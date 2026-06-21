@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>SunamoWpf.Core</id>
+    <version>26.6.21.1</version>
+    <authors>www.sunamo.cz</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.Core/</projectUrl>
+    <description>Core WPF base types extracted from SunamoWpf</description>
+    <releaseNotes>y</releaseNotes>
+    <copyright>www.sunamo.cz</copyright>
+    <repository type="git" url="https://github.com/sunamo/SunamoWpf.Core.git" branch="refs/heads/master" commit="5b7751f001ad95cd6d78736560b7ed1d300397bd" />
+    <dependencies>
+      <group targetFramework="net10.0-windows7.0">
+        <dependency id="SunamoWpf.SunamoUtils" version="26.2.7.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging" version="10.0.8" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Windows.Compatibility" version="10.0.8" exclude="Build,Analyzers" />
+        <dependency id="System.Management" version="10.0.8" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net10.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WPF" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="E:\vs\Projects\PlatformIndependentNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\bin\Release\net10.0-windows\SunamoWpf.Core.pdb" target="lib\net10.0-windows7.0\SunamoWpf.Core.pdb" />
+  </files>
+</package>
