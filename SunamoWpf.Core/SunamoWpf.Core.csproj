@@ -3,6 +3,7 @@
     <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>SunamoWpf</RootNamespace>
     <UseWPF>true</UseWPF>
     <Description>Core WPF base types extracted from SunamoWpf</Description>
     <Version>26.6.21.1</Version>

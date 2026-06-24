@@ -1936,7 +1936,7 @@
           }
         }
       },
-      "SunamoWpf.SunamoUtils/26.2.7.2": {
+      "SunamoWpf.SunamoUtils/26.6.21.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v10.0",
         "dependencies": {
@@ -3532,7 +3532,7 @@
         "textcopy.nuspec"
       ]
     },
-    "SunamoWpf.SunamoUtils/26.2.7.2": {
+    "SunamoWpf.SunamoUtils/26.6.21.1": {
       "type": "project",
       "path": "../../SunamoWpf.SunamoUtils/SunamoWpf.SunamoUtils/SunamoWpf.SunamoUtils.csproj",
       "msbuildProject": "../../SunamoWpf.SunamoUtils/SunamoWpf.SunamoUtils/SunamoWpf.SunamoUtils.csproj"
@@ -3542,7 +3542,7 @@
     "net10.0-windows": [
       "Microsoft.Extensions.Logging >= 10.0.8",
       "Microsoft.Windows.Compatibility >= 10.0.8",
-      "SunamoWpf.SunamoUtils >= 26.2.7.2",
+      "SunamoWpf.SunamoUtils >= 26.6.21.1",
       "System.Management >= 10.0.8"
     ]
   },
@@ -3587,6 +3587,9 @@
         }
       },
       "warningProperties": {
+        "noWarn": [
+          "NU1701"
+        ],
         "warnAsError": [
           "NU1605"
         ]

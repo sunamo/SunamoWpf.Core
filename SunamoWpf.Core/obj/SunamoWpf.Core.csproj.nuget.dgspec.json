@@ -41,6 +41,9 @@
           }
         },
         "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
           "warnAsError": [
             "NU1605"
           ]
@@ -384,7 +387,7 @@
       }
     },
     "E:\\vs\\Projects\\PlatformIndependentNuGetPackages\\SunamoWpf.SunamoUtils\\SunamoWpf.SunamoUtils\\SunamoWpf.SunamoUtils.csproj": {
-      "version": "26.2.7.2",
+      "version": "26.6.21.1",
       "restore": {
         "projectUniqueName": "E:\\vs\\Projects\\PlatformIndependentNuGetPackages\\SunamoWpf.SunamoUtils\\SunamoWpf.SunamoUtils\\SunamoWpf.SunamoUtils.csproj",
         "projectName": "SunamoWpf.SunamoUtils",
@@ -416,6 +419,9 @@
           }
         },
         "warningProperties": {
+          "noWarn": [
+            "NU1701"
+          ],
           "warnAsError": [
             "NU1605"
           ]
