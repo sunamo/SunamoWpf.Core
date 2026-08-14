@@ -1,11 +1,11 @@
 namespace SunamoWpf;
 
+[System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public static partial class WriterEventLog
 {
     static EventLog mainEventLogOfApplication = null;
     public const string ApplicationLogName = XlfKeys.Application;
     static EventLog eventLogWindowsApplication = null;
-    static string scz = "sunamo.cz";
 
     public static void WriteException(string stacktrace, string exception)
     {
@@ -143,7 +143,7 @@ Only the first eight characters of a custom log name are significant, and there 
 
             existsSource = EventLog.SourceExists(notThisAppNameJustEventLogNames);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
         }
 
