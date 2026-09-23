@@ -1,0 +1,12 @@
+C:\Users\aktiv\AppData\Local\Temp\build_audit_logs\SunamoWpf.Core.deps.json
+C:\Users\aktiv\AppData\Local\Temp\build_audit_logs\SunamoWpf.Core.dll
+C:\Users\aktiv\AppData\Local\Temp\build_audit_logs\SunamoWpf.Core.pdb
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWpf.Core.csproj.AssemblyReference.cache
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWpf.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWpf.Core.csproj.CoreCompileInputs.cache
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWpf.Core.sourcelink.json
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWp.938845B1.Up2Date
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWpf.Core.dll
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\refint\SunamoWpf.Core.dll
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\SunamoWpf.Core.pdb
+E:\vs\Projects\WindowsNuGetPackages\SunamoWpf.Core\SunamoWpf.Core\obj\Debug\net10.0-windows\ref\SunamoWpf.Core.dll
