@@ -2,11 +2,11 @@ namespace SunamoWpf._sunamo;
 
 using PathMs = System.IO.Path;
 
-public class FS
+internal class FS
 {
     protected static readonly List<char> invalidFileNameChars = Path.GetInvalidFileNameChars().ToList();
 
-    public static string ReplaceIncorrectCharactersFile(string p)
+    internal static string ReplaceIncorrectCharactersFile(string p)
     {
         var t = p;
         foreach (var item in invalidFileNameChars)
@@ -22,11 +22,11 @@ public class FS
         return t;
     }
 
-    public static void CreateUpfoldersPsysicallyUnlessThere(string nad)
+    internal static void CreateUpfoldersPsysicallyUnlessThere(string nad)
     {
         CreateFoldersPsysicallyUnlessThere(Path.GetDirectoryName(nad));
     }
-    public static void CreateFoldersPsysicallyUnlessThere(string nad)
+    internal static void CreateFoldersPsysicallyUnlessThere(string nad)
     {
         ThrowEx.IsNullOrEmpty("nad", nad);
         //ThrowEx.IsNotWindowsPathFormat("nad", nad);
@@ -61,20 +61,20 @@ nad
     }
 
 
-    public static bool ExistsDirectory(string value)
+    internal static bool ExistsDirectory(string value)
     {
         return Directory.Exists(value);
     }
-    public static bool ExistsFile(string selectedFile)
+    internal static bool ExistsFile(string selectedFile)
     {
         return File.Exists(selectedFile);
     }
-    public static string GetFileName(string fn)
+    internal static string GetFileName(string fn)
     {
         return PathMs.GetFileName(fn.TrimEnd(Path.DirectorySeparatorChar));
     }
 
-    public static string GetSizeInAutoString(long value, ComputerSizeUnitsWpf b)
+    internal static string GetSizeInAutoString(long value, ComputerSizeUnitsWpf b)
     {
         return GetSizeInAutoString((double)value, b);
     }
@@ -92,7 +92,7 @@ nad
         else if (to == ComputerSizeUnitsWpf.TB && b != ComputerSizeUnitsWpf.TB) value *= 1024L * 1024L * 1024L * 1024L;
         return value;
     }
-    public static string GetSizeInAutoString(double value, ComputerSizeUnitsWpf b)
+    internal static string GetSizeInAutoString(double value, ComputerSizeUnitsWpf b)
     {
         if (b != ComputerSizeUnitsWpf.B)
             // Z�sk�m hodnotu v bytech
@@ -113,7 +113,7 @@ nad
         return value + " TB";
     }
 
-    public static string GetSizeInAutoString(double size)
+    internal static string GetSizeInAutoString(double size)
     {
         var unit = ComputerSizeUnitsWpf.B;
         if (size > NumConsts.kB)
@@ -139,7 +139,7 @@ nad
         return size + " " + unit;
     }
 
-    public static byte[] StreamToArrayBytes(System.IO.Stream stream)
+    internal static byte[] StreamToArrayBytes(System.IO.Stream stream)
     {
         if (stream == null)
         {
@@ -196,7 +196,7 @@ nad
         }
     }
 
-    public static bool TryDeleteFile(string item)
+    internal static bool TryDeleteFile(string item)
     {
         // TODO: To all code message logging as here
         try
@@ -212,12 +212,12 @@ nad
         }
     }
 
-    public static string WithEndSlash(string csprojFolderInput)
+    internal static string WithEndSlash(string csprojFolderInput)
     {
         return csprojFolderInput.TrimEnd('\\') + "\\";
     }
 
-    public static string WithEndSlash(ref string v)
+    internal static string WithEndSlash(ref string v)
     {
         if (v != string.Empty)
         {
@@ -228,13 +228,13 @@ nad
         return v;
     }
 
-    public static string FirstCharUpper(ref string nazevPP)
+    internal static string FirstCharUpper(ref string nazevPP)
     {
         nazevPP = FirstCharUpper(nazevPP);
         return nazevPP;
     }
 
-    public static string FirstCharUpper(string nazevPP)
+    internal static string FirstCharUpper(string nazevPP)
     {
         if (nazevPP.Length == 1)
         {
