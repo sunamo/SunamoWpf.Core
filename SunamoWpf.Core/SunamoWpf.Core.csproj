@@ -6,7 +6,7 @@
     <RootNamespace>SunamoWpf</RootNamespace>
     <UseWPF>true</UseWPF>
     <Description>Core WPF base types extracted from SunamoWpf</Description>
-    <Version>26.6.21.1</Version>
+    <Version>26.9.29.3</Version>
     <Authors>www.sunamo.cz</Authors>
     <Copyright>www.sunamo.cz</Copyright>
     <PackageProjectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.Core/</PackageProjectUrl>
@@ -24,7 +24,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Optimize>false</Optimize>
-    <PackageReleaseNotes>y</PackageReleaseNotes>
+    <PackageReleaseNotes>Sync SunamoWpf.Core with wnp</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.8" />

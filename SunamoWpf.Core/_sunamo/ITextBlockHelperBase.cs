@@ -1,6 +1,6 @@
 namespace SunamoWpf._sunamo;
 
-public interface ITextBlockHelperBase<FontWeight, Italic, Inline, Bold, Run, InlineUIContainer, FontArgs>
+internal interface ITextBlockHelperBase<FontWeight, Italic, Inline, Bold, Run, InlineUIContainer, FontArgs>
 {
     FontWeight GetFontWeight(Enums.FontWeights fontWeight);
     Italic GetItalic(string run, FontArgs fa);
