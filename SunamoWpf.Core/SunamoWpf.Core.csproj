@@ -6,7 +6,7 @@
     <RootNamespace>SunamoWpf</RootNamespace>
     <UseWPF>true</UseWPF>
     <Description>Core WPF base types extracted from SunamoWpf</Description>
-    <Version>26.9.30.5</Version>
+    <Version>26.9.30.7</Version>
     <Authors>www.sunamo.cz</Authors>
     <Copyright>www.sunamo.cz</Copyright>
     <PackageProjectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.Core/</PackageProjectUrl>
@@ -24,7 +24,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Optimize>false</Optimize>
-    <PackageReleaseNotes>Zvednout minimalni verzi zavislosti SunamoWpf.SunamoUtils</PackageReleaseNotes>
+    <PackageReleaseNotes>Implement ThrowEx stubs and create settings directory before writing</PackageReleaseNotes>
     <NoWarn>CA1416;CS0067;CS0108;CS0618;CS0649;CS8073;CS8600;CS8601;CS8602;CS8603;CS8604;CS8612;CS8618;CS8622;CS8625;CS8629;CS8714</NoWarn>
   </PropertyGroup>
   <ItemGroup>
