@@ -39,7 +39,7 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
     private ApplicationDataContainerList(FrameworkElement fw)
     {
         // Window bez Name (typicky bez x:Name) se ukládá pod názvem typu, viz ApplicationDataContainer.Add(Window)
-        if (fw is not Window)
+        if (fw != null && fw is not Window)
         {
             ThrowEx.IsWhitespaceOrNull("fw.Name", fw.Name);
         }
@@ -355,9 +355,7 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         StringBuilder sb = new StringBuilder();
         foreach (var item in data)
         {
-            var value = item.Value.B;
-            value = CAG.ToList<string>(value.ToString(), ",");
-            sb.Append(SF.PrepareToSerialization2(CA.ToListString(item.Key, item.Value.A, value.ToString())) + "|");
+            sb.Append(SF.PrepareToSerialization2(CA.ToListString(item.Key, item.Value.A, SH.ListToString(item.Value.B))) + "|");
         }
         if (string.IsNullOrEmpty(path))
         {
