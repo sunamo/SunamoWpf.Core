@@ -92,7 +92,7 @@ internal static class SF
         AppendAllText(string path, string line)
     {
         var content = (await
-                File.ReadAllLinesAsync(path)).ToList();
+                File.ReadAllLinesAsync(path).ConfigureAwait(false)).ToList();
         CA.Trim(content);
         //content += Environment.NewLine + line + Environment.NewLine;
         content.Add(line);
@@ -100,7 +100,7 @@ internal static class SF
 #if ASYNC
         await
 #endif
-            File.WriteAllLinesAsync(path, content);
+            File.WriteAllLinesAsync(path, content).ConfigureAwait(false);
         return vr;
     }
     private static List<List<string>> GetAllElementsLines(List<string> lines)

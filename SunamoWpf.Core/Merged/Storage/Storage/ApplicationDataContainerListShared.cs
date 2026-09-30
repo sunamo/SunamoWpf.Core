@@ -57,7 +57,7 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         {
             return string.Empty;
         }
-        return await TF.ReadAllText(path) ?? string.Empty;
+        return await TF.ReadAllText(path).ConfigureAwait(false) ?? string.Empty;
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
 #if ASYNC
     await
 #endif
- ReadContentIfExists(path);
+ ReadContentIfExists(path).ConfigureAwait(false);
         if (content.Length != 0)
         {
             content = content.Substring(0, content.Length - 1);
@@ -271,12 +271,12 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
     public async Task Nuke()
     {
         data.Clear();
-        await SaveFile();
+        await SaveFile().ConfigureAwait(false);
     }
     public async Task DeleteEntry(string key)
     {
         data.Remove(key);
-        await SaveFile();
+        await SaveFile().ConfigureAwait(false);
     }
     public object this[string key]
     {
@@ -364,7 +364,7 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
             return;
         }
         EnsureParentDirectory(path);
-        await TF.WriteAllText(path, sb.ToString());
+        await TF.WriteAllText(path, sb.ToString()).ConfigureAwait(false);
     }
     public IEnumerator GetEnumerator()
     {
