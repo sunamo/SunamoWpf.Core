@@ -39,4 +39,9 @@
   <ItemGroup>
     <Resource Include="Merged\Controls\Controls\DropDownButtonDictionary.xaml" />
   </ItemGroup>
+  <!-- Excluded from the namespace normalization step of the publish tooling (namespaces are intentionally kept as-is). -->
+  <ItemGroup>
+    <None Remove="Merged\**" />
+    <None Remove="_sunamo\**" />
+  </ItemGroup>
 </Project>
