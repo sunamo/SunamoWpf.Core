@@ -106,6 +106,19 @@ bool fillAlsoFirstTwo = true)
     {
         return CheckBefore(before) + "File " + fnOri + " has wrong file extension";
     }
+    /// <summary>Vrati text chyby, pokud vstup obsahuje nektery z nepovolenych podretezcu, jinak null.</summary>
+    internal static string? StringContainsUnallowedSubstrings(string before, string input,
+        params string[] unallowedStrings)
+    {
+        List<string> foundedUnallowed = [];
+        foreach (var item in unallowedStrings)
+            if (input.Contains(item))
+                foundedUnallowed.Add(item);
+        return foundedUnallowed.Count > 0
+            ? CheckBefore(before) + input + " contains unallowed chars: " +
+              string.Join(string.Empty, unallowedStrings)
+            : null;
+    }
     internal static string? BadMappedXaml(string before, string nameControl, string additionalInfo)
     {
         return CheckBefore(before) + $"Bad mapped XAML in {nameControl}. {additionalInfo}";

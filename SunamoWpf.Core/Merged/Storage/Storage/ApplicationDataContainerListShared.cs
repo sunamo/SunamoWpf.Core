@@ -316,8 +316,28 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
                 ABWpf ab = ABWpf.Get(typeName, value);
                 data.Add(key, ab);
                 string zapsatDoSouboru = SF.PrepareToSerialization2(CA.ToListString(key, typeName, SH.ListToString(value))) + "|";
-                TF.AppendAllText(zapsatDoSouboru, path).GetAwaiter().GetResult();
+                if (!string.IsNullOrEmpty(path))
+                {
+                    EnsureParentDirectory(path);
+                    TF.AppendAllText(zapsatDoSouboru, path).GetAwaiter().GetResult();
+                }
             }
+        }
+    }
+    /// <summary>
+    /// Zajistí existenci nadřazené složky souboru; prázdnou cestu nebo cestu bez složky ignoruje.
+    /// </summary>
+    /// <param name="filePath">Cesta k souboru s nastavením.</param>
+    private static void EnsureParentDirectory(string filePath)
+    {
+        if (string.IsNullOrEmpty(filePath))
+        {
+            return;
+        }
+        var directory = Path.GetDirectoryName(filePath);
+        if (!string.IsNullOrEmpty(directory))
+        {
+            Directory.CreateDirectory(directory);
         }
     }
     public bool Contains(string key)
@@ -343,11 +363,7 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         {
             return;
         }
-        var directory = Path.GetDirectoryName(path);
-        if (!string.IsNullOrEmpty(directory))
-        {
-            Directory.CreateDirectory(directory);
-        }
+        EnsureParentDirectory(path);
         await TF.WriteAllText(path, sb.ToString());
     }
     public IEnumerator GetEnumerator()
