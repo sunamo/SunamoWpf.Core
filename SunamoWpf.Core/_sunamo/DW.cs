@@ -1,4 +1,4 @@
-namespace SunamoWpf._sunamo;
+namespace SunamoWpf.Core._sunamo;
 
 using FolderBrowserDialog = Microsoft.Win32.OpenFolderDialog;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
