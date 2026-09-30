@@ -23,7 +23,7 @@ public static class SunamoWpfInitializer
         // CZ: Inicializujeme jednotlivé komponenty SunamoWpf s názvem aplikace
         // EN: Initialize individual SunamoWpf components with application name
         _shared.Helpers.Resources.EmbeddedResourcesHShared.Initialize(applicationName);
-        _sunamo.RA.Initialize(applicationName);
+        RA.Initialize(applicationName);
 
         if (!string.IsNullOrWhiteSpace(eventLogName))
         {

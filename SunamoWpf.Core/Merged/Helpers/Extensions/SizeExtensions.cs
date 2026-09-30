@@ -1,4 +1,4 @@
-﻿#define ASYNC
+#define ASYNC
 namespace SunamoWpf.Extensions;
 
 public static class SizeExtensions

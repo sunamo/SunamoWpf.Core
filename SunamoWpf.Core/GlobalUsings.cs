@@ -1,10 +1,10 @@
-﻿global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Logging;
 global using Microsoft.Win32;
 global using SunamoWpf._public;
 global using SunamoWpf._shared;
 global using SunamoWpf._shared.Helpers;
 global using SunamoWpf._shared.Helpers.Resources;
-global using SunamoWpf._sunamo;
+global using SunamoWpf.Core._sunamo;
 global using SunamoWpf.Values;
 global using SunamoWpf._.Animation;
 global using SunamoWpf.Args;

@@ -1,4 +1,4 @@
-namespace SunamoWpf._sunamo;
+namespace SunamoWpf.Core._sunamo;
 
 public interface ITextBlockHelperBase<FontWeight, Italic, Inline, Bold, Run, InlineUIContainer, FontArgs>
 {

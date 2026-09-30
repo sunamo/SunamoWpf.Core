@@ -1,4 +1,4 @@
-namespace SunamoWpf._sunamo;
+namespace SunamoWpf.Core._sunamo;
 
 internal class SelectFromManyHelper<T>
 {
