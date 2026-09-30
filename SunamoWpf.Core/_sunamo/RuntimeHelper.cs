@@ -1,9 +1,10 @@
 namespace SunamoWpf._sunamo;
 
-internal class RuntimeHelper
+
+public class RuntimeHelper
 {
-    internal static Type type = typeof(RuntimeHelper);
-    internal static List<Delegate> GetInvocationList(Delegate e)
+    public static Type type = typeof(RuntimeHelper);
+    public static List<Delegate> GetInvocationList(Delegate e)
     {
         if (e == null)
         {
@@ -15,11 +16,11 @@ internal class RuntimeHelper
     /// Not working for WPF
     /// </summary>
     /// <returns></returns>
-    internal static bool IsConsole()
+    public static bool IsConsole()
     {
         return Environment.UserInteractive;
     }
-    internal static bool HasEventHandler(Delegate e)
+    public static bool HasEventHandler(Delegate e)
     {
         return GetInvocationList(e).Count() > 0;
     }
@@ -32,7 +33,7 @@ internal class RuntimeHelper
     /// <param name="control"></param>
     /// <param name="eventName"></param>
     /// <returns></returns>
-    internal static bool HasEventHandler<T>(T control, string eventName)
+    public static bool HasEventHandler<T>(T control, string eventName)
     {
 #if DEBUG
 #endif
@@ -71,7 +72,7 @@ internal class RuntimeHelper
     /// <param name = "controlWithResult"></param>
     /// <param name = "a"></param>
     /// <param name = "throwException"></param>
-    internal static void AttachChangeDialogResult(IControlWithResultDebugWpf controlWithResult, VoidBoolNullable a, bool throwException = true)
+    public static void AttachChangeDialogResult(IControlWithResultDebugWpf controlWithResult, VoidBoolNullable a, bool throwException = true)
     {
         var count = controlWithResult.CountOfHandlersChangeDialogResult();
         if (count > 0)
@@ -90,24 +91,24 @@ internal class RuntimeHelper
             controlWithResult.ChangeDialogResult += a;
         }
     }
-    internal static T CastToGeneric<T>(object o)
+    public static T CastToGeneric<T>(object o)
     {
         return (T)o;
     }
-    internal static void EmptyDummyMethod()
+    public static void EmptyDummyMethod()
     {
     }
 
 #pragma warning disable
-    internal static void EmptyDummyMethod(string s, params string[] o)
+    public static void EmptyDummyMethod(string s, params string[] o)
     {
     }
-    internal static void EmptyDummyMethodLogMessage(TypeOfMessageWpf t, string s, params string[] o)
+    public static void EmptyDummyMethodLogMessage(TypeOfMessageWpf t, string s, params string[] o)
     {
     }
 #pragma warning restore
 
-    internal static bool IsAdminUser()
+    public static bool IsAdminUser()
     {
         return false;
     }
