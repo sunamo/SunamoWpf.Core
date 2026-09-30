@@ -1,4 +1,4 @@
-#define ASYNC
+﻿#define ASYNC
 namespace SunamoWpf.Core._sunamo;
 
 internal class TF
@@ -30,5 +30,13 @@ void
     public static async Task WriteAllText(string csProj, string c)
     {
         await File.WriteAllTextAsync(csProj, c).ConfigureAwait(false);
+    }
+
+    /// <summary>
+    /// Reads all lines of a file asynchronously.
+    /// </summary>
+    public static async Task<List<string>> ReadAllLines(string file)
+    {
+        return (await File.ReadAllLinesAsync(file).ConfigureAwait(false)).ToList();
     }
 }

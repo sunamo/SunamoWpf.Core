@@ -15,21 +15,24 @@ public static partial class BitmapImageHelper
     }
 
     #region Convert between System.Windows and System.Drawing - same name in all helper classes
-    //public static BitmapImage Bitmap2BitmapImage(Image bitmap)
-    //{
-    //    using (MemoryStream ms = new MemoryStream())
-    //    {
-    //        bitmap.Save(ms, ImageFormat.Png);
-    //        ms.Position = 0;
-    //        BitmapImage bi = new BitmapImage();
-    //        bi.BeginInit();
-    //        bi.CacheOption = BitmapCacheOption.OnLoad;
-    //        bi.StreamSource = ms;
-    //        bi.EndInit();
+    /// <summary>
+    /// Converts a System.Drawing image to a WPF BitmapImage via an in-memory PNG.
+    /// </summary>
+    public static BitmapImage Bitmap2BitmapImage(System.Drawing.Image bitmap)
+    {
+        using (MemoryStream ms = new MemoryStream())
+        {
+            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.CacheOption = BitmapCacheOption.OnLoad;
+            bi.StreamSource = ms;
+            bi.EndInit();
 
-    //        return bi;
-    //    }
-    //}
+            return bi;
+        }
+    }
 
     public static BitmapImage Resize(BitmapImage source, int width, int height)
     {

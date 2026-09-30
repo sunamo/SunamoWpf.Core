@@ -145,11 +145,8 @@ internal static class SF
         CA.Replace(list, separator, replaceForSeparatorString);
         CA.Replace(list, Environment.NewLine, "");
         CA.Trim(list);
-        var vr = string.Join(separator, list);
-        if (removeLast)
-            if (vr.Length > 0)
-                return vr.Substring(0, vr.Length - 1);
-        return vr;
+        // string.Join adds no trailing separator, so there is nothing to remove (removeLast is kept for API compatibility).
+        return string.Join(separator, list);
     }
     /// <summary>
     ///     Get all elements from A1

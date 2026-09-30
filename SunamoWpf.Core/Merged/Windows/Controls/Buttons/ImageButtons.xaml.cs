@@ -54,6 +54,16 @@ public partial class ImageButtons : UserControl
         return imageButtons;
     }
 
+    /// <summary>
+    /// Creates ImageButtons synchronously and starts loading the icons in the background (for synchronous Init methods).
+    /// </summary>
+    internal static ImageButtons CreateWithBackgroundIcons()
+    {
+        var imageButtons = new ImageButtons();
+        var iconsTask = imageButtons.SetAwesomeIcons();
+        return imageButtons;
+    }
+
     private void BtnClear_Click(object sender, RoutedEventArgs e)
     {
         ClearAll();

@@ -1,4 +1,4 @@
-#define ASYNC
+﻿#define ASYNC
 namespace SunamoWpf.Core._sunamo;
 
 internal class BTS
@@ -96,5 +96,21 @@ internal class BTS
     {
         if (s == Yes || s == bool.TrueString || s == One || s == Ano) return true;
         return false;
+    }
+
+    /// <summary>
+    /// Returns true when the text can be parsed as an integer.
+    /// </summary>
+    public static bool IsInt(string text)
+    {
+        return int.TryParse(text, out var parsed);
+    }
+
+    /// <summary>
+    /// Converts an integer (or its text form) to bool, non-zero is true.
+    /// </summary>
+    public static bool IntToBool(string text)
+    {
+        return int.TryParse(text, out var value) && value != 0;
     }
 }
