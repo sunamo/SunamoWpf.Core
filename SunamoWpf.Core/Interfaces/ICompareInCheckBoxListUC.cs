@@ -1,12 +1,9 @@
-#define ASYNC
 namespace SunamoWpf.Interfaces;
 
 public interface ICompareInCheckBoxListUC
 {
-#if ASYNC
-    Task
-#else
-    void  
-#endif
-Init(string autoYes, string manuallyYes, string manuallyNo, string autoNo);
+    /// <summary>
+    /// Initializes the control from four files with lines for the auto yes, manually yes, manually no and auto no lists.
+    /// </summary>
+    Task Init(string autoYes, string manuallyYes, string manuallyNo, string autoNo);
 }
