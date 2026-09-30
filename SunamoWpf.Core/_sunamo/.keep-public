@@ -1,0 +1,3 @@
+Tento _sunamo je sdilene jadro konzumovane sourozeneckymi balicky SunamoWpf.*
+pres ProjectReference - internal by rozbil jejich build.
+Nemazat, nezpracovavat krokem PublicToInternalIn_SunamoFiles.
