@@ -132,13 +132,22 @@ internal partial class ThrowEx
         return ThrowIsNotNull(exc);
     }
 
-    public static void StringContainsUnallowedSubstrings(string v1, string v2)
+    /// <summary>Vyhodi vyjimku, pokud vstupni retezec obsahuje nektery z nepovolenych podretezcu.</summary>
+    public static bool StringContainsUnAllowedSubstrings(string input, params string[] unallowedStrings)
     {
-        throw new NotImplementedException();
+        return ThrowIsNotNull(
+            Exceptions.StringContainsUnallowedSubstrings(FullNameOfExecutedCode(), input, unallowedStrings));
     }
 
+    /// <summary>Vyhodi vyjimku, pokud v1 obsahuje podretezec v2.</summary>
+    public static void StringContainsUnallowedSubstrings(string v1, string v2)
+    {
+        StringContainsUnAllowedSubstrings(v1, v2);
+    }
+
+    /// <summary>Vyhodi vyjimku, ze soubor fnOri ma priponu, kterou nelze zparsovat jako obrazek.</summary>
     public static void FileHasExtensionNotParseableToImageFormat(string fnOri)
     {
-        throw new NotImplementedException();
+        FileHasExtensionNotParseAbleToImageFormat(fnOri);
     }
 }
