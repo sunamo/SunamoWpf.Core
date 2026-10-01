@@ -1,6 +1,6 @@
-namespace SunamoWpf._sunamo;
+namespace SunamoWpf.Core._sunamo;
 
-internal class TypesD
+public class TypesD
 {
-    internal static readonly Type tVoidString = typeof(VoidString);
+    public static readonly Type tVoidString = typeof(VoidString);
 }

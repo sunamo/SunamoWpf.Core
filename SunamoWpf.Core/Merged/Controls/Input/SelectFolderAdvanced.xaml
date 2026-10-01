@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SunamoWpf.Controls.SelectFolderAdvanced"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SunamoWpf.Controls"
+             xmlns:SunamoWpfControlsInput="clr-namespace:SunamoWpf.Controls.Input"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <SunamoWpfControlsInput:SelectFolder x:Name="selectFolder" FolderChanged="selectFolder_FolderChanged"></SunamoWpfControlsInput:SelectFolder>
+        
+        <local:DialogButtons Grid.Row="1" x:Name="cDialogButtons" ChangeDialogResult="cDialogButtons_ChangeDialogResult">
+            <local:DialogButtons.CustomControl>
+                <StackPanel Orientation="Vertical">
+                <CheckBox Content="Don't ask again" Tag="chbDontAskAgain"></CheckBox>
+                    <CheckBox Content="Files from subfolders" Tag="chbFilesFromSubfolders"></CheckBox>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition Width="*" ></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text=" Masc: "></TextBlock>
+                    <TextBox Grid.Column="1" Tag="txtMasc"></TextBox>
+                </Grid>
+                </StackPanel>
+            </local:DialogButtons.CustomControl>
+        </local:DialogButtons>
+    </Grid>
+</UserControl>

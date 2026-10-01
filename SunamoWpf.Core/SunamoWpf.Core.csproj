@@ -6,7 +6,7 @@
     <RootNamespace>SunamoWpf</RootNamespace>
     <UseWPF>true</UseWPF>
     <Description>Core WPF base types extracted from SunamoWpf</Description>
-    <Version>26.9.29.3</Version>
+    <Version>26.9.30.8</Version>
     <Authors>www.sunamo.cz</Authors>
     <Copyright>www.sunamo.cz</Copyright>
     <PackageProjectUrl>https://sunamo.github.io/PlatformIndependentNuGetPackages/SunamoWpf.Core/</PackageProjectUrl>
@@ -24,14 +24,24 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <Optimize>false</Optimize>
-    <PackageReleaseNotes>Sync SunamoWpf.Core with wnp</PackageReleaseNotes>
+    <PackageReleaseNotes>Fix UI thread deadlock in settings storage</PackageReleaseNotes>
+    <NoWarn>CA1416;CS0067;CS0108;CS0618;CS0649;CS8073;CS8600;CS8601;CS8602;CS8603;CS8604;CS8612;CS8618;CS8622;CS8625;CS8629;CS8714</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AvalonEdit" Version="6.3.1.120" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.8" />
+    <PackageReference Include="Microsoft.Management.Infrastructure" Version="3.0.0" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="10.0.8" />
+    <PackageReference Include="ObjectDumper.NET" Version="4.3.2" />
     <PackageReference Include="System.Management" Version="10.0.8" />
+    <PackageReference Include="TextCopy" Version="6.2.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils\SunamoWpf.SunamoUtils.csproj" />
+    <Resource Include="Merged\Controls\Controls\DropDownButtonDictionary.xaml" />
+  </ItemGroup>
+  <!-- Excluded from the namespace normalization step of the publish tooling (namespaces are intentionally kept as-is). -->
+  <ItemGroup>
+    <None Remove="Merged\**" />
+    <None Remove="_sunamo\**" />
   </ItemGroup>
 </Project>
