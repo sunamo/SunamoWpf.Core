@@ -1,3 +1,4 @@
+#define ASYNC
 namespace SunamoWpf.Interfaces;
 
 public interface ICompareInCheckBoxListUC
