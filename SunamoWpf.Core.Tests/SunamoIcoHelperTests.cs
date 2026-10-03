@@ -1,5 +1,6 @@
 using Xunit;
 using System.Drawing;
+using Image = System.Drawing.Image;
 using System.IO;
 
 namespace SunamoWpf.Core.Tests;

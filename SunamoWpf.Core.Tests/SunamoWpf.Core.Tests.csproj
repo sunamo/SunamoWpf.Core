@@ -21,6 +21,9 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <ProjectReference Include="..\SunamoWpf.Core\SunamoWpf.Core.csproj" />
+    <ProjectReference Include="..\..\SunamoWpf.AwesomeFont\SunamoWpf.AwesomeFont\SunamoWpf.AwesomeFont.csproj" />
+    <Resource Include="Resources\Resource.jpg" />
+    <Resource Include="Resources\Resource.txt" />
     <ProjectReference Include="..\..\SunamoWf.Helpers\SunamoWf.Helpers\SunamoWf.Helpers.csproj" />
   </ItemGroup>
 </Project>

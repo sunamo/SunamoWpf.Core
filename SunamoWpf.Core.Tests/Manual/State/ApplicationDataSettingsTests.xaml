@@ -1,0 +1,16 @@
+<Window x:Class="WpfState.Tests.ApplicationDataSettingsTests"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfState.Tests"
+        xmlns:desktopControlsCollections="clr-namespace:SunamoWpf.Controls.Collections;assembly=SunamoWpf.Core"
+        mc:Ignorable="d"
+        Title="ApplicationDataSettingsTests" Height="450" Width="800">
+    <StackPanel Orientation="Vertical" x:Name="sp">
+        <!--ItemsSource="{Binding}"-->
+        <ComboBox x:Name="cb" IsEditable="True" ></ComboBox>
+        <CheckBox x:Name="chb"></CheckBox>
+        <desktopControlsCollections:CheckBoxListUC x:Name="chbl"></desktopControlsCollections:CheckBoxListUC>
+    </StackPanel>
+</Window>
