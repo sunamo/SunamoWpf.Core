@@ -1,0 +1,44 @@
+<UserControl x:Class="Wpf.Tests.Controls.Controls.DropDownButtonTests"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Wpf.Tests.Controls.Controls"
+             xmlns:desktopControlsControls="clr-namespace:SunamoWpf.Controls.Controls;assembly=SunamoWpf.Core"
+             xmlns:desktop="clr-namespace:SunamoWpf.Controls.Menu;assembly=SunamoWpf.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid HorizontalAlignment="Stretch"
+          VerticalAlignment="Stretch">
+            <desktopControlsControls:DropDownButton Margin="0,4"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Style="{StaticResource EllipseToggleButtonStyle}">
+                
+                <ContentControl ContentTemplate="{StaticResource PlusIcon}" />
+
+                <desktopControlsControls:DropDownButton.Menu>
+                    <ContextMenu>
+                        <desktop:SuMenuItem Command="{Binding AddCommand}"
+                              CommandParameter="{Binding}"
+                              Header="Add" />
+                        <desktop:SuMenuItem Command="{Binding DeleteCommand}"
+                              CommandParameter="{Binding}"
+                              Header="Delete" />
+                        <desktop:SuMenuItem Command="{Binding MoveCommand}"
+                              CommandParameter="{Binding}"
+                              Header="Move" />
+                    </ContextMenu>
+                </desktopControlsControls:DropDownButton.Menu>
+            </desktopControlsControls:DropDownButton>
+        </Grid>
+    </Grid>
+</UserControl>
