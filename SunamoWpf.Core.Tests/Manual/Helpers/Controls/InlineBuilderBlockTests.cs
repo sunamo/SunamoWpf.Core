@@ -48,14 +48,14 @@ public class InlineBuilderBlockTests : UserControl
 {
     public InlineBuilderBlockTests()
     {
-        FixedDocument fd = new FixedDocument();
-        Paragraph p = new Paragraph();
+        FixedDocument fixedDocument = new FixedDocument();
+        Paragraph paragraph = new Paragraph();
 
-        InlineBuilderBlock b = new InlineBuilderBlock(p);
-        b.H1("Hello world");
-        b.Hyperlink("EN blog", "https://blog.sunamo.cz/2020/06/24/structure-of-flow-text-in-wpf/");
-        b.LineBreak();
-        b.Run("Perfect!");
+        InlineBuilderBlock block = new InlineBuilderBlock(paragraph);
+        block.H1("Hello world");
+        block.Hyperlink("EN blog", "https://blog.sunamo.cz/2020/06/24/structure-of-flow-text-in-wpf/");
+        block.LineBreak();
+        block.Run("Perfect!");
 
         #region FixedDocument
         //FixedPage fp = new FixedPage();

@@ -67,7 +67,7 @@ namespace WpfState.Tests
 
         }
 
-        private void ApplicationDataSettingsTests_Loaded(object sender, RoutedEventArgs e)
+        private void ApplicationDataSettingsTests_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             
             
@@ -83,13 +83,13 @@ namespace WpfState.Tests
             data.Add(chbl);
         }
 
-        protected override void OnClosing(CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs eventArgs)
         {
-            base.OnClosing(e);
+            base.OnClosing(eventArgs);
 
-            var id = chbl.CheckedIndexes();
+            var indexes = chbl.CheckedIndexes();
 
-            int i = 0;
+            int index = 0;
         }
     }
 }

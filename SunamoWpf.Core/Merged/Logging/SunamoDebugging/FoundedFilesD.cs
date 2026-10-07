@@ -45,11 +45,11 @@ public class FoundedFilesD<SearchInUC> //: IFoundedFilesUCCombine<SearchInUC>
     //    return false;
     //}
 
-    public void FoundedFile_Selected(string s)
+    public void FoundedFile_Selected(string path)
     {
         if (Selected != null)
         {
-            Selected(s);
+            Selected(path);
         }
     }
 

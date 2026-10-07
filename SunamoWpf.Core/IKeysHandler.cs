@@ -19,5 +19,5 @@ public interface IKeysHandler<KeyArg>
     }
     */
 
-    bool HandleKey(KeyArg e);
+    bool HandleKey(KeyArg keyArg);
 }

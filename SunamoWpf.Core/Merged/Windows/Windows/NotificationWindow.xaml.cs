@@ -35,9 +35,9 @@ public partial class NotificationWindow : Window
 
         if (content is UIElement)
         {
-            var ui = (UIElement)content;
+            var element = (UIElement)content;
             window.sp.Children.Clear();
-            window.sp.Children.Add(ui);
+            window.sp.Children.Add(element);
         }
         else
         {
@@ -61,7 +61,7 @@ public partial class NotificationWindow : Window
 
 
 
-    private void NotificationWindow_Loaded(object sender, RoutedEventArgs e)
+    private void NotificationWindow_Loaded(object sender, RoutedEventArgs eventArgs)
     {
 
 

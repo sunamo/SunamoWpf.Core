@@ -25,14 +25,14 @@ public partial class PicturesDesktop
         byte red = transparentColor.R;
         byte green = transparentColor.G;
         byte blue = transparentColor.B;
-        for (int i = 0; i < sourceImage.PixelHeight * stride; i += (sourceImage.Format.BitsPerPixel / 8))
+        for (int index = 0; index < sourceImage.PixelHeight * stride; index += (sourceImage.Format.BitsPerPixel / 8))
         {
 
-            if (pixels[i] == blue
-            && pixels[i + 1] == green
-            && pixels[i + 2] == red)
+            if (pixels[index] == blue
+            && pixels[index + 1] == green
+            && pixels[index + 2] == red)
             {
-                pixels[i + 3] = 0;
+                pixels[index + 3] = 0;
             }
 
         }

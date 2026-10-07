@@ -5,9 +5,9 @@ public class StatusesLogger
     // TODO: Merge with public class ThisApp
 
     TextBlock tb = null;
-    public StatusesLogger(TextBlock tb)
+    public StatusesLogger(TextBlock textBlock)
     {
-        this.tb = tb;
+        this.tb = textBlock;
     }
 
     public void Warning(string mes)
@@ -17,8 +17,8 @@ public class StatusesLogger
 
     private void WriteWithColor(Brush color, string mes)
     {
-        string t = DTHelper.AppendToFrontOnlyTime(mes);
+        string timedMessage = DTHelper.AppendToFrontOnlyTime(mes);
         tb.Foreground = color;
-        tb.Text = t;
+        tb.Text = timedMessage;
     }
 }

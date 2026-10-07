@@ -4,17 +4,17 @@ namespace SunamoWpf.Controls;
 public partial class ResourceDictionaryStyles
 {
     #region 10 for remembering default size
-    public static void Margin10(IList<SunamoPasswordBox> p)
+    public static void Margin10(IList<SunamoPasswordBox> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
     #endregion
 
-    public static void Margin(double d, IList<SunamoPasswordBox> p)
+    public static void Margin(double margin, IList<SunamoPasswordBox> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(d);
+            item.Margin = new Thickness(margin);
         }
     }
 }

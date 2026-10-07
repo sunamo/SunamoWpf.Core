@@ -16,40 +16,40 @@ public class SearchingInLbWPF
     /// </summary>
     public object[] oc = null;
     string searchOnlyFromLastOccurenceOf = null;
-    /// <param name="lb"></param>
+    /// <param name="listBox"></param>
     /// <param name="tstb"></param>
-    public SearchingInLbWPF(ListBox lb, TextBox tstb, Button toolStripButton2, SuMenuItem tsmi, string searchOnlyFromLastOccurenceOf)
+    public SearchingInLbWPF(ListBox listBox, TextBox tstb, Button toolStripButton2, SuMenuItem tsmi, string searchOnlyFromLastOccurenceOf)
     {
-        this.lb = lb;
+        this.lb = listBox;
         this.tstb = tstb;
         this.searchOnlyFromLastOccurenceOf = searchOnlyFromLastOccurenceOf;
         tstb.TextChanged += tstb_TextChanged;
         tstb.KeyDown += tstb_KeyDown;
         toolStripButton2.Click += toolStripButton2_Click;
         tsmi.Click += tsmi_Click;
-        List<object> f = new List<object>();
-        foreach (object var in lb.Items)
+        List<object> result = new List<object>();
+        foreach (object var in listBox.Items)
         {
-            f.Add(var);
+            result.Add(var);
         }
-        oc = f.ToArray();
+        oc = result.ToArray();
     }
-    void tsmi_Click(object sender, System.Windows.RoutedEventArgs e)
+    void tsmi_Click(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         tstb.Text = "";
     }
-    void toolStripButton2_Click(object sender, System.Windows.RoutedEventArgs e)
+    void toolStripButton2_Click(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         tstb.Text = "";
     }
-    void tstb_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    void tstb_KeyDown(object sender, System.Windows.Input.KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Back)
+        if (eventArgs.Key == Key.Back)
         {
             tstb.Text = "";
         }
     }
-    void tstb_TextChanged(object sender, TextChangedEventArgs e)
+    void tstb_TextChanged(object sender, TextChangedEventArgs eventArgs)
     {
         if (tstb.Text == "")
         {
@@ -100,9 +100,9 @@ public class SearchingInLbWPF
             AddRangeToListBox(oc);
         }
     }
-    private void AddRangeToListBox(object[] p)
+    private void AddRangeToListBox(object[] items)
     {
-        foreach (var item in p)
+        foreach (var item in items)
         {
             lb.Items.Add(item);
         }

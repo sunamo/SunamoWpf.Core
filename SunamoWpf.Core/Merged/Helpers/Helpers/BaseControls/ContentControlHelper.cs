@@ -3,14 +3,14 @@ namespace SunamoWpf.Helpers.BaseControls;
 
 public partial class ContentControlHelper
 {
-    public static T CastTo<T>(object o) where T : class
+    public static T CastTo<T>(object value) where T : class
     {
-        if (o is T)
+        if (value is T)
         {
-            return (T)o;
+            return (T)value;
         }
-        var cc = (ContentControl)o;
-        return cc.Content as T;
+        var contentControl = (ContentControl)value;
+        return contentControl.Content as T;
 
     }
 

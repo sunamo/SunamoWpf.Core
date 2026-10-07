@@ -6,15 +6,15 @@ public partial class SelectManyFiles : UserControl
 {
     public static Type type = typeof(SelectManyFiles);
 
-    public void Validate(ref ValidateDataWpf d)
+    public void Validate(ref ValidateDataWpf validateData)
     {
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
         foreach (SelectFile item in ControlFinder.StackPanel(this, "spFiles").Children)
         {
-            item.Validate(ref d);
+            item.Validate(ref validateData);
         }
     }
 
@@ -48,7 +48,7 @@ public partial class SelectManyFiles : UserControl
     public event Action<object, List<string>> FileChanged;
     public event Action<object, List<string>> FileRemoved;
 
-    private void SelectMoreFiles_Loaded(object sender, RoutedEventArgs e)
+    private void SelectMoreFiles_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         SetAwesomeIcons(); // async Task nelze RunSynchronously (InvalidOperationException); ikony se nastavi pres Dispatcher.InvokeAsync
 
@@ -60,13 +60,13 @@ public partial class SelectManyFiles : UserControl
         //TextBox sf = new TextBox();
         //sf.Text = File;
 
-        SelectFile sf = new SelectFile();
-        sf.SelectedFile = File;
-        sf.btnRemoveFile.Visibility = Visibility.Visible;
-        sf.FileRemoved += Sf_FileRemoved;
-        sf.FileSelected += Sf_FileChanged;
+        SelectFile selectFile = new SelectFile();
+        selectFile.SelectedFile = File;
+        selectFile.btnRemoveFile.Visibility = Visibility.Visible;
+        selectFile.FileRemoved += Sf_FileRemoved;
+        selectFile.FileSelected += Sf_FileChanged;
 
-        spFiles.Children.Add(sf);
+        spFiles.Children.Add(selectFile);
         if (FileAdded != null)
         {
             FileAdded(this, SelectedFiles());
@@ -75,7 +75,7 @@ public partial class SelectManyFiles : UserControl
         Sf_FileChanged(File);
     }
 
-    private void Sf_FileChanged(string s)
+    private void Sf_FileChanged(string path)
     {
         if (FileChanged != null)
         {
@@ -83,9 +83,9 @@ public partial class SelectManyFiles : UserControl
         }
     }
 
-    public void Sf_FileRemoved(SelectFile t)
+    public void Sf_FileRemoved(SelectFile selectFile)
     {
-        spFiles.Children.Remove(t);
+        spFiles.Children.Remove(selectFile);
         if (FileRemoved != null)
         {
             FileRemoved(this, SelectedFiles());
@@ -98,7 +98,7 @@ public partial class SelectManyFiles : UserControl
         await AwesomeFontControls.SetAwesomeFontSymbol(btnAddAsTemplate, "\uf022 Save set as template");
     }
 
-    private void BtnAddFile_Click(object sender, RoutedEventArgs e)
+    private void BtnAddFile_Click(object sender, RoutedEventArgs eventArgs)
     {
         AddFile(string.Empty);
     }
@@ -109,9 +109,9 @@ public partial class SelectManyFiles : UserControl
 
     public void RemoveAllFiles()
     {
-        for (int i = spFiles.Children.Count - 1; i >= 0; i--)
+        for (int index = spFiles.Children.Count - 1; index >= 0; index--)
         {
-            Sf_FileRemoved((SelectFile)spFiles.Children[i]);
+            Sf_FileRemoved((SelectFile)spFiles.Children[index]);
         }
     }
 
@@ -133,7 +133,7 @@ public partial class SelectManyFiles : UserControl
         return result;
     }
 
-    private void BtnAddAsTemplate_Click(object sender, RoutedEventArgs e)
+    private void BtnAddAsTemplate_Click(object sender, RoutedEventArgs eventArgs)
     {
         SaveSetAsTemplate();
     }

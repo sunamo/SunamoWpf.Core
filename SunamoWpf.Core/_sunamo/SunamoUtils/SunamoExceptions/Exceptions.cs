@@ -8,23 +8,23 @@ internal sealed partial class Exceptions
     {
         return string.IsNullOrWhiteSpace(before) ? string.Empty : before + ": ";
     }
-    internal static string TextOfExceptions(Exception ex)
+    internal static string TextOfExceptions(Exception exception)
     {
-        return ex.GetAllMessages();
+        return exception.GetAllMessages();
     }
     internal static Tuple<string, string, string> PlaceOfException(
 bool fillAlsoFirstTwo = true)
     {
-        StackTrace st = new();
-        var v = st.ToString();
-        var l = v.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        l.RemoveAt(0);
-        var i = 0;
+        StackTrace stackTrace = new();
+        var text = stackTrace.ToString();
+        var lines = text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        lines.RemoveAt(0);
+        var index = 0;
         string type = string.Empty;
         string methodName = string.Empty;
-        for (; i < l.Count; i++)
+        for (; index < lines.Count; index++)
         {
-            var item = l[i];
+            var item = lines[index];
             if (fillAlsoFirstTwo)
                 if (!item.StartsWith("   at ThrowEx"))
                 {
@@ -33,26 +33,26 @@ bool fillAlsoFirstTwo = true)
                 }
             if (item.StartsWith("at System."))
             {
-                l.Add(string.Empty);
-                l.Add(string.Empty);
+                lines.Add(string.Empty);
+                lines.Add(string.Empty);
                 break;
             }
         }
-        return new Tuple<string, string, string>(type, methodName, string.Join(Environment.NewLine, l));
+        return new Tuple<string, string, string>(type, methodName, string.Join(Environment.NewLine, lines));
     }
-    internal static void TypeAndMethodName(string l, out string type, out string methodName)
+    internal static void TypeAndMethodName(string line, out string type, out string methodName)
     {
-        var s2 = l.Split("at ")[1].Trim();
-        var s = s2.Split("(")[0];
-        var p = s.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
-        methodName = p[^1];
-        p.RemoveAt(p.Count - 1);
-        type = string.Join(".", p);
+        var afterAt = line.Split("at ")[1].Trim();
+        var fullName = afterAt.Split("(")[0];
+        var parts = fullName.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+        methodName = parts[^1];
+        parts.RemoveAt(parts.Count - 1);
+        type = string.Join(".", parts);
     }
-    internal static string CallingMethod(int v = 1)
+    internal static string CallingMethod(int depth = 1)
     {
         StackTrace stackTrace = new();
-        var methodBase = stackTrace.GetFrame(v)?.GetMethod();
+        var methodBase = stackTrace.GetFrame(depth)?.GetMethod();
         if (methodBase == null)
         {
             return "Method name cannot be get";
@@ -131,9 +131,9 @@ bool fillAlsoFirstTwo = true)
     {
         return CheckBefore(before) + message;
     }
-    internal static string? ExcAsArg(string before, Exception ex, string message)
+    internal static string? ExcAsArg(string before, Exception exception, string message)
     {
-        return CheckBefore(before) + message + string.Empty + TextOfExceptions(ex);
+        return CheckBefore(before) + message + string.Empty + TextOfExceptions(exception);
     }
     internal static string? NotImplementedMethod(string before)
     {
@@ -165,16 +165,16 @@ bool fillAlsoFirstTwo = true)
     }
     internal static string? NotImplementedCase(string before, object notImplementedName)
     {
-        var fr = string.Empty;
+        var result = string.Empty;
         if (notImplementedName != null)
         {
-            fr = " for ";
+            result = " for ";
             if (notImplementedName.GetType() == typeof(Type))
-                fr += ((Type)notImplementedName).FullName;
+                result += ((Type)notImplementedName).FullName;
             else
-                fr += notImplementedName.ToString();
+                result += notImplementedName.ToString();
         }
-        return CheckBefore(before) + "Not implemented case" + fr + " . internal program error. Please contact developer" +
+        return CheckBefore(before) + "Not implemented case" + result + " . internal program error. Please contact developer" +
         ".";
     }
 }

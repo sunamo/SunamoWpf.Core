@@ -31,11 +31,11 @@ internal class RH
 
             // CZ: GetName() může hodit výjimku pro některé assemblies, proto safe wrapper
             // EN: GetName() can throw exception for some assemblies, so use safe wrapper
-            IEnumerable<Assembly> result = ass.Where(d =>
+            IEnumerable<Assembly> result = ass.Where(assembly =>
             {
                 try
                 {
-                    return d.GetName().Name == name;
+                    return assembly.GetName().Name == name;
                 }
                 catch
                 {
@@ -45,11 +45,11 @@ internal class RH
 
             if (result.Count() == 0)
             {
-                result = ass.Where(d =>
+                result = ass.Where(assembly2 =>
                 {
                     try
                     {
-                        return d.FullName == name;
+                        return assembly2.FullName == name;
                     }
                     catch
                     {
@@ -60,11 +60,11 @@ internal class RH
 
             if (result.Count() == 0)
             {
-                result = ass.Where(d =>
+                result = ass.Where(assembly3 =>
                 {
                     try
                     {
-                        return d.FullName != null && d.FullName.Contains(name);
+                        return assembly3.FullName != null && assembly3.FullName.Contains(name);
                     }
                     catch
                     {
@@ -78,10 +78,10 @@ internal class RH
 
             return foundAssembly;
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            System.Diagnostics.Debug.WriteLine($"AssemblyWithName: EXCEPTION - {ex.GetType().Name}: {ex.Message}");
-            System.Diagnostics.Debug.WriteLine($"AssemblyWithName: StackTrace - {ex.StackTrace}");
+            System.Diagnostics.Debug.WriteLine($"AssemblyWithName: EXCEPTION - {exception.GetType().Name}: {exception.Message}");
+            System.Diagnostics.Debug.WriteLine($"AssemblyWithName: StackTrace - {exception.StackTrace}");
             throw;
         }
     }
@@ -89,17 +89,17 @@ internal class RH
     {
         return ObjectDumper.Dump(dumpAsStringArgs.o);
     }
-    public static string FullPathCodeEntity(Type t)
+    public static string FullPathCodeEntity(Type type)
     {
-        return t.Namespace + "." + t.Name;
+        return type.Namespace + "." + type.Name;
     }
-    public static object GetValueOfPropertyOrField(object o, string name)
+    public static object GetValueOfPropertyOrField(object instance, string name)
     {
-        var type = o.GetType();
+        var type = instance.GetType();
 
-        var value = GetValueOfProperty(name, type, o, false);
+        var value = GetValueOfProperty(name, type, instance, false);
 
-        if (value == null) value = GetValueOfField(name, type, o, false);
+        if (value == null) value = GetValueOfField(name, type, instance, false);
 
         return value;
     }
@@ -116,29 +116,29 @@ internal class RH
         return GetValue(name, type, instance, pis, ignoreCase, null);
     }
 
-    public static object GetValue(string name, Type type, object instance, IList pis, bool ignoreCase, object v)
+    public static object GetValue(string name, Type type, object instance, IList pis, bool ignoreCase, object value)
     {
-        return GetOrSetValue(name, type, instance, pis, ignoreCase, GetValue, v);
+        return GetOrSetValue(name, type, instance, pis, ignoreCase, GetValue, value);
     }
 
-    private static object GetValue(object instance, MemberInfo[] property, object v)
+    private static object GetValue(object instance, MemberInfo[] property, object value)
     {
         var val = property[0];
         if (val is PropertyInfo)
         {
-            var pi = (PropertyInfo)val;
-            return pi.GetValue(instance);
+            var propertyInfo = (PropertyInfo)val;
+            return propertyInfo.GetValue(instance);
         }
         else if (val is FieldInfo)
         {
-            var pi = (FieldInfo)val;
-            return pi.GetValue(instance);
+            var fieldInfo = (FieldInfo)val;
+            return fieldInfo.GetValue(instance);
         }
         return null;
     }
 
     public static object GetOrSetValue(string name, Type type, object instance, IList pis, bool ignoreCase,
-        Func<object, MemberInfo[], object, object> getOrSet, object v)
+        Func<object, MemberInfo[], object, object> getOrSet, object value)
     {
         if (ignoreCase)
         {
@@ -147,7 +147,7 @@ internal class RH
                 if (item.Name.ToLower() == name)
                 {
                     var property = type.GetMember(name);
-                    if (property != null) return getOrSet(instance, property, v);
+                    if (property != null) return getOrSet(instance, property, value);
                     //return GetValue(instance, property);
                 }
         }
@@ -157,7 +157,7 @@ internal class RH
                 if (item.Name == name)
                 {
                     var property = type.GetMember(name);
-                    if (property != null) return getOrSet(instance, property, v);
+                    if (property != null) return getOrSet(instance, property, value);
                     //return GetValue(instance, property);
                 }
         }

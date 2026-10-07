@@ -67,9 +67,9 @@ namespace Wpf.Tests.Controls.Visualization
             folderContentsTreeView.Selected += FolderContentsTreeView_Selected;
         }
 
-        private void FolderContentsTreeView_Selected(FileSystemEntryWpf t)
+        private void FolderContentsTreeView_Selected(FileSystemEntryWpf entry)
         {
-            System.Diagnostics.Debug.WriteLine(System.IO.Path.GetFileName(t.path));
+            System.Diagnostics.Debug.WriteLine(System.IO.Path.GetFileName(entry.path));
         }
     }
 }

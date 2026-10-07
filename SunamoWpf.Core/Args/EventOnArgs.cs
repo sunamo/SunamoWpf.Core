@@ -10,19 +10,19 @@ public class EventOnArgs
 
     }
 
-    public EventOnArgs(bool a)
+    public EventOnArgs(bool value)
     {
-        SetAllFor(a);
+        SetAllFor(value);
     }
 
-    public void SetAllFor(bool a)
+    public void SetAllFor(bool value)
     {
-        onCheck = a;
-        onUnCheck = a;
-        onAdd = a;
-        onRemove = a;
-        onClear = a;
-        onPropertyChanged = a;
+        onCheck = value;
+        onUnCheck = value;
+        onAdd = value;
+        onRemove = value;
+        onClear = value;
+        onPropertyChanged = value;
     }
 
     public EventOnArgs(bool onCheck, bool onUnCheck, bool onAdd, bool onRemove, bool onClear, bool onPropertyChanged)

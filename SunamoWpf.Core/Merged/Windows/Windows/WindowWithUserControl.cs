@@ -34,7 +34,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     StatusBar statusBar = null;
     public DialogButtons dialogButtons = null;
     Menu menu = null;
-    private void WindowWithUserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+    private void WindowWithUserControl_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
     {
         var hMenu = menu.ActualHeight;
         var staturBarH = statusBar.ActualHeight;
@@ -43,12 +43,12 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
         {
             dialogButtonsH = dialogButtons.ActualHeight;
         }
-        var e2 = ControlHelper.ActualInnerSize(this).Height;
-        var growingRow = e2 - hMenu - staturBarH - dialogButtonsH;
+        var height = ControlHelper.ActualInnerSize(this).Height;
+        var growingRow = height - hMenu - staturBarH - dialogButtonsH;
         if (args.showInTitleSizeOfWindowAndContent)
         {
-            var c = (FrameworkElement)Content;
-            WindowHelper.SizeOfWindowToTitle(this, growingRow, c);
+            var content = (FrameworkElement)Content;
+            WindowHelper.SizeOfWindowToTitle(this, growingRow, content);
         }
         OnSizeChanged(new DesktopSize(ActualWidth, growingRow));
     }
@@ -60,10 +60,10 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     /// A3 addDialogButtons only when uc dont have own button!
     /// </summary>
     /// <param name="iUserControlInWindow"></param>
-    /// <param name="rm"></param>
+    /// <param name="resizeMode"></param>
     /// <param name="addDialogButtons"></param>
     /// <param name="tag"></param>
-    public WindowWithUserControl(object iUserControlInWindow, ResizeMode rm, bool addDialogButtons = false, string tag = null) : this(new WindowWithUserControlArgs { iUserControlInWindow = iUserControlInWindow, addDialogButtons = addDialogButtons, tag = tag, rm = rm })
+    public WindowWithUserControl(object iUserControlInWindow, ResizeMode resizeMode, bool addDialogButtons = false, string tag = null) : this(new WindowWithUserControlArgs { iUserControlInWindow = iUserControlInWindow, addDialogButtons = addDialogButtons, tag = tag, rm = resizeMode })
     { }
     /// <summary>
     /// A1 can be IControlWithResult, if have own buttons for accepting
@@ -72,25 +72,25 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     /// <param name="iUserControlInWindow"></param>
     /// <param name="rm"></param>
     /// <param name="addDialogButtons"></param>
-    public WindowWithUserControl(WindowWithUserControlArgs a)
+    public WindowWithUserControl(WindowWithUserControlArgs args2)
     {
-        Tag = a.tag;
-        userControl = (UserControl)a.iUserControlInWindow;
+        Tag = args2.tag;
+        userControl = (UserControl)args2.iUserControlInWindow;
         this.uc = userControl as IUserControl;
         controlWithResultDebug = uc as IControlWithResultDebugWpf;
         userControlWithSizeChange = uc as IUserControlWithSizeChange;
         controlWithResult = uc as IControlWithResultWpf;
         this.Closed += WindowWithUserControl_Closed;
         this.Closing += WindowWithUserControl_Closing;
-        args = a;
+        args = args2;
         dock = new DockPanel();
         dock.LastChildFill = true;
         menu = new Menu();
         DockPanel.SetDock(menu, Dock.Top);
         dock.Children.Add(menu);
-        var tb = TextBlockHelper.Get(new ControlInitData { text = Translate.FromKey(XlfKeys.EnterForFastClosing) });
-        DockPanel.SetDock(tb, Dock.Top);
-        dock.Children.Add(tb);
+        var textBlock = TextBlockHelper.Get(new ControlInitData { text = Translate.FromKey(XlfKeys.EnterForFastClosing) });
+        DockPanel.SetDock(textBlock, Dock.Top);
+        dock.Children.Add(textBlock);
         if (uc is IUserControlWithSuMenuItemsList)
         {
             IUserControlWithSuMenuItemsList userControlWithSuMenuItemsList = (IUserControlWithSuMenuItemsList)uc;
@@ -126,7 +126,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             DockPanel.SetDock(dialogButtons, Dock.Bottom);
             dock.Children.Add(dialogButtons);
         }
-        this.ResizeMode = a.rm;
+        this.ResizeMode = args2.rm;
         // Původně bylo WidthAndHeight, pak Manual, pak opět WidthAndHeight - pokud zobrazuji LoginDialog např. chci aby to vypadalo profesionálně
         this.SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
         //this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth * 0.75d;
@@ -144,13 +144,13 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     public WindowWithUserControl()
     {
     }
-    private void ControlWithResult_ChangeDialogResult(bool? b)
+    private void ControlWithResult_ChangeDialogResult(bool? result)
     {
-        UserControlWithResult_ChangeDialogResult(b);
+        UserControlWithResult_ChangeDialogResult(result);
     }
-    private void WindowWithUserControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private void WindowWithUserControl_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs eventArgs)
     {
-        if (e.Key == System.Windows.Input.Key.Enter)
+        if (eventArgs.Key == System.Windows.Input.Key.Enter)
         {
             if (ChangeDialogResult != null)
             {
@@ -166,26 +166,26 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             }
             Close();
         }
-        else if (e.Key == System.Windows.Input.Key.Escape)
+        else if (eventArgs.Key == System.Windows.Input.Key.Escape)
         {
             OnChangeDialogResult(false);
             Close();
         }
     }
-    private void OnChangeDialogResult(bool v)
+    private void OnChangeDialogResult(bool value)
     {
         if (ChangeDialogResult != null)
         {
-            ChangeDialogResult(v);
+            ChangeDialogResult(value);
         }
     }
-    private void WindowWithUserControl_Closing(object sender, CancelEventArgs e)
+    private void WindowWithUserControl_Closing(object sender, CancelEventArgs eventArgs)
     {
         dialogResult = false;
     }
-    private void DialogButtons_ChangeDialogResult(bool? b)
+    private void DialogButtons_ChangeDialogResult(bool? result)
     {
-        UserControlWithResult_ChangeDialogResult(b);
+        UserControlWithResult_ChangeDialogResult(result);
     }
     public bool EnableBtnOk
     {
@@ -197,8 +197,8 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     /// <summary>
     /// Cant be used as handler, then is called multiple times becaues UserControlWithResult_ChangeDialogResult call the same method
     /// </summary>
-    /// <param name="b"></param>
-    void uc_ChangeDialogResult(bool? b)
+    /// <param name="result"></param>
+    void uc_ChangeDialogResult(bool? result)
     {
         // Throwed exception, output is captured by ChangeDialogResult
         //DialogResult = b;
@@ -207,23 +207,23 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             //var tag2 = Tag.ToString();
             if (dialogResult.HasValue && !dialogResult.Value)
             {
-                b = dialogResult;
+                result = dialogResult;
             }
             // If is registered, will close window exteranlly
-            ChangeDialogResult?.Invoke(b);
+            ChangeDialogResult?.Invoke(result);
             WindowHelper.Close(this);
         }
         else
         {
             if (args.useResultOfShowDialog)
             {
-                base.DialogResult = b;
+                base.DialogResult = result;
             }
             // Otherwise close here
             Close();
         }
     }
-    private void UserControlWithResult_ChangeDialogResult(bool? b)
+    private void UserControlWithResult_ChangeDialogResult(bool? result)
     {
         if (userControl is ICheckBoxListUC)
         {
@@ -233,7 +233,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             {
                 if (dialogButtons.clickedOk || dialogButtons.clickedApply || dialogButtons.clickedCancel)
                 {
-                    UserControlWithResult_ChangeDialogResult2(b);
+                    UserControlWithResult_ChangeDialogResult2(result);
                 }
                 if (checked2.Count() > 0)
                 {
@@ -253,7 +253,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             {
                 if (dialogButtons.clickedOk || dialogButtons.clickedApply || dialogButtons.clickedCancel)
                 {
-                    UserControlWithResult_ChangeDialogResult2(b);
+                    UserControlWithResult_ChangeDialogResult2(result);
                 }
                 if (tag != null)
                 {
@@ -267,26 +267,26 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
         }
         else
         {
-            UserControlWithResult_ChangeDialogResult2(b);
+            UserControlWithResult_ChangeDialogResult2(result);
         }
     }
-    private void UserControlWithResult_ChangeDialogResult2(bool? b)
+    private void UserControlWithResult_ChangeDialogResult2(bool? result)
     {
         if (dialogButtons != null)
         {
             // not only when click ok, could also when click cancel or apply
             //if (dialogButtons.clickedOk)
             //{
-            uc_ChangeDialogResult(b);
+            uc_ChangeDialogResult(result);
             //}
         }
         else
         {
             ////////////DebugLogger.Instance.ClipboardOrDebug("Calling uc_ChangeDialogResult with NO window dialog buttons");
-            uc_ChangeDialogResult(b);
+            uc_ChangeDialogResult(result);
         }
     }
-    private void WindowWithUserControl_Loaded(object sender, RoutedEventArgs e)
+    private void WindowWithUserControl_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         var before = ActualHeight;
         if (args.sizeWindow != Size.Empty)
@@ -296,15 +296,15 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
                //Application.Current.MainWindow = this;
                //Application.Current.MainWindow.Width = args.sizeWindow.Width;
                //Application.Current.MainWindow.Height = args.sizeWindow.Height;
-               var w = args.sizeWindow.Width;
-               var h = args.sizeWindow.Height;
-               if (w != 0)
+               var width = args.sizeWindow.Width;
+               var height = args.sizeWindow.Height;
+               if (width != 0)
                {
-                   this.Width = w;
+                   this.Width = width;
                }
-               if (h != 0)
+               if (height != 0)
                {
-                   this.Height = h;
+                   this.Height = height;
                }
            }, System.Windows.Threading.DispatcherPriority.ContextIdle);
         }
@@ -340,9 +340,9 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             {
                 // IF USER CONTROL HAVE OWN ChangeDialogResult, MUST USE ALWAYS IT
                 // In CheckBoxListUC must handle whether at least one is selected
-                var t = uc.GetType().ToString();
+                var typeName = uc.GetType().ToString();
                 // Check for comparing, delete BP
-                if (t != TypesControlsSunamo.CheckBoxListUC)
+                if (typeName != TypesControlsSunamo.CheckBoxListUC)
                 {
                     userControlWithResult.ChangeDialogResult -= uc_ChangeDialogResult;
                     userControlWithResult.ChangeDialogResult -= UserControlWithResult_ChangeDialogResult;
@@ -358,7 +358,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     }
     public event VoidBoolNullable ChangeDialogResult;
     public event TaskBoolNullable ChangeDialogResultAsync;
-    private void WindowWithUserControl_Closed(object sender, System.EventArgs e)
+    private void WindowWithUserControl_Closed(object sender, System.EventArgs eventArgs)
     {
         WpfApp.SaveReferenceToTextBlockStatus(true, null, null);
     }

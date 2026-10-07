@@ -8,28 +8,28 @@ public partial class TextBlockHelper
 {
     public static void InicializeWidths()
     {
-        StackPanel p = new StackPanel();
+        StackPanel stackPanel = new StackPanel();
         TextBlock txtTest = new TextBlock();
         txtTest.MinWidth = 0;
         Dictionary<int, double> charWidth = new Dictionary<int, double>();
-        double? d = null;
-        for (char i = 'a'; i <= 'z'; i++)
+        double? value = null;
+        for (char letter = 'a'; letter <= 'z'; letter++)
         {
             txtTest = new TextBlock();
-            txtTest.Text = i.ToString();
+            txtTest.Text = letter.ToString();
             txtTest.Measure(ControlsHelperValues.SizePositiveInfinity);
             txtTest.Arrange(new Rect(0, 0, txtTest.DesiredSize.Width, txtTest.DesiredSize.Height));
             txtTest.UpdateLayout();
-            charWidth.Add(i, txtTest.ActualWidth);
-            if (d == null)
+            charWidth.Add(letter, txtTest.ActualWidth);
+            if (value == null)
             {
-                d = txtTest.ActualWidth;
+                value = txtTest.ActualWidth;
             }
             else
             {
-                if (txtTest.ActualWidth > d.Value)
+                if (txtTest.ActualWidth > value.Value)
                 {
-                    d = txtTest.ActualWidth;
+                    value = txtTest.ActualWidth;
                 }
             }
         }
@@ -47,23 +47,23 @@ public partial class TextBlockHelper
         ave /= 100;
         // Násobím 1-100(velikost písma) předchozím výsledkem - dostanu šířku TextBlocku při velikosti písma ai
         Dictionary<int, double> aweWidthFor = new Dictionary<int, double>();
-        for (int i = 1; i < 101; i++)
+        for (int index = 1; index < 101; index++)
         {
-            aweWidthFor.Add(i, i * ave);
+            aweWidthFor.Add(index, index * ave);
         }
 
-        for (int i = 1; i < 101; i++)
+        for (int index2 = 1; index2 < 101; index2++)
         {
             txtTest = new TextBlock();
-            p.Children.Add(txtTest);
+            stackPanel.Children.Add(txtTest);
             txtTest.Text = "1";
-            txtTest.FontSize = i;
+            txtTest.FontSize = index2;
             txtTest.Measure(ControlsHelperValues.SizePositiveInfinity);
-            averageNumberWidthOnFontSize.Add(i, txtTest.DesiredSize.Width);
-            p.Children.Remove(txtTest);
+            averageNumberWidthOnFontSize.Add(index2, txtTest.DesiredSize.Width);
+            stackPanel.Children.Remove(txtTest);
         }
 
-        p.Visibility = Visibility.Collapsed;
+        stackPanel.Visibility = Visibility.Collapsed;
     }
 
     public static void AddTextPostColon(TextBlock tbSmtpServer)

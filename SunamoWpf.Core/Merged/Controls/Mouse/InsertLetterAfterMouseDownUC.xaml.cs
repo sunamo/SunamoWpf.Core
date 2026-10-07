@@ -33,9 +33,9 @@ public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithRes
         }
         //txt.KeyDown += Txt_KeyDown;
     }
-    private void DialogButtons_ChangeDialogResult(bool? b)
+    private void DialogButtons_ChangeDialogResult(bool? result)
     {
-        ChangeDialogResult(b);
+        ChangeDialogResult(result);
     }
     InsertLetterAfterMouseDownData Data
     {
@@ -60,13 +60,13 @@ public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithRes
             chbInsert.IsChecked = value;
         }
     }
-    private void Txt_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+    private void Txt_PreviewMouseUp(object sender, MouseButtonEventArgs eventArgs)
     {
-        if (e.ChangedButton == MouseButton.Right)
+        if (eventArgs.ChangedButton == MouseButton.Right)
         {
             insertNow = false;
         }
-        else if (e.ChangedButton == MouseButton.Left)
+        else if (eventArgs.ChangedButton == MouseButton.Left)
         {
             if (insertNow)
             {
@@ -80,26 +80,26 @@ public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithRes
         state.textSearchedResult = $"{actual}/{count}";
         SetTextBoxState();
     }
-    public void SetTextBoxState(string s = null)
+    public void SetTextBoxState(string text = null)
     {
-        if (s == null)
+        if (text == null)
         {
-            s = state.textSearchedResult;
+            text = state.textSearchedResult;
         }
-        tbState.Text = s;
+        tbState.Text = text;
     }
-    private void BtnOk_Click(object sender, RoutedEventArgs e)
+    private void BtnOk_Click(object sender, RoutedEventArgs eventArgs)
     {
         DialogResult = true;
     }
     Key lastKey = Key.Enter;
-    private void Txt_KeyDown(object sender, KeyEventArgs e)
+    private void Txt_KeyDown(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key != lastKey)
+        if (eventArgs.Key != lastKey)
         {
-            if (e.Key == Key.Enter)
+            if (eventArgs.Key == Key.Enter)
             {
-                lastKey = e.Key;
+                lastKey = eventArgs.Key;
                 DialogResult = true;
             }
         }

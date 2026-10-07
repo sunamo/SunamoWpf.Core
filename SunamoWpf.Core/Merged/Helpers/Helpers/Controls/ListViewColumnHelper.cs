@@ -31,11 +31,11 @@ public class ListViewColumnHelper<T> where T : IIdentificatorDesktop<int>
     }
     public void GridView2_MultiCheck(int arg1, int arg2, Checkboxes chb2)
     {
-        List<int> p = NH.Sort<int>(arg1, arg2);
-        p[1]++;
+        List<int> sorted = NH.Sort<int>(arg1, arg2);
+        sorted[1]++;
         // is already checked actully, so i dont negate
         var col = ((ObservableCollection<T>)lstViewXamlColumns.ItemsSource);
-        var first = col.First(d => d.Id == arg1);
+        var first = col.First(column => column.Id == arg1);
         bool setUp = false;
         switch (chb2)
         {
@@ -49,9 +49,9 @@ public class ListViewColumnHelper<T> where T : IIdentificatorDesktop<int>
                 ThrowEx.NotImplementedCase(chb2);
                 break;
         }
-        for (int i = p[0]; i < p[1]; i++)
+        for (int index = sorted[0]; index < sorted[1]; index++)
         {
-            first = col.FirstOrDefault(d => d.Id == i);
+            first = col.FirstOrDefault(column2 => column2.Id == index);
             if (!EqualityComparer<T>.Default.Equals(default(T), first))
             {
                 switch (chb2)

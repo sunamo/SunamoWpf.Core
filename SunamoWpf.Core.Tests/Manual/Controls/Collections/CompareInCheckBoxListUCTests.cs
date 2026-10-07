@@ -48,10 +48,10 @@ public class CompareInCheckBoxListUCTests :UserControl
 {
     public CompareInCheckBoxListUCTests()
     {
-        CompareInCheckBoxListUC c = new CompareInCheckBoxListUC();
+        CompareInCheckBoxListUC control = new CompareInCheckBoxListUC();
 
-        c.Init(TestData.list100Items, TestData.list59);
-        Content = c;
+        control.Init(TestData.list100Items, TestData.list59);
+        Content = control;
 
         //WindowWithUserControl w = new WindowWithUserControl(c, System.Windows.ResizeMode.CanResize, false);
         //w.WindowState = System.Windows.WindowState.Maximized;

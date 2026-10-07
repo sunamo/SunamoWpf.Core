@@ -9,23 +9,23 @@ public class RadioButtonHelper
     /// </summary>
     /// <param name="text"></param>
     /// <param name="name"></param>
-    public static RadioButton Get(ControlInitData d)
+    public static RadioButton Get(ControlInitData controlInitData)
     {
         RadioButton chb = new RadioButton();
-        ControlHelper.SetForeground(chb, d.foreground);
-        chb.GroupName = d.group;
-        chb.Content = ContentControlHelper.GetContent(d);
-        chb.IsChecked = d.isChecked;
-        chb.Checked += d.OnClick;
-        if (d.tag == null)
+        ControlHelper.SetForeground(chb, controlInitData.foreground);
+        chb.GroupName = controlInitData.group;
+        chb.Content = ContentControlHelper.GetContent(controlInitData);
+        chb.IsChecked = controlInitData.isChecked;
+        chb.Checked += controlInitData.OnClick;
+        if (controlInitData.tag == null)
         {
             chb.Tag = ControlNameGenerator.GetSeries(chb.GetType());
         }
         else
         {
-            chb.Tag = d.tag;
+            chb.Tag = controlInitData.tag;
         }
-        chb.ToolTip = d.tooltip;
+        chb.ToolTip = controlInitData.tooltip;
         return chb;
     }
 }

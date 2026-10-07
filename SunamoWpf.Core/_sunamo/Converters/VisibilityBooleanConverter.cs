@@ -2,18 +2,18 @@ namespace SunamoWpf.Core._sunamo;
 
 internal class VisibilityBooleanConverter
 {
-    public static bool ToBool(Visibility v)
+    public static bool ToBool(Visibility visibility)
     {
-        if (v == Visibility.Visible)
+        if (visibility == Visibility.Visible)
         {
             return true;
         }
         return false;
     }
 
-    public static Visibility FromBool(bool b)
+    public static Visibility FromBool(bool value)
     {
-        if (b)
+        if (value)
         {
             return Visibility.Visible;
         }

@@ -6,18 +6,18 @@ internal class SunamoComparer
     {
         internal static StringLength Instance = new();
 
-        public int Desc(string x, string y)
+        public int Desc(string left, string right)
         {
-            var a = x.Length;
-            var b = y.Length;
-            return a.CompareTo(b) * -1;
+            var leftLength = left.Length;
+            var rightLength = right.Length;
+            return leftLength.CompareTo(rightLength) * -1;
         }
 
-        public int Asc(string x, string y)
+        public int Asc(string left, string right)
         {
-            var a = x.Length;
-            var b = y.Length;
-            return a.CompareTo(b);
+            var leftLength = left.Length;
+            var rightLength = right.Length;
+            return leftLength.CompareTo(rightLength);
         }
     }
 }

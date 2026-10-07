@@ -47,30 +47,30 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
         }
         else
         {
-            TextBlock tb = null;
+            TextBlock textBlock = null;
             TextBox txt = null;
             Visibility visible = Visibility.Visible;
-            for (int i = 1; i < rowsCount + 1; i++)
+            for (int index = 1; index < rowsCount + 1; index++)
             {
-                tb = FrameworkElementHelper.FindName<TextBlock>(this, ControlNames.tb, i);
-                txt = FrameworkElementHelper.FindName<TextBox>(this, ControlNames.txt, i);
+                textBlock = FrameworkElementHelper.FindName<TextBlock>(this, ControlNames.tb, index);
+                txt = FrameworkElementHelper.FindName<TextBox>(this, ControlNames.txt, index);
                 if (visible == Visibility.Visible)
                 {
                     checkForContent.Add(txt);
                 }
-                tb.Visibility = txt.Visibility = visible;
-                if (i == neededRows)
+                textBlock.Visibility = txt.Visibility = visible;
+                if (index == neededRows)
                 {
                     visible = Visibility.Collapsed;
                 }
             }
         }
     }
-    private void DialogButtons_ChangeDialogResult(bool? b)
+    private void DialogButtons_ChangeDialogResult(bool? result)
     {
-        if (b.HasValue)
+        if (result.HasValue)
         {
-            if (!b.Value)
+            if (!result.Value)
             {
                 ////////DebugLogger.Instance.ClipboardOrDebug(methodName + "Dialog result set to " + false);
                 DialogResult = false;
@@ -116,9 +116,9 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
     /// <param name="input"></param>
     public void Accept(object input)
     {
-        ABT<string, string> d = (ABT<string, string>)input;
-        txtFirst.Text = d.A;
-        txtSecond.Text = d.B;
+        ABT<string, string> data = (ABT<string, string>)input;
+        txtFirst.Text = data.A;
+        txtSecond.Text = data.B;
         // Cant be, window must be already showned as dialog
         //DialogResult = true;
     }
@@ -127,14 +127,14 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
     {
         return RuntimeHelper.GetInvocationList(ChangeDialogResult).Count;
     }
-    public void AttachChangeDialogResult(VoidBoolNullable a, bool throwException = true)
+    public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
     {
-        RuntimeHelper.AttachChangeDialogResult(this, a, throwException);
+        RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
     }
     public void Init()
     {
     }
-    public void uc_Loaded(object sender, RoutedEventArgs e)
+    public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
     }
 }

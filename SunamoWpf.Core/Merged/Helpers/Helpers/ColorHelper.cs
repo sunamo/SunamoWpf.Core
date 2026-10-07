@@ -7,23 +7,23 @@ public class ColorHelperDesktop
     public static bool IsColorLight(Color clr)
     {
         // Bude 0 pro černou barvu, 254.99999999999997 pro bílou
-        double dd = .222 * clr.R + .707 * clr.G + .071 * clr.B;
-        return dd > 128;
+        double luminance = .222 * clr.R + .707 * clr.G + .071 * clr.B;
+        return luminance > 128;
     }
 
 
 
-    public static System.Drawing.Color ConvertColorFromWindowsMediaToDrawing(Color v)
+    public static System.Drawing.Color ConvertColorFromWindowsMediaToDrawing(Color color)
     {
-        return System.Drawing.Color.FromArgb(v.A, v.R, v.G, v.B);
+        return System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
     }
 
-    public static bool IsColorSimilar(System.Windows.Media.Color a, System.Windows.Media.Color b, int threshold = 50)
+    public static bool IsColorSimilar(System.Windows.Media.Color first, System.Windows.Media.Color second, int threshold = 50)
     {
-        int r = (int)a.R - b.R;
-        int g = (int)a.G - b.G;
-        int b2 = (int)a.B - b.B;
-        return (r * r + g * g + b2 * b2) <= threshold * threshold;
+        int redDifference = (int)first.R - second.R;
+        int greenDifference = (int)first.G - second.G;
+        int blueDifference = (int)first.B - second.B;
+        return (redDifference * redDifference + greenDifference * greenDifference + blueDifference * blueDifference) <= threshold * threshold;
     }
 
     public static PixelColorWpf PixelColorFromDrawingColor(System.Windows.Media.Color color, byte? alpha)
@@ -38,39 +38,39 @@ public class ColorHelperDesktop
     #endregion
 
     #region Mono
-    public static WriteableBitmap SwapColor(BitmapSource bi, PixelColorWpf bgPixelColor, PixelColorWpf fgPixelColorFg, PixelColorWpf definitelyFgPixelColor)
+    public static WriteableBitmap SwapColor(BitmapSource bitmapSource, PixelColorWpf bgPixelColor, PixelColorWpf fgPixelColorFg, PixelColorWpf definitelyFgPixelColor)
     {
 
         var balckZero = DrawingColorHelper.PixelColorFromDrawingColor(System.Drawing.Color.Black, 0);
-        WriteableBitmap wb = new WriteableBitmap(bi);
-        var pxs = BitmapSourceHelper.GetPixels(bi);
+        WriteableBitmap writeableBitmap = new WriteableBitmap(bitmapSource);
+        var pxs = BitmapSourceHelper.GetPixels(bitmapSource);
         var first = pxs[0, 0];
-        for (int i = 0; i < pxs.GetLength(0); i++)
+        for (int index = 0; index < pxs.GetLength(0); index++)
         {
             for (int y = 0; y < pxs.GetLength(1); y++)
             {
 
-                var pxsi = pxs[i, y];
+                var pxsi = pxs[index, y];
 #if DEBUG
                 //////////DebugLogger.Instance.Write(pxsi.Alpha + "-" + pxsi.Red + "-" + pxsi.Green + "-" + pxsi.Blue);
 #endif
 
-                bool b = ColorHelper.IsColorSame(bgPixelColor, pxsi) || ColorHelper.IsColorSame(balckZero, pxsi);
-                bool b1 = ColorHelper.IsColorSame(definitelyFgPixelColor, pxsi);
-                bool b2 = ColorHelper.IsColorSame(fgPixelColorFg, pxsi);
-                if (!b)
+                bool isBackground = ColorHelper.IsColorSame(bgPixelColor, pxsi) || ColorHelper.IsColorSame(balckZero, pxsi);
+                bool isDefinitelyForeground = ColorHelper.IsColorSame(definitelyFgPixelColor, pxsi);
+                bool isForeground = ColorHelper.IsColorSame(fgPixelColorFg, pxsi);
+                if (!isBackground)
                 {
-                    if (b1 || b2)
+                    if (isDefinitelyForeground || isForeground)
                     {
 
 
-                        if (b2)
+                        if (isForeground)
                         {
-                            pxs[i, y] = definitelyFgPixelColor;
+                            pxs[index, y] = definitelyFgPixelColor;
                         }
                         else
                         {
-                            pxs[i, y] = fgPixelColorFg;
+                            pxs[index, y] = fgPixelColorFg;
                         }
                     }
                 }
@@ -78,33 +78,33 @@ public class ColorHelperDesktop
             }
         }
 
-        BitmapSourceHelper.PutPixels(wb, pxs, 0, 0);
-        return wb;
+        BitmapSourceHelper.PutPixels(writeableBitmap, pxs, 0, 0);
+        return writeableBitmap;
     }
 
-    public static WriteableBitmap ReplaceAlpha(BitmapSource bi/*, PixelColorWpf bgPixelColor*/)
+    public static WriteableBitmap ReplaceAlpha(BitmapSource bitmapSource/*, PixelColorWpf bgPixelColor*/)
     {
         PixelColorWpf balckZero = DrawingColorHelper.PixelColorFromDrawingColor(System.Drawing.Color.Black, 0);
-        WriteableBitmap wb = new WriteableBitmap(bi);
-        var pxs = BitmapSourceHelper.GetPixels(bi);
+        WriteableBitmap writeableBitmap = new WriteableBitmap(bitmapSource);
+        var pxs = BitmapSourceHelper.GetPixels(bitmapSource);
         var first = pxs[0, 0];
-        for (int i = 0; i < pxs.GetLength(0); i++)
+        for (int index = 0; index < pxs.GetLength(0); index++)
         {
             for (int y = 0; y < pxs.GetLength(1); y++)
             {
 
-                var pxsi = pxs[i, y];
+                var pxsi = pxs[index, y];
                 if (pxsi.Alpha < 255)
                 {
 
-                    pxs[i, y].Alpha = 0;
+                    pxs[index, y].Alpha = 0;
                 }
 
             }
         }
 
-        BitmapSourceHelper.PutPixels(wb, pxs, 0, 0);
-        return wb;
+        BitmapSourceHelper.PutPixels(writeableBitmap, pxs, 0, 0);
+        return writeableBitmap;
     }
     #endregion
 }

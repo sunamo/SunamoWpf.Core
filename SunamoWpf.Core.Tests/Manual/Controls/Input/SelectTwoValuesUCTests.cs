@@ -70,7 +70,7 @@ public class SelectTwoValuesUCTests
         w.ShowDialog();
     }
 
-    private static void SelectTwoValues_ChangeDialogResult(bool? b)
+    private static void SelectTwoValues_ChangeDialogResult(bool? result)
     {
         w.Close();
     }

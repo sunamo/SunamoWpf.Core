@@ -51,12 +51,12 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     }
 
 
-    public void SaveControl(object o)
+    public void SaveControl(object control)
     {
-        FrameworkElement fw = (FrameworkElement)o;
-        if (fw != null)
+        FrameworkElement frameworkElement = (FrameworkElement)control;
+        if (frameworkElement != null)
         {
-            data[fw].SaveFile().GetAwaiter().GetResult();
+            data[frameworkElement].SaveFile().GetAwaiter().GetResult();
         }
         else
         {
@@ -67,10 +67,10 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     /// <summary>
     /// Must be AddUserControl, not Add coz many control is derived from UC like SelectFolder
     /// </summary>
-    /// <param name="uc"></param>
-    public void AddUserControl(UserControl uc)
+    /// <param name="userControl"></param>
+    public void AddUserControl(UserControl userControl)
     {
-        var adcl = AddFrameworkElement(uc);
+        var adcl = AddFrameworkElement(userControl);
     }
 
 
@@ -87,13 +87,13 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     //    //twt.Save += Twt_Save;
     //}
 
-    public void Add(ComboBox cb)
+    public void Add(ComboBox comboBox)
     {
         // Automatically load
-        var adcl = AddFrameworkElement(cb);
+        var adcl = AddFrameworkElement(comboBox);
         var list = adcl.GetListString(ItemsSource);
-        cb.ItemsSource = list;
-        cb.KeyUp += Cb_KeyUp;
+        comboBox.ItemsSource = list;
+        comboBox.KeyUp += Cb_KeyUp;
         //cb.DataContextChanged += Cb_DataContextChanged;
     }
 
@@ -103,7 +103,7 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
 
     #endregion
 
-    private void Chb_Click(object sender, RoutedEventArgs e)
+    private void Chb_Click(object sender, RoutedEventArgs eventArgs)
     {
         CheckBox chb = sender as CheckBox;
         Set(sender, IsChecked, chb.IsChecked);
@@ -115,10 +115,10 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     #region Add - single
 
 
-    public void Add(Window cb)
+    public void Add(Window window)
     {
         // Automatically load
-        var adcl = AddFrameworkElement(cb, ResolveControlFile(cb));
+        var adcl = AddFrameworkElement(window, ResolveControlFile(window));
         var list = adcl.GetListString(ItemsSource);
 
 
@@ -127,9 +127,9 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
         //cb.DataContextChanged += Cb_DataContextChanged;
     }
 
-    public void Add(TextBlock tb)
+    public void Add(TextBlock textBlock)
     {
-        var tb2 = AddFrameworkElement(tb);
+        var tb2 = AddFrameworkElement(textBlock);
         //tb.TextChanged +=
     }
 
@@ -148,7 +148,7 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     #endregion
 
 
-    private void Txt_TextChanged(object sender, TextChangedEventArgs e)
+    private void Txt_TextChanged(object sender, TextChangedEventArgs eventArgs)
     {
         TextBox chb = sender as TextBox;
         Set(sender, Text, chb.Text);
@@ -158,10 +158,10 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     public T Get<T>(object sender, string key)
     {
 
-        var v = data[sender];
-        if (v.Contains(key))
+        var value = data[sender];
+        if (value.Contains(key))
         {
-            return (T)v[key];
+            return (T)value[key];
         }
 
         return default(T);
@@ -170,27 +170,27 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     {
         return data[sender][key];
     }
-    public void Set(object sender, string key, object v)
+    public void Set(object sender, string key, object value)
     {
         // Here must be "|" because in file it is in format name|type|value
-        ThrowEx.StringContainsUnallowedSubstrings(v.ToString(), "|");
-        var f = data[sender];
-        f[key] = v;
+        ThrowEx.StringContainsUnallowedSubstrings(value.ToString(), "|");
+        var value2 = data[sender];
+        value2[key] = value;
     }
 
 
 
-    private void Cb_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+    private void Cb_KeyUp(object sender, System.Windows.Input.KeyEventArgs eventArgs)
     {
-        var cb = sender as ComboBox;
-        if (e.Key == System.Windows.Input.Key.Enter)
+        var comboBox = sender as ComboBox;
+        if (eventArgs.Key == System.Windows.Input.Key.Enter)
         {
             //var items = cb.Items;
             //var itemsS = cb.ItemsSource;
-            List<string> list = AddToListString(cb.ItemsSource, cb.Text);
-            cb.ItemsSource = list;
+            List<string> list = AddToListString(comboBox.ItemsSource, comboBox.Text);
+            comboBox.ItemsSource = list;
             Set(sender, ItemsSource, list);
-            SaveControl(cb);
+            SaveControl(comboBox);
         }
     }
     private List<string> AddToListString(object list, string text)
@@ -200,19 +200,19 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
         return list2;
     }
 #pragma warning disable
-    private void Cb_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+    private void Cb_DataContextChanged(object sender, DependencyPropertyChangedEventArgs eventArgs)
 #pragma warning restore
     {
         //SaveControl(sender);
     }
-    public ApplicationDataContainerList AddFrameworkElement(object key, ApplicationDataContainerList fw)
+    public ApplicationDataContainerList AddFrameworkElement(object key, ApplicationDataContainerList list)
     {
-        data.Add(key, fw);
-        return fw;
+        data.Add(key, list);
+        return list;
     }
-    public ApplicationDataContainerList AddFrameworkElement(FrameworkElement fw)
+    public ApplicationDataContainerList AddFrameworkElement(FrameworkElement frameworkElement)
     {
-        return AddFrameworkElement(fw, ResolveControlFile(fw));
+        return AddFrameworkElement(frameworkElement, ResolveControlFile(frameworkElement));
     }
 
     /// <summary>
@@ -225,22 +225,22 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     /// <summary>
     /// Vrátí cestu k souboru s nastavením prvku (název prvku, u okna bez Name název typu).
     /// </summary>
-    /// <param name="fw">Prvek, jehož nastavení se ukládá.</param>
-    private static string ResolveControlFile(FrameworkElement fw)
+    /// <param name="frameworkElement">Prvek, jehož nastavení se ukládá.</param>
+    private static string ResolveControlFile(FrameworkElement frameworkElement)
     {
-        var name = string.IsNullOrWhiteSpace(fw.Name) ? fw.GetType().Name : fw.Name;
+        var name = string.IsNullOrWhiteSpace(frameworkElement.Name) ? frameworkElement.GetType().Name : frameworkElement.Name;
         return Path.Combine(ControlsFolder, name + ".txt");
     }
 
     /// <summary>
     /// Načte nastavení prvku z daného souboru a zaregistruje ho pod prvkem.
     /// </summary>
-    /// <param name="fw">Prvek, jehož nastavení se ukládá.</param>
+    /// <param name="frameworkElement">Prvek, jehož nastavení se ukládá.</param>
     /// <param name="path">Cesta k souboru s nastavením.</param>
-    private ApplicationDataContainerList AddFrameworkElement(FrameworkElement fw, string path)
+    private ApplicationDataContainerList AddFrameworkElement(FrameworkElement frameworkElement, string path)
     {
-        ApplicationDataContainerList result = ApplicationDataContainerList.Init(fw, path).Result;
-        return AddFrameworkElement(fw, result);
+        ApplicationDataContainerList result = ApplicationDataContainerList.Init(frameworkElement, path).Result;
+        return AddFrameworkElement(frameworkElement, result);
     }
 
 }

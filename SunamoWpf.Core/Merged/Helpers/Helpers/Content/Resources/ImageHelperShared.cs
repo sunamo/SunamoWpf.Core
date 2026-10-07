@@ -27,12 +27,12 @@ public partial class ImageHelper
                 new System.Windows.Application();
         }
     
-public static Image ReturnImage(ImageSource bs)
+public static Image ReturnImage(ImageSource imageSource)
 	{
-        return imageHelperDesktop.ReturnImage(bs);
+        return imageHelperDesktop.ReturnImage(imageSource);
 	}
-public static Image ReturnImage(ImageSource bs, double width, double height)
+public static Image ReturnImage(ImageSource imageSource, double width, double height)
 	{
-        return imageHelperDesktop.ReturnImage(bs, width, height);
+        return imageHelperDesktop.ReturnImage(imageSource, width, height);
 	}
 }

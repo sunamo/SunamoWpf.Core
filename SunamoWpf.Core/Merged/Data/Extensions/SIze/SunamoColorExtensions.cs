@@ -5,15 +5,15 @@ namespace SunamoWpf.Extensions.SIze;
 /// </summary>
 public static class SunamoColorExtensions
 {
-    public static System.Drawing.Color ToSystemDrawing(this SunamoColor c)
+    public static System.Drawing.Color ToSystemDrawing(this SunamoColor color)
     {
-        System.Drawing.Color r = System.Drawing.Color.FromArgb(c.A, c.R, c.G, c.B);
-        return r;
+        System.Drawing.Color result = System.Drawing.Color.FromArgb(color.A, color.R, color.G, color.B);
+        return result;
     }
 
-    public static System.Windows.Media.Color ToSystemWindowsMedia(this SunamoColor c)
+    public static System.Windows.Media.Color ToSystemWindowsMedia(this SunamoColor color)
     {
-        var r = System.Windows.Media.Color.FromArgb(c.A, c.R, c.G, c.B);
-        return r;
+        var result = System.Windows.Media.Color.FromArgb(color.A, color.R, color.G, color.B);
+        return result;
     }
 }

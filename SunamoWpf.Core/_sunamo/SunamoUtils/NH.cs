@@ -3,10 +3,10 @@ namespace SunamoWpf.Core._sunamo;
 
 internal class NH
 {
-    internal static List<T> Sort<T>(params T[] t)
+    internal static List<T> Sort<T>(params T[] items)
     {
-        var c = new List<T>(t);
-        c.Sort();
-        return c;
+        var result = new List<T>(items);
+        result.Sort();
+        return result;
     }
 }

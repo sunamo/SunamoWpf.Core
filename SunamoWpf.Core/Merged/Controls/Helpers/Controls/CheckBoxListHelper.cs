@@ -4,15 +4,15 @@ public class CheckBoxListHelper
     {
         //chbs[0].IsChecked = true;
         var indexes = chbs.Select((v, i) => new { v, i });
-        var where = indexes.Where(x => BTS.GetValueOfNullable(x.v.IsChecked));
-        List<int> v2 = new List<int>();
+        var where = indexes.Where(entry => BTS.GetValueOfNullable(entry.v.IsChecked));
+        List<int> result = new List<int>();
         foreach (var item in where)
         {
-            v2.Add(item.i);
+            result.Add(item.i);
         }
         //var select = where.Select(x => x.i);
         //where.SelectMany<int>(d => d.;
-        return v2;
+        return result;
     }
 
     //
@@ -44,8 +44,8 @@ public class CheckBoxListHelper
     {
         //chbs[0].IsChecked = true;
         var indexes = chbs.Select((v, i) => new { v, i });
-        var where = indexes.Where(x => !BTS.GetValueOfNullable(x.v.IsChecked));
-        return where.Select(d => d.v.Content).Cast<StackPanel>().ToList();
+        var where = indexes.Where(entry => !BTS.GetValueOfNullable(entry.v.IsChecked));
+        return where.Select(entry2 => entry2.v.Content).Cast<StackPanel>().ToList();
     }
 
     /// <summary>
@@ -56,8 +56,8 @@ public class CheckBoxListHelper
     {
         //chbs[0].IsChecked = true;
         var indexes = chbs.Select((v, i) => new { v, i });
-        var where = indexes.Where(x => BTS.GetValueOfNullable(x.v.IsChecked));
-        return where.Select(d => d.v.Content).Cast<StackPanel>().ToList();
+        var where = indexes.Where(entry => BTS.GetValueOfNullable(entry.v.IsChecked));
+        return where.Select(entry2 => entry2.v.Content).Cast<StackPanel>().ToList();
     }
 
     /// <summary>
@@ -68,11 +68,11 @@ public class CheckBoxListHelper
     {
         //chbs[0].IsChecked = true;
         var indexes = chbs.Select((v, i) => new { v, i });
-        var where = indexes.Where(x => CheckBoxHelper.IsChecked(x.v));
+        var where = indexes.Where(entry => CheckBoxHelper.IsChecked(entry.v));
 
-        var sp = where.Select(d => ContentControlHelper.Content(d.v)).Cast<StackPanel>().ToList();
-        List<string> result = new List<string>(sp.Count);
-        foreach (var item in sp)
+        var stackPanels = where.Select(entry2 => ContentControlHelper.Content(entry2.v)).Cast<StackPanel>().ToList();
+        List<string> result = new List<string>(stackPanels.Count);
+        foreach (var item in stackPanels)
         {
             result.Add(CheckBoxListUC.ContentOfTextBlock(item));
         }
@@ -85,15 +85,15 @@ public class CheckBoxListHelper
     /// <param name="chbs"></param>
     public static List<StackPanel> AllContent(IList<CheckBox> chbs)
     {
-        List<StackPanel> d = null;
+        List<StackPanel> result = null;
 
         if (chbs.Count() > 0)
         {
-            d = chbs.Select(e => (StackPanel)e.Dispatcher.Invoke(() => { return (StackPanel)e.Content; })).ToList();
+            result = chbs.Select(checkBox => (StackPanel)checkBox.Dispatcher.Invoke(() => { return (StackPanel)checkBox.Content; })).ToList();
 
             //Nevím proč to převádím na string když o řádek níže to dávám na StackPanel
             //var result = CA.ToListString(d);
-            return d.Cast<StackPanel>().ToList();
+            return result.Cast<StackPanel>().ToList();
         }
         return new List<StackPanel>();
     }

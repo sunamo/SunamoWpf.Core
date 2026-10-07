@@ -7,9 +7,9 @@ namespace SunamoWpf.Core.Tests;
 
 public class BitmapImageHelperTests
 {
-    string GetFile(string n)
+    string GetFile(string fileName)
     {
-        return @"D:\_Test\sunamo\desktop\Helpers\Content\Resource\BitmapImageHelper\Bitmap2BitmapImage\" + n + ".png";
+        return @"D:\_Test\sunamo\desktop\Helpers\Content\Resource\BitmapImageHelper\Bitmap2BitmapImage\" + fileName + ".png";
     }
 
     [StaFact]

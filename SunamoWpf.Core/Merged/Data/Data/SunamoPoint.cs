@@ -17,11 +17,11 @@ public class SunamoPoint
 
     public void Parse(string input)
     {
-        var d = input.Split(',');
+        var parts = input.Split(',');
         //ParserTwoValues.ParseDouble(",", SHParts.RemoveAfterFirstFunc(input, char.IsLetter, new char[] { ',' }));
-        X = double.Parse(d[0]);
+        X = double.Parse(parts[0]);
 
-        Y = double.Parse(d[1]);
+        Y = double.Parse(parts[1]);
     }
 
     public override string ToString()

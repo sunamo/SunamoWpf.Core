@@ -10,8 +10,8 @@ public static partial class BitmapImageHelper
 
     public static BitmapImage UriToBitmapImage(Uri uri)
     {
-        BitmapImage bi = new BitmapImage(uri);
-        return bi;
+        BitmapImage bitmapImage = new BitmapImage(uri);
+        return bitmapImage;
     }
 
     #region Convert between System.Windows and System.Drawing - same name in all helper classes
@@ -20,17 +20,17 @@ public static partial class BitmapImageHelper
     /// </summary>
     public static BitmapImage Bitmap2BitmapImage(System.Drawing.Image bitmap)
     {
-        using (MemoryStream ms = new MemoryStream())
+        using (MemoryStream memoryStream = new MemoryStream())
         {
-            bitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-            ms.Position = 0;
-            BitmapImage bi = new BitmapImage();
-            bi.BeginInit();
-            bi.CacheOption = BitmapCacheOption.OnLoad;
-            bi.StreamSource = ms;
-            bi.EndInit();
+            bitmap.Save(memoryStream, System.Drawing.Imaging.ImageFormat.Png);
+            memoryStream.Position = 0;
+            BitmapImage bitmapImage = new BitmapImage();
+            bitmapImage.BeginInit();
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+            bitmapImage.StreamSource = memoryStream;
+            bitmapImage.EndInit();
 
-            return bi;
+            return bitmapImage;
         }
     }
 
@@ -60,13 +60,13 @@ public static partial class BitmapImageHelper
         return source;
     }
 
-    public static void Save(BitmapSource renderTarget, string fn)
+    public static void Save(BitmapSource renderTarget, string path)
     {
         PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();
         bitmapEncoder.Frames.Add(BitmapFrame.Create(renderTarget));
-        using (Stream stm = File.Create(fn))
+        using (Stream stm = File.Create(path))
         {
-            FS.CreateUpfoldersPsysicallyUnlessThere(fn);
+            FS.CreateUpfoldersPsysicallyUnlessThere(path);
             bitmapEncoder.Save(stm);
 
             // Cant be, otherwise could be visible on another screenshot

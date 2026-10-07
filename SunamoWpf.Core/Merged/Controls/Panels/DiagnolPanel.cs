@@ -79,9 +79,9 @@ public class DiagnolPanel : Panel
     private double GetXLocationAfterMiddleChild(int childNUmber)
     {
         double xLocation = 0;
-        for (int i = 0; i < childNUmber; i++)
+        for (int index = 0; index < childNUmber; index++)
         {
-            xLocation += this.InternalChildren[i].DesiredSize.Width;
+            xLocation += this.InternalChildren[index].DesiredSize.Width;
         }
 
         return xLocation;

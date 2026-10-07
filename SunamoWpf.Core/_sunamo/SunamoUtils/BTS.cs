@@ -13,10 +13,10 @@ internal class BTS
     //{
     //    return isChar ? (T)(dynamic)c.First() : (T)(dynamic)c;
     //}
-    public static string Replace(ref string id, bool replaceCommaForDot)
+    public static string Replace(ref string value, bool replaceCommaForDot)
     {
-        if (replaceCommaForDot) id = id.Replace(",", ".");
-        return id;
+        if (replaceCommaForDot) value = value.Replace(",", ".");
+        return value;
     }
     /// <summary>
     ///     Check for null in A2
@@ -34,9 +34,9 @@ internal class BTS
         }
         return same;
     }
-    public static string ToString<T>(T t)
+    public static string ToString<T>(T value)
     {
-        return t.ToString();
+        return value.ToString();
     }
     /// <summary>
     ///     POkud bude A1 nevyparsovatelné, vrátí int.MinValue
@@ -58,23 +58,23 @@ internal class BTS
     /// <summary>
     ///     If has value true, return true. Otherwise return false
     /// </summary>
-    /// <param name="t"></param>
-    public static bool GetValueOfNullable(bool? t)
+    /// <param name="value"></param>
+    public static bool GetValueOfNullable(bool? value)
     {
-        if (t.HasValue) return t.Value;
+        if (value.HasValue) return value.Value;
         return false;
     }
-    public static int BoolToInt(bool v)
+    public static int BoolToInt(bool value)
     {
-        return Convert.ToInt32(v);
+        return Convert.ToInt32(value);
     }
     public static int ParseInt(string entry, bool mustBeAllNumbers)
     {
-        int d;
-        if (!int.TryParse(entry, out d))
+        int result;
+        if (!int.TryParse(entry, out result))
             if (mustBeAllNumbers)
                 return int.MinValue;
-        return d;
+        return result;
     }
     public static int ParseInt(string entry, int _default)
     {
@@ -91,10 +91,10 @@ internal class BTS
     /// <summary>
     ///     G bool repr. A1. Pro Yes true, JF.
     /// </summary>
-    /// <param name="s"></param>
-    public static bool StringToBool(string s)
+    /// <param name="value"></param>
+    public static bool StringToBool(string value)
     {
-        if (s == Yes || s == bool.TrueString || s == One || s == Ano) return true;
+        if (value == Yes || value == bool.TrueString || value == One || value == Ano) return true;
         return false;
     }
 

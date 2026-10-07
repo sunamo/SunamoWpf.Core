@@ -8,18 +8,18 @@ public partial class ActionButtonHelper{
     /// </summary>
     /// <param name = "tooltip"></param>
     /// <param name = "imagePath"></param>
-    public static ActionButton<T> Get<T>(ControlInitData d)
+    public static ActionButton<T> Get<T>(ControlInitData controlInitData)
     {
-        ActionButton<T> vr = new ActionButton<T>(d.action, (T)d.tag);
-        ControlHelper.SetForeground(vr, d.foreground);
-        vr.Content = ContentControlHelper.GetContent(d);
-        if (d.OnClick != null)
+        ActionButton<T> button = new ActionButton<T>(controlInitData.action, (T)controlInitData.tag);
+        ControlHelper.SetForeground(button, controlInitData.foreground);
+        button.Content = ContentControlHelper.GetContent(controlInitData);
+        if (controlInitData.OnClick != null)
         {
-            vr.Click += d.OnClick;
+            button.Click += controlInitData.OnClick;
         }
 
-        vr.Tag = d.tag;
-        vr.ToolTip = d.tooltip;
-        return vr;
+        button.Tag = controlInitData.tag;
+        button.ToolTip = controlInitData.tooltip;
+        return button;
     }
 }

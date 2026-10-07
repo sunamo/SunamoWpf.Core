@@ -18,17 +18,17 @@ public partial class WpfApp
     /// Delegate set by Windows layer to show exception window with args. Returns dump string.
     /// </summary>
     public static Func<object, string, bool, string> ShowExceptionWindowDelegate;
-    public static void ShowMb(string t)
+    public static void ShowMb(string text)
     {
         reallyThrow = ThrowEx.reallyThrow2;
         ThrowEx.reallyThrow2 = false;
         if (WriteToStartupLogRelease != null)
         {
-            WriteToStartupLogRelease(t);
+            WriteToStartupLogRelease(text);
         }
         ThrowEx.reallyThrow2 = reallyThrow;
     }
-    public static void Shutdown(object o, EventArgs eh)
+    public static void Shutdown(object sender, EventArgs eventArgs)
     {
         WpfApp.htt.SetCancelClosing(false);
         WpfApp.window.Close();
@@ -103,16 +103,16 @@ public partial class WpfApp
     //    otherStatuses.Clear();
     //    errorStatuses.Clear();
     //}
-    private static void SetStatus(TypeOfMessageWpf st, string status)
+    private static void SetStatus(TypeOfMessageWpf typeOfMessage, string status)
     {
         status = DateTime.Now.ToShortTimeString() + " " + status;
-        Color fg = StatusHelper.GetForegroundBrushOfTypeOfMessage(st);
-        if (st == TypeOfMessageWpf.Error || st == TypeOfMessageWpf.Warning)
+        Color foreground = StatusHelper.GetForegroundBrushOfTypeOfMessage(typeOfMessage);
+        if (typeOfMessage == TypeOfMessageWpf.Error || typeOfMessage == TypeOfMessageWpf.Warning)
         {
             // tbLastErrorOrWarning must be defined otherwise wont be adding to lbLogsErrors also
             //if (tbLastErrorOrWarning != null)
             //{
-            SetForeground(tbLastErrorOrWarning, fg);
+            SetForeground(tbLastErrorOrWarning, foreground);
             TextBlockHelper.SetText(tbLastErrorOrWarning, status);
             if (lbLogsErrors != null)
             {
@@ -130,7 +130,7 @@ public partial class WpfApp
             // tbLastOtherMessage must be defined otherwise wont be adding to lbLogsErrors also
             //if (tbLastOtherMessage != null)
             //{
-            SetForeground(tbLastOtherMessage, fg);
+            SetForeground(tbLastOtherMessage, foreground);
             TextBlockHelper.SetText(tbLastOtherMessage, status);
             if (lbLogsOthers != null)
             {
@@ -158,9 +158,9 @@ public partial class WpfApp
     /// </summary>
     public static event Action<TypeOfMessageWpf, string> StatusSetted;
 
-    public static void EnableDesktopLogging(bool v)
+    public static void EnableDesktopLogging(bool value)
     {
-        if (v)
+        if (value)
         {
             // CZ: Povolit desktop logování - nyní se používá StatusSetted event
             // EN: Enable desktop logging - now uses StatusSetted event
@@ -173,22 +173,22 @@ public partial class WpfApp
         }
     }
 
-    private static void ThisApp_StatusSetted(TypeOfMessageWpf t, string message)
+    private static void ThisApp_StatusSetted(TypeOfMessageWpf typeOfMessage, string message)
     {
-        SetStatus(t, message);
+        SetStatus(typeOfMessage, message);
     }
     // TODO: Rename to SetStatusAsync and merge with commented method SetStatus here
-    public async static Task SetStatusToTextBlock(TypeOfMessageWpf st, string status)
+    public async static Task SetStatusToTextBlock(TypeOfMessageWpf typeOfMessage, string status)
     {
-        Color fg = Colors.Black;
-        if (st == TypeOfMessageWpf.Error || st == TypeOfMessageWpf.Warning)
+        Color foreground = Colors.Black;
+        if (typeOfMessage == TypeOfMessageWpf.Error || typeOfMessage == TypeOfMessageWpf.Warning)
         {
-            await SetForegroundAsync(tbLastErrorOrWarning, fg);
+            await SetForegroundAsync(tbLastErrorOrWarning, foreground);
             await SetTextAsync(tbLastErrorOrWarning, status);
         }
         else
         {
-            await SetForegroundAsync(tbLastOtherMessage, fg);
+            await SetForegroundAsync(tbLastOtherMessage, foreground);
             await SetTextAsync(tbLastOtherMessage, status);
         }
     }
@@ -222,7 +222,7 @@ public partial class WpfApp
             _mp = value;
             window = (Window)value;
             // Without it, app would be still running after close
-            window.Closed += (sender, e) => window.Dispatcher.InvokeShutdown();
+            window.Closed += (sender, eventArgs) => window.Dispatcher.InvokeShutdown();
         }
     }
     public static TextBlock tbLastErrorOrWarning = null;

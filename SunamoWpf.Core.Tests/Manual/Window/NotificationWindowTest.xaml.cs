@@ -61,27 +61,27 @@ namespace WpfApp2
             Loaded += NotificationWindowTest_Loaded;
         }
 
-        private void NotificationWindowTest_Loaded(object sender, RoutedEventArgs e)
+        private void NotificationWindowTest_Loaded(object sender, RoutedEventArgs eventArgs)
         {
 
         }
 
-        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs eventArgs)
         {
 
         }
 
-        private void Grid_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void Grid_PreviewKeyDown(object sender, KeyEventArgs eventArgs)
         {
             NotificationWindow.Show("Hello", this);
         }
 
-        private void Grid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_PreviewMouseDown(object sender, MouseButtonEventArgs eventArgs)
         {
 
         }
 
-        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs eventArgs)
         {
 
         }

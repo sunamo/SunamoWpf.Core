@@ -32,8 +32,8 @@ public class ResourcesH : IResourceHelperWpf
 
     public Stream GetStream(string name)
     {
-        var v = GetRelativeUri(name);
-        StreamResourceInfo info = Application.GetResourceStream(v);
+        var uri = GetRelativeUri(name);
+        StreamResourceInfo info = Application.GetResourceStream(uri);
         return info.Stream;
     }
 }

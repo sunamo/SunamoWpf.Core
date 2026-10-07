@@ -45,15 +45,15 @@ public static class BitmapSourceHelper
         byte[] byteArray = new byte[width * height * 4];
         //int nStride = (source.PixelWidth * source.Format.BitsPerPixel + 7) / 8;
         source.CopyPixels(byteArray, width * 4, 0);
-        PixelColorWpf[,] vr = new PixelColorWpf[width, height];
+        PixelColorWpf[,] result = new PixelColorWpf[width, height];
         var colorArray = new PixelColorWpf[byteArray.Length / 4];
-        for (var i = 0; i < byteArray.Length; i += 4)
+        for (var index = 0; index < byteArray.Length; index += 4)
         {
-            var color = new PixelColorWpf { Alpha = byteArray[i + 0], Red = byteArray[i + 1], Green = byteArray[i + 2], Blue = byteArray[i + 3] };
-            colorArray[i / 4] = color;
+            var color = new PixelColorWpf { Alpha = byteArray[index + 0], Red = byteArray[index + 1], Green = byteArray[index + 2], Blue = byteArray[index + 3] };
+            colorArray[index / 4] = color;
         }
-        vr = new PixelColorWpf[0, 0]; //CA.OneDimensionArrayToTwoDirection<PixelColor>(colorArray, source.PixelWidth);
-        return vr;
+        result = new PixelColorWpf[0, 0]; //CA.OneDimensionArrayToTwoDirection<PixelColor>(colorArray, source.PixelWidth);
+        return result;
     }
     public static void PutPixels(WriteableBitmap bitmap, PixelColorWpf[,] pixels, int x, int y)
     {

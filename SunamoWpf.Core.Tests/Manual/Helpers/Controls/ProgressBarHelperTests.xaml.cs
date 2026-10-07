@@ -61,15 +61,15 @@ namespace Wpf.Tests.Helpers.Controls
 
             pbh = new ProgressBarHelper(pb, 10, this);
             
-            ParameterizedThreadStart p = new ParameterizedThreadStart(LoadInThread);
-            Thread t = new Thread(p) { IsBackground = true };
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start(null);
+            ParameterizedThreadStart threadStart = new ParameterizedThreadStart(LoadInThread);
+            Thread thread = new Thread(threadStart) { IsBackground = true };
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start(null);
         }
 
-        void LoadInThread(object o)
+        void LoadInThread(object state)
         {
-            for (int i = 0; i < 10; i++)
+            for (int index = 0; index < 10; index++)
             {
                 pbh.DonePartially();
                 Thread.Sleep(100);

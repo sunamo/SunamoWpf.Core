@@ -7,20 +7,20 @@ namespace SunamoWpf.ConfigurableWindow;
 /// </summary>
 public class ConfigurableWindowHelper
 {
-    public static void SourceInitialized(ConfigurableWindowWrapper c)
+    public static void SourceInitialized(ConfigurableWindowWrapper wrapper)
     {
-        if (c != null)
+        if (wrapper != null)
         {
-            c.w.WindowState = c._settings.WindowState;
+            wrapper.w.WindowState = wrapper._settings.WindowState;
         }
     }
-    public static void RenderSizeChanged(ConfigurableWindowWrapper c)
+    public static void RenderSizeChanged(ConfigurableWindowWrapper wrapper)
     {
-        if (c != null)
+        if (wrapper != null)
         {
-            if (c._isLoaded && c.w.WindowState == WindowState.Normal)
+            if (wrapper._isLoaded && wrapper.w.WindowState == WindowState.Normal)
             {
-                c._settings.WindowSize = c.w.RenderSize;
+                wrapper._settings.WindowSize = wrapper.w.RenderSize;
             }
         }
     }

@@ -59,7 +59,7 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         }
     }
 
-    private void SunamoPasswordBox_SizeChanged(object sender, SizeChangedEventArgs e)
+    private void SunamoPasswordBox_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
     {
 
     }
@@ -73,10 +73,10 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
     {
         set
         {
-            var v = VisibilityBooleanConverter.FromBool(value);
+            var visibility = VisibilityBooleanConverter.FromBool(value);
 
 
-            spShowPassword.Visibility = v;
+            spShowPassword.Visibility = visibility;
         }
     }
 
@@ -88,9 +88,9 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         }
     }
 
-    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+    private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs eventArgs)
     {
-        var passwordBox = (PasswordBox)e.Source;
+        var passwordBox = (PasswordBox)eventArgs.Source;
         if (passwordBox != null)
         {
             System.Diagnostics.Debug.WriteLine(passwordBox.Password);
@@ -104,15 +104,15 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         txtShowPassword.Text = txtPassword.Password;
     }
 
-    private void Button_Click(object sender, RoutedEventArgs e)
+    private void Button_Click(object sender, RoutedEventArgs eventArgs)
     {
-        var b = !VisibilityBooleanConverter.ToBool(txtShowPassword.Visibility);
-        var v = VisibilityBooleanConverter.FromBool(b);
-        if (v == Visibility.Collapsed)
+        var visible = !VisibilityBooleanConverter.ToBool(txtShowPassword.Visibility);
+        var visibility = VisibilityBooleanConverter.FromBool(visible);
+        if (visibility == Visibility.Collapsed)
         {
-            v = Visibility.Hidden;
+            visibility = Visibility.Hidden;
         }
-        if (b)
+        if (visible)
         {
             btnShowPassword.Content = Translate.FromKey(XlfKeys.HidePassword);
         }
@@ -120,18 +120,18 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         {
             btnShowPassword.Content = Translate.FromKey(XlfKeys.ShowPassword);
         }
-        txtShowPassword.Visibility = v;
+        txtShowPassword.Visibility = visibility;
     }
 
-    public void OnSizeChanged(DesktopSize e)
+    public void OnSizeChanged(DesktopSize size)
     {
         if (noMargin)
         {
-            txtPassword.Width = spShowPassword.Width = e.Width;
+            txtPassword.Width = spShowPassword.Width = size.Width;
         }
         else
         {
-            txtPassword.Width = e.Width - 2 * 5;
+            txtPassword.Width = size.Width - 2 * 5;
         }
     }
 }

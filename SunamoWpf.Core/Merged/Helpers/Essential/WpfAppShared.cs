@@ -21,17 +21,17 @@ public partial class WpfApp
     {
         get
         {
-            var sl = PD.WriteToStartupLogRelease;
-            return sl != null ? sl : (string s) => { };
+            var logAction = PD.WriteToStartupLogRelease;
+            return logAction != null ? logAction : (string message) => { };
         }
     }
 
 
-    public static void Init(Dispatcher d)
+    public static void Init(Dispatcher dispatcher)
     {
         string initWpfApp = "Init WpfApp";
 
-        WpfApp.cd = d;
+        WpfApp.cd = dispatcher;
 #if MB
         ShowMb(initWpfApp);
 #endif
@@ -90,13 +90,13 @@ public partial class WpfApp
     #region MyRegion
     private static int dCount(IList arg)
     {
-        int i = 0;
+        int index = 0;
         foreach (var item in arg)
         {
-            i++;
+            index++;
         }
 
-        return i;
+        return index;
     }
 
     //private static object dFirstOrNull(IList arg)
@@ -110,9 +110,9 @@ public partial class WpfApp
     //    return null;
     //}
 
-    private static T2 DispatcherAction<T1, T2>(Func<T1, T2> count, T1 t1)
+    private static T2 DispatcherAction<T1, T2>(Func<T1, T2> count, T1 argument)
     {
-        T2 result = WpfApp.cd.Invoke(() => count(t1));
+        T2 result = WpfApp.cd.Invoke(() => count(argument));
         return result;
     }
     #endregion
@@ -191,12 +191,12 @@ public partial class WpfApp
 #endif
         sl(_a);
 
-        bool vr = false;
+        bool result = false;
         bool vr2 = false;
 
         if (WpfApp.cd == null)
         {
-            vr = true;
+            result = true;
         }
 
         if (PD.delShowMb == null)
@@ -204,10 +204,10 @@ public partial class WpfApp
             vr2 = true;
         }
 
-        if (vr || vr2)
+        if (result || vr2)
         {
             bool run = false;
-            if (vr)
+            if (result)
             {
                 string _b = DesktopNotTranslateAble.WpfAppCdWasNull;
 #if MB
@@ -226,7 +226,7 @@ public partial class WpfApp
                 run = true;
             }
 
-            Exception ex = new Exception();
+            Exception exception = new Exception();
 
             try
             {
@@ -238,7 +238,7 @@ public partial class WpfApp
             }
             catch (Exception ex2)
             {
-                ex = ex2;
+                exception = ex2;
 
                 string _e = DesktopNotTranslateAble.CatchBlockFromEmptyTryBlock;
 #if MB
@@ -252,8 +252,8 @@ public partial class WpfApp
 
             if (run)
             {
-                string nl = Environment.NewLine;
-                var err = handler + nl +Exceptions.TextOfExceptions(ex);
+                string newLine = Environment.NewLine;
+                var err = handler + newLine +Exceptions.TextOfExceptions(exception);
                 Debug.WriteLine(err);
 
                 string _f = handler + " " + DesktopNotTranslateAble.SomethingIsNullProbablyWpfAppCdIntoClipboardAndDebugWasCopiedStacktrace + ".";
@@ -281,9 +281,9 @@ public partial class WpfApp
     /// <summary>
     /// A2 = name of calling method (like Current_DispatcherUnhandledException)
     /// </summary>
-    /// <param name="e"></param>
-    /// <param name="n"></param>
-    public static void ShowExceptionWindow(EventArgs e, string n, bool isTerminanting = false)
+    /// <param name="eventArgs"></param>
+    /// <param name="name"></param>
+    public static void ShowExceptionWindow(EventArgs eventArgs, string name, bool isTerminanting = false)
     {
         string showExceptionWindow = "ShowExceptionWindow";
 #if MB
@@ -292,15 +292,15 @@ public partial class WpfApp
         sl(showExceptionWindow);
 
         var dump = WpfApp.ShowExceptionWindowDelegate != null
-            ? WpfApp.ShowExceptionWindowDelegate(e, n, isTerminanting)
+            ? WpfApp.ShowExceptionWindowDelegate(eventArgs, name, isTerminanting)
             : null;
 
-        WriterEventLog.WriteToMainAppLog(n + Environment.NewLine + dump, System.Diagnostics.EventLogEntryType.Error, Exceptions.CallingMethod());
+        WriterEventLog.WriteToMainAppLog(name + Environment.NewLine + dump, System.Diagnostics.EventLogEntryType.Error, Exceptions.CallingMethod());
     }
 
     static Type typeSEH = typeof(System.Runtime.InteropServices.SEHException);
 
-    private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+    private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs eventArgs)
     {
         reallyThrow = ThrowEx.reallyThrow2;
         ThrowEx.reallyThrow2 = false;
@@ -310,21 +310,21 @@ public partial class WpfApp
             return;
         }
 
-        var typeExc = e.Exception.GetType();
+        var typeExc = eventArgs.Exception.GetType();
         if (typeExc == typeSEH)
         {
 
         }
-        var t = typeExc.Name;
+        var typeName = typeExc.Name;
 
         //https://stackoverflow.com/a/7883087/9327173
-        e.SetObserved();
+        eventArgs.SetObserved();
 
         WpfApp.cd.Invoke(() =>
         {
             if (!Debugger.IsAttached)
             {
-                ShowExceptionWindow(e, "TaskScheduler_UnobservedTaskException");
+                ShowExceptionWindow(eventArgs, "TaskScheduler_UnobservedTaskException");
             }
             else { if (breakAt) { DebuggerIsAttached(); } }
         }
@@ -338,19 +338,19 @@ public partial class WpfApp
     /// 3
     /// </summary>
     /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private static void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+    /// <param name="eventArgs"></param>
+    private static void Current_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs eventArgs)
     {
         reallyThrow = ThrowEx.reallyThrow2;
         ThrowEx.reallyThrow2 = false;
         #region MyRegion
         // https://stackoverflow.com/a/13523188
-        var comException = e.Exception as System.Runtime.InteropServices.COMException;
+        var comException = eventArgs.Exception as System.Runtime.InteropServices.COMException;
 
         if (comException != null && comException.ErrorCode == -2147221040)
-            e.Handled = true;
+            eventArgs.Handled = true;
 
-        var typeExc = e.Exception.GetType();
+        var typeExc = eventArgs.Exception.GetType();
         if (typeExc == typeSEH)
         {
 
@@ -363,13 +363,13 @@ public partial class WpfApp
             return;
         }
 
-        e.Handled = handled;
+        eventArgs.Handled = handled;
         WpfApp.cd.Invoke(() =>
         {
             if (!Debugger.IsAttached)
             {
-                e.Handled = true;
-                ShowExceptionWindow(e, "Current_DispatcherUnhandledException");
+                eventArgs.Handled = true;
+                ShowExceptionWindow(eventArgs, "Current_DispatcherUnhandledException");
             }
             else { if (breakAt) { DebuggerIsAttached(); } }
 
@@ -382,8 +382,8 @@ public partial class WpfApp
     /// 2
     /// </summary>
     /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+    /// <param name="eventArgs"></param>
+    private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs eventArgs)
     {
         reallyThrow = ThrowEx.reallyThrow2;
         ThrowEx.reallyThrow2 = false;
@@ -394,7 +394,7 @@ public partial class WpfApp
         }
 
 
-        var typeExc = e.ExceptionObject.GetType();
+        var typeExc = eventArgs.ExceptionObject.GetType();
         if (typeExc == typeSEH)
         {
 
@@ -404,7 +404,7 @@ public partial class WpfApp
         {
             if (!Debugger.IsAttached)
             {
-                ShowExceptionWindow(e, "CurrentDomain_UnhandledException", e.IsTerminating);
+                ShowExceptionWindow(eventArgs, "CurrentDomain_UnhandledException", eventArgs.IsTerminating);
             }
             else { if (breakAt) { DebuggerIsAttached(); } }
         }

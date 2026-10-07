@@ -3,11 +3,11 @@ namespace SunamoWpf.Controls.Helpers;
 
 public partial class CheckBoxDataHelper
 {
-    private static CheckBoxData<UIElement> Get(UIElement c)
+    private static CheckBoxData<UIElement> Get(UIElement element)
     {
-        var vr = new CheckBoxData<UIElement>();
-        vr.t = c;
-        return vr;
+        var result = new CheckBoxData<UIElement>();
+        result.t = element;
+        return result;
     }
     public static CheckBoxData<UIElement> ActionButton(ControlInitData controlInitData)
     {

@@ -7,14 +7,14 @@ public class FoundedResultDataWrapper //: INotifyPropertyChanged
 {
     public FoundedResultData Frd { get; set; }
 
-    public FoundedResultDataWrapper(FoundedResultData f)
+    public FoundedResultDataWrapper(FoundedResultData data)
     {
-        Frd = f;
+        Frd = data;
     }
 
-    public FoundedResultDataWrapper(string f)
+    public FoundedResultDataWrapper(string path)
     {
-        Frd = new FoundedResultData { fileFullPath = f };
+        Frd = new FoundedResultData { fileFullPath = path };
     }
 }
 

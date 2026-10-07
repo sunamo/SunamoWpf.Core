@@ -8,27 +8,27 @@ public partial class ComboBoxHelper
 {
     public static void AddRange2List(ComboBox cbInterpret, IList allInterprets)
     {
-        for (int i = 0; i < allInterprets.Count; i++)
+        for (int index = 0; index < allInterprets.Count; index++)
         {
-            object o = allInterprets[i];
-            if (o != null)
+            object item = allInterprets[index];
+            if (item != null)
             {
-                if (o.ToString().Trim() != "")
+                if (item.ToString().Trim() != "")
                 {
-                    cbInterpret.Items.Add(o);
+                    cbInterpret.Items.Add(item);
 
                 }
             }
         }
     }
 
-    public static object ValueFromTWithNameOrObject(object o)
+    public static object ValueFromTWithNameOrObject(object value)
     {
-        if (o is TWithNameTWpf<object>)
+        if (value is TWithNameTWpf<object>)
         {
-            return ((TWithNameTWpf<object>)o).t;
+            return ((TWithNameTWpf<object>)value).t;
         }
-        return o;
+        return value;
     }
 
     public static void SetFocus(ComboBox comboBox1)
@@ -44,41 +44,41 @@ public partial class ComboBoxHelper
         AddValuesOfEnumAsItems(arr);
     }
 
-    public void AddValuesOfEnumAsItems(IList bs)
+    public void AddValuesOfEnumAsItems(IList values)
     {
-        int i = 0;
-        foreach (object item in bs)
+        int index = 0;
+        foreach (object item in values)
         {
             cb.Items.Add(item);
-            if (i == 0)
+            if (index == 0)
             {
                 cb.SelectedIndex = 0;
 
             }
-            i++;
+            index++;
         }
 
     }
 
 
-    public void AddValuesOfEnumerableAsItems(IList l)
+    public void AddValuesOfEnumerableAsItems(IList items)
     {
-        AddValuesOfArrayAsItems(null, null, l);
+        AddValuesOfArrayAsItems(null, null, items);
     }
 
-    public void AddValuesOfArrayAsItems(params object[] o)
+    public void AddValuesOfArrayAsItems(params object[] items)
     {
-        AddValuesOfArrayAsItems(null, o);
+        AddValuesOfArrayAsItems(null, items);
     }
 
     /// <summary>
     /// A1 is out of using - set null
     /// </summary>
-    /// <param name="eh"></param>
-    /// <param name="o"></param>
-    public void AddValuesOfArrayAsItems(RoutedEventHandler eh, params object[] o)
+    /// <param name="eventHandler"></param>
+    /// <param name="items"></param>
+    public void AddValuesOfArrayAsItems(RoutedEventHandler eventHandler, params object[] items)
     {
-        AddValuesOfArrayAsItems(null, eh, o);
+        AddValuesOfArrayAsItems(null, eventHandler, items);
     }
 
 
@@ -87,31 +87,31 @@ public partial class ComboBoxHelper
     /// A2 was handler of MouseDown, now without using - set null.
     /// </summary>
     /// <param name="eh"></param>
-    /// <param name="o"></param>
-    public void AddValuesOfArrayAsItems(Func<object, string> toMakeNameInTWithName, /*RoutedEventHandler eh,*/ params object[] o)
+    /// <param name="items"></param>
+    public void AddValuesOfArrayAsItems(Func<object, string> toMakeNameInTWithName, /*RoutedEventHandler eh,*/ params object[] items)
     {
-        var enu = CAG.ToList<object>(o);
+        var enu = CAG.ToList<object>(items);
         // cant add here because A1 will try cast added string to Encoding and throw exception
         //if (enu[0].ToString().Trim() != string.Empty)
         //{
         //    enu.Insert(0, string.Empty);
         //}
-        int i = 0;
+        int index = 0;
         foreach (object item in enu)
         {
             if (toMakeNameInTWithName != null)
             {
-                TWithNameTWpf<object> t = new TWithNameTWpf<object>();
-                t.name = toMakeNameInTWithName.Invoke(item);
-                t.t = item;
-                cb.Items.Add(t);
+                TWithNameTWpf<object> item2 = new TWithNameTWpf<object>();
+                item2.name = toMakeNameInTWithName.Invoke(item);
+                item2.t = item;
+                cb.Items.Add(item2);
             }
             else
             {
                 cb.Items.Add(item);
             }
 
-            i++;
+            index++;
         }
     }
 
@@ -128,7 +128,7 @@ public partial class ComboBoxHelper
     {
         int akt = initialValue;
         List<int> pred = new List<int>();
-        for (int i = 0; i < degrees; i++)
+        for (int index = 0; index < degrees; index++)
         {
             akt -= resizeOf;
             pred.Add(akt);
@@ -136,21 +136,21 @@ public partial class ComboBoxHelper
         }
         pred.Reverse();
         akt = initialValue;
-        List<int> po = new List<int>();
-        for (int i = 0; i < degrees; i++)
+        List<int> following = new List<int>();
+        for (int index2 = 0; index2 < degrees; index2++)
         {
             akt += resizeOf;
             pred.Add(akt);
         }
-        List<int> o = new List<int>();
-        o.AddRange(pred);
-        o.Add(initialValue);
-        o.AddRange(po);
-        int y = 0;
-        foreach (int item in o)
+        List<int> values = new List<int>();
+        values.AddRange(pred);
+        values.Add(initialValue);
+        values.AddRange(following);
+        int index3 = 0;
+        foreach (int item in values)
         {
             cb.Items.Add(item);
-            y++;
+            index3++;
         }
     }
 }

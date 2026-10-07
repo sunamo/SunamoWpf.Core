@@ -13,10 +13,10 @@ public class TWithNameTWpf<T>
     {
     }
 
-    public TWithNameTWpf(string name, T t)
+    public TWithNameTWpf(string name, T value)
     {
         this.name = name;
-        this.t = t;
+        this.t = value;
     }
 
     public override string ToString()

@@ -8,13 +8,13 @@ public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>
         Loaded += FoundedFilesUC_Loaded;
         SizeChanged += FoundedFilesUC_SizeChanged;
     }
-    private void FoundedFilesUC_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+    private void FoundedFilesUC_SizeChanged(object sender, System.Windows.SizeChangedEventArgs eventArgs)
     {
 #if DEBUG
         //FrameworkElementDebug.ActualSize(this);
 #endif
     }
-    private void FoundedFilesUC_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    private void FoundedFilesUC_Loaded(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
     }
     public void AttachSelected(VoidString act)
@@ -26,14 +26,14 @@ public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>
     /// Already inserted is not deleted
     /// </summary>
     /// <param name="foundedList"></param>
-    /// <param name="p"></param>
-    public void AddFoundedFiles(List<string> foundedList, TUListWpf<string, System.Windows.Media.Brush> p)
+    /// <param name="colors"></param>
+    public void AddFoundedFiles(List<string> foundedList, TUListWpf<string, System.Windows.Media.Brush> colors)
     {
         HideTbNoResultsFound();
-        int i = 0;
+        int index = 0;
         foreach (var item in foundedList)
         {
-            AddFoundedFile(item, p, ref i);
+            AddFoundedFile(item, colors, ref index);
         }
     }
     /// <summary>
@@ -41,21 +41,21 @@ public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>
     /// Already inserted is not deleted
     /// </summary>
     /// <param name="foundedList"></param>
-    /// <param name="p"></param>
-    public void AddFoundedFile(string item, TUListWpf<string, System.Windows.Media.Brush> p, ref int i)
+    /// <param name="colors"></param>
+    public void AddFoundedFile(string item, TUListWpf<string, System.Windows.Media.Brush> colors, ref int index)
     {
         if (sp != null)
         {
             HideTbNoResultsFound();
-            FoundedFileUC foundedFile = new FoundedFileUC(item, p, i++);
+            FoundedFileUC foundedFile = new FoundedFileUC(item, colors, index++);
             foundedFile.Selected += FoundedFile_Selected;
             sp.Children.Add(foundedFile);
         }
     }
-    public void FoundedFile_Selected(string s)
+    public void FoundedFile_Selected(string path)
     {
-        selectedItem = s;
-        OnSelected(s);
+        selectedItem = path;
+        OnSelected(path);
     }
     public bool? Filter(string text)
     {
@@ -72,15 +72,15 @@ public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>
             else
             {
                 bool someVisible = false;
-                Regex r = null;
+                Regex regex = null;
                 if (WildcardHelper.IsWildcard(text))
                 {
                     text = Wildcard.WildcardToRegex(text);
-                    r = new Regex(text);
+                    regex = new Regex(text);
                 }
                 foreach (FoundedFileUC item in sp.Children)
                 {
-                    if (item.Contains(r, text))
+                    if (item.Contains(regex, text))
                     {
                         someVisible = true;
                         item.Visibility = System.Windows.Visibility.Visible;

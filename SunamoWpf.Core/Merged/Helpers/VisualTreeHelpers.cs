@@ -112,9 +112,9 @@ public class VisualTreeHelpers
     {
         if (depObj == null) return null;
 
-        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+        for (int index = 0; index < VisualTreeHelper.GetChildrenCount(depObj); index++)
         {
-            var child = VisualTreeHelper.GetChild(depObj, i);
+            var child = VisualTreeHelper.GetChild(depObj, index);
 
             var result = (child as T) ?? GetChildOfType<T>(child);
             if (result != null) return result;
@@ -154,9 +154,9 @@ public class VisualTreeHelpers
 
         if (depObj != null)
         {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+            for (int index = 0; index < VisualTreeHelper.GetChildrenCount(depObj); index++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
+                DependencyObject child = VisualTreeHelper.GetChild(depObj, index);
                 if (child != null && child is T)
                 {
                     result.Add( (T)child);
@@ -181,8 +181,8 @@ public class VisualTreeHelpers
     /// <param name="depObj"></param>
     public static IList<T> FindDescendents<T>(DependencyObject depObj) where T : DependencyObject
     {
-        List<T> t = new List<T>();
-        return FindDescendents<T>(t, depObj);
+        List<T> result = new List<T>();
+        return FindDescendents<T>(result, depObj);
     }
 
     /// <summary>
@@ -193,21 +193,21 @@ public class VisualTreeHelpers
     /// Often The calling thread cannot access this object because a different thread owns it. -              better is get controls directlry with Children, if it is possible
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    /// <param name="vr"></param>
+    /// <param name="result"></param>
     /// <param name="depObj"></param>
-    static IList<T> FindDescendents<T>(List<T> vr, DependencyObject depObj) where T : DependencyObject
+    static IList<T> FindDescendents<T>(List<T> result, DependencyObject depObj) where T : DependencyObject
     {
         if (depObj != null)
         {
             var count = VisualTreeHelper.GetChildrenCount(depObj);
-            for (int i = 0; i < count; i++)
+            for (int index = 0; index < count; index++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(depObj, i);
-                if (vr != null)
+                DependencyObject child = VisualTreeHelper.GetChild(depObj, index);
+                if (result != null)
                 {
                     if (child != null && RH.IsOrIsDeriveFromBaseClass(child.GetType(), typeof(T)))
                     {
-                        vr.Add((T)child);
+                        result.Add((T)child);
                     }
                 }
 
@@ -216,15 +216,15 @@ public class VisualTreeHelpers
                 //{
                 //    vr.Add(desc[i]);
                 //}
-                if (vr != null)
+                if (result != null)
                 {
                     foreach (T childOfChild in desc)
                     {
-                        vr.Add(childOfChild);
+                        result.Add(childOfChild);
                     }
                 }
             }
         }
-        return vr;
+        return result;
     }
 }

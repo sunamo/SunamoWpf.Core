@@ -8,32 +8,32 @@ public partial class SuMenuItemHelper{
     /// </summary>
     /// <param name="header"></param>
     /// <param name="clickHandler"></param>
-    public static SuMenuItem Get(ControlInitData d)
+    public static SuMenuItem Get(ControlInitData controlInitData)
     {
-        SuMenuItem mi = new SuMenuItem();
-        mi.IsCheckable = d.checkable;
-        mi.IsChecked = d.isChecked;
-        if (d.foreground != null)
+        SuMenuItem menuItem = new SuMenuItem();
+        menuItem.IsCheckable = controlInitData.checkable;
+        menuItem.IsChecked = controlInitData.isChecked;
+        if (controlInitData.foreground != null)
         {
-            mi.Foreground = d.foreground;
+            menuItem.Foreground = controlInitData.foreground;
         }
-        if (d.OnClick != null)
+        if (controlInitData.OnClick != null)
         {
-            mi.Click += d.OnClick;
+            menuItem.Click += controlInitData.OnClick;
         }
-        if (d.list != null)
+        if (controlInitData.list != null)
         {
-            foreach (var item in d.list)
+            foreach (var item in controlInitData.list)
             {
-                mi.Items.Add(Get((ControlInitData)item));
+                menuItem.Items.Add(Get((ControlInitData)item));
             }
         }
-        mi.Tag = d.tag;
-        mi.ToolTip = d.tooltip;
-        d.addPadding = 20;
+        menuItem.Tag = controlInitData.tag;
+        menuItem.ToolTip = controlInitData.tooltip;
+        controlInitData.addPadding = 20;
         // into Header I cant insert StackPanel from ContentControlHelper.GetContent( d);, because then is no show
         //mi.Header = d.text;
-        mi.Header = ContentControlHelper.GetContent(d);
-        return mi;
+        menuItem.Header = ContentControlHelper.GetContent(controlInitData);
+        return menuItem;
     }
 }

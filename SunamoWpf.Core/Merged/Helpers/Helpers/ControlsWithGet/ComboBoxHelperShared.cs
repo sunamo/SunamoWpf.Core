@@ -43,7 +43,7 @@ public partial class ComboBoxHelper
             return SelectedO.ToString();
         }
     }
-    void tsddb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    void tsddb_SelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
     {
         SelectedO = cb.SelectedItem;
         if (SelectedO != null)
@@ -55,7 +55,7 @@ public partial class ComboBoxHelper
         {
             if (SelectionChanged != null)
             {
-                SelectionChanged(sender, e);
+                SelectionChanged(sender, eventArgs);
             }
         }
     }
@@ -83,22 +83,22 @@ public partial class ComboBoxHelper
     /// </summary>
     /// <param name="tag"></param>
     /// <param name="list12"></param>
-    public static ComboBox Get(ControlInitData d)
+    public static ComboBox Get(ControlInitData controlInitData)
     {
-        ComboBox cb = new ComboBox();
-        ControlHelper.SetForeground(cb, d.foreground);
-        foreach (var item in d.list)
+        ComboBox comboBox = new ComboBox();
+        ControlHelper.SetForeground(comboBox, controlInitData.foreground);
+        foreach (var item in controlInitData.list)
         {
-            cb.Items.Add(item);
+            comboBox.Items.Add(item);
         }
-        if (d.OnClick != null)
+        if (controlInitData.OnClick != null)
         {
             ThrowEx.IsNotAllowed("d.OnClick");
         }
-        cb.Tag = d.tag;
-        cb.ToolTip = d.tooltip;
-        cb.IsEditable = d.isEditable;
-        return cb;
+        comboBox.Tag = controlInitData.tag;
+        comboBox.ToolTip = controlInitData.tooltip;
+        comboBox.IsEditable = controlInitData.isEditable;
+        return comboBox;
     }
     /// <summary>
     /// Instead of this use instance 
@@ -106,9 +106,9 @@ public partial class ComboBoxHelper
     /// <param name="tb"></param>
     /// <param name="control"></param>
     /// <param name="trim"></param>
-    public static void Validate(ComboBox control, ref ValidateDataWpf d)
+    public static void Validate(ComboBox control, ref ValidateDataWpf validateData)
     {
-        control.Validate(ref d);
+        control.Validate(ref validateData);
     }
     public static bool validated
     {

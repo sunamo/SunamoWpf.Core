@@ -17,9 +17,9 @@ public class BorderData
         BorderBrush = borderBrush;
     }
 
-    public static Thickness Thickness(double d)
+    public static Thickness Thickness(double value)
     {
-        return new Thickness(d);
+        return new Thickness(value);
     }
 
     public static readonly BorderData None = new BorderData(Brushes.Beige, 0);

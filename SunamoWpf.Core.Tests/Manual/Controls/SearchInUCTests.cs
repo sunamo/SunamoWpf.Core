@@ -51,7 +51,7 @@ public class SearchInUCTests : UserControl
         Loaded += SearchInUCTests_Loaded;
     }
 
-    private void SearchInUCTests_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    private void SearchInUCTests_Loaded(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         //SearchInUC searchIn = new SearchInUC();
         //Content = searchIn;

@@ -48,13 +48,13 @@ public class InlineBuilderTextBlockTests : UserControl
 {
     public InlineBuilderTextBlockTests()
     {
-        TextBlock tb = new TextBlock();
-        InlineBuilderTextBlock t = new InlineBuilderTextBlock(tb);
+        TextBlock textBlock = new TextBlock();
+        InlineBuilderTextBlock inlineBuilder = new InlineBuilderTextBlock(textBlock);
 
-        t.Hyperlink("Web", "http://www.sunamo.cz");
-        t.LineBreak();
-        t.Run("Hi!");
+        inlineBuilder.Hyperlink("Web", "http://www.sunamo.cz");
+        inlineBuilder.LineBreak();
+        inlineBuilder.Run("Hi!");
 
-        Content = tb;
+        Content = textBlock;
     }
 }

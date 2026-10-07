@@ -7,8 +7,8 @@ internal class ClipboardHelper
     {
         SetText(string.Join("\n", lines));
     }
-    internal static void SetText(string s)
+    internal static void SetText(string text)
     {
-        ClipboardService.SetText(s);
+        ClipboardService.SetText(text);
     }
 }

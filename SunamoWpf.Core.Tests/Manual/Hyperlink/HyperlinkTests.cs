@@ -51,7 +51,7 @@ public class HyperlinkTests : UserControl
         // Create a FlowDocument  
         FlowDocument doc = new FlowDocument();
         // Create a Paragraph and 3 Runs  
-        Paragraph p = new Paragraph();
+        Paragraph paragraph = new Paragraph();
         Run run1 = new Run("Hyperlink Sample ");
         Run run2 = new Run(" Hyperlink added");
         Run run3 = new Run("C# Corner ");
@@ -60,11 +60,11 @@ public class HyperlinkTests : UserControl
         Hyperlink hlink = new Hyperlink(run3);
         hlink.NavigateUri = new Uri("http://www.c-sharpcorner.com");
         // Add Runs and Hyperlink to Paragraph  
-        p.Inlines.Add(run1);
-        p.Inlines.Add(hlink);
-        p.Inlines.Add(run2);
+        paragraph.Inlines.Add(run1);
+        paragraph.Inlines.Add(hlink);
+        paragraph.Inlines.Add(run2);
         // Add Paragraph to FlowDocument  
-        doc.Blocks.Add(p);
+        doc.Blocks.Add(paragraph);
         Content = doc;
     }
 }

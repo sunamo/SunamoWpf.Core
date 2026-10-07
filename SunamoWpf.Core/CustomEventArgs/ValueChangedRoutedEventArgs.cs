@@ -1,6 +1,6 @@
 namespace SunamoWpf.CustomEventArgs;
 
-public delegate void ValueChangedRoutedHandler<T>(object sender, ValueChangedRoutedEventArgs<T> ea);
+public delegate void ValueChangedRoutedHandler<T>(object sender, ValueChangedRoutedEventArgs<T> eventArgs);
 
 public class ValueChangedRoutedEventArgs<T> : RoutedEventArgs
 {

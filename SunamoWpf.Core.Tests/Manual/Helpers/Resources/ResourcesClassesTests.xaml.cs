@@ -61,7 +61,7 @@ namespace Wpf.Tests
             Loaded += ResourcesClasses_Loaded;
         }
 
-        private void ResourcesClasses_Loaded(object sender, RoutedEventArgs e)
+        private void ResourcesClasses_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             
 

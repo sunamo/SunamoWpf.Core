@@ -9,83 +9,83 @@ public partial class ResourceDictionaryStyles
 {
     #region 10 for remembering default size
     public static double def = 10;
-    public static void Padding10(IList<Control> p)
+    public static void Padding10(IList<Control> controls)
     {
-        Padding(def, p);
+        Padding(def, controls);
     }
 
     /// <summary>
     /// TextBlock is not deriving from Control, has own Padding
     /// </summary>
     /// <param name="d"></param>
-    /// <param name="p"></param>
-    public static void Padding10(IList<TextBlock> p)
+    /// <param name="controls"></param>
+    public static void Padding10(IList<TextBlock> controls)
     {
-        Padding(def, p);
+        Padding(def, controls);
     }
 
-    public static void Margin10(IList<TextBox> p)
+    public static void Margin10(IList<TextBox> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
 
-    public static void Margin10(IList<TextBlock> p)
+    public static void Margin10(IList<TextBlock> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
 
-    public static void Margin10(IList<PasswordBox> p)
+    public static void Margin10(IList<PasswordBox> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
 
-    public static void Margin10(IList<Grid> p)
+    public static void Margin10(IList<Grid> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
 
-    public static void Margin10(IList<CheckBox> p)
+    public static void Margin10(IList<CheckBox> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
 
-    public static void Margin10(IList<Button> p)
+    public static void Margin10(IList<Button> controls)
     {
-        Margin(def, p);
+        Margin(def, controls);
     }
 
 
     #endregion
 
-    public static void Padding(double d, IList<Control> p)
+    public static void Padding(double padding, IList<Control> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Padding = new Thickness(d);
+            item.Padding = new Thickness(padding);
         }
     }
 
-    public static void Margin(double d, IList<CheckBox> p)
+    public static void Margin(double margin, IList<CheckBox> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(d);
+            item.Margin = new Thickness(margin);
         }
     }
 
-    public static void Margin(double d, IList<TextBlock> p)
+    public static void Margin(double margin, IList<TextBlock> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(d);
+            item.Margin = new Thickness(margin);
         }
     }
 
-    public static void Margin(double d, IList<Grid> p)
+    public static void Margin(double margin, IList<Grid> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(d);
+            item.Margin = new Thickness(margin);
         }
     }
 
@@ -94,53 +94,53 @@ public partial class ResourceDictionaryStyles
     /// <summary>
     /// TextBlock is not deriving from Control, has own Padding
     /// </summary>
-    /// <param name="d"></param>
-    /// <param name="p"></param>
-    public static void Padding(double d, IList<TextBlock> p)
+    /// <param name="padding"></param>
+    /// <param name="controls"></param>
+    public static void Padding(double padding, IList<TextBlock> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Padding = new Thickness(d);
+            item.Padding = new Thickness(padding);
         }
     }
 
-    public static void Margin(double v, IList<PasswordBox> p)
+    public static void Margin(double margin, IList<PasswordBox> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(v);
+            item.Margin = new Thickness(margin);
         }
     }
 
-    public static void Margin(double v, IList<TextBox> p)
+    public static void Margin(double margin, IList<TextBox> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(v);
+            item.Margin = new Thickness(margin);
         }
     }
 
-    public static void Margin(double v, IList<Button> p)
+    public static void Margin(double margin, IList<Button> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(v);
+            item.Margin = new Thickness(margin);
         }
     }
 
-    public static void Margin(int v, IList<StackPanel> p)
+    public static void Margin(int margin, IList<StackPanel> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(v);
+            item.Margin = new Thickness(margin);
         }
     }
 
-    public static void Margin(int v, IList<SelectManyFiles> p)
+    public static void Margin(int margin, IList<SelectManyFiles> controls)
     {
-        foreach (var item in p)
+        foreach (var item in controls)
         {
-            item.Margin = new Thickness(v);
+            item.Margin = new Thickness(margin);
         }
     }
 }

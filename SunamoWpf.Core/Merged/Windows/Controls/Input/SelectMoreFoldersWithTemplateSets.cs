@@ -54,9 +54,9 @@ public class SelectMoreFoldersWithTemplateSets
         cbSetsFoldersHelper.SelectionChanged += CbSetsFolders_SelectionChanged;
         txtFolders.SaveSetAsTemplate += this_SaveSetAsTemplate;
     }
-    private void EnterOneValueUC_ChangeDialogResult(bool? b)
+    private void EnterOneValueUC_ChangeDialogResult(bool? result)
     {
-        if (BTS.GetValueOfNullable(b))
+        if (BTS.GetValueOfNullable(result))
         {
             string text = enterNameOfSet.enterOneValueUC.txtEnteredText.Text;
             if (cbSetsFolders.Items.Contains(text))
@@ -76,7 +76,7 @@ public class SelectMoreFoldersWithTemplateSets
             }
         }
     }
-    private void CbSetsFolders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void CbSetsFolders_SelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
     {
         string selected = cbSetsFoldersHelper.SelectedS;
         List<List<string>> lines = SF.GetAllElementsFile(pathFromCtor);
@@ -85,9 +85,9 @@ public class SelectMoreFoldersWithTemplateSets
             if (item[0] == selected)
             {
                 txtFolders.RemoveAllFolders();
-                for (int i = 1; i < item.Count; i++)
+                for (int index = 1; index < item.Count; index++)
                 {
-                    txtFolders.AddFolder(item[i]);
+                    txtFolders.AddFolder(item[index]);
                 }
             }
         }

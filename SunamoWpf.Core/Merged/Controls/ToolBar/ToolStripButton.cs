@@ -32,9 +32,9 @@ public class ToolStripButton : ToggleButton
 
     }
 
-    protected override void OnChecked(RoutedEventArgs e)
+    protected override void OnChecked(RoutedEventArgs eventArgs)
     {
-        base.OnChecked(e);
+        base.OnChecked(eventArgs);
 
         if (CheckOnClick)
         {

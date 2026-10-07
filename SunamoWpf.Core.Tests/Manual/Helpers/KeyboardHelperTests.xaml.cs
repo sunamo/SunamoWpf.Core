@@ -54,11 +54,11 @@ namespace Wpf.Tests.UC
             InitializeComponent();
         }
 
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        protected override void OnPreviewKeyDown(KeyEventArgs eventArgs)
         {
-            base.OnPreviewKeyDown(e);
+            base.OnPreviewKeyDown(eventArgs);
 
-            System.Diagnostics.Debug.WriteLine(KeyboardHelper.IsCapsLock() + " " + e.Key.ToString());
+            System.Diagnostics.Debug.WriteLine(KeyboardHelper.IsCapsLock() + " " + eventArgs.Key.ToString());
         }
     }
 }

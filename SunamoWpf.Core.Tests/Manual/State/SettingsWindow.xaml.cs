@@ -55,10 +55,10 @@ namespace WpfState.Tests
         Random random = new Random();
         WpfStateSettings mus = null;
 
-        private void button2_Click(object sender, RoutedEventArgs e)
+        private void button2_Click(object sender, RoutedEventArgs eventArgs)
         {
-            int nt = random.Next(999);
-            mus[s] = nt;
+            int randomNumber = random.Next(999);
+            mus[s] = randomNumber;
             SetToTb();
         }
 
@@ -73,11 +73,11 @@ namespace WpfState.Tests
             InitializeComponent();
 
             var settings = new WpfStateSettings();
-            var sm = new SettingsManager(settings, settings.Providers);
-            sm.customProperties.Add(s, 0);
+            var settingsManager = new SettingsManager(settings, settings.Providers);
+            settingsManager.customProperties.Add(s, 0);
 
             mus = settings;
-            AppSettingsManager.SettingsManager = sm;
+            AppSettingsManager.SettingsManager = settingsManager;
 
             //WpfStateHelper.AddControls(sp, "CheckBox", "TextBox");
             
@@ -85,7 +85,7 @@ namespace WpfState.Tests
 
         }
 
-        private void SettingsWindow_Loaded(object sender, RoutedEventArgs e)
+        private void SettingsWindow_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             AppSettingsManager.AddChildrenFrom(this);
 
@@ -94,9 +94,9 @@ namespace WpfState.Tests
 
         
 
-        protected override void OnClosing(CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs eventArgs)
         {
-            base.OnClosing(e);
+            base.OnClosing(eventArgs);
 
             AppSettingsManager.SaveSettings();
         }

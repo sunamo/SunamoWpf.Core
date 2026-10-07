@@ -38,13 +38,13 @@ public class ParagraphBuilderTextBlock : IInlineBuilder
     {
         t.Bold(text);
     }
-    public void Bullet(string p)
+    public void Bullet(string text)
     {
-        t.Bullet(p);
+        t.Bullet(text);
     }
-    public void Error(string p)
+    public void Error(string text)
     {
-        t.Error(p);
+        t.Error(text);
     }
     public void H1(string text)
     {
@@ -66,21 +66,21 @@ public class ParagraphBuilderTextBlock : IInlineBuilder
     {
         t.Hyperlink(text, uri);
     }
-    public void Italic(string p)
+    public void Italic(string text)
     {
-        t.Italic(p);
+        t.Italic(text);
     }
-    public void KeyValue(string p1, string p2)
+    public void KeyValue(string key, string value)
     {
-        t.KeyValue(p1, p2);
+        t.KeyValue(key, value);
     }
     public void LineBreak()
     {
         t.LineBreak();
     }
-    public void Run(string p)
+    public void Run(string text)
     {
-        t.Run(p);
+        t.Run(text);
     }
     #endregion
 }

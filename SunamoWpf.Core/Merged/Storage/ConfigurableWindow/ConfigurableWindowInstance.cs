@@ -26,8 +26,8 @@ public class ConfigurableWindowInstance : Window, IConfigurableWindow
     /// Has normal event
     /// </summary>
     /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void ConfigurableWindow_SourceInitialized(object sender, EventArgs e)
+    /// <param name="eventArgs"></param>
+    private void ConfigurableWindow_SourceInitialized(object sender, EventArgs eventArgs)
     {
         ConfigurableWindowHelper.SourceInitialized(configurableWindowWrapper);
     }

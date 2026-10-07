@@ -14,20 +14,20 @@ public class InlineBuilder : InlineBuilderBase, IInlineBuilder
     {
     }
     public FontArgs fa = FontArgs.DefaultRun();
-    public void DivideStringToRows(FontArgs fa, string text, Size maxSize)
+    public void DivideStringToRows(FontArgs fontArgs, string text, Size maxSize)
     {
-        List<string> ls = FontHelper.DivideStringToRows(fa.fontFamily, fa.fontSize, fa.fontStyle, fa.fontStretch, fa.fontWeight, text, maxSize);
-        foreach (var item in ls)
+        List<string> rows = FontHelper.DivideStringToRows(fontArgs.fontFamily, fontArgs.fontSize, fontArgs.fontStyle, fontArgs.fontStretch, fontArgs.fontWeight, text, maxSize);
+        foreach (var item in rows)
         {
-            inlines.Add(GetRun(item, fa));
+            inlines.Add(GetRun(item, fontArgs));
             inlines.Add(new LineBreak());
         }
     }
     public void Bold(string text)
     {
-        FontArgs fa = FontArgs.DefaultRun();
-        fa.fontWeight = GetFontWeight(SunamoWpf.Enums.FontWeights.bold);
-        inlines.Add(GetBold(text, fa));
+        FontArgs fontArgs = FontArgs.DefaultRun();
+        fontArgs.fontWeight = GetFontWeight(SunamoWpf.Enums.FontWeights.bold);
+        inlines.Add(GetBold(text, fontArgs));
     }
     public void Hyperlink(string text, string uri)
     {
@@ -37,61 +37,61 @@ public class InlineBuilder : InlineBuilderBase, IInlineBuilder
     /// <summary>
     /// Return null but also add it
     /// </summary>
-    /// <param name="p"></param>
+    /// <param name="text"></param>
     /// <returns></returns>
-    public void Run(string p)
+    public void Run(string text)
     {
-        Run run = GetRun(p, fa);
+        Run run = GetRun(text, fa);
         inlines.Add(run);
     }
     public void H1(string text, double maxWidth)
     {
-        Bold b = new Bold();
-        FontArgs fa = FontArgs.DefaultRun();
-        fa.fontSize = HeaderSize.h1;
+        Bold bold = new Bold();
+        FontArgs fontArgs = FontArgs.DefaultRun();
+        fontArgs.fontSize = HeaderSize.h1;
         //b.FontSize = 40;
-        b.Inlines.Add(new LineBreak());
+        bold.Inlines.Add(new LineBreak());
         //b.Inlines.Add(GetRun(text, fa));
-        DivideStringToRows(fa, text, new Size(maxWidth, double.PositiveInfinity));
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(new LineBreak());
-        inlines.Add(b);
+        DivideStringToRows(fontArgs, text, new Size(maxWidth, double.PositiveInfinity));
+        bold.Inlines.Add(new LineBreak());
+        bold.Inlines.Add(new LineBreak());
+        inlines.Add(bold);
     }
     public void H1(string text)
     {
-        Bold b = new Bold();
-        FontArgs fa = FontArgs.DefaultRun();
-        fa.fontSize = HeaderSize.h1;
+        Bold bold = new Bold();
+        FontArgs fontArgs = FontArgs.DefaultRun();
+        fontArgs.fontSize = HeaderSize.h1;
         //b.FontSize = 40;
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(GetRun(text, fa));
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(new LineBreak());
-        inlines.Add(b);
+        bold.Inlines.Add(new LineBreak());
+        bold.Inlines.Add(GetRun(text, fontArgs));
+        bold.Inlines.Add(new LineBreak());
+        bold.Inlines.Add(new LineBreak());
+        inlines.Add(bold);
     }
     public void H2(string text)
     {
-        Bold b = new Bold();
-        FontArgs fa = FontArgs.DefaultRun();
+        Bold bold = new Bold();
+        FontArgs fontArgs = FontArgs.DefaultRun();
         //fa.fontSize = 50;
-        fa.fontSize = HeaderSize.h2;
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(GetRun(text, fa));
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(new LineBreak());
-        inlines.Add(b);
+        fontArgs.fontSize = HeaderSize.h2;
+        bold.Inlines.Add(new LineBreak());
+        bold.Inlines.Add(GetRun(text, fontArgs));
+        bold.Inlines.Add(new LineBreak());
+        bold.Inlines.Add(new LineBreak());
+        inlines.Add(bold);
     }
     public void H3(string text)
     {
-        Italic b = new Italic();
-        FontArgs fa = FontArgs.DefaultRun();
-        fa.fontSize = HeaderSize.h3;
+        Italic italic = new Italic();
+        FontArgs fontArgs = FontArgs.DefaultRun();
+        fontArgs.fontSize = HeaderSize.h3;
         //b.FontSize = 30;
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(GetRun(text, fa));
-        b.Inlines.Add(new LineBreak());
-        b.Inlines.Add(new LineBreak());
-        inlines.Add(b);
+        italic.Inlines.Add(new LineBreak());
+        italic.Inlines.Add(GetRun(text, fontArgs));
+        italic.Inlines.Add(new LineBreak());
+        italic.Inlines.Add(new LineBreak());
+        inlines.Add(italic);
     }
     /// <summary>
     /// Tato Metoda nefunguje, protože Paragraph je odvozený od Block a ne od Inline 
@@ -104,39 +104,39 @@ public class InlineBuilder : InlineBuilderBase, IInlineBuilder
     {
         inlines.Add(new LineBreak());
     }
-    public void KeyValue(string p1, string p2)
+    public void KeyValue(string key, string value)
     {
-        if (!string.IsNullOrWhiteSpace(p2))
+        if (!string.IsNullOrWhiteSpace(value))
         {
-            p2 = p2.Trim();
-            p1 = p1.Trim();
-            if (p2 != "" && p1 != "")
+            value = value.Trim();
+            key = key.Trim();
+            if (value != "" && key != "")
             {
-                Bold(p1);
-                Run(" " + p2);
+                Bold(key);
+                Run(" " + value);
                 LineBreak();
             }
         }
     }
-    public void Error(string p)
+    public void Error(string text)
     {
-        inlines.Add(GetError(p, FontArgs.DefaultRun()));
+        inlines.Add(GetError(text, FontArgs.DefaultRun()));
         LineBreak();
     }
-    public void Bullet(string p)
+    public void Bullet(string text)
     {
-        Inline il = GetBullet(p, fa);
+        Inline inline = GetBullet(text, fa);
         //il.Foreground = new SolidColorBrush(Colors.Black);
-        inlines.Add(il);
+        inlines.Add(inline);
         LineBreak();
     }
-    public void Italic(string p)
+    public void Italic(string text)
     {
-        inlines.Add(GetItalic(p, fa));
+        inlines.Add(GetItalic(text, fa));
     }
     public void DivideStringToRows(FontFamily fontFamily, double fontSize, FontStyle fontStyle, FontStretch fontStretch, System.Windows.FontWeight fontWeight, string text, Size maxSize)
     {
-        FontArgs fa = new FontArgs(fontFamily, fontSize, fontStyle, fontStretch, fontWeight);
-        DivideStringToRows(fa, text, maxSize);
+        FontArgs fontArgs = new FontArgs(fontFamily, fontSize, fontStyle, fontStretch, fontWeight);
+        DivideStringToRows(fontArgs, text, maxSize);
     }
 }

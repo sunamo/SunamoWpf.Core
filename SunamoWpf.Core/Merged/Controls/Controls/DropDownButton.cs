@@ -27,10 +27,10 @@ public class DropDownButton : ToggleButton
     }
     public static readonly DependencyProperty MenuProperty = DependencyProperty.Register("Menu", typeof(ContextMenu), typeof(DropDownButton), new UIPropertyMetadata(null, OnMenuChanged));
 
-    private static void OnMenuChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnMenuChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
     {
-        var dropDownButton = (DropDownButton)d;
-        var contextMenu = (ContextMenu)e.NewValue;
+        var dropDownButton = (DropDownButton)dependencyObject;
+        var contextMenu = (ContextMenu)eventArgs.NewValue;
         contextMenu.DataContext = dropDownButton.DataContext;
     }
 

@@ -66,7 +66,7 @@ public sealed partial class ErrorListing : UserControl
 #endif
         }
     }
-    private void OnClickOK(object sender, RoutedEventArgs e)
+    private void OnClickOK(object sender, RoutedEventArgs eventArgs)
     {
         ClickOK(null);
     }

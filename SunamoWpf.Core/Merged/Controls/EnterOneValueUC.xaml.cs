@@ -63,7 +63,7 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             }
         }
     }
-    public void EnterOneValueUC_Loaded(object sender, RoutedEventArgs e)
+    public void EnterOneValueUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         PrintColumnsRows(gridGrowable);
         PrintColumnsRows(grid2);
@@ -84,32 +84,32 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
     /// Tag can be TWithNameT<object> or any object and its value is set to TextBlock
     /// </summary>
     /// <param name="uie"></param>
-    public void Init(IList<FrameworkElement> uie, GridSize gs = GridSize.GetAutoSize)
+    public void Init(IList<FrameworkElement> uie, GridSize gridSize = GridSize.GetAutoSize)
     {
         //gridGrowable.
         txtEnteredText.Visibility = Visibility.Collapsed;
         //txtEnteredText.Parent.Chi
         fwElemements = uie.ToList();
-        if (gs == GridSize.GetAutoSize)
+        if (gridSize == GridSize.GetAutoSize)
         {
             GridHelper.GetAutoSize(gridGrowable, 2, uie.Count());
         }
-        else if (gs == GridSize.Mine)
+        else if (gridSize == GridSize.Mine)
         {
-            ThrowEx.NotImplementedCase(gs);
+            ThrowEx.NotImplementedCase(gridSize);
         }
-        else if (gs == GridSize.XamlDefined)
+        else if (gridSize == GridSize.XamlDefined)
         {
             // is already in xaml
             GridHelper.GetAutoSize(gridGrowable, 0, uie.Count());
         }
-        int i = 0;
+        int index = 0;
         foreach (var item in uie)
         {
             string name = null;
             name = ExtractName(item);
-            AddControl(i, name, item);
-            i++;
+            AddControl(index, name, item);
+            index++;
         }
     }
     private static string ExtractName(FrameworkElement item)
@@ -117,8 +117,8 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         string name;
         if (item.Tag is TWithNameTWpf<object>)
         {
-            var t = (TWithNameTWpf<object>)item.Tag;
-            name = t.name;
+            var tagged = (TWithNameTWpf<object>)item.Tag;
+            name = tagged.name;
         }
         else
         {
@@ -126,7 +126,7 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         }
         return name;
     }
-    private void btnEnter_Click_1(object sender, RoutedEventArgs e)
+    private void btnEnter_Click_1(object sender, RoutedEventArgs eventArgs)
     {
         if (AfterEnteredValue(fwElemements))
         {
@@ -148,9 +148,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
     {
         return dynLayout.GetContentByTag(tag);
     }
-    public void AddControl(int row, string name, FrameworkElement ui)
+    public void AddControl(int row, string name, FrameworkElement control)
     {
-        dynLayout.AddControl(row, name, ui);
+        dynLayout.AddControl(row, name, control);
     }
     private bool AfterEnteredValue(List<FrameworkElement> txtEnteredText)
     {
@@ -175,9 +175,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
                 {
                     if (RH.IsOrIsDeriveFromBaseClass(item.GetType(), TypesControls.tControl))
                     {
-                        var c = (Control)item;
-                        c.BorderThickness = new Thickness(2);
-                        c.BorderBrush = new SolidColorBrush(Colors.Red);
+                        var control = (Control)item;
+                        control.BorderThickness = new Thickness(2);
+                        control.BorderBrush = new SolidColorBrush(Colors.Red);
                         if (validateData != null)
                         {
                             if (!string.IsNullOrEmpty(validateData.messageToReallyShow))
@@ -217,17 +217,17 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             dynLayout.fwElements = value;
         }
     }
-    public object this[int i]
+    public object this[int index]
     {
         get
         {
-            return fwElemements[i].GetContent();
+            return fwElemements[index].GetContent();
         }
     }
     public DynLayout dynLayout = null;
-    private void txtEnteredText_KeyDown_1(object sender, KeyEventArgs e)
+    private void txtEnteredText_KeyDown_1(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Enter)
+        if (eventArgs.Key == Key.Enter)
         {
             if (AfterEnteredValue(fwElemements))
             {
@@ -253,18 +253,18 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
     }
     public int CountOfHandlersChangeDialogResult()
     {
-        var l = RuntimeHelper.GetInvocationList(ChangeDialogResult);
-        return l.Count;
+        var invocationList = RuntimeHelper.GetInvocationList(ChangeDialogResult);
+        return invocationList.Count;
     }
-    public void AttachChangeDialogResult(VoidBoolNullable a, bool throwException = true)
+    public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
     {
-        RuntimeHelper.AttachChangeDialogResult(this, a, throwException);
+        RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
     }
     public void FocusOnMainElement()
     {
         txtEnteredText.Focus();
     }
-    public void uc_Loaded(object sender, RoutedEventArgs e)
+    public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         //ThrowEx.NotImplementedMethod(Exc.GetStackTrace(),type, Exceptions.CallingMethod());
     }

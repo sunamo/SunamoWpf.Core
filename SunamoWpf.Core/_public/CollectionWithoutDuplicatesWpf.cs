@@ -10,7 +10,7 @@ public class CollectionWithoutDuplicatesWpf<T> : CollectionWithoutDuplicatesBase
     {
     }
 
-    internal CollectionWithoutDuplicatesWpf(IList<T> l) : base(l)
+    internal CollectionWithoutDuplicatesWpf(IList<T> items) : base(items)
     {
     }
 
@@ -19,8 +19,8 @@ public class CollectionWithoutDuplicatesWpf<T> : CollectionWithoutDuplicatesBase
         return allowNull.HasValue && allowNull.Value;
     }
 
-    internal override bool? Contains(T t2)
+    internal override bool? Contains(T item)
     {
-        return c.Contains(t2);
+        return c.Contains(item);
     }
 }

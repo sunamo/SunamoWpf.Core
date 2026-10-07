@@ -68,8 +68,8 @@ public class ApplicationDataContainerTests
         container = new ApplicationDataContainer(fileTest);
 
         // Is really object, not ABWpf
-        var o = container.Values[key2];
-        Assert.Equal(value2, o);
+        var value = container.Values[key2];
+        Assert.Equal(value2, value);
         Assert.Equal(1, container.Values.GetItems().Count());
     }
 }

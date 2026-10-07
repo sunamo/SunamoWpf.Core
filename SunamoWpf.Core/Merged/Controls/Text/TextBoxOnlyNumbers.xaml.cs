@@ -31,7 +31,7 @@ public partial class TextBoxOnlyNumbers : UserControl
         txt.TextChanged += Txt_TextChanged;
     }
 
-    private void Txt_TextChanged(object sender, TextChangedEventArgs e)
+    private void Txt_TextChanged(object sender, TextChangedEventArgs eventArgs)
     {
         txt.Text = CharHelper.OnlyDigits(txt.Text);
     }

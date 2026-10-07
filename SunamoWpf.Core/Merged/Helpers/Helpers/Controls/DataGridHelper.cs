@@ -3,21 +3,21 @@ namespace SunamoWpf.Helpers.Controls;
 
 public static class DataGridHelper
 {
-    public static DataGridColumn NewTextColumn(string p, string bindingPath)
+    public static DataGridColumn NewTextColumn(string header, string bindingPath)
     {
-        DataGridTextColumn c = new DataGridTextColumn();
-        c.Header = p;
-        c.Binding = new Binding(bindingPath);
-        return c;
+        DataGridTextColumn column = new DataGridTextColumn();
+        column.Header = header;
+        column.Binding = new Binding(bindingPath);
+        return column;
     }
 
-    public static DataGridColumn NewCheckBoxColumn(string p, string bindingPath)
+    public static DataGridColumn NewCheckBoxColumn(string header, string bindingPath)
     {
-        DataGridCheckBoxColumn c = new DataGridCheckBoxColumn();
-        c.Header = p;
-        c.Binding = new Binding(bindingPath);
+        DataGridCheckBoxColumn column = new DataGridCheckBoxColumn();
+        column.Header = header;
+        column.Binding = new Binding(bindingPath);
 
-        return c;
+        return column;
     }
 
     public static DataGridCell GetCell(DataGrid dataGrid1, int row, int column)
@@ -60,13 +60,13 @@ public static class DataGridHelper
     {
         T child = default;
         int numVisuals = VisualTreeHelper.GetChildrenCount(parent);
-        for (int i = 0; i < numVisuals; i++)
+        for (int index = 0; index < numVisuals; index++)
         {
-            Visual v = (Visual)VisualTreeHelper.GetChild(parent, i);
-            child = v as T;
+            Visual visual = (Visual)VisualTreeHelper.GetChild(parent, index);
+            child = visual as T;
             if (child == null)
             {
-                child = GetVisualChild<T>(v);
+                child = GetVisualChild<T>(visual);
             }
             if (child != null)
             {
@@ -122,12 +122,12 @@ public static class DataGridHelper
 
     public static string GetCellValueAsString(DataGridCellInfo dataGridCellInfo)
     {
-        object vr = GetCellValue(dataGridCellInfo);
-        if (vr == null)
+        object value = GetCellValue(dataGridCellInfo);
+        if (value == null)
         {
             return "";
         }
-        return vr.ToString();
+        return value.ToString();
     }
 
     public static List<DataGridRow> GetDataGridRows(DataGrid dataGrid)
@@ -136,44 +136,44 @@ public static class DataGridHelper
         {
             dataGrid.UpdateLayout();
         }
-        List<DataGridRow> vr = new List<DataGridRow>();
-        for (int i = 0; i < dataGrid.Items.Count; i++)
+        List<DataGridRow> result = new List<DataGridRow>();
+        for (int index = 0; index < dataGrid.Items.Count; index++)
         {
-            var d = dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+            var container = dataGrid.ItemContainerGenerator.ContainerFromIndex(index);
 
 
 
-            if (d == null)
+            if (container == null)
             {
                 // These 2 lines help get all DataGridRow but wont work if is working with templates (like checkbox)
                 //dataGrid.UpdateLayout();
                 //dataGrid.ScrollIntoView(dataGrid.Items[i]);
-                d = dataGrid.ItemContainerGenerator.ContainerFromIndex(i);
+                container = dataGrid.ItemContainerGenerator.ContainerFromIndex(index);
             }
 
 
-            DataGridRow row = (DataGridRow)d;
-            vr.Add(row);
+            DataGridRow row = (DataGridRow)container;
+            result.Add(row);
         }
-        return vr;
+        return result;
     }
 
-    public static void AddRows(DataGrid dtGrid, /*List<object> list,*/ List<IList> o, params string[] columns)
+    public static void AddRows(DataGrid dtGrid, /*List<object> list,*/ List<IList> rows, params string[] columns)
     {
         foreach (var item in columns)
         {
             dtGrid.Columns.Add(NewTextColumn(item, null));
         }
 
-        dtGrid.ItemsSource = o;
+        dtGrid.ItemsSource = rows;
     }
 
-    public static void EnableSorting(DataGrid dtGrid, bool v)
+    public static void EnableSorting(DataGrid dtGrid, bool enabled)
     {
-        dtGrid.CanUserSortColumns = v;
+        dtGrid.CanUserSortColumns = enabled;
         foreach (var item in dtGrid.Columns)
         {
-            item.CanUserSort = v;
+            item.CanUserSort = enabled;
         }
     }
 

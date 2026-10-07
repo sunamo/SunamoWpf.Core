@@ -3,39 +3,39 @@ namespace SunamoWpf.Controls.Helpers.Controls;
 
 public class ContextMenuHelper
 {
-    public static SuMenuItem GetSuMenuItemWithName(ContextMenu cm, string name)
+    public static SuMenuItem GetSuMenuItemWithName(ContextMenu contextMenu, string name)
     {
-        int i = 0;
+        int index = 0;
         while (true)
         {
-            if (i == cm.Items.Count)
+            if (index == contextMenu.Items.Count)
             {
                 break;
             }
-            object o = cm.Items.GetItemAt(i);
-            if (o is SuMenuItem)
+            object item = contextMenu.Items.GetItemAt(index);
+            if (item is SuMenuItem)
             {
-                SuMenuItem vr = o as SuMenuItem;
-                if (vr.Name == name)
+                SuMenuItem menuItem = item as SuMenuItem;
+                if (menuItem.Name == name)
                 {
-                    return vr;
+                    return menuItem;
                 }
             }
-            i++;
+            index++;
         }
         return null;
     }
     public static ContextMenu FindContextMenu(DependencyObject depObj, DependencyProperty ContextMenuProperty)
     {
-        ContextMenu cm = depObj.GetValue(ContextMenuProperty) as ContextMenu;
-        if (cm != null)
-            return cm;
+        ContextMenu contextMenu = depObj.GetValue(ContextMenuProperty) as ContextMenu;
+        if (contextMenu != null)
+            return contextMenu;
         int children = VisualTreeHelper.GetChildrenCount(depObj);
-        for (int i = 0; i < children; i++)
+        for (int index = 0; index < children; index++)
         {
-            cm = FindContextMenu(VisualTreeHelper.GetChild(depObj, i), ContextMenuProperty);
-            if (cm != null)
-                return cm;
+            contextMenu = FindContextMenu(VisualTreeHelper.GetChild(depObj, index), ContextMenuProperty);
+            if (contextMenu != null)
+                return contextMenu;
         }
         return null;
     }

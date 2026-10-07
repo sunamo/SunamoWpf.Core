@@ -48,17 +48,17 @@ public partial class RadioButtonsList : UserControl, IUserControl, IControlWithR
         }
     }
 
-    public void AddRadioButton(ControlInitData d)
+    public void AddRadioButton(ControlInitData controlInitData)
     {
-        spRbs.Children.Add(RadioButtonHelper.Get(d));
+        spRbs.Children.Add(RadioButtonHelper.Get(controlInitData));
     }
 
     public object clickedTag = null;
 
-    public void RbClicked(object o, RoutedEventArgs e)
+    public void RbClicked(object sender, RoutedEventArgs eventArgs)
     {
-        var rb = (RadioButton)o;
-        clickedTag = rb.Tag;
+        var radioButton = (RadioButton)sender;
+        clickedTag = radioButton.Tag;
         ChangeDialogResult(true);
     }
 
@@ -72,13 +72,13 @@ public partial class RadioButtonsList : UserControl, IUserControl, IControlWithR
     {
         foreach (var item in all)
         {
-            var d = new ControlInitData { content = item, tag = item, group = "g" };
+            var initData = new ControlInitData { content = item, tag = item, group = "g" };
             if (addHandlers)
             {
-                d.OnClick = RbClicked;
+                initData.OnClick = RbClicked;
             }
 
-            AddRadioButton(d);
+            AddRadioButton(initData);
         }
     }
 
@@ -87,9 +87,9 @@ public partial class RadioButtonsList : UserControl, IUserControl, IControlWithR
         return RuntimeHelper.GetInvocationList(ChangeDialogResult).Count;
     }
 
-    public void AttachChangeDialogResult(VoidBoolNullable a, bool throwException = true)
+    public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
     {
-        RuntimeHelper.AttachChangeDialogResult(this, a, throwException);
+        RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
     }
 
     public void Accept(object input)

@@ -8,8 +8,8 @@ public class InlineBuilderBlock : InlineBuilder
     /// <summary>
     /// Block put into FlowDocument.Blocks
     /// </summary>
-    /// <param name="fd"></param>
-    public InlineBuilderBlock(Paragraph fd) : base(fd.Inlines)
+    /// <param name="paragraph"></param>
+    public InlineBuilderBlock(Paragraph paragraph) : base(paragraph.Inlines)
     {
     }
 }

@@ -5,8 +5,8 @@ public partial class ImageHelperDesktop : ImageHelperBase<ImageSource, Image>
 {
     public override Image MsAppx(string relPath)
     {
-        BitmapSource bs = new BitmapImage(new Uri(ImageHelper.protocol + relPath));
-        return ReturnImage(bs);
+        BitmapSource bitmapSource = new BitmapImage(new Uri(ImageHelper.protocol + relPath));
+        return ReturnImage(bitmapSource);
     }
     public override Image MsAppx(bool disabled, AppPics appPic)
     {
@@ -15,7 +15,7 @@ public partial class ImageHelperDesktop : ImageHelperBase<ImageSource, Image>
     }
     public override Image MsAppxI(string appPic2)
     {
-        BitmapSource bs = new BitmapImage(new Uri(ImageHelper.protocol + "i/" + appPic2 + ".png"));
-        return ReturnImage(bs);
+        BitmapSource bitmapSource = new BitmapImage(new Uri(ImageHelper.protocol + "i/" + appPic2 + ".png"));
+        return ReturnImage(bitmapSource);
     }
 }

@@ -5,7 +5,7 @@ public class LimitedTimer : SunamoTimer
     int pocet = 0;
     int odbylo = 0;
 
-    public LimitedTimer(int ms, int pocet, Action a) : base(ms, a, false)
+    public LimitedTimer(int milliseconds, int pocet, Action action) : base(milliseconds, action, false)
     {
         Tick += LimitedTimer_Tick;
         this.pocet = pocet;
@@ -22,7 +22,7 @@ public class LimitedTimer : SunamoTimer
         }
     }
 
-    void t_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    void t_Elapsed(object sender, System.Timers.ElapsedEventArgs eventArgs)
     {
         odbylo++;
 

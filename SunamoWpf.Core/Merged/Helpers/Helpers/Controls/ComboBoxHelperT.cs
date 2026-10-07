@@ -9,7 +9,7 @@ public class ComboBoxHelper<T> : ComboBoxHelper
         : base(tsddb)
     { }
 
-    public ComboBoxHelper(ComboBox tsddb, Array bs, T defaultValue)
+    public ComboBoxHelper(ComboBox tsddb, Array values, T defaultValue)
         : base(tsddb)
     {
         if (tsddb.ToolTip == null)
@@ -20,7 +20,7 @@ public class ComboBoxHelper<T> : ComboBoxHelper
         {
             originalToolTipText = tsddb.ToolTip.ToString();
         }
-        AddValuesOfEnumAsItems(bs);
+        AddValuesOfEnumAsItems(values);
         SelectedO = defaultValue;
         tsddb.SelectedItem = defaultValue;
         tsddb.ToolTip = originalToolTipText + " " + defaultValue.ToString();

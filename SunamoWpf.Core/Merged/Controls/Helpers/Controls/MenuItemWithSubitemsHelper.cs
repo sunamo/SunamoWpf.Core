@@ -51,17 +51,17 @@ public class SuMenuItemWithSubitemsHelper
     }
     public void AddValuesOfEnumAsItems<T>(object defVal)
     {
-        Dictionary<T, string> d = new Dictionary<T, string>();
+        Dictionary<T, string> result = new Dictionary<T, string>();
         Type type = typeof(T);
-        var en = Enum.GetValues(type);
-        foreach (T item in en)
+        var values = Enum.GetValues(type);
+        foreach (T item in values)
         {
-            d.Add(item, item.ToString());
+            result.Add(item, item.ToString());
             //AddSuMenuItem(item);
         }
-        AddValuesOfEnumAsItems<T>(d, defVal);
+        AddValuesOfEnumAsItems<T>(result, defVal);
     }
-    public void AddValuesOfEnumAsItems<T>(Dictionary<SuMenuItem, T> d, object defVal, SuMenuItem defMi)
+    public void AddValuesOfEnumAsItems<T>(Dictionary<SuMenuItem, T> items, object defVal, SuMenuItem defMi)
     {
         Type type = typeof(T);
         if (defVal != null)
@@ -72,7 +72,7 @@ public class SuMenuItemWithSubitemsHelper
             }
         }
         T _def = (T)defVal;
-        foreach (var item in d)
+        foreach (var item in items)
         {
             item.Key.Tag = item.Value;
             AddSuMenuItem(item.Key);
@@ -83,7 +83,7 @@ public class SuMenuItemWithSubitemsHelper
         }
         prev = defMi;
     }
-    public void AddValuesOfEnumAsItems<T>(Dictionary<T, string> d, object defVal)
+    public void AddValuesOfEnumAsItems<T>(Dictionary<T, string> items, object defVal)
     {
         Type type = typeof(T);
         if (defVal != null)
@@ -94,7 +94,7 @@ public class SuMenuItemWithSubitemsHelper
             }
         }
         T _def = (T)defVal;
-        foreach (var item in d)
+        foreach (var item in items)
         {
             AddSuMenuItem(item.Key, item.Value);
         }
@@ -147,25 +147,25 @@ public class SuMenuItemWithSubitemsHelper
             return SelectedO.ToString();
         }
     }
-    public void AddValuesOfEnumAsItems(Array bs, bool zaskPrvni)
+    public void AddValuesOfEnumAsItems(Array values, bool zaskPrvni)
     {
         tsddb.Items.Clear();
-        int i = 0;
-        foreach (object item in bs)
+        int index = 0;
+        foreach (object item in values)
         {
             SuMenuItem tsmi = AddSuMenuItem(item, item.ToString());
             if (zaskPrvni)
             {
-                if (i == 0)
+                if (index == 0)
                 {
                     tsmi.IsChecked = true;
                     prev = tsmi;
                 }
             }
-            i++;
+            index++;
         }
     }
-    public void tsmi_Click(object sender, RoutedEventArgs e)
+    public void tsmi_Click(object sender, RoutedEventArgs eventArgs)
     {
         prev.IsChecked = false;
         SuMenuItem tsmi = (SuMenuItem)sender;
@@ -185,59 +185,59 @@ public class SuMenuItemWithSubitemsHelper
         tsddb.ToolTip = originalToolTipText + " " + SelectedO.ToString();
         if (SuMenuItemChecked != null)
         {
-            SuMenuItemChecked(sender, e);
+            SuMenuItemChecked(sender, eventArgs);
         }
     }
-    public void AddValuesOfArrayAsItems(RoutedEventHandler eh, object[] o)
+    public void AddValuesOfArrayAsItems(RoutedEventHandler eventHandler, object[] items)
     {
         tsddb.Items.Clear();
-        int i = 0;
-        foreach (object item in o)
+        int index = 0;
+        foreach (object item in items)
         {
             SuMenuItem tsmi = AddSuMenuItem(item, item.ToString());
-            tsmi.Click += eh;
-            i++;
+            tsmi.Click += eventHandler;
+            index++;
         }
     }
-    public void AddValuesOfArrayAsItems(ICommand eh, object[] o)
+    public void AddValuesOfArrayAsItems(ICommand command, object[] items)
     {
         tsddb.Items.Clear();
-        int i = 0;
-        foreach (object item in o)
+        int index = 0;
+        foreach (object item in items)
         {
             SuMenuItem tsmi = AddSuMenuItem(item, item.ToString());
-            tsmi.Command = eh;
+            tsmi.Command = command;
             tsmi.CommandParameter = item;
-            i++;
+            index++;
         }
     }
-    public void AddValuesOfArrayAsItems(RoutedCommand cmd0, object[] p, RoutedCommand cmd1, List<StringBuilder> stovky, RoutedCommand cmd2, /*List<StringBuilder> desitky,*/ RoutedCommand cmd3 /*, List<StringBuilder> jednotky*/)
+    public void AddValuesOfArrayAsItems(RoutedCommand cmd0, object[] items, RoutedCommand cmd1, List<StringBuilder> stovky, RoutedCommand cmd2, /*List<StringBuilder> desitky,*/ RoutedCommand cmd3 /*, List<StringBuilder> jednotky*/)
     {
         mnoho = true;
         int pristePokracovatDesitky = 0;
         tsddb.Items.Clear();
-        int i = 0;
-        foreach (object item in p)
+        int index = 0;
+        foreach (object item in items)
         {
             pristePokracovatDesitky = 0;
             string category = item.ToString();
             string categoryPipe = category + "|";
             SuMenuItem tsmi = new SuMenuItem();
             tsmi.Header = category;
-            List<string> stovkyDivided = SHSplit.SplitChar(stovky[i].ToString(), '|');
+            List<string> stovkyDivided = SHSplit.SplitChar(stovky[index].ToString(), '|');
             List<String> stovkyActual = new List<String>();
             StringBuilder stovkyActualTemp = new StringBuilder();
-            for (int y = 0; y < stovkyDivided.Count; y++)
+            for (int index2 = 0; index2 < stovkyDivided.Count; index2++)
             {
-                if ((y) % 100 == 0 && y != 0)
+                if ((index2) % 100 == 0 && index2 != 0)
                 {
                     stovkyActual.Add(stovkyActualTemp.ToString());
                     stovkyActualTemp.Clear();
-                    stovkyActualTemp.Append(stovkyDivided[y] + ",");
+                    stovkyActualTemp.Append(stovkyDivided[index2] + ",");
                 }
                 else
                 {
-                    stovkyActualTemp.Append(stovkyDivided[y] + ",");
+                    stovkyActualTemp.Append(stovkyDivided[index2] + ",");
                 }
                 //
             }
@@ -262,8 +262,8 @@ public class SuMenuItemWithSubitemsHelper
                     pristePokracovatJednotky++;
                     tsmiJednotky.Command = cmd3;
                     tsmiJednotky.CommandParameter = tsmiJednotky.Header.ToString() + "|" + categoryPipe + jednotka;
-                    var o = (pristePokracovatJednotky - 1);
-                    if (o % 10 == 0 && o % 100 != 0 && o != 0)
+                    var unitNumber = (pristePokracovatJednotky - 1);
+                    if (unitNumber % 10 == 0 && unitNumber % 100 != 0 && unitNumber != 0)
                     {
                         indexNaKteryUkladatDesitky++;
                         kVlozeniDoDesitky.Add(new List<SuMenuItem>());
@@ -272,7 +272,7 @@ public class SuMenuItemWithSubitemsHelper
                     kVlozeniDoDesitky[indexNaKteryUkladatDesitky].Add(tsmiJednotky);
                     idckaDesitky[indexNaKteryUkladatDesitky].Append(jednotka + ",");
                 }
-                for (int t = 0; t < kVlozeniDoDesitky.Count; t++)
+                for (int index3 = 0; index3 < kVlozeniDoDesitky.Count; index3++)
                 {
                     if (kVlozeniDoDesitky[kVlozeniDoDesitky.Count - 1].Count == 0)
                     {
@@ -281,12 +281,12 @@ public class SuMenuItemWithSubitemsHelper
                         idckaDesitky.RemoveAt(rat);
                     }
                 }
-                int e = 0;
+                int tensIndex = 0;
                 foreach (var item3 in kVlozeniDoDesitky)
                 {
-                    var u = idckaDesitky[e].ToString();
-                    e++;
-                    var desitkyPouze = SHSplit.Split(u, ",");
+                    var text = idckaDesitky[tensIndex].ToString();
+                    tensIndex++;
+                    var desitkyPouze = SHSplit.Split(text, ",");
                     SuMenuItem tsmiDesitky = new SuMenuItem();
                     tsmiDesitky.Header = (pristePokracovatDesitky + 1).ToString() + " - " + (pristePokracovatDesitky + desitkyPouze.Count).ToString();
                     foreach (var item4 in item3)
@@ -297,7 +297,7 @@ public class SuMenuItemWithSubitemsHelper
                     tsmiDesitky2.Header = (pristePokracovatDesitky + 1).ToString() + " - " + (pristePokracovatDesitky + desitkyPouze.Count).ToString();
                     tsmiDesitky2.Command = cmd2;
                     //
-                    tsmiDesitky2.CommandParameter = tsmiDesitky2.Header.ToString() + "|" + categoryPipe + u;
+                    tsmiDesitky2.CommandParameter = tsmiDesitky2.Header.ToString() + "|" + categoryPipe + text;
                     tsmiStovky.Items.Add(tsmiDesitky2);
                     tsmiStovky.Items.Add(tsmiDesitky);
                     pristePokracovatDesitky += 10;
@@ -318,41 +318,41 @@ public class SuMenuItemWithSubitemsHelper
             tsddb.Items.Add(tsmi2);
             tsmi.IsEnabled = true;
             tsddb.Items.Add(tsmi);
-            i++;
+            index++;
         }
     }
-    public void AddValuesOfIntAsItems(RoutedEventHandler eh, int initialValue, int resizeOf, int degrees)
+    public void AddValuesOfIntAsItems(RoutedEventHandler eventHandler, int initialValue, int resizeOf, int degrees)
     {
         tsddb.Items.Clear();
         int akt = initialValue;
         List<int> pred = new List<int>();
-        for (int i = 0; i < degrees; i++)
+        for (int index = 0; index < degrees; index++)
         {
             akt -= resizeOf;
             pred.Add(akt);
         }
         pred.Reverse();
         akt = initialValue;
-        List<int> po = new List<int>();
-        for (int i = 0; i < degrees; i++)
+        List<int> following = new List<int>();
+        for (int index2 = 0; index2 < degrees; index2++)
         {
             akt += resizeOf;
-            po.Add(akt);
+            following.Add(akt);
         }
-        List<int> o = new List<int>();
-        o.AddRange(pred);
-        o.Add(initialValue);
-        o.AddRange(po);
-        int y = 0;
-        foreach (int item in o)
+        List<int> values = new List<int>();
+        values.AddRange(pred);
+        values.Add(initialValue);
+        values.AddRange(following);
+        int index3 = 0;
+        foreach (int item in values)
         {
             SuMenuItem tsmi = new SuMenuItem();
             tsmi.Header = item.ToString();
             tsmi.Tag = item;
             tsmi.Click += tsmi_Click;
-            tsmi.Click += eh;
+            tsmi.Click += eventHandler;
             tsddb.Items.Add(tsmi);
-            y++;
+            index3++;
         }
     }
     bool tagy = true;

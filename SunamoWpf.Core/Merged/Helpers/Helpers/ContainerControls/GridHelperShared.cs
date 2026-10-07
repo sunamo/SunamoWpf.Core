@@ -5,48 +5,48 @@ public partial class GridHelper
 {
     public static Grid GetAutoSize(int columns, int rows)
     {
-        Grid g = new Grid();
-        GetAutoSize(g, columns, rows);
-        return g;
+        Grid grid = new Grid();
+        GetAutoSize(grid, columns, rows);
+        return grid;
     }
     /// <summary>
     /// Assign to every cell GridLength.Auto
     /// </summary>
-    /// <param name = "g"></param>
+    /// <param name = "grid"></param>
     /// <param name = "columns"></param>
     /// <param name = "rows"></param>
-    public static void GetAutoSize(Grid g, int columns, int rows)
+    public static void GetAutoSize(Grid grid, int columns, int rows)
     {
-        for (int i = 0; i < columns; i++)
+        for (int index = 0; index < columns; index++)
         {
-            g.ColumnDefinitions.Add(GetColumnDefinition(GridLength.Auto));
+            grid.ColumnDefinitions.Add(GetColumnDefinition(GridLength.Auto));
         }
 
-        for (int i = 0; i < rows; i++)
+        for (int index2 = 0; index2 < rows; index2++)
         {
-            g.RowDefinitions.Add(GetRowDefinition(GridLength.Auto));
+            grid.RowDefinitions.Add(GetRowDefinition(GridLength.Auto));
         }
     }
 
     public static ColumnDefinition GetColumnDefinition(GridLength oneC)
     {
-        ColumnDefinition cd = new ColumnDefinition();
-        cd.Width = oneC;
-        return cd;
+        ColumnDefinition columnDefinition = new ColumnDefinition();
+        columnDefinition.Width = oneC;
+        return columnDefinition;
     }
 
     public static ColumnDefinition GetColumnDefinitionDirect(double pixels)
     {
-        ColumnDefinition cd = new ColumnDefinition();
-        cd.Width = new GridLength(pixels);
-        return cd;
+        ColumnDefinition columnDefinition = new ColumnDefinition();
+        columnDefinition.Width = new GridLength(pixels);
+        return columnDefinition;
     }
 
     public static ColumnDefinition GetColumnDefinitionDirect(double value, GridUnitType type)
     {
-        ColumnDefinition cd = new ColumnDefinition();
-        cd.Width = new GridLength(value, type);
-        return cd;
+        ColumnDefinition columnDefinition = new ColumnDefinition();
+        columnDefinition.Width = new GridLength(value, type);
+        return columnDefinition;
     }
 
     /// <summary>
@@ -55,23 +55,23 @@ public partial class GridHelper
     /// <param name="auto"></param>
     public static RowDefinition GetRowDefinition(GridLength auto)
     {
-        RowDefinition rd = new RowDefinition();
-        rd.Height = auto;
-        return rd;
+        RowDefinition rowDefinition = new RowDefinition();
+        rowDefinition.Height = auto;
+        return rowDefinition;
     }
 
     public static RowDefinition GetRowDefinitionDirect(double pixels)
     {
-        RowDefinition rd = new RowDefinition();
-        rd.Height = new GridLength(pixels);
-        return rd;
+        RowDefinition rowDefinition = new RowDefinition();
+        rowDefinition.Height = new GridLength(pixels);
+        return rowDefinition;
     }
 
     public static RowDefinition GetRowDefinitionDirect(double value, GridUnitType type)
     {
-        RowDefinition rd = new RowDefinition();
-        rd.Height = new GridLength(value, type);
-        return rd;
+        RowDefinition rowDefinition = new RowDefinition();
+        rowDefinition.Height = new GridLength(value, type);
+        return rowDefinition;
     }
 
     /// <summary>
@@ -79,20 +79,20 @@ public partial class GridHelper
     /// </summary>
     /// <param name="grid"></param>
     /// <param name="row"></param>
-    /// <param name="dx"></param>
-    public static IList<T> GetControlsFrom<T>(Grid grid, bool row, int dx) where T : UIElement
+    /// <param name="index"></param>
+    public static IList<T> GetControlsFrom<T>(Grid grid, bool row, int index) where T : UIElement
     {
-        dx++;
+        index++;
 
         IList<UIElement> uiElements = null;
         if (row)
         {
 
-            uiElements = grid.Children.Cast<UIElement>().Where(s => Grid.GetRow(s) == dx).ToList();
+            uiElements = grid.Children.Cast<UIElement>().Where(element => Grid.GetRow(element) == index).ToList();
         }
         else
         {
-            uiElements = grid.Children.Cast<UIElement>().Where(s => Grid.GetColumn(s) == dx).ToList();
+            uiElements = grid.Children.Cast<UIElement>().Where(element2 => Grid.GetColumn(element2) == index).ToList();
         }
 
         List<T> result = new List<T>();

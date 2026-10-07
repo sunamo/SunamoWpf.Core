@@ -54,24 +54,24 @@ public partial class CyclingImageViewer : UserControl, IStatusBroadcasterAppendW
 #endif
         }
     }
-    public void KeyUp(object sender, KeyEventArgs e)
+    public void KeyUp(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Left)
+        if (eventArgs.Key == Key.Left)
         {
             Before();
             OnNewStatus(Translate.FromKey(XlfKeys.MovedBackToPhoto) + " " + imagesPath.ToString());
         }
-        else if (e.Key == Key.Right)
+        else if (eventArgs.Key == Key.Right)
         {
             Next();
             OnNewStatus(Translate.FromKey(XlfKeys.MovedForwardToPhoto) + " " + imagesPath.ToString());
         }
-        else if (e.Key == Key.Enter)
+        else if (eventArgs.Key == Key.Enter)
         {
             string copy = string.Copy(ActualFile);
-            string b = OperationAfterEnter.Invoke(ActualFile);
+            string result = OperationAfterEnter.Invoke(ActualFile);
             Next();
-            if (b == "success")
+            if (result == "success")
             {
                 OnNewStatus("Byl zmenšen obrázek {0} a nastaven obrázek v dalším pořadí - {1} ({{})", FS.GetFileName(copy), FS.GetFileName(ActualFile), imagesPath.ToString());
             }
@@ -116,13 +116,13 @@ public partial class CyclingImageViewer : UserControl, IStatusBroadcasterAppendW
         ActualFile = imagesPath.Before();
     }
     public event Action<object, Object[]> NewStatus;
-    public void OnNewStatus(string s, params string[] p)
+    public void OnNewStatus(string message, params string[] parameters)
     {
-        NewStatus(s, p);
+        NewStatus(message, parameters);
     }
     public event Action<object, Object[]> NewStatusAppend;
-    public void OnNewStatusAppend(string s, params string[] o)
+    public void OnNewStatusAppend(string message, params string[] parameters)
     {
-        NewStatusAppend(s, o);
+        NewStatusAppend(message, parameters);
     }
 }

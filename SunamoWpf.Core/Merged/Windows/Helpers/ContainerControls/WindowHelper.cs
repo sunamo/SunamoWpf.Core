@@ -14,18 +14,18 @@ public partial class WindowHelper
         return Size.Empty;
         //return WpfApp.mp.actualR.RenderSize;
     }
-    public static bool? SetDialogResult(Window w, bool dialog, bool? dialogResult)
+    public static bool? SetDialogResult(Window window, bool dialog, bool? dialogResult)
     {
         if (dialog)
         {
-            var dr = w.ShowDialog();
-            if (w.DialogResult != dr)
+            var dialogResult2 = window.ShowDialog();
+            if (window.DialogResult != dialogResult2)
             {
                 // Cant set DialogResult while window isnt show as dialog
                 //DialogResult = dialogResult;
             }
 
-            return dr;
+            return dialogResult2;
         }
         else
         {

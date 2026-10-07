@@ -19,14 +19,14 @@ public static partial class SHWithControls
         return tb.DesiredSize.Width;
     }
 
-    public static object MeasureString(FormattedText f)
+    public static object MeasureString(FormattedText formattedText)
     {
         //tb.FontFamily = fontFamily;
         //tb.FontSize = f.;
         tb.FontStyle = FontStyles.Normal;
         //tb.FontStretch = FontStretch;
         tb.FontWeight = System.Windows.FontWeights.Normal;
-        tb.Text = f.Text;
+        tb.Text = formattedText.Text;
         tb.Measure(ControlHelper.SizePositiveInfinity);
         //tb.Arrange(new Rect(new Point(0, 0), maxSize));
         return tb.DesiredSize.Width;

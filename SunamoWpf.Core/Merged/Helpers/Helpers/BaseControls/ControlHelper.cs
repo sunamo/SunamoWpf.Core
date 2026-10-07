@@ -13,55 +13,55 @@ public partial class ControlHelper
     public static Size GetMinimumHeightMinimumWidth(UIElement uie, Size windowSize)
     {
         uie.Measure(windowSize);
-        var vr = uie.DesiredSize;
+        var desiredSize = uie.DesiredSize;
 
-        return vr;
+        return desiredSize;
     }
 
     public static Point GetOnCenter(Size parent, Size child)
     {
-        Point vr = new Point();
+        Point result = new Point();
         if (parent.Width > child.Width)
         {
-            vr.X = ((parent.Width - child.Width) / 2d);
+            result.X = ((parent.Width - child.Width) / 2d);
         }
         else if (parent.Width == child.Width)
         {
-            vr.X = 0;
+            result.X = 0;
         }
         else
         {
-            vr.X = 0;
+            result.X = 0;
         }
 
         if (parent.Height > child.Height)
         {
-            vr.Y = (parent.Height - child.Height) / 2d;
+            result.Y = (parent.Height - child.Height) / 2d;
         }
         else if (parent.Height == child.Height)
         {
-            vr.Y = 0;
+            result.Y = 0;
         }
         else
         {
-            vr.Y = 0;
+            result.Y = 0;
         }
 
-        return vr;
+        return result;
     }
 
-    public static void SwitchBorder(Control c, BorderData bd)
+    public static void SwitchBorder(Control control, BorderData borderData)
     {
-        if (c != null)
+        if (control != null)
         {
-            var b = c.BorderThickness;
-            if (!CA.IsAllTheSame<double>(NumConsts.zeroDouble, [b.Bottom, b.Left, b.Right, b.Top]))
+            var thickness = control.BorderThickness;
+            if (!CA.IsAllTheSame<double>(NumConsts.zeroDouble, [thickness.Bottom, thickness.Left, thickness.Right, thickness.Top]))
             {
-                bd = BorderData.None;
+                borderData = BorderData.None;
             }
 
-            c.BorderThickness = bd.BorderThickness;
-            c.BorderBrush = bd.BorderBrush;
+            control.BorderThickness = borderData.BorderThickness;
+            control.BorderBrush = borderData.BorderBrush;
         }
     }
 

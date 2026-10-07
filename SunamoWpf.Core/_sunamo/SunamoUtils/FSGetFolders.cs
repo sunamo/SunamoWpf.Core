@@ -3,15 +3,15 @@ namespace SunamoWpf.Core._sunamo;
 
 internal class FSGetFolders
 {
-    public static List<string> GetFoldersEveryFolder(ILogger logger, string fi, string v, SearchOption topDirectoryOnly)
+    public static List<string> GetFoldersEveryFolder(ILogger logger, string folder, string mask, SearchOption topDirectoryOnly)
     {
         try
         {
-            return Directory.GetDirectories(fi, v, topDirectoryOnly).ToList();
+            return Directory.GetDirectories(folder, mask, topDirectoryOnly).ToList();
         }
-        catch (Exception ex)
+        catch (Exception exception)
         {
-            logger.LogError(ex.Message);
+            logger.LogError(exception.Message);
             return new List<string>();
         }
     }

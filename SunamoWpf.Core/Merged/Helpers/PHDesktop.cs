@@ -3,9 +3,9 @@ namespace SunamoWpf;
 
 public class PHDesktop
 {
-    public static void OpenFileInTag(object s, RoutedEventArgs e)
+    public static void OpenFileInTag(object sender, RoutedEventArgs eventArgs)
     {
-        var fe = (FrameworkElement)s;
+        var frameworkElement = (FrameworkElement)sender;
         PH.Start();
     }
     private static void KillProcessAndChildren(int pid)
@@ -53,18 +53,18 @@ public class PHDesktop
     await
 #endif
  PowershellRunner.ci.Invoke(CA.ToListString(cmdHandle + name)))[0];
-        var lines = result.Where(d => d.Contains(pid));
+        var lines = result.Where(line => line.Contains(pid));
         var processid = -1;
         foreach (var item in lines)
         {
             processid = -1;
-            List<string> p = SHSplit.SplitByWhiteSpaces(item, true);
-            var dx = p.IndexOf(pid);
-            if (dx != -1)
+            List<string> parts = SHSplit.SplitByWhiteSpaces(item, true);
+            var index = parts.IndexOf(pid);
+            if (index != -1)
             {
-                if (p.Count > dx + 1)
+                if (parts.Count > index + 1)
                 {
-                    processid = BTS.ParseInt(p[dx + 1]);
+                    processid = BTS.ParseInt(parts[index + 1]);
                 }
             }
             if (processid != -1)

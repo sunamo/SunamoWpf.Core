@@ -51,7 +51,7 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
         cbEntered.SelectionChanged += CbEntered_Selected;
         tbWhatEnter.Text = Translate.FromKey(XlfKeys.EnterOrSelect) + " " + whatEnter;
     }
-    private void btnEnter_Click_1(object sender, RoutedEventArgs e)
+    private void btnEnter_Click_1(object sender, RoutedEventArgs eventArgs)
     {
         if (AfterEnteredValue(cbEntered))
         {
@@ -86,9 +86,9 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
         cbEntered.BorderBrush = new SolidColorBrush(Colors.Red);
         return false;
     }
-    private void cbEntered_KeyDown_1(object sender, KeyEventArgs e)
+    private void cbEntered_KeyDown_1(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Enter)
+        if (eventArgs.Key == Key.Enter)
         {
         }
     }
@@ -114,7 +114,7 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
         //DialogResult = true;
     }
     public event VoidBoolNullable ChangeDialogResult;
-    private void CbEntered_Selected(object sender, RoutedEventArgs e)
+    private void CbEntered_Selected(object sender, RoutedEventArgs eventArgs)
     {
         EnableBtn();
     }

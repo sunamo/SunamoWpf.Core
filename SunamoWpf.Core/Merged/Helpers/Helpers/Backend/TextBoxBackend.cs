@@ -27,7 +27,7 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
     }
     private List<FoundedCodeElementWpf> RemoveDuplicatedOccurences(List<FoundedCodeElementWpf> actualFileSearchOccurences)
     {
-        var distinctItems = actualFileSearchOccurences.GroupBy(x => x.Line).Select(y => y.First());
+        var distinctItems = actualFileSearchOccurences.GroupBy(occurrence => occurrence.Line).Select(group => group.First());
         return distinctItems.ToList();
     }
     /// <summary>
@@ -61,11 +61,11 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
         // Is changed also when just moved cursor (mouse, arrows)
         //txtContent.SelectionChanged += TxtContent_SelectionChanged;
     }
-    private void TxtContent_SelectionChanged(object sender, System.Windows.RoutedEventArgs e)
+    private void TxtContent_SelectionChanged(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         //SetActualLine( txtContent.GetLineIndexFromCharacterIndex(txtContent.SelectionStart));
     }
-    public bool HandleKey(KeyEventArgs e)
+    public bool HandleKey(KeyEventArgs eventArgs)
     {
         return false;
     }
@@ -89,13 +89,13 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
         state.textSearchedResult = $"{actual}/{count}";
         SetTextBoxState();
     }
-    public void SetTextBoxState(string s = null)
+    public void SetTextBoxState(string text = null)
     {
-        if (s == null)
+        if (text == null)
         {
-            s = (string.Join("  ", state.textActualFile, state.textSearchedResult) + " " + Translate.FromKey(XlfKeys.Line) + ": " + (actualLine + 1)).Trim();
+            text = (string.Join("  ", state.textActualFile, state.textSearchedResult) + " " + Translate.FromKey(XlfKeys.Line) + ": " + (actualLine + 1)).Trim();
         }
-        txtTextBoxState.Text = s;
+        txtTextBoxState.Text = text;
     }
     public void JumpToNextSearchedResult(int addLines)
     {
@@ -126,8 +126,8 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
             }
             int serie = actualSearchedResult + 1;
             SetTbSearchedResult(serie, actualFileSearchOccurencesCount);
-            FoundedCodeElementWpf a = actualFileSearchOccurences[actualSearchedResult];
-            ScrollToLineMethod(a.Line/*, addRowsDuringScrolling*/);
+            FoundedCodeElementWpf element = actualFileSearchOccurences[actualSearchedResult];
+            ScrollToLineMethod(element.Line/*, addRowsDuringScrolling*/);
             actualSearchedResult++;
         }
     }
@@ -161,12 +161,12 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
         WpfLogger.Info(Translate.FromKey(XlfKeys.ScrolledToLine) + " " + line);
         SetTextBoxState();
     }
-    public void ScrollAboutLines(int v)
+    public void ScrollAboutLines(int lines)
     {
         //v -= 1;
         //v = v * 2;
         //v -= 1;
-        int newLine = actualLine + v;
+        int newLine = actualLine + lines;
         int countLines = SH.CountLines(txtContent.Text);
         if (newLine > countLines)
         {
@@ -198,8 +198,8 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
     {
         if (searchCodeElementsUCData.actualFileSearchOccurences != null)
         {
-            var r = searchCodeElementsUCData.actualFileSearchOccurences[actualSearchedResult];
-            Highlight(r.From, r.Lenght);
+            var element = searchCodeElementsUCData.actualFileSearchOccurences[actualSearchedResult];
+            Highlight(element.From, element.Lenght);
         }
     }
 }

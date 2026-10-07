@@ -13,14 +13,14 @@ public class SunamoVariableSizedWrapGrid2 : Panel
     {
         get
         {
-            int vr = 0;
+            int result = 0;
 
             foreach (KeyValuePair<int, Dictionary<int, UIElement>> item in controls)
             {
-                vr += item.Value.Count;
+                result += item.Value.Count;
 
             }
-            return vr;
+            return result;
         }
     }
 
@@ -33,16 +33,16 @@ public class SunamoVariableSizedWrapGrid2 : Panel
             ThrowEx.Custom("bla");
         }
 
-        int i = 0;
+        int index2 = 0;
         foreach (KeyValuePair<int, Dictionary<int, UIElement>> item in controls)
         {
             foreach (var item2 in item.Value)
             {
-                if (i == index)
+                if (index2 == index)
                 {
                     return item2.Value;
                 }
-                i++;
+                index2++;
             }
         }
         ThrowEx.NotImplementedMethod();
@@ -51,37 +51,37 @@ public class SunamoVariableSizedWrapGrid2 : Panel
 
     protected override Size MeasureOverride(Size availableSize)
     {
-        double w = 0;
-        double h = 0;
-        double w2 = 0;
-        double h2 = 0;
-        for (int i = 0; i < InternalChildren.Count; i++)
+        double width = 0;
+        double height = 0;
+        double secondWidth = 0;
+        double secondHeight = 0;
+        for (int index = 0; index < InternalChildren.Count; index++)
         {
 
-            UIElement item = InternalChildren[i];
+            UIElement item = InternalChildren[index];
             if (IsFirst(item))
             {
-                w2 = 0;
-                h2 = 0;
+                secondWidth = 0;
+                secondHeight = 0;
             }
             item.Measure(availableSize);
-            w2 = item.DesiredSize.Width;
-            if (h2 < item.DesiredSize.Height)
+            secondWidth = item.DesiredSize.Width;
+            if (secondHeight < item.DesiredSize.Height)
             {
-                h2 = item.DesiredSize.Height;
+                secondHeight = item.DesiredSize.Height;
             }
             //}
             if (IsLast(item))
             {
-                if (w < w2)
+                if (width < secondWidth)
                 {
-                    w = w2;
+                    width = secondWidth;
                 }
-                h += h2;
+                height += secondHeight;
             }
         }
         //return availableSize;
-        return new Size(w, h);
+        return new Size(width, height);
         //return base.MeasureOverride(availableSize);
     }
 
@@ -89,12 +89,12 @@ public class SunamoVariableSizedWrapGrid2 : Panel
     {
         foreach (var item in controls)
         {
-            UIElement i4 = null;
+            UIElement element = null;
             foreach (var item2 in item.Value)
             {
-                i4 = item2.Value;
+                element = item2.Value;
             }
-            if (i4 == item3)
+            if (element == item3)
             {
                 return true;
 
@@ -128,9 +128,9 @@ public class SunamoVariableSizedWrapGrid2 : Panel
         //Size vr = new Size();
         double startHeight = 0;
         double startWidth = 0;
-        for (int i = 0; i < InternalChildren.Count; i++)
+        for (int index = 0; index < InternalChildren.Count; index++)
         {
-            var item = InternalChildren[i];
+            var item = InternalChildren[index];
             if (IsFirst(item))
             {
                 startHeight = 0;
@@ -165,20 +165,20 @@ public class SunamoVariableSizedWrapGrid2 : Panel
         bool start = false;
         if (controls.Count == 0)
         {
-            Dictionary<int, UIElement> n = new Dictionary<int, UIElement>();
-            controls.Add(0, n);
-            StackPanel sp = new StackPanel();
-            sp.SizeChanged += sp_SizeChanged;
+            Dictionary<int, UIElement> result = new Dictionary<int, UIElement>();
+            controls.Add(0, result);
+            StackPanel stackPanel = new StackPanel();
+            stackPanel.SizeChanged += sp_SizeChanged;
             //sps.Add(0, sp);
-            Children.Insert(0, sp);
-            int i = 0;
+            Children.Insert(0, stackPanel);
+            int index = 0;
             foreach (UIElement item in ((StackPanel)Children[0]).Children)
             {
-                n.Add(i, item);
+                result.Add(index, item);
                 RemoveLogicalChild(item);
                 RemoveVisualChild(item);
 
-                i++;
+                index++;
             }
             start = true;
         }
@@ -205,36 +205,36 @@ public class SunamoVariableSizedWrapGrid2 : Panel
     /// <summary>
     ///
     /// </summary>
-    /// <param name="p"></param>
-    private void AfterGrowth(double p)
+    /// <param name="growth"></param>
+    private void AfterGrowth(double growth)
     {
-        for (int i = 0; i < controls.Count; i++)
+        for (int index = 0; index < controls.Count; index++)
         {
             int odKterehoMusimOdebrat = -1;
-            double widthOfUIElements = GetWidthOfUIElements(controls[i], p, out odKterehoMusimOdebrat);
+            double widthOfUIElements = GetWidthOfUIElements(controls[index], growth, out odKterehoMusimOdebrat);
             // Zde nevím zda to bude fungovat ta první podmínka
-            if (!(odKterehoMusimOdebrat >= controls[i].Count) && odKterehoMusimOdebrat != -1)
+            if (!(odKterehoMusimOdebrat >= controls[index].Count) && odKterehoMusimOdebrat != -1)
             {
-                int dexDalsihoSP = i + 1;
+                int dexDalsihoSP = index + 1;
                 if (IsStackPanelInSeries(dexDalsihoSP))
                 {
                     bool zastavit = false;
-                    for (int z = dexDalsihoSP; z < controls.Count; z++)
+                    for (int stackPanelIndex = dexDalsihoSP; stackPanelIndex < controls.Count; stackPanelIndex++)
                     {
-                        if (controls[z + 1].Count > 0)
+                        if (controls[stackPanelIndex + 1].Count > 0)
                         {
-                            int y = 0;
-                            UIElement c = controls[dexDalsihoSP][y];
-                            double d = GetWidthOfUIElement(c);
+                            int controlIndex = 0;
+                            UIElement control = controls[dexDalsihoSP][controlIndex];
+                            double width = GetWidthOfUIElement(control);
                             int odKterehoMusimOdebrat2 = -1;
-                            if (d < p - GetWidthOfUIElements(controls[i], p, out odKterehoMusimOdebrat2))
+                            if (width < growth - GetWidthOfUIElements(controls[index], growth, out odKterehoMusimOdebrat2))
                             {
-                                controls[dexDalsihoSP].Remove(y);
-                                controls[i].Add(controls[i].Count, c);
-                                GetStackPanelOnIndex(dexDalsihoSP).Children.RemoveAt(y);
-                                RemoveLogicalChild(c);
-                                RemoveVisualChild(c);
-                                GetStackPanelOnIndex(i).Children.Add(c);
+                                controls[dexDalsihoSP].Remove(controlIndex);
+                                controls[index].Add(controls[index].Count, control);
+                                GetStackPanelOnIndex(dexDalsihoSP).Children.RemoveAt(controlIndex);
+                                RemoveLogicalChild(control);
+                                RemoveVisualChild(control);
+                                GetStackPanelOnIndex(index).Children.Add(control);
                             }
                             // Na konec posuneme indexy všech zbývajících UIElementů
                             if (GetStackPanelOnIndex(dexDalsihoSP).Children.Count == 0)
@@ -274,83 +274,83 @@ public class SunamoVariableSizedWrapGrid2 : Panel
     /// <summary>
     ///
     /// </summary>
-    /// <param name="p"></param>
-    private void AfterShrink(double p)
+    /// <param name="shrink"></param>
+    private void AfterShrink(double shrink)
     {
-        for (int i = 0; i < controls.Count; i++)
+        for (int index = 0; index < controls.Count; index++)
         {
             int odKterehoMusimOdebrat = -1;
-            double widthOfUIElements = GetWidthOfUIElements(controls[i], p, out odKterehoMusimOdebrat);
+            double widthOfUIElements = GetWidthOfUIElements(controls[index], shrink, out odKterehoMusimOdebrat);
             if (odKterehoMusimOdebrat != 0 && odKterehoMusimOdebrat != -1)
             {
-                List<UIElement> c = new List<UIElement>();
-                for (int y = controls.Count; y >= odKterehoMusimOdebrat; y--)
+                List<UIElement> removed = new List<UIElement>();
+                for (int controlIndex = controls.Count; controlIndex >= odKterehoMusimOdebrat; controlIndex--)
                 {
-                    c.Add(controls[i][y]);
-                    controls[i].Remove(y);
+                    removed.Add(controls[index][controlIndex]);
+                    controls[index].Remove(controlIndex);
 
                 }
-                int vkladatDo = i + 1;
+                int vkladatDo = index + 1;
                 if (!IsStackPanelInSeries(vkladatDo))
                 {
                     //sps.Add(vkladatDo, new StackPanel());
                     Children.Insert(vkladatDo, new StackPanel());
                     controls.Add(vkladatDo, new Dictionary<int, UIElement>());
                 }
-                int y2 = 0;
-                for (int y = odKterehoMusimOdebrat - 1; y >= 0; y--)
+                int removedCount = 0;
+                for (int controlIndex2 = odKterehoMusimOdebrat - 1; controlIndex2 >= 0; controlIndex2--)
                 {
-                    RemoveLogicalChild(c[y]);
-                    RemoveVisualChild(c[y]);
+                    RemoveLogicalChild(removed[controlIndex2]);
+                    RemoveVisualChild(removed[controlIndex2]);
                     //sps.Remove(y);
-                    StackPanel v = GetStackPanelOnIndex(i);
-                    v.Children.Remove(c[y]);
-                    GetStackPanelOnIndex(vkladatDo).Children.Insert(y, c[y]);
+                    StackPanel stackPanel = GetStackPanelOnIndex(index);
+                    stackPanel.Children.Remove(removed[controlIndex2]);
+                    GetStackPanelOnIndex(vkladatDo).Children.Insert(controlIndex2, removed[controlIndex2]);
                     if (!controls.ContainsKey(vkladatDo))
                     {
                         controls.Add(vkladatDo, new Dictionary<int, UIElement>());
                     }
-                    y2 = y * -1 + 1;
-                    controls[vkladatDo].Add(y2, c[i]);
+                    removedCount = controlIndex2 * -1 + 1;
+                    controls[vkladatDo].Add(removedCount, removed[index]);
                 }
-                for (int y = 0; y < c.Count; y++)
+                for (int controlIndex3 = 0; controlIndex3 < removed.Count; controlIndex3++)
                 {
 
                 }
                 // A nyní musím všechny indexy posunout
-                y2 = Math.Abs(y2);
-                if (y2 != 1)
+                removedCount = Math.Abs(removedCount);
+                if (removedCount != 1)
                 {
-                    for (int y = controls[vkladatDo].Count - 1; y >= y2; y--)
+                    for (int sourceIndex = controls[vkladatDo].Count - 1; sourceIndex >= removedCount; sourceIndex--)
                     {
-                        controls[vkladatDo].Add(y + y2, controls[vkladatDo][y]);
-                        controls[vkladatDo].Remove(y);
+                        controls[vkladatDo].Add(sourceIndex + removedCount, controls[vkladatDo][sourceIndex]);
+                        controls[vkladatDo].Remove(sourceIndex);
                     }
                 }
             }
         }
     }
 
-    private StackPanel GetStackPanelOnIndex(int i)
+    private StackPanel GetStackPanelOnIndex(int index)
     {
-        return (StackPanel)Children[i];
+        return (StackPanel)Children[index];
     }
 
     private double GetWidthOfUIElements(Dictionary<int, UIElement> dictionary, double maxWidth, out int odKterehoMusimOdebrat)
     {
         odKterehoMusimOdebrat = -1;
-        double vr = 0;
-        int nt = 0;
+        double result = 0;
+        int count = 0;
         foreach (var item in dictionary)
         {
-            vr += GetWidthOfUIElement(item.Value);
-            if (vr >= maxWidth)
+            result += GetWidthOfUIElement(item.Value);
+            if (result >= maxWidth)
             {
-                odKterehoMusimOdebrat = nt;
+                odKterehoMusimOdebrat = count;
             }
-            nt++;
+            count++;
         }
-        return vr;
+        return result;
     }
 
     private double GetWidthOfUIElement(UIElement control)

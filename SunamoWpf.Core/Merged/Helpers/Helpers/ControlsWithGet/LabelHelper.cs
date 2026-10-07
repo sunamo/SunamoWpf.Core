@@ -5,19 +5,19 @@ public class LabelHelper
 {
     static Type type = typeof(LabelHelper);
 
-    public static Label Get(ControlInitData d)
+    public static Label Get(ControlInitData controlInitData)
     {
-        Label vr = new Label();
-        ControlHelper.SetForeground(vr, d.foreground);
-        vr.Content = ContentControlHelper.GetContent(d);
-        vr.Foreground = d.foreground;
-        if (d.OnClick != null)
+        Label label = new Label();
+        ControlHelper.SetForeground(label, controlInitData.foreground);
+        label.Content = ContentControlHelper.GetContent(controlInitData);
+        label.Foreground = controlInitData.foreground;
+        if (controlInitData.OnClick != null)
         {
-            ThrowEx.IsNotNull("d.OnClick", d.OnClick);
+            ThrowEx.IsNotNull("d.OnClick", controlInitData.OnClick);
             //vr.MouseDown += d.OnClick;
         }
-        vr.Tag = d.tag;
-        vr.ToolTip = d.tooltip;
-        return vr;
+        label.Tag = controlInitData.tag;
+        label.ToolTip = controlInitData.tooltip;
+        return label;
     }
 }

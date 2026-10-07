@@ -8,22 +8,22 @@ public class VisualTreeHelpersTests
     [StaFact]
     public void FindDescendentsTest()
     {
-        var sp = new StackPanel();
+        var stackPanel = new StackPanel();
         var chb = new CheckBox();
-        var tb = new TextBlock();
+        var textBlock = new TextBlock();
 
         const string inputText = "Hello world!";
-        tb.Text = inputText;
+        textBlock.Text = inputText;
 
-        chb.Content = tb;
-        sp.Children.Add(chb);
+        chb.Content = textBlock;
+        stackPanel.Children.Add(chb);
 
         // The CheckBox template (and with it the visual tree) is created only after layout.
-        sp.Measure(new System.Windows.Size(200, 200));
-        sp.Arrange(new System.Windows.Rect(0, 0, 200, 200));
-        sp.UpdateLayout();
+        stackPanel.Measure(new System.Windows.Size(200, 200));
+        stackPanel.Arrange(new System.Windows.Rect(0, 0, 200, 200));
+        stackPanel.UpdateLayout();
 
-        var ele = VisualTreeHelpers.FindDescendents<TextBlock>(sp);
+        var ele = VisualTreeHelpers.FindDescendents<TextBlock>(stackPanel);
         var tb2 = ele.First();
         Assert.Equal(inputText, tb2.Text);
     }

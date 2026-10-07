@@ -1,6 +1,6 @@
 namespace SunamoWpf.Data;
 
-public delegate Task RoutedEventHandlerAsync(object sender, RoutedEventArgs e);
+public delegate Task RoutedEventHandlerAsync(object sender, RoutedEventArgs eventArgs);
 public class ControlInitData
 {
     #region Sort by alphabet (same as in intellisense popup)

@@ -20,19 +20,19 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
     private object _sender;
     public EventOnArgs eoa = null;
     public EventOnArgs eoaWasChanged = new EventOnArgs(false);
-    public void EventOn(EventOnArgs e)
+    public void EventOn(EventOnArgs eventOnArgs)
     {
-        this.eoa = e;
+        this.eoa = eventOnArgs;
     }
     /// <summary>
     /// Into args you can insert sth like this, new ObservableCollection<NotifyPropertyChangedWrapper<CheckBox>>()
     /// </summary>
     /// <param name="sender"></param>
-    /// <param name="c"></param>
-    public NotifyChangesCollection(object sender, Collection<T> c)
+    /// <param name="collection"></param>
+    public NotifyChangesCollection(object sender, Collection<T> collection)
     {
         _sender = sender;
-        l = c;
+        l = collection;
     }
     public T this[int index] { get => l[index]; set => l[index] = value; }
     public int Count => l.Count;
@@ -50,27 +50,27 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
             OnCollectionChanged(ListOperation.Add, item);
         }
     }
-    private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void Item_PropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
     {
         if (eoa.onPropertyChanged)
         {
-            T t = (T)sender;
-            if (e.PropertyName == "IsChecked")
+            T item = (T)sender;
+            if (eventArgs.PropertyName == "IsChecked")
             {
-                var tb = (ToggleButton)sender;
-                bool? isChecked = (bool?)tb.GetValue(ToggleButton.IsCheckedProperty);
+                var toggleButton = (ToggleButton)sender;
+                bool? isChecked = (bool?)toggleButton.GetValue(ToggleButton.IsCheckedProperty);
                 if (isChecked.GetValueOrDefault())
                 {
-                    OnCollectionChanged(ListOperation.Checked, t);
+                    OnCollectionChanged(ListOperation.Checked, item);
                 }
                 else
                 {
-                    OnCollectionChanged(ListOperation.Unchecked, t);
+                    OnCollectionChanged(ListOperation.Unchecked, item);
                 }
             }
             else
             {
-                OnCollectionChanged(ListOperation.PropertyChanged, t);
+                OnCollectionChanged(ListOperation.PropertyChanged, item);
             }
         }
     }
@@ -108,12 +108,12 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
     }
     public bool Remove(T item)
     {
-        bool vr = l.Remove(item);
+        bool removed = l.Remove(item);
         if (eoa.onRemove)
         {
             OnCollectionChanged(ListOperation.Remove, item);
         }
-        return vr;
+        return removed;
     }
     public void RemoveAt(int index)
     {
@@ -124,14 +124,14 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
     {
         return l.GetEnumerator();
     }
-    public void OnCollectionChanged(ListOperation op, object data)
+    public void OnCollectionChanged(ListOperation operation, object data)
     {
         if (CollectionChanged != null)
         {
             // must be _sender, not this
-            CollectionChanged(_sender, op, data);
+            CollectionChanged(_sender, operation, data);
         }
-        switch (op)
+        switch (operation)
         {
             case ListOperation.RemoveAt:
             case ListOperation.Remove:

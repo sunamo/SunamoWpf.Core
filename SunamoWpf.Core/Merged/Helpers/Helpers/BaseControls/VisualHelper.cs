@@ -43,29 +43,29 @@ public class VisualHelper
     //    return vr;
     //}
 
-    private static void ModifyPositionBack(FrameworkElement fe)
+    private static void ModifyPositionBack(FrameworkElement frameworkElement)
     {
         /// remeasure a size smaller than need, wpf will
         /// rearrange it to the original position
-        fe.Measure(new Size());
+        frameworkElement.Measure(new Size());
     }
 
-    private static void ModifyPosition(FrameworkElement fe)
+    private static void ModifyPosition(FrameworkElement frameworkElement)
     {
         /// get the size of the visual with margin
-        Size fs = new Size(
-            fe.ActualWidth +
-            fe.Margin.Left + fe.Margin.Right,
-            fe.ActualHeight +
-            fe.Margin.Top + fe.Margin.Bottom);
+        Size size = new Size(
+            frameworkElement.ActualWidth +
+            frameworkElement.Margin.Left + frameworkElement.Margin.Right,
+            frameworkElement.ActualHeight +
+            frameworkElement.Margin.Top + frameworkElement.Margin.Bottom);
 
         /// measure the visual with new size
-        fe.Measure(fs);
+        frameworkElement.Measure(size);
 
         /// arrange the visual to align parent with (0,0)
-        fe.Arrange(new Rect(
-            -fe.Margin.Left, -fe.Margin.Top,
-            fs.Width, fs.Height));
+        frameworkElement.Arrange(new Rect(
+            -frameworkElement.Margin.Left, -frameworkElement.Margin.Top,
+            size.Width, size.Height));
     }
 
     private static string CreateJpeg(RenderTargetBitmap bitmap)
@@ -91,38 +91,38 @@ public class VisualHelper
         return result;
     }
 
-    public static byte[] ConvertVisualToBytes(FrameworkElement maybePanel, FrameworkElement v, Size forceSizeTo)
+    public static byte[] ConvertVisualToBytes(FrameworkElement maybePanel, FrameworkElement element, Size forceSizeTo)
     {
         /// get bound of the visual
         //Rect b = VisualTreeHelper.GetDescendantBounds(v);
-        Rect b = BoundsRelativeTo(v, maybePanel);
+        Rect bounds = BoundsRelativeTo(element, maybePanel);
 
         if (forceSizeTo != null)
         {
-            b.Size = forceSizeTo;
+            bounds.Size = forceSizeTo;
         }
 
         /// new a RenderTargetBitmap with actual size of c
-        RenderTargetBitmap r = new RenderTargetBitmap(
-            (int)b.Width, (int)b.Height,
+        RenderTargetBitmap renderTarget = new RenderTargetBitmap(
+            (int)bounds.Width, (int)bounds.Height,
             96, 96, PixelFormats.Pbgra32);
 
         /// render visual
-        ModifyPosition(v);
-        r.Render(v);
-        ModifyPositionBack(v);
+        ModifyPosition(element);
+        renderTarget.Render(element);
+        ModifyPositionBack(element);
 
         /// new a JpegBitmapEncoder and add r into it 
-        JpegBitmapEncoder e = new JpegBitmapEncoder();
-        e.Frames.Add(BitmapFrame.Create(r));
+        JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(renderTarget));
 
-        MemoryStream ms = new MemoryStream();
+        MemoryStream memoryStream = new MemoryStream();
         /// new a FileStream to write the image file
         //FileStream s = new FileStream(f, FileMode.OpenOrCreate, FileAccess.Write);
-        e.Save(ms);
-        var vr = ms.ToArray();
-        ms.Close();
-        return vr;
+        encoder.Save(memoryStream);
+        var bytes = memoryStream.ToArray();
+        memoryStream.Close();
+        return bytes;
     }
 
     /// <summary>
@@ -138,18 +138,18 @@ public class VisualHelper
                  .TransformBounds(LayoutInformation.GetLayoutSlot(element));
     }
 
-    static DrawingVisual ModifyToDrawingVisual(Visual v)
+    static DrawingVisual ModifyToDrawingVisual(Visual visual)
     {
-        Rect b = VisualTreeHelper.GetDescendantBounds(v);
+        Rect bounds = VisualTreeHelper.GetDescendantBounds(visual);
         /// new a drawing visual and get its context
-        DrawingVisual dv = new DrawingVisual();
-        DrawingContext dc = dv.RenderOpen();
+        DrawingVisual drawingVisual = new DrawingVisual();
+        DrawingContext drawingContext = drawingVisual.RenderOpen();
 
         /// generate a visual brush by input, and paint
-        VisualBrush vb = new VisualBrush(v);
-        dc.DrawRectangle(vb, null, b);
-        dc.Close();
+        VisualBrush visualBrush = new VisualBrush(visual);
+        drawingContext.DrawRectangle(visualBrush, null, bounds);
+        drawingContext.Close();
 
-        return dv;
+        return drawingVisual;
     }
 }

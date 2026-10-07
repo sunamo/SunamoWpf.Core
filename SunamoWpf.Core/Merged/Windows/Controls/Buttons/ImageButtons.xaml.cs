@@ -64,15 +64,15 @@ public partial class ImageButtons : UserControl
         return imageButtons;
     }
 
-    private void BtnClear_Click(object sender, RoutedEventArgs e)
+    private void BtnClear_Click(object sender, RoutedEventArgs eventArgs)
     {
         ClearAll();
     }
-    private void BtnCopyToClipboard_Click(object sender, RoutedEventArgs e)
+    private void BtnCopyToClipboard_Click(object sender, RoutedEventArgs eventArgs)
     {
         CopyToClipboard();
     }
-    private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    private void BtnAdd_Click(object sender, RoutedEventArgs eventArgs)
     {
         eov = new EnterOneValueWindow("item to insert (one on line)");
         // TODO Replaced during repair 0xc0000374
@@ -82,15 +82,15 @@ public partial class ImageButtons : UserControl
         eov.IsMultiline = true;
         eov.ShowDialog();
     }
-    private void EnterOneValueUC_ChangeDialogResult(bool? b)
+    private void EnterOneValueUC_ChangeDialogResult(bool? result)
     {
-        if (b.HasValue && b.Value)
+        if (result.HasValue && result.Value)
         {
             data = eov.enterOneValueUC.txtEnteredText.Text;
             Handler(btnAdd, null);
         }
     }
-    private void ImageButtons_Loaded(object sender, RoutedEventArgs e)
+    private void ImageButtons_Loaded(object sender, RoutedEventArgs eventArgs)
     {
     }
     public double HeightOfFirstVisibleButton()
@@ -110,18 +110,18 @@ public partial class ImageButtons : UserControl
     /// </summary>
     /// <param name="copyToClipboard"></param>
     /// <param name="clear"></param>
-    public void Init(ImageButtonsInit i)
+    public void Init(ImageButtonsInit imageButtonsInit)
     {
         SetToolTip(btnCopyToClipboard, XlfKeys.CopyTextToClipboard);
         SetToolTip(btnClear, XlfKeys.Clear);
         SetToolTip(btnAdd, XlfKeys.Add);
         SetToolTip(btnSelectAll, XlfKeys.CheckAll);
         SetToolTip(btnUnselectAll, XlfKeys.UncheckAll);
-        SetVisibility(btnCopyToClipboard, i.copyToClipboard);
-        SetVisibility(btnClear, i.clear);
-        SetVisibility(btnAdd, i.add);
-        SetVisibility(btnSelectAll, i.selectAll);
-        SetVisibility(btnUnselectAll, i.deselectAll);
+        SetVisibility(btnCopyToClipboard, imageButtonsInit.copyToClipboard);
+        SetVisibility(btnClear, imageButtonsInit.clear);
+        SetVisibility(btnAdd, imageButtonsInit.add);
+        SetVisibility(btnSelectAll, imageButtonsInit.selectAll);
+        SetVisibility(btnUnselectAll, imageButtonsInit.deselectAll);
         allButtons = CAG.ToList<Button>(btnCopyToClipboard, btnClear, btnAdd, btnSelectAll, btnUnselectAll);
         this.Visibility = this.IsAllCollapsed() ? Visibility.Collapsed : Visibility.Visible;
         ResourceDictionaryStyles.Margin10(allButtons);
@@ -158,17 +158,17 @@ public partial class ImageButtons : UserControl
         else
         {
             btn.Visibility = Visibility.Visible;
-            var t = copyToClipboard.GetType();
-            if (t == typeof(bool))
+            var type = copyToClipboard.GetType();
+            if (type == typeof(bool))
             {
                 UIElementHelper.SetVisibility((bool)copyToClipboard, btn);
             }
-            else if (t == TypesDesktop.tRoutedEventHandler)
+            else if (type == TypesDesktop.tRoutedEventHandler)
             {
-                var d = (RoutedEventHandler)copyToClipboard;
-                btn.Click += d;
+                var handler = (RoutedEventHandler)copyToClipboard;
+                btn.Click += handler;
             }
-            else if (t == TypesD.tVoidString)
+            else if (type == TypesD.tVoidString)
             {
                 var voidString = (VoidString)copyToClipboard;
                 btn.Tag = voidString;
@@ -177,30 +177,30 @@ public partial class ImageButtons : UserControl
             }
             else
             {
-                ThrowEx.NotImplementedCase(t);
+                ThrowEx.NotImplementedCase(type);
             }
         }
     }
-    void Handler(object o, RoutedEventArgs e)
+    void Handler(object sender, RoutedEventArgs eventArgs)
     {
         string methodName = Translate.FromKey(XlfKeys.Handler);
-        Button btn = (Button)o;
-        var t = btn.Tag.GetType();
-        if (t == TypesD.tVoidString)
+        Button btn = (Button)sender;
+        var type = btn.Tag.GetType();
+        if (type == TypesD.tVoidString)
         {
             var voidString = (VoidString)btn.Tag;
             voidString.Invoke(data.ToString());
         }
         else
         {
-            ThrowEx.NotImplementedCase(t);
+            ThrowEx.NotImplementedCase(type);
         }
     }
-    private void BtnSelectAll_Click(object sender, RoutedEventArgs e)
+    private void BtnSelectAll_Click(object sender, RoutedEventArgs eventArgs)
     {
         SelectAll();
     }
-    private void BtnUnselectAll_Click(object sender, RoutedEventArgs e)
+    private void BtnUnselectAll_Click(object sender, RoutedEventArgs eventArgs)
     {
         UnselectAll();
     }

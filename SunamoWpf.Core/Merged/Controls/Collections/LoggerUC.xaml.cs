@@ -18,16 +18,16 @@ public partial class LoggerUC : UserControl, ISaveWithoutArgWpf
         }
         Loaded += LoggerUC_Loaded;
     }
-    private void LoggerUC_Loaded(object sender, RoutedEventArgs e)
+    private void LoggerUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         AwesomeFontControls.SetAwesomeFontSymbol(BtnClear, "\uf00d"); // async Task nelze RunSynchronously (InvalidOperationException); symbol se nastavi pres Dispatcher.InvokeAsync
         AwesomeFontControls.SetAwesomeFontSymbol(BtnCopyToClipboard, "\uf0c5"); // async Task nelze RunSynchronously (InvalidOperationException); symbol se nastavi pres Dispatcher.InvokeAsync
     }
-    private void BtnClear_Click(object o, RoutedEventArgs e)
+    private void BtnClear_Click(object sender, RoutedEventArgs eventArgs)
     {
         lbLogs.Children.Clear();
     }
-    private void BtnCopyToClipboard_Click(object o, RoutedEventArgs e)
+    private void BtnCopyToClipboard_Click(object sender, RoutedEventArgs eventArgs)
     {
         List<string> result = Lines();
         ClipboardHelper.SetLines(result);

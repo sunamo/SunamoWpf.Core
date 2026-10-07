@@ -63,10 +63,10 @@ internal static class FileUtil
                     processes = new List<Process>((int)pnProcInfo);
                     // Enumerate all of the results and add them to the 
                     // list to be returned
-                    for (var i = 0; i < pnProcInfo; i++)
+                    for (var index = 0; index < pnProcInfo; index++)
                         try
                         {
-                            processes.Add(Process.GetProcessById(processInfo[i].Process.dwProcessId));
+                            processes.Add(Process.GetProcessById(processInfo[index].Process.dwProcessId));
                         }
                         // catch the error -- in case the process is no longer running
                         catch (ArgumentException)

@@ -223,10 +223,10 @@ DbeEnterDialogConversionMode
 OemClear
 DeadCharProcessed");
     #endregion
-    public static bool IsWhitespace(KeyEventArgs e)
+    public static bool IsWhitespace(KeyEventArgs eventArgs)
     {
-        var k = e.Key.ToString();
-        if (whiteSpace.Contains(k))
+        var keyName = eventArgs.Key.ToString();
+        if (whiteSpace.Contains(keyName))
         {
             return true;
         }
@@ -263,11 +263,11 @@ DeadCharProcessed");
 mam 2, d0, u1 - logicke
 mam 3, d0, u1 - nechapu */
         bool keyPressed = false;
-        var kd = Keyboard.IsKeyDown(key);
+        var isKeyDown = Keyboard.IsKeyDown(key);
         //var ku = Keyboard.IsKeyUp(key);
         //var kt = Keyboard.IsKeyToggled(key);
         //bool keyPressed = kd || kt;
-        keyPressed = kd; //e.Key.HasFlag( key);
+        keyPressed = isKeyDown; //e.Key.HasFlag( key);
         bool modifierPressed = modifier == Keyboard.Modifiers;
         bool result = keyPressed && modifierPressed;
         return result;
@@ -299,18 +299,18 @@ mam 3, d0, u1 - nechapu */
     {
         return (W32.GetKeyState(0x91) & 0xffff) != 0;
     }
-    public static bool KeyWithNoneModifier(KeyEventArgs e, Key key)
+    public static bool KeyWithNoneModifier(KeyEventArgs eventArgs, Key key)
     {
         bool result = false;
         if (Keyboard.Modifiers == ModifierKeys.None)
         {
-            result = key == e.Key;
+            result = key == eventArgs.Key;
         }
         return result;
     }
-    public static int Number(KeyEventArgs e)
+    public static int Number(KeyEventArgs eventArgs)
     {
-        switch (e.Key)
+        switch (eventArgs.Key)
         {
             case Key.NumPad0:
                 return 0;
@@ -356,49 +356,49 @@ mam 3, d0, u1 - nechapu */
                 return -1;
         }
     }
-    public static string DownKey(KeyEventArgs e)
+    public static string DownKey(KeyEventArgs eventArgs)
     {
-        string d = Keyboard.Modifiers.ToString() + ", " + e.Key.ToString();
-        return d;
+        string text = Keyboard.Modifiers.ToString() + ", " + eventArgs.Key.ToString();
+        return text;
     }
     /// <summary>
     /// If dont be remain number, return 255
     /// </summary>
-    /// <param name="e"></param>
-    public static byte IsNumber(KeyEventArgs e)
+    /// <param name="eventArgs"></param>
+    public static byte IsNumber(KeyEventArgs eventArgs)
     {
-        string s = e.Key.ToString();
-        if (SH.RemovePrefix(ref s, "NumPad"))
+        string keyName = eventArgs.Key.ToString();
+        if (SH.RemovePrefix(ref keyName, "NumPad"))
         {
-            return byte.Parse(s);
+            return byte.Parse(keyName);
         }
         return byte.MaxValue;
     }
     public static Type type = typeof(KeyboardHelper);
-    public static bool IsModifier(Key k)
+    public static bool IsModifier(Key key)
     {
-        if (k == Key.LeftShift || k == Key.RightShift)
+        if (key == Key.LeftShift || key == Key.RightShift)
         {
             if (Keyboard.IsKeyDown(Key.RightShift) || Keyboard.IsKeyDown(Key.LeftShift))
             {
                 return true;
             }
         }
-        else if (k == Key.LeftAlt || k == Key.RightAlt)
+        else if (key == Key.LeftAlt || key == Key.RightAlt)
         {
             if (Keyboard.IsKeyDown(Key.RightAlt) || Keyboard.IsKeyDown(Key.LeftAlt))
             {
                 return true;
             }
         }
-        else if (k == Key.LeftCtrl || k == Key.RightCtrl)
+        else if (key == Key.LeftCtrl || key == Key.RightCtrl)
         {
             if (Keyboard.IsKeyDown(Key.RightCtrl) || Keyboard.IsKeyDown(Key.LeftCtrl))
             {
                 return true;
             }
         }
-        else if (k == Key.LWin || k == Key.RWin)
+        else if (key == Key.LWin || key == Key.RWin)
         {
             if (Keyboard.IsKeyDown(Key.RWin) || Keyboard.IsKeyDown(Key.LWin))
             {

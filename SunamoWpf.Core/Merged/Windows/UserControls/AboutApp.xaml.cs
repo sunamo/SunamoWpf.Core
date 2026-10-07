@@ -64,9 +64,9 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
         btnCheckNewVersion.Content = Translate.FromKey(XlfKeys.CheckUpdatedVersion);
         tbh2.margin = new Thickness(25, 0, 0, 0);
         tbh2.padding = new Thickness(0, 0, 0, 0);
-        var sp = tbh2.Final();
-        Grid.SetRow(sp, 4);
-        grid.Children.Add(sp);
+        var stackPanel = tbh2.Final();
+        Grid.SetRow(stackPanel, 4);
+        grid.Children.Add(stackPanel);
         //wg.DataContext = tbh2.uis;
         //var itemsPanel = wg.ItemsPanel;
         ////var ipt = itemsPanel.te
@@ -89,7 +89,7 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
     public Action<string, string, string> CheckNewVersion;
     public bool? DialogResult { set => RuntimeHelper.EmptyDummyMethod(); }
     public string Title => Translate.FromKey(XlfKeys.AboutApp);
-    private void OnClickOK(object sender, RoutedEventArgs e)
+    private void OnClickOK(object sender, RoutedEventArgs eventArgs)
     {
         ChangeDialogResult(true);
     }
@@ -99,11 +99,11 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
     public void Init()
     {
     }
-    public bool HandleKey(KeyEventArgs e)
+    public bool HandleKey(KeyEventArgs eventArgs)
     {
         return false;
     }
-    private void btnCheckNewVersion_Click(object sender, RoutedEventArgs e)
+    private void btnCheckNewVersion_Click(object sender, RoutedEventArgs eventArgs)
     {
         CheckNewVersion(updateUri, actualVersion, appUri);
     }

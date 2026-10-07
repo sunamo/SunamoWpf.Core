@@ -50,16 +50,16 @@ public class WRTBHTests : UserControl
 
     public WRTBHTests()
     {
-        ItemsControl ic = new ItemsControl();
-        ic.ItemsSource = new ObservableCollection<object>();// new Binding();
+        ItemsControl itemsControl = new ItemsControl();
+        itemsControl.ItemsSource = new ObservableCollection<object>();// new Binding();
 
         ItemsPanelTemplate ipt = new ItemsPanelTemplate();
         //ipt.LoadContent("<StackPanel Orientation=\"Vertical\"></StackPanel>");
         var templateContent = ipt.Template;
         var visualTree = ipt.VisualTree;
 
-        StackPanel sp = new StackPanel();
-        sp.Orientation = Orientation.Vertical;
+        StackPanel stackPanel = new StackPanel();
+        stackPanel.Orientation = Orientation.Vertical;
 
         ControlTemplate template = new ControlTemplate(typeof(Button));
         var image = new FrameworkElementFactory(typeof(Image));
@@ -72,7 +72,7 @@ public class WRTBHTests : UserControl
         "</ControlTemplate>";
         btn.Template = (ControlTemplate)XamlReader.Parse(template2);
 
-        ic.ItemsPanel = ipt;
+        itemsControl.ItemsPanel = ipt;
 
         WRTBH tbh2 = new WRTBH(475, 10, FontArgs.DefaultRun());
 
@@ -80,8 +80,8 @@ public class WRTBHTests : UserControl
 
         wrtbh.Hyperlink("hello", "https://sunamo.cz/");
 
-        ic.DataContext = wrtbh.uis;
+        itemsControl.DataContext = wrtbh.uis;
 
-        Content = ic;
+        Content = itemsControl;
     }
 }

@@ -6,8 +6,8 @@ public interface IFoundedResultUC
 
     event VoidString Selected;
 
-    bool Contains(Regex r, string text);
-    bool Contains(string t);
+    bool Contains(Regex regex, string text);
+    bool Contains(string text);
     // musí to tu být?
     //void InitializeComponent();
 }

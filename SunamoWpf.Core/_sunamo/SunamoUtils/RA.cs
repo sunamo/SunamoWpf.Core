@@ -23,11 +23,11 @@ internal class RA
 
             //HKEY_LOCAL_MACHINE\SOFTWARE
             var hklm = Registry.CurrentUser;
-            var sw = hklm.OpenSubKey("SOFTWARE", true);
-            m = sw.OpenSubKey(applicationName, true);
+            var software = hklm.OpenSubKey("SOFTWARE", true);
+            m = software.OpenSubKey(applicationName, true);
             if (m == null)
             {
-                m = sw.CreateSubKey(applicationName);
+                m = software.CreateSubKey(applicationName);
                 valuesInKey = new List<string>();
             }
             else
@@ -53,11 +53,11 @@ internal class RA
     }
     public static int ReturnValueInt(string klic)
     {
-        int c;
-        var o = m.GetValue(klic);
-        if (o != null)
-            if (int.TryParse(o.ToString(), out c))
-                return c;
+        int count;
+        var value = m.GetValue(klic);
+        if (value != null)
+            if (int.TryParse(value.ToString(), out count))
+                return count;
         return -1;
     }
     /// <summary>
@@ -86,8 +86,8 @@ internal class RA
     }
     public static bool ReturnValueBool(string klic)
     {
-        var s = m.GetValue(klic, "").ToString();
-        if (s == "True") return true;
+        var value = m.GetValue(klic, "").ToString();
+        if (value == "True") return true;
         return false;
     }
 }

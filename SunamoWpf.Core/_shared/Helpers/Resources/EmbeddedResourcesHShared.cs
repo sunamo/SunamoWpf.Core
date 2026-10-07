@@ -111,23 +111,23 @@ public class EmbeddedResourcesHShared : EmbeddedResourcesH
     /// </summary>
     /// <param name="_entryAssembly"></param>
     /// <param name="defaultNamespace"></param>
-    /// <param name="v"></param>
+    /// <param name="name"></param>
     /// <returns></returns>
-    public ImageSource GetAppIcon(Assembly _entryAssembly, string defaultNamespace, string v, ref EmbeddedResourcesHShared er)
+    public ImageSource GetAppIcon(Assembly _entryAssembly, string defaultNamespace, string name, ref EmbeddedResourcesHShared embeddedResources)
     {
-        er = new EmbeddedResourcesHShared(_entryAssembly, defaultNamespace);
-        return er.GetBitmapImageSource(v);
+        embeddedResources = new EmbeddedResourcesHShared(_entryAssembly, defaultNamespace);
+        return embeddedResources.GetBitmapImageSource(name);
     }
 
     /// <summary>
     /// ALways take from ciShared ()
     /// 
     /// </summary>
-    /// <param name="v"></param>
+    /// <param name="name"></param>
     /// <returns></returns>
-    public ImageSource GetAppIcon(string v)
+    public ImageSource GetAppIcon(string name)
     {
-        var ims = ciShared.GetBitmapImageSource(v);
+        var ims = ciShared.GetBitmapImageSource(name);
         return ims;
     }
 }

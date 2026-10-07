@@ -3,16 +3,16 @@ namespace SunamoWpf.Controls;
 
 public class NotifyPropertyHelper
 {
-    public static List<T> InnerObjectsOfNotifyPropertyChangedWrapper<T>(IList<NotifyPropertyChangedWrapper<T>> t) where T : DependencyObject
+    public static List<T> InnerObjectsOfNotifyPropertyChangedWrapper<T>(IList<NotifyPropertyChangedWrapper<T>> wrappers) where T : DependencyObject
     {
-        List<T> l = new List<T>(t.Count);
+        List<T> result = new List<T>(wrappers.Count);
 
-        foreach (var item in t)
+        foreach (var item in wrappers)
         {
-            l.Add(item.o);
+            result.Add(item.o);
         }
 
-        return l;
+        return result;
     }
 
     public static void CheckBox<T>(NotifyPropertyChangedWrapper<T> notifyWrapper) where T : DependencyObject

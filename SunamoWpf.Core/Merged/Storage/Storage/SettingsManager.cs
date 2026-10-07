@@ -63,24 +63,24 @@ public class SettingsManager : ISettingsManagerWpf<FrameworkElement, DependencyP
     /// <summary>
     /// Should be without . bue to is Property name
     /// </summary>
-    /// <param name="fw"></param>
+    /// <param name="frameworkElement"></param>
     /// <param name="sender"></param>
-    private string GetElementFullPath(FrameworkElement fw/*, FrameworkElement sender*/)
+    private string GetElementFullPath(FrameworkElement frameworkElement/*, FrameworkElement sender*/)
     {
         if (false)
         {
             //return sender.Name + "." + fw.GetType().FullName;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.Append(fw.Name);
-        var p = fw.Parent as FrameworkElement;
-        while (p != null)
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.Append(frameworkElement.Name);
+        var parent = frameworkElement.Parent as FrameworkElement;
+        while (parent != null)
         {
             // Must be underscore because its PropertyName
-            sb.Insert(0, p.Name + "_");
-            p = p.Parent as FrameworkElement; ;
+            stringBuilder.Insert(0, parent.Name + "_");
+            parent = parent.Parent as FrameworkElement; ;
         }
-        var result = sb.ToString();
+        var result = stringBuilder.ToString();
         return result;
     }
     public void SaveSettings(FrameworkElement sender, TUListWpf<FrameworkElement, DependencyProperty> savedElements)

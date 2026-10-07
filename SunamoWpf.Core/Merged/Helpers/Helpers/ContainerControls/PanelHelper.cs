@@ -3,31 +3,31 @@ namespace SunamoWpf.Helpers.ContainerControls;
 
 public partial class PanelHelper
 {
-    public static List<UIElement> GetThisAndRecursiveAllSubUIElements(UIElement f)
+    public static List<UIElement> GetThisAndRecursiveAllSubUIElements(UIElement element)
     {
-        List<UIElement> vr = new List<UIElement>();
-        vr.Add(f);
+        List<UIElement> result = new List<UIElement>();
+        result.Add(element);
 
-        foreach (UIElement item in Childrens(f))
+        foreach (UIElement item in Childrens(element))
         {
-            GetThisAndRecursiveAllSubUIElements(f, vr);
+            GetThisAndRecursiveAllSubUIElements(element, result);
         }
-        return vr;
+        return result;
     }
 
     /// <summary>
     /// because every of structure is other innered, is stupidity have own method for get content control without closer determination
     /// </summary>
-    /// <param name="p"></param>
-    public static object ContentOfFirstChild(Panel p)
+    /// <param name="panel"></param>
+    public static object ContentOfFirstChild(Panel panel)
     {
-        var first = p.Children;
+        var first = panel.Children;
         if (first == null)
         {
             return null;
         }
-        var c = VisualTreeHelpers.FindDescendents<ContentControl>(p);
-        return c;
+        var controls = VisualTreeHelpers.FindDescendents<ContentControl>(panel);
+        return controls;
     }
 
     private static IList Childrens(UIElement maybePanel)
@@ -36,9 +36,9 @@ public partial class PanelHelper
         {
             if (maybePanel is ContentControl)
             {
-                ContentControl c = (ContentControl)maybePanel;
+                ContentControl contentControl = (ContentControl)maybePanel;
                 // Will check for Panel
-                return Childrens(c.Content as UIElement);
+                return Childrens(contentControl.Content as UIElement);
             }
 
             else if (maybePanel is Panel)
@@ -50,42 +50,42 @@ public partial class PanelHelper
         return new System.Collections.Generic.List<object>();
     }
 
-    /// <param name="f"></param>
-    /// <param name="vr"></param>
-    private static void GetThisAndRecursiveAllSubUIElements(UIElement f, List<UIElement> vr)
+    /// <param name="element"></param>
+    /// <param name="result"></param>
+    private static void GetThisAndRecursiveAllSubUIElements(UIElement element, List<UIElement> result)
     {
-        vr.Add(f);
+        result.Add(element);
 
 
-        foreach (UIElement item in Childrens(f))
+        foreach (UIElement item in Childrens(element))
         {
-            GetThisAndRecursiveAllSubUIElements(item, vr);
+            GetThisAndRecursiveAllSubUIElements(item, result);
         }
     }
 
-    private static void GetThisAndRecursiveAllSubUIElements<T>(UIElement f, List<T> vr) where T : class
+    private static void GetThisAndRecursiveAllSubUIElements<T>(UIElement element, List<T> result) where T : class
     {
         // Cant compare with ==, but check for parent classes. 
         // In most cases I will search for UIElement, Control etc. and nothing will found
-        if (RH.IsOrIsDeriveFromBaseClass(f.GetType(), typeof(T)))
+        if (RH.IsOrIsDeriveFromBaseClass(element.GetType(), typeof(T)))
         {
-            vr.Add(f as T);
+            result.Add(element as T);
         }
 
-        foreach (UIElement item in Childrens(f))
+        foreach (UIElement item in Childrens(element))
         {
-            GetThisAndRecursiveAllSubUIElements(item, vr);
+            GetThisAndRecursiveAllSubUIElements(item, result);
         }
     }
 
     public static List<T> GetRecursiveAllSubUIElementsOfType<T>(UIElement control) where T : class
     {
-        List<T> vr = new List<T>();
+        List<T> result = new List<T>();
         foreach (UIElement item in Childrens(control))
         {
-            GetThisAndRecursiveAllSubUIElements<T>(item, vr);
+            GetThisAndRecursiveAllSubUIElements<T>(item, result);
         }
-        return vr;
+        return result;
     }
 
 

@@ -4,18 +4,18 @@ namespace SunamoWpf.Controls.Helpers.ControlsWithGet;
 public partial class SuMenuItemHelper
 {
     SuMenuItem mi = null;
-    public SuMenuItemHelper(SuMenuItem mi)
+    public SuMenuItemHelper(SuMenuItem menuItem)
     {
-        this.mi = mi;
+        this.mi = menuItem;
     }
-    public void AddValuesOfEnumAsItems(Array bs, RoutedEventHandler eh)
+    public void AddValuesOfEnumAsItems(Array values, RoutedEventHandler eventHandler)
     {
-        foreach (object item in bs)
+        foreach (object item in values)
         {
             SuMenuItem tsmi = new SuMenuItem();
             tsmi.Header = item.ToString();
             tsmi.Tag = item;
-            tsmi.Click += eh;
+            tsmi.Click += eventHandler;
             mi.Items.Add(tsmi);
         }
     }
@@ -23,15 +23,15 @@ public partial class SuMenuItemHelper
     /// A2 was onClick
     /// A4 was tag
     /// </summary>
-    /// <param name="d"></param>
-    public static SuMenuItem GetCheckable(ControlInitData d)
+    /// <param name="controlInitData"></param>
+    public static SuMenuItem GetCheckable(ControlInitData controlInitData)
     {
-        d.checkable = true;
-        return Get(d);
+        controlInitData.checkable = true;
+        return Get(controlInitData);
     }
     public static void Remove(SuMenuItem miInClipboard)
     {
-        var ic = (ItemsControl) miInClipboard.Parent;
-        ic.Items.Remove(miInClipboard);
+        var itemsControl = (ItemsControl) miInClipboard.Parent;
+        itemsControl.Items.Remove(miInClipboard);
     }
 }

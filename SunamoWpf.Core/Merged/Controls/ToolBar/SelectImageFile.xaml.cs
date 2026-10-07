@@ -26,19 +26,19 @@ public partial class SelectImageFile : UserControl
         SelectedFile = "";
     }
 
-    private void SetSelectedFile(string v)
+    private void SetSelectedFile(string path)
     {
-        if (v == "")
+        if (path == "")
         {
-            v = Translate.FromKey(XlfKeys.None);
+            path = Translate.FromKey(XlfKeys.None);
         }
-        selectedFile = v;
-        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + v;
+        selectedFile = path;
+        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + path;
     }
 
     //public event VoidStringBitmapBitmapImage FileSelected;
 
-    private void btnSelectFile_Click(object sender, RoutedEventArgs e)
+    private void btnSelectFile_Click(object sender, RoutedEventArgs eventArgs)
     {
         string file = null;
         file = DW.SelectOfFile();

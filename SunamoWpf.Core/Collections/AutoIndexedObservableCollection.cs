@@ -20,17 +20,17 @@ public class AutoIndexedObservableCollection<T> : ObservableCollection<T>
     public List<int> CheckedIndexes()
     {
         //List<int> result = new List<int>();
-        return this.Where(d => d.IsChecked).Select(r => r.Id).ToList();
+        return this.Where(item => item.IsChecked).Select(checkedItem => checkedItem.Id).ToList();
     }
 
     public List<T> CheckedElements()
     {
-        return this.Where(d => d.IsChecked).ToList();
+        return this.Where(item => item.IsChecked).ToList();
     }
 
-    public void AddRange(IList<T> t)
+    public void AddRange(IList<T> items)
     {
-        foreach (var item in t) Add(item);
+        foreach (var item in items) Add(item);
     }
 
     public new void Add(T item)
@@ -39,19 +39,19 @@ public class AutoIndexedObservableCollection<T> : ObservableCollection<T>
         base.Add(item);
     }
 
-    private void FullObservableCollectionCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+    private void FullObservableCollectionCollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
     {
-        if (e.NewItems != null)
-            foreach (var item in e.NewItems)
+        if (eventArgs.NewItems != null)
+            foreach (var item in eventArgs.NewItems)
                 if (item != null)
                     ((INotifyPropertyChanged)item).PropertyChanged += ItemPropertyChanged;
-        if (e.OldItems != null)
-            foreach (var item in e.OldItems)
+        if (eventArgs.OldItems != null)
+            foreach (var item in eventArgs.OldItems)
                 if (item != null)
                     ((INotifyPropertyChanged)item).PropertyChanged -= ItemPropertyChanged;
     }
 
-    private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void ItemPropertyChanged(object sender, PropertyChangedEventArgs eventArgs)
     {
         var args = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, sender, sender,
             IndexOf((T)sender));
