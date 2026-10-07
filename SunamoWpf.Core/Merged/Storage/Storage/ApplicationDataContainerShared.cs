@@ -174,8 +174,8 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     {
         // Here must be "|" because in file it is in format name|type|value
         ThrowEx.StringContainsUnallowedSubstrings(value.ToString(), "|");
-        var value2 = data[sender];
-        value2[key] = value;
+        var senderData = data[sender];
+        senderData[key] = value;
     }
 
 

@@ -101,10 +101,10 @@ public partial class ComboBoxHelper
         {
             if (toMakeNameInTWithName != null)
             {
-                TWithNameTWpf<object> item2 = new TWithNameTWpf<object>();
-                item2.name = toMakeNameInTWithName.Invoke(item);
-                item2.t = item;
-                cb.Items.Add(item2);
+                TWithNameTWpf<object> namedItem = new TWithNameTWpf<object>();
+                namedItem.name = toMakeNameInTWithName.Invoke(item);
+                namedItem.t = item;
+                cb.Items.Add(namedItem);
             }
             else
             {
@@ -137,7 +137,7 @@ public partial class ComboBoxHelper
         pred.Reverse();
         akt = initialValue;
         List<int> following = new List<int>();
-        for (int index2 = 0; index2 < degrees; index2++)
+        for (int degreeIndex = 0; degreeIndex < degrees; degreeIndex++)
         {
             akt += resizeOf;
             pred.Add(akt);
@@ -146,11 +146,11 @@ public partial class ComboBoxHelper
         values.AddRange(pred);
         values.Add(initialValue);
         values.AddRange(following);
-        int index3 = 0;
+        int valueIndex = 0;
         foreach (int item in values)
         {
             cb.Items.Add(item);
-            index3++;
+            valueIndex++;
         }
     }
 }

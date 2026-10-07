@@ -26,10 +26,10 @@ internal class SH
             {
                 var dexMezery = 0;
                 var working = text; //p.Substring(p.Length - zkratitO);
-                var length2 = working.Length;
+                var workingLength = working.Length;
 
                 var napocitano = 0;
-                for (var index = 0; index < length2; index++)
+                for (var index = 0; index < workingLength; index++)
                 {
                     napocitano++;
 

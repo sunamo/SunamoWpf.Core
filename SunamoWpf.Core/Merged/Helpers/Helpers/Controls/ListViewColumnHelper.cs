@@ -51,7 +51,7 @@ public class ListViewColumnHelper<T> where T : IIdentificatorDesktop<int>
         }
         for (int index = sorted[0]; index < sorted[1]; index++)
         {
-            first = col.FirstOrDefault(column2 => column2.Id == index);
+            first = col.FirstOrDefault(gridColumn => gridColumn.Id == index);
             if (!EqualityComparer<T>.Default.Equals(default(T), first))
             {
                 switch (chb2)

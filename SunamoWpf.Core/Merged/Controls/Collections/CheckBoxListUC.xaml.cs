@@ -271,7 +271,7 @@ public partial class CheckBoxListUC : UserControl
 
             foreach (var item in lines)
             {
-                var contents = l.Select(item3 => item3.o.Content);
+                var contents = l.Select(checkBoxItem => checkBoxItem.o.Content);
                 var contents2 = new List<string>(contents.Count());
 
                 StackPanel stackPanel = null;
@@ -430,9 +430,9 @@ public partial class CheckBoxListUC : UserControl
                 {
                     var chb2 = (NotifyPropertyChangedWrapper<CheckBox>)item;
                     var stackPanel = (StackPanel)chb2.o.Content;
-                    var text2 = ContentControlHelper.ExtractContent(stackPanel);
+                    var contentText = ContentControlHelper.ExtractContent(stackPanel);
 
-                    if (text2 != string.Empty)
+                    if (contentText != string.Empty)
                     {
 
                     }
@@ -442,7 +442,7 @@ public partial class CheckBoxListUC : UserControl
 
                     }
 
-                    if (text2 == text)
+                    if (contentText == text)
                     {
                         actChecked = index;
                         break;
@@ -460,13 +460,13 @@ public partial class CheckBoxListUC : UserControl
                         var sorted = NH.Sort<int>(actChecked, dexLastChecked);
                         sorted[1]++;
 
-                        for (int index2 = sorted[0]; index2 < sorted[1]; index2++)
+                        for (int checkIndex = sorted[0]; checkIndex < sorted[1]; checkIndex++)
                         {
-                            var ich2 = l[index2].o.GetValue(CheckBox.IsCheckedProperty);
+                            var ich2 = l[checkIndex].o.GetValue(CheckBox.IsCheckedProperty);
 
-                            l[index2].o.IsChecked = UIElement.IsChecked;
+                            l[checkIndex].o.IsChecked = UIElement.IsChecked;
 
-                            var ich = l[index2].o.GetValue(CheckBox.IsCheckedProperty);
+                            var ich = l[checkIndex].o.GetValue(CheckBox.IsCheckedProperty);
                             int count = 0;
                         }
                     }
@@ -512,7 +512,7 @@ public partial class CheckBoxListUC : UserControl
                 Tag = sender;
             }
 
-            var where = l.Where(item2 => item2.o.Tag == element.Tag);
+            var where = l.Where(checkBoxWrapper => checkBoxWrapper.o.Tag == element.Tag);
 
             foreach (var item in where)
             {
@@ -618,9 +618,9 @@ Here its is not possible with set up visibility
                 {
                     var wrapper = item.o;
                     var stackPanel = (StackPanel)wrapper.Content;
-                    var text2 = CheckBoxListUC.ContentOfTextBlock(stackPanel);
+                    var contentText = CheckBoxListUC.ContentOfTextBlock(stackPanel);
 
-                    if (text2.Contains(text))
+                    if (contentText.Contains(text))
                     {
                         item.IsActive = true;
                     }

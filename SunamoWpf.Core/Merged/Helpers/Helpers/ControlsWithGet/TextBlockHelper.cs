@@ -52,14 +52,14 @@ public partial class TextBlockHelper
             aweWidthFor.Add(index, index * ave);
         }
 
-        for (int index2 = 1; index2 < 101; index2++)
+        for (int widthIndex = 1; widthIndex < 101; widthIndex++)
         {
             txtTest = new TextBlock();
             stackPanel.Children.Add(txtTest);
             txtTest.Text = "1";
-            txtTest.FontSize = index2;
+            txtTest.FontSize = widthIndex;
             txtTest.Measure(ControlsHelperValues.SizePositiveInfinity);
-            averageNumberWidthOnFontSize.Add(index2, txtTest.DesiredSize.Width);
+            averageNumberWidthOnFontSize.Add(widthIndex, txtTest.DesiredSize.Width);
             stackPanel.Children.Remove(txtTest);
         }
 

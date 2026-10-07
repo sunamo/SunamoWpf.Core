@@ -86,9 +86,9 @@ internal class DictionaryHelper
                 {
                     if (!dict.ContainsKey(key))
                     {
-                        List<Value> result2 = new();
-                        result2.Add(value);
-                        dict.Add(key, result2);
+                        List<Value> newList = new();
+                        newList.Add(value);
+                        dict.Add(key, newList);
                     }
                     else
                     {

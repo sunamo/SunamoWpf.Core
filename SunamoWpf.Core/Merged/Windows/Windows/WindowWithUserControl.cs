@@ -72,17 +72,17 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     /// <param name="iUserControlInWindow"></param>
     /// <param name="rm"></param>
     /// <param name="addDialogButtons"></param>
-    public WindowWithUserControl(WindowWithUserControlArgs args2)
+    public WindowWithUserControl(WindowWithUserControlArgs windowArgs)
     {
-        Tag = args2.tag;
-        userControl = (UserControl)args2.iUserControlInWindow;
+        Tag = windowArgs.tag;
+        userControl = (UserControl)windowArgs.iUserControlInWindow;
         this.uc = userControl as IUserControl;
         controlWithResultDebug = uc as IControlWithResultDebugWpf;
         userControlWithSizeChange = uc as IUserControlWithSizeChange;
         controlWithResult = uc as IControlWithResultWpf;
         this.Closed += WindowWithUserControl_Closed;
         this.Closing += WindowWithUserControl_Closing;
-        args = args2;
+        args = windowArgs;
         dock = new DockPanel();
         dock.LastChildFill = true;
         menu = new Menu();
@@ -126,7 +126,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             DockPanel.SetDock(dialogButtons, Dock.Bottom);
             dock.Children.Add(dialogButtons);
         }
-        this.ResizeMode = args2.rm;
+        this.ResizeMode = windowArgs.rm;
         // Původně bylo WidthAndHeight, pak Manual, pak opět WidthAndHeight - pokud zobrazuji LoginDialog např. chci aby to vypadalo profesionálně
         this.SizeToContent = System.Windows.SizeToContent.WidthAndHeight;
         //this.MaxWidth = System.Windows.SystemParameters.PrimaryScreenWidth * 0.75d;

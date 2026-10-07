@@ -124,12 +124,12 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
     /// </summary>
     /// <param name="salt"></param>
     /// <param name="storageApplicationData"></param>
-    public LoginDialog(string salt, StorageApplicationData storageApplicationData, CryptDelegatesWpf cryptDelegates2)
+    public LoginDialog(string salt, StorageApplicationData storageApplicationData, CryptDelegatesWpf cryptDelegatesWpf)
         : this(salt)
     {
         this.salt = salt;
         this.storageApplicationData = storageApplicationData;
-        cryptDelegates = cryptDelegates2;
+        cryptDelegates = cryptDelegatesWpf;
     }
     public
 #if ASYNC

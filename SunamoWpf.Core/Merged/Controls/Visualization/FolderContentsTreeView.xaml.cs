@@ -93,15 +93,15 @@ public partial class FolderContentsTreeView : UserControl
         }
         parent.Items.Add(subfolder);
     }
-    private void AddTviFileTo(string file2, ItemsControl parent)
+    private void AddTviFileTo(string filePath, ItemsControl parent)
     {
         TreeViewItem subfiles = new TreeViewItem();
-        subfiles.Header = file2.Substring(file2.LastIndexOf("\\") + 1);
-        subfiles.Tag = new FileSystemEntryWpf { file = true, path = file2 };
+        subfiles.Header = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+        subfiles.Tag = new FileSystemEntryWpf { file = true, path = filePath };
         subfiles.FontWeight = System.Windows.FontWeights.Normal;
         if (useDictionary)
         {
-            files.Add(file2, subfiles);
+            files.Add(filePath, subfiles);
         }
         parent.Items.Add(subfiles);
     }
@@ -114,9 +114,9 @@ public partial class FolderContentsTreeView : UserControl
             try
             {
                 string folder = ((FileSystemEntryWpf)item.Tag).path.ToString();
-                foreach (string folder2 in FSGetFolders.GetFoldersEveryFolder(logger, folder))
+                foreach (string subfolder in FSGetFolders.GetFoldersEveryFolder(logger, folder))
                 {
-                    AddTviFolderTo(folder2, item);
+                    AddTviFolderTo(subfolder, item);
                 }
                 if (args.addFiles)
                 {

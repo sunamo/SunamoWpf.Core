@@ -29,7 +29,7 @@ internal class SHSplit
     public static List<string> SplitChar(string parametry, params char[] deli)
     {
         return Split(StringSplitOptions.RemoveEmptyEntries, parametry,
-            deli.ToList().ConvertAll(item => item.ToString()).ConvertAll(item2 => item2.ToString()).ToArray());
+            deli.ToList().ConvertAll(item => item.ToString()).ConvertAll(itemText => itemText.ToString()).ToArray());
     }
 
     public static List<string> Split(string text, params string[] newLine)

@@ -115,11 +115,11 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             }
             foreach (var item in foundedResult)
             {
-                FoundedResultUC foundedResult2 = new FoundedResultUC(item.name, colors, index++);
-                foundedResult2.Selected += OnSelected;
+                FoundedResultUC resultControl = new FoundedResultUC(item.name, colors, index++);
+                resultControl.Selected += OnSelected;
                 TextBlock textBlock = TextBlockHelper.Get(new ControlInitData { text = item.t });
-                foundedResult2.SecondRow = textBlock;
-                sp.Children.Add(foundedResult2);
+                resultControl.SecondRow = textBlock;
+                sp.Children.Add(resultControl);
             }
         }
     }

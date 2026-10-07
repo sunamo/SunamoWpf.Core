@@ -38,8 +38,8 @@ public class LBHT<T> : LBH
             FrameworkElement frameworkElement = lb.SelectedItem as FrameworkElement;
             if (frameworkElement.Tag is T)
             {
-                T item2 = (T)frameworkElement.Tag;
-                SaveSelectedItem(item2);
+                T selectedItem = (T)frameworkElement.Tag;
+                SaveSelectedItem(selectedItem);
             }
         }
     }

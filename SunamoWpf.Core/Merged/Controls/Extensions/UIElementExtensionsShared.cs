@@ -27,8 +27,8 @@ public static partial class UIElementExtensions
         {
             validateData = new ValidateDataWpf();
         }
-        var type2 = uiElement.GetType();
-        if (type2 == TypesControls.tTextBox)
+        var elementType = uiElement.GetType();
+        if (elementType == TypesControls.tTextBox)
         {
             var textBox = uiElement as TextBox;
             textBox.Validate(name, ref validateData);
@@ -48,38 +48,38 @@ public static partial class UIElementExtensions
         //    c.Validate(/*name,*/ d);
         //    return ListViewHelper.validated;
         //}
-        else if (type2 == TypesControls.tComboBox)
+        else if (elementType == TypesControls.tComboBox)
         {
             var comboBox = uiElement as ComboBox;
             comboBox.Validate(/*name,*/ ref validateData);
             return ComboBoxHelper.validated;
         }
-        else if (type2 == SelectFile.type)
+        else if (elementType == SelectFile.type)
         {
             var selectFile = uiElement as SelectFile;
             selectFile.Validate(/*name,*/ ref validateData);
             return SelectFile.validated;
         }
-        else if (type2 == SelectManyFiles.type)
+        else if (elementType == SelectManyFiles.type)
         {
             var selectManyFiles = uiElement as SelectManyFiles;
             selectManyFiles.Validate(ref validateData);
             return SelectManyFiles.validated;
         }
-        else if (type2 == TwoRadiosUC.type)
+        else if (elementType == TwoRadiosUC.type)
         {
             var twoRadios = uiElement as TwoRadiosUC;
             twoRadios.Validate(/*name,*/ ref validateData);
             return TwoRadiosUC.validated;
         }
-        else if (type2 == TypesControlsSunamo.tPathEditor)
+        else if (elementType == TypesControlsSunamo.tPathEditor)
         {
             IValidateControl validateControl = (IValidateControl)uiElement;
             return validateControl.Validate(name, ref validateData);
         }
         else
         {
-            ThrowEx.NotImplementedCase(type2);
+            ThrowEx.NotImplementedCase(elementType);
         }
         return null;
     }
@@ -92,39 +92,39 @@ public static partial class UIElementExtensions
                 return;
             }
         }
-        var type2 = uiElement.GetType();
-        if (type2 == TypesControls.tTextBox)
+        var elementType = uiElement.GetType();
+        if (elementType == TypesControls.tTextBox)
         {
             TextBoxHelper.validated = value;
         }
-        else if (type2 == TypesControls.tListBox)
+        else if (elementType == TypesControls.tListBox)
         {
             ListBoxExtensions.validated = value;
         }
-        else if (type2 == TypesControls.tListView)
+        else if (elementType == TypesControls.tListView)
         {
             ListViewExtensions.validated = value;
         }
-        else if (type2 == TypesControls.tComboBox)
+        else if (elementType == TypesControls.tComboBox)
         {
             ComboBoxExtensions.validated = value;
         }
-        else if (type2 == SelectFile.type)
+        else if (elementType == SelectFile.type)
         {
             SelectFile.validated = value;
         }
-        else if (type2 == SelectManyFiles.type)
+        else if (elementType == SelectManyFiles.type)
         {
             SelectManyFiles.validated = value;
         }
-        else if (type2 == TypesControlsSunamo.tPathEditor)
+        else if (elementType == TypesControlsSunamo.tPathEditor)
         {
             var ivc = (IValidateControl)uiElement;
             ivc.Validated = value;
         }
         else
         {
-            ThrowEx.NotImplementedCase(type2.FullName);
+            ThrowEx.NotImplementedCase(elementType.FullName);
         }
     }
     /// <summary>
@@ -133,50 +133,50 @@ public static partial class UIElementExtensions
     /// <param name="uiElement"></param>
     public static object GetContent(this UIElement uiElement)
     {
-        var type2 = uiElement.GetType();
-        if (type2 == TypesControls.tListBox)
+        var elementType = uiElement.GetType();
+        if (elementType == TypesControls.tListBox)
         {
             var selector = (ListBox)uiElement;
             return selector.SelectedItems;
         }
-        else if (type2 == TypesControls.tListView)
+        else if (elementType == TypesControls.tListView)
         {
             var listView = (ListView)uiElement;
             return listView.SelectedItems;
         }
-        else if (type2 == TypesControls.tComboBox)
+        else if (elementType == TypesControls.tComboBox)
         {
             var comboBox = uiElement as ComboBox;
             return comboBox.Text;
         }
-        else if (type2 == TypesControls.tTextBox)
+        else if (elementType == TypesControls.tTextBox)
         {
             var txt = (TextBox)uiElement;
             return txt.Text;
         }
-        else if (type2 == TypesControls.tCheckBox)
+        else if (elementType == TypesControls.tCheckBox)
         {
             var txt = (CheckBox)uiElement;
             return txt.Content;
         }
-        else if (type2 == TwoRadiosUC.type)
+        else if (elementType == TwoRadiosUC.type)
         {
             var txt = (TwoRadiosUC)uiElement;
             return txt.GetBool();
         }
-        else if (type2 == TypesControlsSunamo.tPathEditor)
+        else if (elementType == TypesControlsSunamo.tPathEditor)
         {
             var txt = (IValidateControl)uiElement;
             return txt.GetContent();
         }
-        else if (type2 == TypesControls.tTextBlock)
+        else if (elementType == TypesControls.tTextBlock)
         {
             var txt = (TextBlock)uiElement;
             return txt.Text;
         }
         else
         {
-            ThrowEx.NotImplementedCase(type2);
+            ThrowEx.NotImplementedCase(elementType);
         }
         return null;
     }

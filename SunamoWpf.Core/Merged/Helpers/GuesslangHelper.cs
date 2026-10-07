@@ -27,8 +27,8 @@ public class GuesslangHelper
         {
             if (item.Contains(SourceCode))
             {
-                var result2 = SH.TextAfter(item, SourceCode);
-                return result2;
+                var textAfterSource = SH.TextAfter(item, SourceCode);
+                return textAfterSource;
             }
         }
         return null;

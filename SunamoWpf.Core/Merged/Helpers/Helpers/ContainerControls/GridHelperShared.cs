@@ -22,7 +22,7 @@ public partial class GridHelper
             grid.ColumnDefinitions.Add(GetColumnDefinition(GridLength.Auto));
         }
 
-        for (int index2 = 0; index2 < rows; index2++)
+        for (int rowIndex = 0; rowIndex < rows; rowIndex++)
         {
             grid.RowDefinitions.Add(GetRowDefinition(GridLength.Auto));
         }
@@ -92,7 +92,7 @@ public partial class GridHelper
         }
         else
         {
-            uiElements = grid.Children.Cast<UIElement>().Where(element2 => Grid.GetColumn(element2) == index).ToList();
+            uiElements = grid.Children.Cast<UIElement>().Where(child => Grid.GetColumn(child) == index).ToList();
         }
 
         List<T> result = new List<T>();

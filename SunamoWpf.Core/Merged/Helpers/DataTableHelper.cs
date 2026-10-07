@@ -32,9 +32,9 @@ public class DataTableHelper
         foreach (var item in rows)
         {
             var row = dataTable.NewRow();
-            for (int index2 = 0; index2 < columns.Length; index2++)
+            for (int columnIndex = 0; columnIndex < columns.Length; columnIndex++)
             {
-                row[columns[index2]] = item[index2];
+                row[columns[columnIndex]] = item[columnIndex];
             }
 
             dataTable.Rows.Add(row);

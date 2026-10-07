@@ -121,15 +121,15 @@ public partial class PicturesDesktop
         string ext = "";
         if (PicturesSunamo.GetImageFormatFromExtension1(fnOri, out ext))
         {
-            double height2 = bmp2.Height;
-            double width2 = bmp2.Width;
+            double bitmapHeight = bmp2.Height;
+            double bitmapWidth = bmp2.Width;
             if (useAtA1PixelSize)
             {
-                height2 = bmp2.PixelHeight;
-                width2 = bmp2.PixelWidth;
+                bitmapHeight = bmp2.PixelHeight;
+                bitmapWidth = bmp2.PixelWidth;
             }
-            double y = (height - height2);
-            double x = (width - width2);
+            double y = (height - bitmapHeight);
+            double x = (width - bitmapWidth);
             // Prvně si já ověřím zda obrázek je delší než šířka aby to nebylo kostkované
             if (y < 1 || x < 1)
             {
@@ -144,14 +144,14 @@ public partial class PicturesDesktop
                 x = 0;
             }
             #region MyRegion
-            double width3 = 0;
-            double height3 = 0;
-            width3 = img.Width;
-            height3 = img.Height;
-            while (width3 > width && height3 > height)
+            double imageWidth = 0;
+            double imageHeight = 0;
+            imageWidth = img.Width;
+            imageHeight = img.Height;
+            while (imageWidth > width && imageHeight > height)
             {
-                width3 *= .9f;
-                height3 *= .9f;
+                imageWidth *= .9f;
+                imageHeight *= .9f;
             }
             if (width <= height)
             {

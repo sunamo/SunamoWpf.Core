@@ -313,8 +313,8 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
             }
             else
             {
-                ABWpf item2 = ABWpf.Get(typeName, value);
-                data.Add(key, item2);
+                ABWpf abItem = ABWpf.Get(typeName, value);
+                data.Add(key, abItem);
                 string zapsatDoSouboru = SF.PrepareToSerialization2(CA.ToListString(key, typeName, SH.ListToString(value))) + "|";
                 if (!string.IsNullOrEmpty(path))
                 {

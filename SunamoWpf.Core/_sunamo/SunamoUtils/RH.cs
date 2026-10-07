@@ -45,11 +45,11 @@ internal class RH
 
             if (result.Count() == 0)
             {
-                result = ass.Where(assembly2 =>
+                result = ass.Where(candidateAssembly =>
                 {
                     try
                     {
-                        return assembly2.FullName == name;
+                        return candidateAssembly.FullName == name;
                     }
                     catch
                     {
@@ -60,11 +60,11 @@ internal class RH
 
             if (result.Count() == 0)
             {
-                result = ass.Where(assembly3 =>
+                result = ass.Where(assemblyToCheck =>
                 {
                     try
                     {
-                        return assembly3.FullName != null && assembly3.FullName.Contains(name);
+                        return assemblyToCheck.FullName != null && assemblyToCheck.FullName.Contains(name);
                     }
                     catch
                     {

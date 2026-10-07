@@ -40,8 +40,8 @@ public class ConfigurableWindowWrapper
         w = configurableWindow;
         w.LocationChanged += W_LocationChanged;
         w.StateChanged += W_StateChanged;
-        var configurableWindow2 = (IConfigurableWindow)w;
-        _settings = configurableWindow2.CreateSettings();
+        var windowSettingsSource = (IConfigurableWindow)w;
+        _settings = windowSettingsSource.CreateSettings();
         if (_settings == null)
             ThrowEx.Custom(Translate.FromKey(XlfKeys.CannotReturnNull)+".");
         // Direct set _isLoaded to true, because I call this from _Loaded

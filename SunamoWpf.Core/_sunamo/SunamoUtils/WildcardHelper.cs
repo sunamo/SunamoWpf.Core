@@ -5,6 +5,6 @@ internal class WildcardHelper
 {
     internal static bool IsWildcard(string text)
     {
-        return text.ToCharArray().Any(character => character == '?') || text.ToCharArray().Any(character2 => character2 == '*');
+        return text.ToCharArray().Any(character => character == '?') || text.ToCharArray().Any(charToCompare => charToCompare == '*');
     }
 }

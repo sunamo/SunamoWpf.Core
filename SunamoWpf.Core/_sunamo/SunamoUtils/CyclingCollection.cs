@@ -106,9 +106,9 @@ internal class CyclingCollection<T> //: IStatusBroadcaster
         OnChange();
     }
 
-    internal T SetIretation(int index2)
+    internal T SetIretation(int newIndex)
     {
-        index = ValidateIndex(index2);
+        index = ValidateIndex(newIndex);
         OnChange();
         return GetIretation;
     }
@@ -122,9 +122,9 @@ internal class CyclingCollection<T> //: IStatusBroadcaster
         return index;
     }
 
-    internal void SetIretationWithoutEvent(int index2)
+    internal void SetIretationWithoutEvent(int newIndex)
     {
-        index = index2;
+        index = newIndex;
     }
 
     public override string ToString()

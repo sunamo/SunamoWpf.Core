@@ -33,16 +33,16 @@ public class SunamoVariableSizedWrapGrid2 : Panel
             ThrowEx.Custom("bla");
         }
 
-        int index2 = 0;
+        int childIndex = 0;
         foreach (KeyValuePair<int, Dictionary<int, UIElement>> item in controls)
         {
             foreach (var item2 in item.Value)
             {
-                if (index2 == index)
+                if (childIndex == index)
                 {
                     return item2.Value;
                 }
-                index2++;
+                childIndex++;
             }
         }
         ThrowEx.NotImplementedMethod();
@@ -298,22 +298,22 @@ public class SunamoVariableSizedWrapGrid2 : Panel
                     controls.Add(vkladatDo, new Dictionary<int, UIElement>());
                 }
                 int removedCount = 0;
-                for (int controlIndex2 = odKterehoMusimOdebrat - 1; controlIndex2 >= 0; controlIndex2--)
+                for (int removedIndex = odKterehoMusimOdebrat - 1; removedIndex >= 0; removedIndex--)
                 {
-                    RemoveLogicalChild(removed[controlIndex2]);
-                    RemoveVisualChild(removed[controlIndex2]);
+                    RemoveLogicalChild(removed[removedIndex]);
+                    RemoveVisualChild(removed[removedIndex]);
                     //sps.Remove(y);
                     StackPanel stackPanel = GetStackPanelOnIndex(index);
-                    stackPanel.Children.Remove(removed[controlIndex2]);
-                    GetStackPanelOnIndex(vkladatDo).Children.Insert(controlIndex2, removed[controlIndex2]);
+                    stackPanel.Children.Remove(removed[removedIndex]);
+                    GetStackPanelOnIndex(vkladatDo).Children.Insert(removedIndex, removed[removedIndex]);
                     if (!controls.ContainsKey(vkladatDo))
                     {
                         controls.Add(vkladatDo, new Dictionary<int, UIElement>());
                     }
-                    removedCount = controlIndex2 * -1 + 1;
+                    removedCount = removedIndex * -1 + 1;
                     controls[vkladatDo].Add(removedCount, removed[index]);
                 }
-                for (int controlIndex3 = 0; controlIndex3 < removed.Count; controlIndex3++)
+                for (int unusedIndex = 0; unusedIndex < removed.Count; unusedIndex++)
                 {
 
                 }

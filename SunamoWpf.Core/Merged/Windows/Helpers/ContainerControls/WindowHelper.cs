@@ -18,14 +18,14 @@ public partial class WindowHelper
     {
         if (dialog)
         {
-            var dialogResult2 = window.ShowDialog();
-            if (window.DialogResult != dialogResult2)
+            var shownResult = window.ShowDialog();
+            if (window.DialogResult != shownResult)
             {
                 // Cant set DialogResult while window isnt show as dialog
                 //DialogResult = dialogResult;
             }
 
-            return dialogResult2;
+            return shownResult;
         }
         else
         {

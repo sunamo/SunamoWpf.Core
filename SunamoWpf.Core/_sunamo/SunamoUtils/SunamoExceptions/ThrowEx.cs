@@ -84,8 +84,8 @@ internal partial class ThrowEx
         }
         else
         {
-            Type type3 = type.GetType();
-            typeFullName = type3.FullName ?? "Type cannot be get via type.GetType()";
+            Type objectType = type.GetType();
+            typeFullName = objectType.FullName ?? "Type cannot be get via type.GetType()";
         }
         return string.Concat(typeFullName, ".", methodName);
     }

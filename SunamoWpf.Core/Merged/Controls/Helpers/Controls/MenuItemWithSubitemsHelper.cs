@@ -227,17 +227,17 @@ public class SuMenuItemWithSubitemsHelper
             List<string> stovkyDivided = SHSplit.SplitChar(stovky[index].ToString(), '|');
             List<String> stovkyActual = new List<String>();
             StringBuilder stovkyActualTemp = new StringBuilder();
-            for (int index2 = 0; index2 < stovkyDivided.Count; index2++)
+            for (int valueIndex = 0; valueIndex < stovkyDivided.Count; valueIndex++)
             {
-                if ((index2) % 100 == 0 && index2 != 0)
+                if ((valueIndex) % 100 == 0 && valueIndex != 0)
                 {
                     stovkyActual.Add(stovkyActualTemp.ToString());
                     stovkyActualTemp.Clear();
-                    stovkyActualTemp.Append(stovkyDivided[index2] + ",");
+                    stovkyActualTemp.Append(stovkyDivided[valueIndex] + ",");
                 }
                 else
                 {
-                    stovkyActualTemp.Append(stovkyDivided[index2] + ",");
+                    stovkyActualTemp.Append(stovkyDivided[valueIndex] + ",");
                 }
                 //
             }
@@ -272,7 +272,7 @@ public class SuMenuItemWithSubitemsHelper
                     kVlozeniDoDesitky[indexNaKteryUkladatDesitky].Add(tsmiJednotky);
                     idckaDesitky[indexNaKteryUkladatDesitky].Append(jednotka + ",");
                 }
-                for (int index3 = 0; index3 < kVlozeniDoDesitky.Count; index3++)
+                for (int tensLoopIndex = 0; tensLoopIndex < kVlozeniDoDesitky.Count; tensLoopIndex++)
                 {
                     if (kVlozeniDoDesitky[kVlozeniDoDesitky.Count - 1].Count == 0)
                     {
@@ -334,7 +334,7 @@ public class SuMenuItemWithSubitemsHelper
         pred.Reverse();
         akt = initialValue;
         List<int> following = new List<int>();
-        for (int index2 = 0; index2 < degrees; index2++)
+        for (int degreeIndex = 0; degreeIndex < degrees; degreeIndex++)
         {
             akt += resizeOf;
             following.Add(akt);
@@ -343,7 +343,7 @@ public class SuMenuItemWithSubitemsHelper
         values.AddRange(pred);
         values.Add(initialValue);
         values.AddRange(following);
-        int index3 = 0;
+        int valueIndex = 0;
         foreach (int item in values)
         {
             SuMenuItem tsmi = new SuMenuItem();
@@ -352,7 +352,7 @@ public class SuMenuItemWithSubitemsHelper
             tsmi.Click += tsmi_Click;
             tsmi.Click += eventHandler;
             tsddb.Items.Add(tsmi);
-            index3++;
+            valueIndex++;
         }
     }
     bool tagy = true;

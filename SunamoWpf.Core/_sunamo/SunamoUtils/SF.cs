@@ -39,7 +39,7 @@ internal static class SF
         //    }
         //}
         //CA.RemoveStartingWith("#", tf);
-        lines = lines.Where(line2 => !line2.StartsWith("#")).ToList();
+        lines = lines.Where(currentLine => !currentLine.StartsWith("#")).ToList();
         return lines;
     }
     public static List<List<string>> GetAllElementsFile(string file/*, ref string firstCommentLine*/,

@@ -45,7 +45,7 @@ public class CheckBoxListHelper
         //chbs[0].IsChecked = true;
         var indexes = chbs.Select((v, i) => new { v, i });
         var where = indexes.Where(entry => !BTS.GetValueOfNullable(entry.v.IsChecked));
-        return where.Select(entry2 => entry2.v.Content).Cast<StackPanel>().ToList();
+        return where.Select(checkBoxEntry => checkBoxEntry.v.Content).Cast<StackPanel>().ToList();
     }
 
     /// <summary>
@@ -57,7 +57,7 @@ public class CheckBoxListHelper
         //chbs[0].IsChecked = true;
         var indexes = chbs.Select((v, i) => new { v, i });
         var where = indexes.Where(entry => BTS.GetValueOfNullable(entry.v.IsChecked));
-        return where.Select(entry2 => entry2.v.Content).Cast<StackPanel>().ToList();
+        return where.Select(checkBoxEntry => checkBoxEntry.v.Content).Cast<StackPanel>().ToList();
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class CheckBoxListHelper
         var indexes = chbs.Select((v, i) => new { v, i });
         var where = indexes.Where(entry => CheckBoxHelper.IsChecked(entry.v));
 
-        var stackPanels = where.Select(entry2 => ContentControlHelper.Content(entry2.v)).Cast<StackPanel>().ToList();
+        var stackPanels = where.Select(checkBoxEntry => ContentControlHelper.Content(checkBoxEntry.v)).Cast<StackPanel>().ToList();
         List<string> result = new List<string>(stackPanels.Count);
         foreach (var item in stackPanels)
         {
