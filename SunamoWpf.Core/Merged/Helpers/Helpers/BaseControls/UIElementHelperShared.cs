@@ -3,11 +3,11 @@ namespace SunamoWpf.Helpers.BaseControls;
 
 public partial class UIElementHelper
 {
-    public static void SetVisibility(bool v, params UIElement[] elements)
+    public static void SetVisibility(bool isVisible, params UIElement[] elements)
     {
         foreach (var item in elements)
         {
-            item.Visibility = v ? Visibility.Visible : Visibility.Collapsed;
+            item.Visibility = isVisible ? Visibility.Visible : Visibility.Collapsed;
         }
     }
 }

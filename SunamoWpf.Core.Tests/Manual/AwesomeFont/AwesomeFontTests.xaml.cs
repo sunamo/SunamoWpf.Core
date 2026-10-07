@@ -59,7 +59,7 @@ namespace Wpf.Tests
             Loaded += MainWindow_Loaded;
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             // SetAwesomeFontSymbol must be in loaded with async/await
             await AwesomeFontControls.SetAwesomeFontSymbol(tbAwesome, "\uf133");

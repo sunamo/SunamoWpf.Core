@@ -46,11 +46,11 @@ public partial class LogUC : UserControl, IUserControl, IWindowOpener, IUserCont
         }
     }
 
-    public bool HandleKey(KeyEventArgs e)
+    public bool HandleKey(KeyEventArgs eventArgs)
     {
         if (keyHandlerMain != null)
         {
-            if (keyHandlerMain.HandleKey(e))
+            if (keyHandlerMain.HandleKey(eventArgs))
             {
                 //return true;
             }
@@ -69,7 +69,7 @@ public partial class LogUC : UserControl, IUserControl, IWindowOpener, IUserCont
         }
     }
 
-    public void uc_Loaded(object sender, RoutedEventArgs e)
+    public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         WpfApp.sl("LogUC loaded");
     }

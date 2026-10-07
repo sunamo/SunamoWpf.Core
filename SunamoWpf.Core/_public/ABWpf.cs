@@ -6,18 +6,18 @@ public class ABWpf
     public string A;
     public object B;
 
-    public ABWpf(string a, object b)
+    public ABWpf(string first, object second)
     {
-        A = a;
-        B = b;
+        A = first;
+        B = second;
     }
 
 
-    /// <param name="a"></param>
-    /// <param name="b"></param>
-    public static ABWpf Get(string a, object b)
+    /// <param name="first"></param>
+    /// <param name="second"></param>
+    public static ABWpf Get(string first, object second)
     {
-        return new ABWpf(a, b);
+        return new ABWpf(first, second);
     }
 
     public override string ToString()

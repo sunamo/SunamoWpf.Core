@@ -4,9 +4,9 @@ public class FSWin //: IFSWin
 {
     public static FSWin ci = new FSWin();
 
-    private static void Terminate(List<Process> pr)
+    private static void Terminate(List<Process> processes)
     {
-        foreach (var item in pr)
+        foreach (var item in processes)
         {
             Terminate(item);
         }
@@ -20,32 +20,32 @@ public class FSWin //: IFSWin
         item.WaitForExit();
     }
 
-    public static void DeleteFileMaybeLocked(string s)
+    public static void DeleteFileMaybeLocked(string path)
     {
-        var pr = FileUtil.WhoIsLocking(s);
-        Terminate(pr);
-        FS.TryDeleteFile(s);
+        var processes = FileUtil.WhoIsLocking(path);
+        Terminate(processes);
+        FS.TryDeleteFile(path);
     }
 
-    public static void DeleteFileOrFolderMaybeLocked(string p)
+    public static void DeleteFileOrFolderMaybeLocked(string path)
     {
-        Console.WriteLine("DeleteFileOrFolderMaybeLocked: " + p);
-        if (File.Exists(p))
+        Console.WriteLine("DeleteFileOrFolderMaybeLocked: " + path);
+        if (File.Exists(path))
         {
-            DeleteFileMaybeLocked(p);
-            if (File.Exists(p))
+            DeleteFileMaybeLocked(path);
+            if (File.Exists(path))
             {
-                WpfLogger.Error(p + " could not be deleted! Press enter to continue!");
+                WpfLogger.Error(path + " could not be deleted! Press enter to continue!");
                 Console.ReadLine();
             }
             else
             {
-                WpfLogger.Success(p + " was deleted completely!");
+                WpfLogger.Success(path + " was deleted completely!");
             }
         }
-        else if (Directory.Exists(p))
+        else if (Directory.Exists(path))
         {
-            var files = Directory.GetFiles(p, "*", SearchOption.AllDirectories);
+            var files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
 
             foreach (var item in files)
             {
@@ -55,22 +55,22 @@ public class FSWin //: IFSWin
                 //}
                 DeleteFileMaybeLocked(item);
             }
-            files = Directory.GetFiles(p, "*", SearchOption.AllDirectories);
+            files = Directory.GetFiles(path, "*", SearchOption.AllDirectories);
             if (files.Length == 0)
             {
-                Directory.Delete(p, true);
-                WpfLogger.Success(p + " was deleted completely!");
+                Directory.Delete(path, true);
+                WpfLogger.Success(path + " was deleted completely!");
             }
             else
             {
-                WpfLogger.Error(p + " could not be deleted completely! Press enter to continue!");
+                WpfLogger.Error(path + " could not be deleted completely! Press enter to continue!");
                 Console.ReadLine();
             }
         }
         else
         {
             // Only warning, not exc with stacktrace cecause is using in Quadient
-            WpfLogger.Warning("Doesnt exists as file / folder:" + p);
+            WpfLogger.Warning("Doesnt exists as file / folder:" + path);
             //ThrowEx.FileDoesntExists(p);
         }
     }
@@ -91,23 +91,23 @@ public class FSWin //: IFSWin
     /// V Azuru poté uvidím všechny změny, to bych sice viděl i ve forku ale musel bych to přidávat
     /// </summary>
     /// <param name="arg1"></param>
-    /// <param name="v"></param>
-    public static void MoveFolderMaybeLocked(string arg1, string v)
+    /// <param name="replacement"></param>
+    public static void MoveFolderMaybeLocked(string arg1, string replacement)
     {
         FS.WithEndSlash(ref arg1);
-        FS.WithEndSlash(ref v);
+        FS.WithEndSlash(ref replacement);
 
         var files = Directory.GetFiles(arg1, "*", SearchOption.AllDirectories);
         foreach (var item in files)
         {
-            var np = item.Replace(arg1, v);
-            var pr = FileUtil.WhoIsLocking(item, false);
-            Terminate(pr);
+            var newPath = item.Replace(arg1, replacement);
+            var processes = FileUtil.WhoIsLocking(item, false);
+            Terminate(processes);
 
-            FS.CreateUpfoldersPsysicallyUnlessThere(np);
+            FS.CreateUpfoldersPsysicallyUnlessThere(newPath);
             if (File.Exists(item))
             {
-                File.Move(item, np);
+                File.Move(item, newPath);
             }
         }
 

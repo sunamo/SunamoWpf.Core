@@ -24,7 +24,7 @@ public class ShowTextResultWindow : Window, IControlWithResultWpf
         s.Focus();
     }
 
-    private void S_ChangeDialogResult(bool? b)
+    private void S_ChangeDialogResult(bool? result)
     {
         // It's window, not user control, therefore I have to close, not calling ChangeDialogResult
         Close();

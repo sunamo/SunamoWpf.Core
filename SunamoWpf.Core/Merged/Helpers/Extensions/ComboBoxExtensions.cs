@@ -16,18 +16,18 @@ public static class ComboBoxExtensions
     /// <param name="tb"></param>
     /// <param name="control"></param>
     /// <param name="trim"></param>
-    public static void Validate(this ComboBox control, ref ValidateDataWpf d)
+    public static void Validate(this ComboBox control, ref ValidateDataWpf validateData)
     {
         if (!validated)
         {
             return;
         }
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
         string text = control.Text;
-        if (d.trim)
+        if (validateData.trim)
         {
             text = text.Trim();
         }

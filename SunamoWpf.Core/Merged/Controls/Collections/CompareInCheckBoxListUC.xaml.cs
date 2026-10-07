@@ -17,7 +17,7 @@ namespace SunamoWpf.Controls.Collections;
 
         }
         public void RemoveWhichHaveNoItem() { }
-        private void CompareInCheckBoxListUC_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void CompareInCheckBoxListUC_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
         {
             foreach (CheckBoxListUC item in chbls)
             {
@@ -26,9 +26,9 @@ namespace SunamoWpf.Controls.Collections;
                     continue;
                 }
                 //var size = item.ActualHeight;
-                var sp = item.lb;
-                sp.Height = sp.MaxHeight = sp.MinHeight = item.ActualHeight - r0.ActualHeight;
-                sp.UpdateLayout();
+                var listBox = item.lb;
+                listBox.Height = listBox.MaxHeight = listBox.MinHeight = item.ActualHeight - r0.ActualHeight;
+                listBox.UpdateLayout();
 
             }
             //r1.Height. = this.ActualHeight - r0.ActualHeight;
@@ -83,32 +83,32 @@ namespace SunamoWpf.Controls.Collections;
 
         int moved = 0;
 
-        private void MoveCheckBox(object sender, CheckBoxListUC from, CheckBoxListUC to)
+        private void MoveCheckBox(object sender, CheckBoxListUC from, CheckBoxListUC target)
         {
             moved++;
 
             var fromName = from.Name;
-            var toName = to.Name;
+            var toName = target.Name;
 
-            var c = ch(sender);
-            var con = c.o.Content;
-            for (int i = from.l.l.Count - 1; i >= 0; i--)
+            var wrapper = ch(sender);
+            var con = wrapper.o.Content;
+            for (int index = from.l.l.Count - 1; index >= 0; index--)
             {
-                if (from.l.l[i].o.Tag == c.o.Tag)
+                if (from.l.l[index].o.Tag == wrapper.o.Tag)
                 {
-                    from.l.l.RemoveAt(i);
+                    from.l.l.RemoveAt(index);
                     break;
                 }
             }
 
             //from.l.l.Remove(c);
 
-            c.o.Content = con;
+            wrapper.o.Content = con;
             // Tag is transfer OK
             //var tag = c.Tag;
 
             // Switch of IsChecked will be perfomed after click
-            to.l.l.Add(c);
+            target.l.l.Add(wrapper);
 
 
             if (moved % 5 == 0)
@@ -117,9 +117,9 @@ namespace SunamoWpf.Controls.Collections;
             }
         }
 
-        NotifyPropertyChangedWrapper<CheckBox> ch(object o)
+        NotifyPropertyChangedWrapper<CheckBox> ch(object sender)
         {
-            var casted = (CheckBoxListUC)o;
+            var casted = (CheckBoxListUC)sender;
             var chb = (NotifyPropertyChangedWrapper<CheckBox>)casted.Tag;
 
             // Debugger because I have changed from CheckBox to NotifyPropertyChangedWrapper< CheckBox>
@@ -129,7 +129,7 @@ namespace SunamoWpf.Controls.Collections;
         }
 
 
-        private void Save(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs eventArgs)
         {
             TF.WriteAllLines(autoYes, chblAutoYes.AllContentString());
             TF.WriteAllLines(manuallyYes, chblManuallyYes.AllContentString());
@@ -265,7 +265,7 @@ namespace SunamoWpf.Controls.Collections;
             chblAutoNo.OnSizeChanged(maxSize);
         }
 
-        public void uc_Loaded(object sender, RoutedEventArgs e)
+        public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
         {
 
         }

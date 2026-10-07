@@ -3,10 +3,10 @@ namespace SunamoWpf.Controls.Controls;
 
 public class CommandBindingManager
 {
-    public static CommandBinding AddAndGetCommandBinding(Window w, RoutedCommand routedCommand, CanExecuteRoutedEventHandler canExecuteHandler, ExecutedRoutedEventHandler executedRoutedEventHandler)
+    public static CommandBinding AddAndGetCommandBinding(Window window, RoutedCommand routedCommand, CanExecuteRoutedEventHandler canExecuteHandler, ExecutedRoutedEventHandler executedRoutedEventHandler)
     {
-        CommandBinding cb = new CommandBinding(routedCommand, executedRoutedEventHandler, canExecuteHandler);
-        w.CommandBindings.Add(cb);
-        return cb;
+        CommandBinding commandBinding = new CommandBinding(routedCommand, executedRoutedEventHandler, canExecuteHandler);
+        window.CommandBindings.Add(commandBinding);
+        return commandBinding;
     }
 }

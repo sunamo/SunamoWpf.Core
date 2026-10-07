@@ -3,12 +3,12 @@ namespace SunamoWpf.Helpers.ContainerControls;
 
 public partial class PanelHelper
 {
-    public static UIElementCollection Children(StackPanel key, Dispatcher d)
+    public static UIElementCollection Children(StackPanel key, Dispatcher dispatcher)
     {
         //WpfApp.cd
 
-        var r = d.Invoke(() => key.Children, DispatcherPriority.ContextIdle);
-        return r;
+        var children = dispatcher.Invoke(() => key.Children, DispatcherPriority.ContextIdle);
+        return children;
 
     }
 }

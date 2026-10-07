@@ -4,10 +4,10 @@ namespace SunamoWpf.Helpers.ControlsWithGet;
 public partial class CheckBoxHelper
 {
 
-    public static bool IsChecked(CheckBox v)
+    public static bool IsChecked(CheckBox checkBox)
     {
-        var r = WpfApp.cd.Invoke(() => v.IsChecked);
-        return r.GetValueOrDefault();
+        var isChecked = WpfApp.cd.Invoke(() => checkBox.IsChecked);
+        return isChecked.GetValueOrDefault();
     }
 
     /// <summary>
@@ -15,17 +15,17 @@ public partial class CheckBoxHelper
     /// Tag here is mainly for comment what data control hold 
     /// </summary>
     /// <param name="text"></param>
-    public static CheckBox Get(ControlInitData d)
+    public static CheckBox Get(ControlInitData controlInitData)
     {
         CheckBox chb = new CheckBox();
-        ControlHelper.SetForeground(chb, d.foreground);
-        chb.Content = ContentControlHelper.GetContent(d);
-        if (d.OnClick != null)
+        ControlHelper.SetForeground(chb, controlInitData.foreground);
+        chb.Content = ContentControlHelper.GetContent(controlInitData);
+        if (controlInitData.OnClick != null)
         {
-            chb.Click += d.OnClick;
+            chb.Click += controlInitData.OnClick;
         }
         chb.Tag = ControlNameGenerator.GetSeries(chb.GetType());
-        chb.ToolTip = d.tooltip;
+        chb.ToolTip = controlInitData.tooltip;
         return chb;
     }
 }

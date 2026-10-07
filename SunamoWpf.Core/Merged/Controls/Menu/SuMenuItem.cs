@@ -37,9 +37,9 @@ public class SuMenuItem : MenuItem
 
     public static void CollapseMaybeNotReferenced(params SuMenuItem[] mis)
     {
-        foreach (var mi in mis)
+        foreach (var menuItem in mis)
         {
-            mi.Visibility = Visibility.Collapsed;
+            menuItem.Visibility = Visibility.Collapsed;
         }
     }
 

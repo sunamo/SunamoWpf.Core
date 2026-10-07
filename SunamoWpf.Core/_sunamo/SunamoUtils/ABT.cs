@@ -5,10 +5,10 @@ internal class ABT<Key, Value>
 {
     internal Key A;
     internal Value B;
-    internal ABT(Key a, Value b)
+    internal ABT(Key key, Value value)
     {
-        A = a;
-        B = b;
+        A = key;
+        B = value;
     }
     internal ABT()
     {

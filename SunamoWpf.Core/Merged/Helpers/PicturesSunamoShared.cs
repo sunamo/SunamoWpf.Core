@@ -15,15 +15,15 @@ public partial class PicturesSunamo
     /// <param name="p_3"></param>
     public static System.Windows.Size CalculateOptimalSizeHeight(int width, int height, int maxHeight)
     {
-        System.Windows.Size vr = new System.Windows.Size(width, height);
+        System.Windows.Size size = new System.Windows.Size(width, height);
         int vyskaSloupce = maxHeight;
         if (height > vyskaSloupce)
         {
-            vr.Height = vyskaSloupce;
+            size.Height = vyskaSloupce;
             // mohl by ses ještě rozhodovat jestli round, nebo floor, nebo ceil
-            vr.Width = vyskaSloupce * width / height;
+            size.Width = vyskaSloupce * width / height;
         }
-        return vr;
+        return size;
     }
     public static bool GetImageFormatFromExtension1(string filePath, out string ext)
     {
@@ -45,9 +45,9 @@ public partial class PicturesSunamo
         {
             ext = "jpeg";
         }
-        for (int i = 0; i < s_supportedExtensionForResize.Count; i++)
+        for (int index = 0; index < s_supportedExtensionForResize.Count; index++)
         {
-            if (s_supportedExtensionForResize[i] == ext)
+            if (s_supportedExtensionForResize[index] == ext)
             {
                 return true;
             }
@@ -72,14 +72,14 @@ public partial class PicturesSunamo
     }
     public static System.Windows.Size CalculateOptimalSizeWpf(double width, double height, int maxWidth)
     {
-        System.Windows.Size vr = new System.Windows.Size(width, height);
+        System.Windows.Size size = new System.Windows.Size(width, height);
         int sirkaSloupce = maxWidth;
         if (width > sirkaSloupce)
         {
-            vr.Width = sirkaSloupce;
+            size.Width = sirkaSloupce;
             // mohl by ses ještě rozhodovat jestli round, nebo floor, nebo ceil
-            vr.Height = sirkaSloupce * height / width;
+            size.Height = sirkaSloupce * height / width;
         }
-        return vr;
+        return size;
     }
 }

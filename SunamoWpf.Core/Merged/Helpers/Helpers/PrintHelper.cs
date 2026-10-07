@@ -14,9 +14,9 @@ public enum LengthUnit
 }
 public class PrintHelper
 {
-    public static Size GetPixelSizeForPaper(int dpiXPrinter, int dpiYPrinter, FormatOfPaper fp, int size, LandscapePortraitWpf lp)
+    public static Size GetPixelSizeForPaper(int dpiXPrinter, int dpiYPrinter, FormatOfPaper formatOfPaper, int size, LandscapePortraitWpf landscapePortrait)
     {
-        Size sizeInOfPaper = SizeOfPaper.GetPaperSize(fp.ToString() + size, LengthUnit.In, lp);
+        Size sizeInOfPaper = SizeOfPaper.GetPaperSize(formatOfPaper.ToString() + size, LengthUnit.In, landscapePortrait);
         sizeInOfPaper = SizeH.Multiply(sizeInOfPaper, dpiXPrinter, dpiYPrinter);
         return SizeH.Divide(sizeInOfPaper, 2);
     }
@@ -33,22 +33,22 @@ public static class SizeOfPaper
         papersInMm.Add("A4", new Size(210, 297));
     }
     static Type type = typeof(PrintHelper);
-    public static Size GetPaperSize(string a4, LengthUnit lu, LandscapePortraitWpf lp)
+    public static Size GetPaperSize(string paperName, LengthUnit lengthUnit, LandscapePortraitWpf landscapePortrait)
     {
-        if (papersInMm.ContainsKey(a4))
+        if (papersInMm.ContainsKey(paperName))
         {
-            Size vr = papersInMm[a4];
-            if (lp == LandscapePortraitWpf.Landscape)
+            Size result = papersInMm[paperName];
+            if (landscapePortrait == LandscapePortraitWpf.Landscape)
             {
-                vr = new Size(vr.Height, vr.Width);
+                result = new Size(result.Height, result.Width);
             }
-            if (lu == LengthUnit.Mm)
+            if (lengthUnit == LengthUnit.Mm)
             {
-                return vr;
+                return result;
             }
-            else if (lu == LengthUnit.In)
+            else if (lengthUnit == LengthUnit.In)
             {
-                return SizeH.Divide(vr, mmInInch);
+                return SizeH.Divide(result, mmInInch);
             }
         }
         else

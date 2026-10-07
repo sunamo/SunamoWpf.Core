@@ -20,16 +20,16 @@ public class TextPanel : StackPanel
 
     public void H1(string text)
     {
-        List<string> dd = FontHelper.DivideStringToRows(fontFamily, 50, FontStyles.Normal, fontStretch, FontWeight.FromOpenTypeWeight(601), text, new Size(ActualWidth, ActualHeight));
-        foreach (var item in dd)
+        List<string> rows = FontHelper.DivideStringToRows(fontFamily, 50, FontStyles.Normal, fontStretch, FontWeight.FromOpenTypeWeight(601), text, new Size(ActualWidth, ActualHeight));
+        foreach (var item in rows)
         {
-            TextBlock tb = new TextBlock();
-            tb.FontFamily = fontFamily;
-            tb.FontSize = 50;
-            tb.FontStyle = FontStyles.Normal;
-            tb.FontStretch = fontStretch;
-            tb.FontWeight = FontWeight.FromOpenTypeWeight(601);
-            Children.Add(tb);
+            TextBlock textBlock = new TextBlock();
+            textBlock.FontFamily = fontFamily;
+            textBlock.FontSize = 50;
+            textBlock.FontStyle = FontStyles.Normal;
+            textBlock.FontStretch = fontStretch;
+            textBlock.FontWeight = FontWeight.FromOpenTypeWeight(601);
+            Children.Add(textBlock);
         }
     }
 }

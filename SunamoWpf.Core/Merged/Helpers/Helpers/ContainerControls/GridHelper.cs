@@ -17,8 +17,8 @@ public partial class GridHelper
 
     public static void ForAllTheSameRuntime(Grid grid, int count, bool columns)
     {
-        var d = 100d / (double)count;
-        for (int i = 0; i < count; i++)
+        var percent = 100d / (double)count;
+        for (int index = 0; index < count; index++)
         {
             if (columns)
             {

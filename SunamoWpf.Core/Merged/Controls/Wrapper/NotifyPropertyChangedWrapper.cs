@@ -104,34 +104,34 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 	{
 		get
 		{
-			DependencyObject w = (DependencyObject)o;
-			return w;
+			DependencyObject dependencyObject = (DependencyObject)o;
+			return dependencyObject;
 		}
 	}
 
 	/// <summary>
 	/// A2 can be null
 	/// </summary>
-	/// <param name="o"></param>
-	/// <param name="d"></param>
-	public NotifyPropertyChangedWrapper(T o, DependencyProperty d)
+	/// <param name="target"></param>
+	/// <param name="dependencyProperty"></param>
+	public NotifyPropertyChangedWrapper(T target, DependencyProperty dependencyProperty)
 	{
-		this.o = o;
+		this.o = target;
 
-		if (o.GetType() == TypesControls.tCheckBox)
+		if (target.GetType() == TypesControls.tCheckBox)
 		{
 			NotifyPropertyHelper.CheckBox<T>(this);
 		}
 
-		if (d != null)
+		if (dependencyProperty != null)
 		{
-			this.capturedProperty = d;
+			this.capturedProperty = dependencyProperty;
 			//this.dpIsChecked = d;
 			//this.DataContext = o;
 
 			DependencyPropertyDescriptor
-				.FromProperty(d, typeof(T))
-				.AddValueChanged(o, (s, e) => { OnPropertyChanged(capturedProperty.Name); });
+				.FromProperty(dependencyProperty, typeof(T))
+				.AddValueChanged(target, (sender, eventArgs) => { OnPropertyChanged(capturedProperty.Name); });
 		}
 	}
 

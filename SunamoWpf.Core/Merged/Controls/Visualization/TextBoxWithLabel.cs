@@ -15,17 +15,17 @@ public class TextBoxWithLabel : UserControl
 
     public TextBoxWithLabel()
     {
-        Grid g = new Grid();
-        g.RowDefinitions.Add(GridHelper.GetRowDefinition(GridLength.Auto));
+        Grid grid = new Grid();
+        grid.RowDefinitions.Add(GridHelper.GetRowDefinition(GridLength.Auto));
 
         cdLabel = GridHelper.GetColumnDefinition(GridLength.Auto);
-        g.ColumnDefinitions.Add(cdLabel);
-        g.ColumnDefinitions.Add(GridHelper.GetColumnDefinition(GridLength.Auto));
+        grid.ColumnDefinitions.Add(cdLabel);
+        grid.ColumnDefinitions.Add(GridHelper.GetColumnDefinition(GridLength.Auto));
 
-        g.Children.Add(lbl);
-        g.Children.Add(txt);
+        grid.Children.Add(lbl);
+        grid.Children.Add(txt);
         Grid.SetColumn(txt, 1);
 
-        Content = g;
+        Content = grid;
     }
 }

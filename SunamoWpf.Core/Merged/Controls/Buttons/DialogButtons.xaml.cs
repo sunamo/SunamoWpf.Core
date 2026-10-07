@@ -74,19 +74,19 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         }
     }
 
-    private void btnCancel_Click(object sender, RoutedEventArgs e)
+    private void btnCancel_Click(object sender, RoutedEventArgs eventArgs)
     {
         clickedCancel = true;
         DialogResult = false;
     }
 
-    private void btnOk_Click(object sender, RoutedEventArgs e)
+    private void btnOk_Click(object sender, RoutedEventArgs eventArgs)
     {
         clickedOk = true;
         DialogResult = true;
     }
 
-    private void btnApply_Click(object sender, RoutedEventArgs e)
+    private void btnApply_Click(object sender, RoutedEventArgs eventArgs)
     {
         clickedApply = true;
         DialogResult = null;

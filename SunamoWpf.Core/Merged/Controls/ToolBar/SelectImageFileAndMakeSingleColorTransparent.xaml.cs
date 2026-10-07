@@ -23,20 +23,20 @@ public partial class SelectImageFileAndMakeSingleColorTransparent : UserControl
         SelectedFile = "";
     }
 
-    private void SetSelectedFile(string v)
+    private void SetSelectedFile(string path)
     {
-        if (v == "")
+        if (path == "")
         {
-            v = Translate.FromKey(XlfKeys.None);
+            path = Translate.FromKey(XlfKeys.None);
         }
-        selectedFile = v;
-        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + v;
+        selectedFile = path;
+        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + path;
     }
 
     //public event VoidStringBitmapBitmapSource FileSelected;
     //public BitmapImage bi = null;
     //public Bitmap bmp = null;
-    private void btnSelectFile_Click(object sender, RoutedEventArgs e)
+    private void btnSelectFile_Click(object sender, RoutedEventArgs eventArgs)
     {
         //    string file = null;
         //    file = DW.SelectOfFile(Environment.SpecialFolder.DesktopDirectory);

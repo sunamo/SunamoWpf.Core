@@ -29,7 +29,7 @@ public partial class EmptyUC : UserControl, IUserControl, IKeysHandler
              ((IWindowOpener)Application.Current.MainWindow).windowWithUserControl = value;
     }
 
-    public bool HandleKey(KeyEventArgs e)
+    public bool HandleKey(KeyEventArgs eventArgs)
     {
         return false;
     }
@@ -39,7 +39,7 @@ public partial class EmptyUC : UserControl, IUserControl, IKeysHandler
 
     }
 
-    public void uc_Loaded(object sender, RoutedEventArgs e)
+    public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
 
     }

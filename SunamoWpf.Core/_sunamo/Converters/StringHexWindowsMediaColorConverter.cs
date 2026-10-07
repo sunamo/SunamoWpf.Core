@@ -2,53 +2,53 @@ namespace SunamoWpf.Core._sunamo;
 
 internal static class StringHexWindowsMediaColorConverter //: ISimpleConverter<string, Color>
 {
-    public static string ConvertTo(Color u)
+    public static string ConvertTo(Color color)
     {
-        return SHFormat.Format4("#{0:X2}{1:X2}{2:X2}{3:X2}", u.A, u.R, u.G, u.B);
+        return SHFormat.Format4("#{0:X2}{1:X2}{2:X2}{3:X2}", color.A, color.R, color.G, color.B);
     }
-    public static Color ConvertFrom(string t)
+    public static Color ConvertFrom(string hex)
     {
-        Color vr = new Color();
-        t = t.TrimStart('#');
-        if (t.Length == 8)
+        Color color = new Color();
+        hex = hex.TrimStart('#');
+        if (hex.Length == 8)
         {
-            vr.A = GetGroup(0, t);
-            vr.R = GetGroup(1, t);
-            vr.G = GetGroup(2, t);
-            vr.B = GetGroup(3, t);
+            color.A = GetGroup(0, hex);
+            color.R = GetGroup(1, hex);
+            color.G = GetGroup(2, hex);
+            color.B = GetGroup(3, hex);
         }
-        else if (t.Length == 6)
+        else if (hex.Length == 6)
         {
-            vr.A = 255;
-            vr.R = GetGroup(0, t);
-            vr.G = GetGroup(1, t);
-            vr.B = GetGroup(2, t);
+            color.A = 255;
+            color.R = GetGroup(0, hex);
+            color.G = GetGroup(1, hex);
+            color.B = GetGroup(2, hex);
         }
         else
         {
             return Colors.Black;
         }
-        return vr;
+        return color;
     }
-    private static byte GetGroup(int p, string t)
+    private static byte GetGroup(int groupIndex, string hex)
     {
-        string s = "";
-        if (p == 0)
+        string result = "";
+        if (groupIndex == 0)
         {
-            s = t[0].ToString() + t[1].ToString();
+            result = hex[0].ToString() + hex[1].ToString();
         }
-        else if (p == 1)
+        else if (groupIndex == 1)
         {
-            s = t[2].ToString() + t[3].ToString();
+            result = hex[2].ToString() + hex[3].ToString();
         }
-        else if (p == 2)
+        else if (groupIndex == 2)
         {
-            s = t[4].ToString() + t[5].ToString();
+            result = hex[4].ToString() + hex[5].ToString();
         }
         else
         {
-            s = t[6].ToString() + t[7].ToString();
+            result = hex[6].ToString() + hex[7].ToString();
         }
-        return Convert.ToByte(s, 16);
+        return Convert.ToByte(result, 16);
     }
 }

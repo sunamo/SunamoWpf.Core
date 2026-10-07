@@ -10,10 +10,10 @@ public class DesktopSize
 
     }
 
-    public DesktopSize(SizeChangedEventArgs e)
+    public DesktopSize(SizeChangedEventArgs eventArgs)
     {
-        s.Width = e.NewSize.Width;
-        s.Height = e.NewSize.Height;
+        s.Width = eventArgs.NewSize.Width;
+        s.Height = eventArgs.NewSize.Height;
     }
 
     public DesktopSize(double actualWidth, double actualHeight)

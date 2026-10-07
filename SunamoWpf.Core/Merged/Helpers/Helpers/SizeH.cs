@@ -5,19 +5,19 @@ public class SizeH
 {
     static Type type = typeof(SizeH);
 
-    public static Size Divide(Size s, double div)
+    public static Size Divide(Size size, double div)
     {
-        return new Size(s.Width / div, s.Height / div);
+        return new Size(size.Width / div, size.Height / div);
     }
 
-    public static Size Multiply(Size s, double mul)
+    public static Size Multiply(Size size, double mul)
     {
-        return new Size(s.Width * mul, s.Height * mul);
+        return new Size(size.Width * mul, size.Height * mul);
     }
 
-    public static Size Multiply(Size s, int dpiXPrinter, int dpiYPrinter)
+    public static Size Multiply(Size size, int dpiXPrinter, int dpiYPrinter)
     {
-        return new Size(s.Width * dpiXPrinter, s.Height * dpiYPrinter);
+        return new Size(size.Width * dpiXPrinter, size.Height * dpiYPrinter);
     }
 
     public static SunamoSize ShringUnder(object init2, object max2)
@@ -48,8 +48,8 @@ public class SizeH
         var init = CastSize(init2);
         var max = CastSize(max2);
 
-        var b1 = init.Width > max.Width;
-        var b2 = init.Height > max.Height;
+        var exceedsWidth = init.Width > max.Width;
+        var exceedsHeight = init.Height > max.Height;
 
         if (init.IsNegativeOrZero())
         {
@@ -59,26 +59,26 @@ public class SizeH
 
         if (allMustBeLower)
         {
-            var vr = !b1 && !b2;
+            var fits = !exceedsWidth && !exceedsHeight;
 
-            return vr;
+            return fits;
         }
 
-        return b1 || b2;
+        return exceedsWidth || exceedsHeight;
     }
 
-    public static SunamoSize CastSize(object s)
+    public static SunamoSize CastSize(object input)
     {
-        var t = s.GetType();
-        if (t == typeof(DesktopSize))
+        var type = input.GetType();
+        if (type == typeof(DesktopSize))
         {
-            return ((DesktopSize)s).ToSunamoSize();
+            return ((DesktopSize)input).ToSunamoSize();
         }
-        else if (t == typeof(SunamoSize))
+        else if (type == typeof(SunamoSize))
         {
-            return (SunamoSize)s;
+            return (SunamoSize)input;
         }
-        else if (t == typeof(System.Windows.Size))
+        else if (type == typeof(System.Windows.Size))
         {
             //var c = (System.Windows.Size)s;
             //return c.ToSunamo();
@@ -97,20 +97,20 @@ public class SizeH
         //}
         else
         {
-            ThrowEx.NotImplementedCase(t);
+            ThrowEx.NotImplementedCase(type);
         }
         return null;
     }
 
     public static bool OneDimensionOfFirstLargerThanSecond(object renderSize, object maxSize)
     {
-        var s1 = CastSize(renderSize);
-        var s2 = CastSize(maxSize);
+        var renderSizeCast = CastSize(renderSize);
+        var maxSizeCast = CastSize(maxSize);
 
-        bool l1 = s1.Width > s2.Width;
-        bool l2 = s1.Height > s2.Height;
+        bool isWider = renderSizeCast.Width > maxSizeCast.Width;
+        bool isHigher = renderSizeCast.Height > maxSizeCast.Height;
 
-        if ((l1 && !l2) || !l1 && l2)
+        if ((isWider && !isHigher) || !isWider && isHigher)
         {
             return true;
         }

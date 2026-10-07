@@ -28,7 +28,7 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         Loaded += FoundedResultsUC_Loaded;
         SizeChanged += FoundedResultsUC_SizeChanged;
     }
-    private void FoundedResultsUC_SizeChanged(object sender, SizeChangedEventArgs e)
+    private void FoundedResultsUC_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
     {
 #if DEBUG
         //FrameworkElementDebug.ActualSize(this);
@@ -36,7 +36,7 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         //FrameworkElementDebug.ActualSize(sp);
 #endif
     }
-    private void FoundedResultsUC_Loaded(object sender, RoutedEventArgs e)
+    private void FoundedResultsUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         //DataContext = new FoundedResultViewModel();
         //if (txtFilter != null)
@@ -53,15 +53,15 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         {
             if (sp != null)
             {
-                StringBuilder sb = new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
                 foreach (FoundedFileUC item in sp.Children)
                 {
                     if (item.Visibility == Visibility.Visible)
                     {
-                        sb.AppendLine(item.fileFullPath);
+                        stringBuilder.AppendLine(item.fileFullPath);
                     }
                 }
-                ClipboardService.SetText(sb.ToString());
+                ClipboardService.SetText(stringBuilder.ToString());
             }
         }
         else
@@ -80,8 +80,8 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
         }
         basePaths = basePath.ToList();
-        SunamoComparerICompare.StringLength.Desc s = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
-        basePaths.Sort(s);
+        SunamoComparerICompare.StringLength.Desc comparer = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
+        basePaths.Sort(comparer);
         CA.WithEndSlash(basePaths);
     }
     public TUListWpf<string, Brush> DefaultBrushes(string green = "", string red = "")
@@ -99,11 +99,11 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             sv.Visibility = Visibility.Visible;
         }
     }
-    public void AddFoundedResults(bool clear, TUListWpf<string, Brush> p, List<TWithNameTWpf<string>> foundedResult)
+    public void AddFoundedResults(bool clear, TUListWpf<string, Brush> colors, List<TWithNameTWpf<string>> foundedResult)
     {
         if (sp != null && sv != null)
         {
-            int i = 1;
+            int index = 1;
             if (clear)
             {
                 ClearFoundedResult();
@@ -115,11 +115,11 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             }
             foreach (var item in foundedResult)
             {
-                FoundedResultUC fr = new FoundedResultUC(item.name, p, i++);
-                fr.Selected += OnSelected;
-                TextBlock tb = TextBlockHelper.Get(new ControlInitData { text = item.t });
-                fr.SecondRow = tb;
-                sp.Children.Add(fr);
+                FoundedResultUC resultControl = new FoundedResultUC(item.name, colors, index++);
+                resultControl.Selected += OnSelected;
+                TextBlock textBlock = TextBlockHelper.Get(new ControlInitData { text = item.t });
+                resultControl.SecondRow = textBlock;
+                sp.Children.Add(resultControl);
             }
         }
     }
@@ -168,9 +168,9 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             tbNoResultsFound.Visibility = Visibility.Visible;
         }
     }
-    public void OnSelected(string p)
+    public void OnSelected(string path)
     {
-        Selected(p);
+        Selected(path);
     }
     /// <summary>
     /// return null if there is no element

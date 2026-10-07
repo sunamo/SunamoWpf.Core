@@ -27,11 +27,11 @@ public partial class TwoRadiosUC
         }
         return false;
     }
-    public bool Validate(ref ValidateDataWpf d)
+    public bool Validate(ref ValidateDataWpf validateData)
     {
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
         validated = BTS.GetValueOfNullable(rb1.IsChecked) || BTS.GetValueOfNullable(rb2.IsChecked);
         return validated;

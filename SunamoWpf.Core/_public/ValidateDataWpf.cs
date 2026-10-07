@@ -15,7 +15,7 @@ public class ValidateDataWpf
 
     public int ValidateNotInline()
     {
-        var i = 0;
-        return i;
+        var result = 0;
+        return result;
     }
 }

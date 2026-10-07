@@ -3,43 +3,43 @@ namespace SunamoWpf;
 
 public class DataTableHelper
 {
-    public static void NewColumn(DataTable dt, string name, object type)
+    public static void NewColumn(DataTable dataTable, string name, object type)
     {
         if (!(type is Type))
         {
             type = type.GetType();
         }
         
-        DataColumn dc = new DataColumn(name, (Type)type);
+        DataColumn dataColumn = new DataColumn(name, (Type)type);
         
-        dt.Columns.Add(dc);
+        dataTable.Columns.Add(dataColumn);
     }
 
-    public static void NewColumn(DataTable dt, int v, IList<string> columns, IList f)
+    public static void NewColumn(DataTable dataTable, int columnIndex, IList<string> columns, IList types)
     {
-        NewColumn(dt, columns[v], f[v]);
+        NewColumn(dataTable, columns[columnIndex], types[columnIndex]);
     }
 
-    public static DataTable CreateDataTable(List<object> defaultValue, List<IList> o, params string[] columns)
+    public static DataTable CreateDataTable(List<object> defaultValue, List<IList> rows, params string[] columns)
     {
-        DataTable dt = new DataTable();
+        DataTable dataTable = new DataTable();
 
-        for (int i = 0; i < columns.Count(); i++)
+        for (int index = 0; index < columns.Count(); index++)
         {
-            NewColumn(dt, i, columns, defaultValue);
+            NewColumn(dataTable, index, columns, defaultValue);
         }
 
-        foreach (var item in o)
+        foreach (var item in rows)
         {
-            var row = dt.NewRow();
-            for (int i = 0; i < columns.Length; i++)
+            var row = dataTable.NewRow();
+            for (int columnIndex = 0; columnIndex < columns.Length; columnIndex++)
             {
-                row[columns[i]] = item[i];
+                row[columns[columnIndex]] = item[columnIndex];
             }
 
-            dt.Rows.Add(row);
+            dataTable.Rows.Add(row);
         }
 
-        return dt;
+        return dataTable;
     }
 }

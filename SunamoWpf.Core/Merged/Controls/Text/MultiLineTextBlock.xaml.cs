@@ -20,16 +20,16 @@ public partial class MultiLineTextBlock : UserControl
 
     }
 
-    public void AddLines(Brush bg, Brush fg, params string[] lines)
+    public void AddLines(Brush background, Brush foreground, params string[] lines)
     {
         foreach (var item in lines)
         {
-            TextBlock tb = new TextBlock();
-            tb.HorizontalAlignment = HorizontalAlignment.Stretch;
-            tb.Background = bg;
-            tb.Foreground = fg;
-            tb.Text = item;
-            spLines.Children.Add(tb);
+            TextBlock textBlock = new TextBlock();
+            textBlock.HorizontalAlignment = HorizontalAlignment.Stretch;
+            textBlock.Background = background;
+            textBlock.Foreground = foreground;
+            textBlock.Text = item;
+            spLines.Children.Add(textBlock);
         }
     }
 }

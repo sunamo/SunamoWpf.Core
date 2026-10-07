@@ -36,12 +36,12 @@ public class FoundedFileUCBackend : IKeysHandler
         textBoxBackend = new TextBoxBackend(txtTextBoxState, txtContent, addRowsDuringScrolling);
     }
 
-    private void FoundedFilesUC_Selected(string s)
+    private void FoundedFilesUC_Selected(string path)
     {
         ControlHelper.SwitchBorder((Control)lastSelected, BorderData.Black1);
 
         #region TODO: fixing Everyline not searching
-        lastSelected = foundedFilesUC.GetFoundedFileByPath(s);
+        lastSelected = foundedFilesUC.GetFoundedFileByPath(path);
         #endregion
         ControlHelper.SwitchBorder((Control)lastSelected, BorderData.Black1);
     }
@@ -60,14 +60,14 @@ public class FoundedFileUCBackend : IKeysHandler
     public event VoidString ReturnMovedFileBack;
 
 
-    public bool HandleKey(KeyEventArgs e)
+    public bool HandleKey(KeyEventArgs eventArgs)
     {
         if (FullPathSelectedFile == null)
         {
             return false;
         }
 
-        if (e.Key == Key.Right)
+        if (eventArgs.Key == Key.Right)
         {
             // Is right
             if (FileIsRightEvent != null)
@@ -77,7 +77,7 @@ public class FoundedFileUCBackend : IKeysHandler
             }
 
         }
-        else if (e.Key == Key.Left)
+        else if (eventArgs.Key == Key.Left)
         {
             // Is wrong, keep where is
             if (LeaveInActualFolder != null)
@@ -87,7 +87,7 @@ public class FoundedFileUCBackend : IKeysHandler
             }
 
         }
-        else if (e.Key == Key.Up)
+        else if (eventArgs.Key == Key.Up)
         {
             // Action
             if (MoveLastFile != null)
@@ -97,7 +97,7 @@ public class FoundedFileUCBackend : IKeysHandler
             }
 
         }
-        else if (e.Key == Key.Down)
+        else if (eventArgs.Key == Key.Down)
         {
             // Undo action
             if (ReturnMovedFileBack != null)

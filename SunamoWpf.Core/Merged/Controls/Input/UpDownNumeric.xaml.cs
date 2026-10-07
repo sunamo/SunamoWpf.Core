@@ -58,14 +58,14 @@ public sealed partial class UpDownNumeric : UserControl
             }
         }
     }
-    private void btnIncrement_Click_1(object sender, RoutedEventArgs e)
+    private void btnIncrement_Click_1(object sender, RoutedEventArgs eventArgs)
     {
         if (Value != Max)
         {
             Value++;
         }
     }
-    private void btnDecrement_Click_1(object sender, RoutedEventArgs e)
+    private void btnDecrement_Click_1(object sender, RoutedEventArgs eventArgs)
     {
         if (Value != 0)
         {
@@ -74,13 +74,13 @@ public sealed partial class UpDownNumeric : UserControl
     }
     public event PropertyChangedEventHandler PropertyChanged;
     public static bool captureChanges = true;
-    private void txtValue_TextChanged_1(object sender, TextChangedEventArgs e)
+    private void txtValue_TextChanged_1(object sender, TextChangedEventArgs eventArgs)
     {
-        uint nv = 0;
-        if (uint.TryParse(txtValue.Text, out nv))
+        uint newValue = 0;
+        if (uint.TryParse(txtValue.Text, out newValue))
         {
             // 3000 to allow enter also ye
-            if (nv > 3000)
+            if (newValue > 3000)
             {
                 txtValue.Text = latest;
             }
@@ -91,7 +91,7 @@ public sealed partial class UpDownNumeric : UserControl
                 {
                     if (ValueChanged != null)
                     {
-                        ValueChanged(sender, new ValueChangedRoutedEventArgs<uint>(nv));
+                        ValueChanged(sender, new ValueChangedRoutedEventArgs<uint>(newValue));
                     }
                 }
             }

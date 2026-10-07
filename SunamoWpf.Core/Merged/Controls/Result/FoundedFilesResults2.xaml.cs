@@ -102,10 +102,10 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
         bool cancel = string.IsNullOrWhiteSpace(text);
         return cancel;
     }
-    public void FoundedFile_Selected(string s)
+    public void FoundedFile_Selected(string path)
     {
-        selectedItem = s;
-        OnSelected(s);
+        selectedItem = path;
+        OnSelected(path);
     }
     public IFoundedFileUC GetFoundedFileByPath(string path)
     {
@@ -125,13 +125,13 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
             tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
         }
         basePaths = basePath.ToList();
-        SunamoComparerICompare.StringLength.Desc s = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
-        basePaths.Sort(s);
+        SunamoComparerICompare.StringLength.Desc comparer = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
+        basePaths.Sort(comparer);
         CA.WithEndSlash(basePaths);
     }
-    public void OnSelected(string p)
+    public void OnSelected(string path)
     {
-        Selected(p);
+        Selected(path);
     }
     /// <summary>
     /// NSN
@@ -146,7 +146,7 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
     {
         Selected(file);
     }
-    private void FoundedFilesResults2_Loaded(object sender, RoutedEventArgs e)
+    private void FoundedFilesResults2_Loaded(object sender, RoutedEventArgs eventArgs)
     {
     }
 }

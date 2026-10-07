@@ -8,7 +8,7 @@ internal class CAToNumber
         throw new NotImplementedException();
     }
 
-    public static List<int> ToNumber<U>(Func<ReadOnlySpan<byte>, NumberStyles, IFormatProvider, int> parse, IList<U> d)
+    public static List<int> ToNumber<U>(Func<ReadOnlySpan<byte>, NumberStyles, IFormatProvider, int> parse, IList<U> items)
     {
         throw new NotImplementedException();
     }

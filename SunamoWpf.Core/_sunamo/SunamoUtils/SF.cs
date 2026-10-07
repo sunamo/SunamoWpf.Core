@@ -25,10 +25,10 @@ internal static class SF
     //    string firstLine = null;
     //    return GetAllElementsFile(file, ref firstLine);
     //}
-    public static List<string> RemoveComments(List<string> tf)
+    public static List<string> RemoveComments(List<string> lines)
     {
         //CA.RemoveStringsEmpty2(tf);
-        tf = tf.Where(d => !string.IsNullOrWhiteSpace(d)).ToList();
+        lines = lines.Where(line => !string.IsNullOrWhiteSpace(line)).ToList();
         // Nevím vůbec co toto má znamenat ael nedává mi to smysl
         // Příště dopsat komentář pokud budu odkomentovávat
         //if (tf.Count > 0)
@@ -39,8 +39,8 @@ internal static class SF
         //    }
         //}
         //CA.RemoveStartingWith("#", tf);
-        tf = tf.Where(d => !d.StartsWith("#")).ToList();
-        return tf;
+        lines = lines.Where(currentLine => !currentLine.StartsWith("#")).ToList();
+        return lines;
     }
     public static List<List<string>> GetAllElementsFile(string file/*, ref string firstCommentLine*/,
         string oddelovaciZnak = "|")
@@ -57,11 +57,11 @@ internal static class SF
     ///     Without last |
     ///     DateTime is format with DTHelperEn.ToString
     /// </summary>
-    /// <param name="o"></param>
+    /// <param name="lines"></param>
     /// <param name="separator"></param>
-    public static string PrepareToSerialization2(IList<string> o)
+    public static string PrepareToSerialization2(IList<string> lines)
     {
-        return PrepareToSerializationWorker(o, true, dDeli);
+        return PrepareToSerializationWorker(lines, true, dDeli);
     }
     ///// <summary>
     ///// Return without last
@@ -78,10 +78,10 @@ internal static class SF
     ///     Return without last
     ///     If need to combine string and IList, lets use CA.Join
     /// </summary>
-    /// <param name="o"></param>
-    public static string PrepareToSerializationExplicit2(IList<string> o, string separator = "|")
+    /// <param name="lines"></param>
+    public static string PrepareToSerializationExplicit2(IList<string> lines, string separator = "|")
     {
-        return PrepareToSerializationWorker(o, true, separator);
+        return PrepareToSerializationWorker(lines, true, separator);
     }
     public static
 #if ASYNC
@@ -96,12 +96,12 @@ internal static class SF
         CA.Trim(content);
         //content += Environment.NewLine + line + Environment.NewLine;
         content.Add(line);
-        var vr = GetAllElementsLines(content);
+        var result = GetAllElementsLines(content);
 #if ASYNC
         await
 #endif
             File.WriteAllLinesAsync(path, content).ConfigureAwait(false);
-        return vr;
+        return result;
     }
     private static List<List<string>> GetAllElementsLines(List<string> lines)
     {
@@ -111,14 +111,14 @@ internal static class SF
     private static List<List<string>> GetAllElementsLines(List<string> lines, ref string firstLIne)
     {
         lines = RemoveComments(lines);
-        var vr = new List<List<string>>();
+        var result = new List<List<string>>();
 
         firstLIne = lines[0];
 
         foreach (var var in lines)
             if (!string.IsNullOrWhiteSpace(var))
-                vr.Add(GetAllElementsLine(var));
-        return vr;
+                result.Add(GetAllElementsLine(var));
+        return result;
     }
     ///// <summary>
     ///// Return without last
@@ -134,12 +134,12 @@ internal static class SF
     /// <summary>
     ///     DateTime is format with DTHelperEn.ToString
     /// </summary>
-    /// <param name="o"></param>
+    /// <param name="lines"></param>
     /// <param name="removeLast"></param>
     /// <param name="separator"></param>
-    private static string PrepareToSerializationWorker(IList<string> o, bool removeLast, string separator)
+    private static string PrepareToSerializationWorker(IList<string> lines, bool removeLast, string separator)
     {
-        var list = o.ToList();
+        var list = lines.ToList();
         if (separator == replaceForSeparatorString)
             throw new Exception("replaceForSeparatorString is the same as separator");
         CA.Replace(list, separator, replaceForSeparatorString);
@@ -173,32 +173,32 @@ internal static class SF
     {
         if (oddelovaciZnak == null) oddelovaciZnak = "|";
         var hlavicka = new List<string>();
-        var oz = oddelovaciZnak;
-        var vr = new List<List<string>>();
+        var delimiter = oddelovaciZnak;
+        var result = new List<List<string>>();
         // Sync protože mám v deklaraci out
         var lines = File.ReadAllLines(file).ToList();
         CA.Trim(lines);
         if (lines.Count > 0)
         {
             hlavicka = GetAllElementsLine(lines[0], oddelovaciZnak);
-            var musiByt = lines[0].Split(new[] { oz }, StringSplitOptions.None).Length - 1;
+            var musiByt = lines[0].Split(new[] { delimiter }, StringSplitOptions.None).Length - 1;
             //int nalezeno = 0;
             var jedenRadek = new StringBuilder();
-            for (var i = 1; i < lines.Count; i++)
+            for (var index = 1; index < lines.Count; index++)
             {
-                if (lines[i].Trim().Length == 0) continue;
+                if (lines[index].Trim().Length == 0) continue;
                 //nalezeno += SH.OccurencesOfStringIn(lines[i], oz);
-                jedenRadek.AppendLine(lines[i]);
+                jedenRadek.AppendLine(lines[index]);
                 //if (nalezeno == musiByt)
                 //{
                 //nalezeno = 0;
                 var columns = GetAllElementsLine(jedenRadek.ToString(), oddelovaciZnak);
                 CA.Trim(columns);
                 jedenRadek.Clear();
-                vr.Add(columns);
+                result.Add(columns);
                 //}
             }
         }
-        return (hlavicka, vr);
+        return (hlavicka, result);
     }
 }

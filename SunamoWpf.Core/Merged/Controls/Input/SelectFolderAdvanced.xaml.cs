@@ -86,9 +86,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             GetChbDontAskAgain().Visibility = value;
         }
     }
-    private void selectFolder_FolderChanged(string s)
+    private void selectFolder_FolderChanged(string folder)
     {
-        if (FS.ExistsDirectory(s))
+        if (FS.ExistsDirectory(folder))
         {
             cDialogButtons.btnOk.IsEnabled = true;
         }
@@ -97,9 +97,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             cDialogButtons.btnOk.IsEnabled = false;
         }
     }
-    private void cDialogButtons_ChangeDialogResult(bool? b)
+    private void cDialogButtons_ChangeDialogResult(bool? result)
     {
-        DialogResult = b;
+        DialogResult = result;
     }
     /// <summary>
     /// A1 = string, cant be null

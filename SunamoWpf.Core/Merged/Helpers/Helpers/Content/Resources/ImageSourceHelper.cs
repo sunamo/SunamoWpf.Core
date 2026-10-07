@@ -59,25 +59,25 @@ public static class ImageSourceHelper
     //} 
     #endregion
 
-    public static BitmapFrame CropImage(System.Windows.Point point, System.Windows.Size size, BitmapImage bi)
+    public static BitmapFrame CropImage(System.Windows.Point point, System.Windows.Size size, BitmapImage bitmapImage)
     {
         // bi je BitmapImage obrázek ke výřezu, point je bod od kterého se vyřezává, size je velikost která se vyřezává
-        if (bi.DpiX != 96)
+        if (bitmapImage.DpiX != 96)
         {
             size.Width /= 96d;
-            size.Width *= bi.DpiX;
+            size.Width *= bitmapImage.DpiX;
             point.X /= 96d;
-            point.X *= bi.DpiX;
+            point.X *= bitmapImage.DpiX;
         }
-        if (bi.DpiY != 96)
+        if (bitmapImage.DpiY != 96)
         {
             size.Height /= 96d;
-            size.Height *= bi.DpiY;
+            size.Height *= bitmapImage.DpiY;
             point.Y /= 96d;
-            point.Y *= bi.DpiY;
+            point.Y *= bitmapImage.DpiY;
         }
 
         // Samotná operace výřezu
-        return BitmapFrame.Create(new CroppedBitmap(bi, new Int32Rect((int)point.X, (int)point.Y, (int)size.Width, (int)size.Height)));
+        return BitmapFrame.Create(new CroppedBitmap(bitmapImage, new Int32Rect((int)point.X, (int)point.Y, (int)size.Width, (int)size.Height)));
     }
 }

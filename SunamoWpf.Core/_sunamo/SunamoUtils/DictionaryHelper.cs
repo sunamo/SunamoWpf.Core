@@ -45,9 +45,9 @@ internal class DictionaryHelper
             }
             else
             {
-                List<Value> ad = new();
-                ad.Add(value);
-                dict.Add(key, ad);
+                List<Value> result = new();
+                result.Add(value);
+                dict.Add(key, result);
                 if (compWithString)
                 {
                     List<string> ad2 = new();
@@ -86,9 +86,9 @@ internal class DictionaryHelper
                 {
                     if (!dict.ContainsKey(key))
                     {
-                        List<Value> ad = new();
-                        ad.Add(value);
-                        dict.Add(key, ad);
+                        List<Value> newList = new();
+                        newList.Add(value);
+                        dict.Add(key, newList);
                     }
                     else
                     {
@@ -117,24 +117,24 @@ internal class DictionaryHelper
     /// </summary>
     /// <typeparam name="Key"></typeparam>
     /// <typeparam name="Value"></typeparam>
-    /// <param name="sl"></param>
+    /// <param name="dictionary"></param>
     /// <param name="key"></param>
     /// <param name="p"></param>
-    public static void AddOrCreate<Key, Value>(IDictionary<Key, List<Value>> sl, Key key, Value value,
+    public static void AddOrCreate<Key, Value>(IDictionary<Key, List<Value>> dictionary, Key key, Value value,
     bool withoutDuplicitiesInValue = false, Dictionary<Key, List<string>> dictS = null)
     {
-        AddOrCreate<Key, Value, object>(sl, key, value, withoutDuplicitiesInValue, dictS);
+        AddOrCreate<Key, Value, object>(dictionary, key, value, withoutDuplicitiesInValue, dictS);
     }
 
-    public static void AddOrSet<T1, T2>(IDictionary<T1, T2> qs, T1 k, T2 v)
+    public static void AddOrSet<T1, T2>(IDictionary<T1, T2> dictionary, T1 key, T2 value)
     {
-        if (qs.ContainsKey(k))
+        if (dictionary.ContainsKey(key))
         {
-            qs[k] = v;
+            dictionary[key] = value;
         }
         else
         {
-            qs.Add(k, v);
+            dictionary.Add(key, value);
         }
     }
 }

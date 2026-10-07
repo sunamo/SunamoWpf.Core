@@ -9,13 +9,13 @@ public class SunamoGrid : Grid
     DrawingGroup backingStore = new DrawingGroup();
     DrawingContext dc = null;
 
-    protected override void OnRender(DrawingContext dc)
+    protected override void OnRender(DrawingContext drawingContext)
     {
-        base.OnRender(dc);
+        base.OnRender(drawingContext);
 
-        this.dc = dc;
+        this.dc = drawingContext;
         ForceRender();
-        dc.DrawDrawing(backingStore);
+        drawingContext.DrawDrawing(backingStore);
     }
 
     public void ForceRender()

@@ -48,10 +48,10 @@ public class StartupHelper
     /// <summary>
     /// Optional
     /// </summary>
-    /// <param name="e"></param>
-    public static void Startup(StartupEventArgs e)
+    /// <param name="eventArgs"></param>
+    public static void Startup(StartupEventArgs eventArgs)
     {
-        args = e.Args;
+        args = eventArgs.Args;
 
 
         if (WriterEventLog.IsAdmin())
@@ -159,7 +159,7 @@ public class StartupHelper
         //};
     }
 
-    private static void App_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
+    private static void App_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs eventArgs)
     {
         // CanT be used for my purposes
         StartupHelper.Dispose();

@@ -5,9 +5,9 @@ public class DynLayout
 {
     Grid gridGrowable = null;
 
-    public DynLayout(Grid g)
+    public DynLayout(Grid grid)
     {
-        gridGrowable = g;
+        gridGrowable = grid;
     }
 
     public List<FrameworkElement> fwElements = new List<FrameworkElement>();
@@ -24,11 +24,11 @@ public class DynLayout
         return null;
     }
 
-    public object this[int i]
+    public object this[int index]
     {
         get
         {
-            return fwElements[i].GetContent();
+            return fwElements[index].GetContent();
         }
     }
 
@@ -39,46 +39,46 @@ public class DynLayout
     /// </summary>
     /// <param name="row"></param>
     /// <param name="name"></param>
-    /// <param name="ui"></param>
-    public void AddControl(int row, string name, FrameworkElement ui)
+    /// <param name="control"></param>
+    public void AddControl(int row, string name, FrameworkElement control)
     {
-        Grid.SetRow(ui, row);
-        Grid.SetColumn(ui, 1);
+        Grid.SetRow(control, row);
+        Grid.SetColumn(control, 1);
         // Horizontal alignment cant be set here - otherwise won't be horizontally stretched
         //ui.HorizontalAlignment = HorizontalAlignment.Left;
-        ui.Margin = uit;
+        control.Margin = uit;
         // double.NaN to fill all available width
         // HorizontalAligment have no effect
-        ui.Width = double.NaN;
-        gridGrowable.Children.Add(ui);
+        control.Width = double.NaN;
+        gridGrowable.Children.Add(control);
 
         if (name != null)
         {
             AddLabel(row, name);
         }
 
-        fwElements.Add(ui);
+        fwElements.Add(control);
     }
 
     public void AddLabel(int row, string name)
     {
-        var tb = TextBlockHelper.Get(new ControlInitData { text = name });
+        var textBlock = TextBlockHelper.Get(new ControlInitData { text = name });
 
-        AddLabel(row, tb);
+        AddLabel(row, textBlock);
     }
 
-    public void AddLabel(int row, UIElement tb)
+    public void AddLabel(int row, UIElement label)
     {
-        if (tb is TextBlock)
+        if (label is TextBlock)
         {
-            var tbb = (TextBlock)tb;
+            var tbb = (TextBlock)label;
             tbb.HorizontalAlignment = HorizontalAlignment.Right;
             tbb.VerticalAlignment = VerticalAlignment.Center;
             tbb.Margin = uit;
         }
 
-        Grid.SetRow(tb, row);
-        Grid.SetColumn(tb, 0);
-        gridGrowable.Children.Add(tb);
+        Grid.SetRow(label, row);
+        Grid.SetColumn(label, 0);
+        gridGrowable.Children.Add(label);
     }
 }

@@ -12,12 +12,12 @@ public partial class ApplicationDataContainer
 
     }
 
-    private void Chb_FolderChanged(object o, string s)
+    private void Chb_FolderChanged(object sender, string folder)
     {
-        var cb = o as SelectFolder;
+        var selectFolder = sender as SelectFolder;
 
-        Set(cb, SelectedFolder, s);
-        SaveControl(cb);
+        Set(selectFolder, SelectedFolder, folder);
+        SaveControl(selectFolder);
     }
     #endregion
 

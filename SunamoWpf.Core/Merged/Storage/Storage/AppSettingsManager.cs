@@ -7,11 +7,11 @@ public class AppSettingsManager
     /// </summary>
     public static ISettingsManagerWpf<FrameworkElement, DependencyProperty> SettingsManager = null;
     static Dictionary<FrameworkElement, TUListWpf<FrameworkElement, DependencyProperty>> savedElement = new Dictionary<FrameworkElement, TUListWpf<FrameworkElement, DependencyProperty>>();
-    public static void AddChildrenFrom(FrameworkElement fe)
+    public static void AddChildrenFrom(FrameworkElement frameworkElement)
     {
-        if (fe is Panel)
+        if (frameworkElement is Panel)
         {
-            Panel panel = fe as Panel;
+            Panel panel = frameworkElement as Panel;
             //The settings property 'sp.System.Windows.Controls.StackPanel' is of a non-compatible type.'
             //AddToSavedElements(panel);
             foreach (FrameworkElement item in panel.Children)
@@ -21,32 +21,32 @@ public class AppSettingsManager
         }
         else
         {
-            AddToSavedElements(fe);
-            if (fe is Window)
+            AddToSavedElements(frameworkElement);
+            if (frameworkElement is Window)
             {
-                Window panel = fe as Window;
+                Window panel = frameworkElement as Window;
                 AddChildrenFrom(panel.Content as FrameworkElement);
             }
         }
     }
-    private static void AddToSavedElements(FrameworkElement fe)
+    private static void AddToSavedElements(FrameworkElement frameworkElement)
     {
         TUListWpf<FrameworkElement, DependencyProperty> list = new TUListWpf<FrameworkElement, DependencyProperty>();
         // U TextBox mi to vrátilo 2, ačkoliv má jich mnohem vic i bez base class
-        var depencies = DependencyObjectHelper.GetDependencyProperties(fe);
-        var attached = DependencyObjectHelper.GetAttachedProperties(fe);
-        if (fe is TextBox)
+        var depencies = DependencyObjectHelper.GetDependencyProperties(frameworkElement);
+        var attached = DependencyObjectHelper.GetAttachedProperties(frameworkElement);
+        if (frameworkElement is TextBox)
         {
         }
         foreach (var item in depencies)
         {
-            list.Add(TUWpf<FrameworkElement, DependencyProperty>.Get(fe, item));
+            list.Add(TUWpf<FrameworkElement, DependencyProperty>.Get(frameworkElement, item));
         }
         foreach (var item in attached)
         {
-            list.Add(TUWpf<FrameworkElement, DependencyProperty>.Get(fe, item));
+            list.Add(TUWpf<FrameworkElement, DependencyProperty>.Get(frameworkElement, item));
         }
-        savedElement.Add(fe, list);
+        savedElement.Add(frameworkElement, list);
     }
     public static void LoadSettings()
     {

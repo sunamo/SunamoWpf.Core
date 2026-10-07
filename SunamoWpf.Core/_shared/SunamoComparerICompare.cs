@@ -11,16 +11,16 @@ internal class SunamoComparerICompare
             /// <summary>
             ///     As parameter I can insert SunamoComparer.IListCharLength or SunamoComparer.StringLength
             /// </summary>
-            /// <param name="sc"></param>
-            public Asc(ISunamoComparer<string> sc)
+            /// <param name="comparer"></param>
+            public Asc(ISunamoComparer<string> comparer)
             {
-                _sc = sc;
+                _sc = comparer;
             }
 
 
-            public int Compare(string x, string y)
+            public int Compare(string left, string right)
             {
-                return _sc.Asc(x, y);
+                return _sc.Asc(left, right);
             }
         }
 
@@ -31,16 +31,16 @@ internal class SunamoComparerICompare
             /// <summary>
             ///     As parameter I can insert SunamoComparer.IListCharLength or SunamoComparer.StringLength
             /// </summary>
-            /// <param name="sc"></param>
-            internal Desc(ISunamoComparer<string> sc)
+            /// <param name="comparer"></param>
+            internal Desc(ISunamoComparer<string> comparer)
             {
-                _sc = sc;
+                _sc = comparer;
             }
 
 
-            public int Compare(string x, string y)
+            public int Compare(string left, string right)
             {
-                return _sc.Desc(x, y);
+                return _sc.Desc(left, right);
             }
         }
     }

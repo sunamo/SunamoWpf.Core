@@ -36,11 +36,11 @@ public class SunamoComboBox : ComboBox
         base.OnApplyTemplate();
         string nameChild = "PART_EditableTextBox";
         //var d = GetTemplateChild(nameChild);
-        var d = Template.FindName(nameChild, this);
-        if (d != null)
+        var child = Template.FindName(nameChild, this);
+        if (child != null)
         {
-            string type = d.GetType().FullName;
-            var myTextBox = d as TextBox;
+            string type = child.GetType().FullName;
+            var myTextBox = child as TextBox;
             if (myTextBox != null)
             {
                 this.editableTextBox = myTextBox;
@@ -48,9 +48,9 @@ public class SunamoComboBox : ComboBox
         }
     }
 
-    private void SunamoComboBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+    private void SunamoComboBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Space)
+        if (eventArgs.Key == Key.Space)
         {
             this.Text += " ";
             SetCaret(editableTextBox.Text.Length);

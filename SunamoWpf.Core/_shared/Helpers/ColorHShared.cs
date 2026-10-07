@@ -2,14 +2,14 @@ namespace SunamoWpf._shared.Helpers;
 
 public partial class ColorH
 {
-    public static Color GetOpaqueColor(byte r, byte g, byte b)
+    public static Color GetOpaqueColor(byte red, byte green, byte blue)
     {
-        Color c = new Color();
-        c.A = 255;
-        c.R = r;
-        c.G = g;
-        c.B = b;
-        return c;
+        Color color = new Color();
+        color.A = 255;
+        color.R = red;
+        color.G = green;
+        color.B = blue;
+        return color;
     }
 
     public static Color RandomColor(bool dark)

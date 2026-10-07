@@ -12,12 +12,12 @@ public static partial class TwoStatesToggleButton
         }
     }
 
-    public static void SetInitialChecked(ToggleButton tb, bool check)
+    public static void SetInitialChecked(ToggleButton toggleButton, bool check)
     {
-        tb.IsChecked = check;
-        if (!previousCheched.ContainsKey(tb))
+        toggleButton.IsChecked = check;
+        if (!previousCheched.ContainsKey(toggleButton))
         {
-            previousCheched.Add(tb, check);
+            previousCheched.Add(toggleButton, check);
         }
         else
         {
@@ -30,13 +30,13 @@ public static partial class TwoStatesToggleButton
     /// <summary>
     /// musí se volat vždy jako první věc v metodě Click
     /// </summary>
-    /// <param name = "tb"></param>
-    public static void AfterClick(ToggleButton tb)
+    /// <param name = "toggleButton"></param>
+    public static void AfterClick(ToggleButton toggleButton)
     {
-        bool save = !((bool)previousCheched[tb]);
-        previousCheched[tb] = save;
+        bool save = !((bool)previousCheched[toggleButton]);
+        previousCheched[toggleButton] = save;
         //}
-        tb.IsChecked = save;
+        toggleButton.IsChecked = save;
     }
 
 }

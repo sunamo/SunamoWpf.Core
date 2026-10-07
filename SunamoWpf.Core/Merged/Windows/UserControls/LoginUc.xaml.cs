@@ -39,7 +39,7 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
             this.chbUlozHeslo.IsChecked = this.txtHeslo.Text != "";
         }
     }
-    private void btnLetsLogin_Click(object sender, RoutedEventArgs e)
+    private void btnLetsLogin_Click(object sender, RoutedEventArgs eventArgs)
     {
         if (publicSaveLogic)
         {
@@ -63,15 +63,15 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
             ChangeDialogResult(true);
         }
     }
-    private void btnCancel_Click(object sender, RoutedEventArgs e)
+    private void btnCancel_Click(object sender, RoutedEventArgs eventArgs)
     {
         ChangeDialogResult(false);
     }
     public bool HaveLoginedData()
     {
-        string he = RA.ReturnValueString(h);
-        string lo = RA.ReturnValueString(l);
-        return he != "" && lo != "";
+        string firstValue = RA.ReturnValueString(h);
+        string secondValue = RA.ReturnValueString(l);
+        return firstValue != "" && secondValue != "";
     }
     /// <summary>
     /// A1 = LoginData
@@ -79,9 +79,9 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
     /// <param name="input"></param>
     public void Accept(object input)
     {
-        LoginData ld = (LoginData)input;
-        txtLogin.Text = ld.Login;
-        txtHeslo.Text = ld.Pw;
+        LoginData loginData = (LoginData)input;
+        txtLogin.Text = loginData.Login;
+        txtHeslo.Text = loginData.Pw;
         // Cant be, window must be already showned as dialog
         //DialogResult = true;
     }

@@ -48,15 +48,15 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
         get { return Frd.fileFullPath; }
         set { Frd.fileFullPath = value; }
     }
-    public bool Contains(string t)
+    public bool Contains(string text)
     {
-        return Frd.fileFullPath.Contains(t);
+        return Frd.fileFullPath.Contains(text);
     }
-    public bool Contains(Regex r, string text)
+    public bool Contains(Regex regex, string text)
     {
-        if (r != null)
+        if (regex != null)
         {
-            return r.IsMatch(Frd.fileFullPath);
+            return regex.IsMatch(Frd.fileFullPath);
         }
         return Frd.fileFullPath.Contains(text);
     }
@@ -78,9 +78,9 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
     /// A2 is require but is available through foundedResultsUC.DefaultBrush
     /// </summary>
     /// <param name="filePath"></param>
-    /// <param name="p"></param>
+    /// <param name="colors"></param>
     /// <param name="serie"></param>
-    public FoundedResultUC(string filePath, TUListWpf<string, Brush> p, int serie)
+    public FoundedResultUC(string filePath, TUListWpf<string, Brush> colors, int serie)
     {
         try
         {
@@ -96,10 +96,10 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
         tbSerie.Text = serie.ToString();
         Frd.fileFullPath = filePath;
         ellipseSerie.Stroke = Brushes.Black;
-        Frd.P = p;
+        Frd.P = colors;
         Loaded += FoundedResultUC_Loaded;
     }
-    private void FoundedResultUC_Loaded(object sender, RoutedEventArgs e)
+    private void FoundedResultUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         this.file = Frd.fileFullPath;
         bool replaced = false;
@@ -129,12 +129,12 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
         {
         }
     }
-    protected override void OnGotFocus(RoutedEventArgs e)
+    protected override void OnGotFocus(RoutedEventArgs eventArgs)
     {
-        base.OnGotFocus(e);
+        base.OnGotFocus(eventArgs);
         Selected(Frd.fileFullPath);
     }
-    private void FoundedFileUC_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    private void FoundedFileUC_MouseLeftButtonDown(object sender, MouseButtonEventArgs eventArgs)
     {
         Selected(Frd.fileFullPath);
     }

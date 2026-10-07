@@ -10,23 +10,23 @@ public partial class TextBlockHelper{
     /// Tag here is mainly for comment what data control hold 
     /// </summary>
     /// <param name="text"></param>
-    public static TextBlock Get(ControlInitData d)
+    public static TextBlock Get(ControlInitData controlInitData)
     {
-        TextBlock tb = new TextBlock();
+        TextBlock textBlock = new TextBlock();
 
         // TextBlock is not derived from Control, so have own property Foreground
-        TextBlockHelper.SetForeground(tb, d.foreground);
+        TextBlockHelper.SetForeground(textBlock, controlInitData.foreground);
 
-        if (d.imagePath != null)
+        if (controlInitData.imagePath != null)
         {
-            ThrowEx.IsNotNull("d.imagePath", d.imagePath);
+            ThrowEx.IsNotNull("d.imagePath", controlInitData.imagePath);
         }
 
-        tb.Tag = d.tag;
-        tb.ToolTip = d.tooltip;
-        tb.Text = d.text;
+        textBlock.Tag = controlInitData.tag;
+        textBlock.ToolTip = controlInitData.tooltip;
+        textBlock.Text = controlInitData.text;
 
-        return tb;
+        return textBlock;
     }
 
     public static void SetText(TextBlock lblStatusDownload, string status)
@@ -46,23 +46,23 @@ public partial class TextBlockHelper{
     /// <summary>
     /// A1 can be TextBlock or any object
     /// </summary>
-    /// <param name = "tb"></param>
-    public static string TextOrToString(object tb)
+    /// <param name = "value"></param>
+    public static string TextOrToString(object value)
     {
-        if (tb is TextBlock)
+        if (value is TextBlock)
         {
-            var tb2 = (TextBlock)tb;
+            var tb2 = (TextBlock)value;
             return tb2.Text;
         }
 
-        return tb.ToString();
+        return value.ToString();
     }
 
-    public static void SetForeground(TextBlock c, Brush fg)
+    public static void SetForeground(TextBlock textBlock, Brush foreground)
     {
-        if (fg != null)
+        if (foreground != null)
         {
-            c.Foreground = fg;
+            textBlock.Foreground = foreground;
         }
     }
 }

@@ -3,20 +3,20 @@ namespace SunamoWpf.Helpers.ContainerControls;
 
 public partial class WindowHelper
 {
-    public static void SizeOfWindowToTitle(Window w, RowDefinition growingRow, FrameworkElement c)
+    public static void SizeOfWindowToTitle(Window window, RowDefinition growingRow, FrameworkElement content)
     {
-        SizeOfWindowToTitle(w, growingRow.ActualHeight, c);
+        SizeOfWindowToTitle(window, growingRow.ActualHeight, content);
     }
-    public static void SizeOfWindowToTitle(Window w, double growingRow, FrameworkElement c)
+    public static void SizeOfWindowToTitle(Window window, double growingRow, FrameworkElement content)
     {
-        w.Title = $"Window: {w.ActualWidth}x{w.ActualHeight} growingRow: {growingRow} Content: {c.ActualWidth}x{c.ActualHeight}";
+        window.Title = $"Window: {window.ActualWidth}x{window.ActualHeight} growingRow: {growingRow} Content: {content.ActualWidth}x{content.ActualHeight}";
     }
     static IWindowOpener windowOpener = null;
-    public static void ShowExceptionWindow2(object e)
+    public static void ShowExceptionWindow2(object exception)
     {
-        ShowExceptionWindow(e, Environment.NewLine);
+        ShowExceptionWindow(exception, Environment.NewLine);
     }
-    private static void Result_ChangeDialogResult(bool? b)
+    private static void Result_ChangeDialogResult(bool? result)
     {
         windowOpener.windowWithUserControl.Close();
     }
@@ -31,10 +31,10 @@ public partial class WindowHelper
     /// <summary>
     /// Return dump A1
     /// </summary>
-    /// <param name="e"></param>
+    /// <param name="exception"></param>
     /// <param name="methodName"></param>
     /// <returns></returns>
-    public static string ShowExceptionWindow(object e, string methodName = "", bool isTerminanting = false)
+    public static string ShowExceptionWindow(object exception, string methodName = "", bool isTerminanting = false)
     {
         if (methodName != string.Empty)
         {
@@ -44,28 +44,28 @@ public partial class WindowHelper
         //dump = YamlHelper.DumpAsYaml(e);
         //dump = SunamoJsonHelper.SerializeObject(e, true);
         //dump = JsonParser.Serialize<>
-        dump = RH.DumpAsString(new DumpAsStringArgs { o = e, d = DumpProvider.Reflection });
+        dump = RH.DumpAsString(new DumpAsStringArgs { o = exception, d = DumpProvider.Reflection });
         if (dump == lastError)
         {
             return dump;
         }
         lastError = dump;
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         if (isTerminanting)
         {
-            sb.AppendLine("Is terminating: YES");
-            sb.AppendLine();
+            stringBuilder.AppendLine("Is terminating: YES");
+            stringBuilder.AppendLine();
         }
-        sb.AppendLine(methodName);
-        sb.Append(dump);
-        var result = new ShowTextResult(sb.ToString());
+        stringBuilder.AppendLine(methodName);
+        stringBuilder.Append(dump);
+        var result = new ShowTextResult(stringBuilder.ToString());
         result.ChangeDialogResult += Result_ChangeDialogResult;
         if (isTerminanting)
         {
             //result.txtResult.Background = Brushes.OrangeRed;
         }
-        var mw = Application.Current.MainWindow;
-        windowOpener = mw as IWindowOpener;
+        var mainWindow = Application.Current.MainWindow;
+        windowOpener = mainWindow as IWindowOpener;
         if (windowOpener == null)
         {
             string windowOpenerIsNull = "windowOpener == null";
@@ -73,12 +73,12 @@ public partial class WindowHelper
             ShowMb(windowOpenerIsNull);
 #endif
             sl(windowOpenerIsNull);
-            var d = Translate.FromKey(XlfKeys.MainWindowMustBeIWindowOpenerDueToShowExceptions) + $"Is Application.Current.MainWindow null: {mw == null}";
-            if (mw != null)
+            var message = Translate.FromKey(XlfKeys.MainWindowMustBeIWindowOpenerDueToShowExceptions) + $"Is Application.Current.MainWindow null: {mainWindow == null}";
+            if (mainWindow != null)
             {
-                d += $"Type: {mw.GetType()}";
+                message += $"Type: {mainWindow.GetType()}";
             }
-            MessageBox.Show(d);
+            MessageBox.Show(message);
         }
         else
         {
@@ -92,11 +92,11 @@ public partial class WindowHelper
         }
         return dump;
     }
-    public static void Close(Window w)
+    public static void Close(Window window)
     {
         try
         {
-            w.Close();
+            window.Close();
         }
         catch (Exception)
         {

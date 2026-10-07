@@ -28,7 +28,7 @@ public partial class SelectMoreFolders : UserControl
         Loaded += SelectMoreFolders_Loaded;
     }
 
-    private void SelectMoreFolders_Loaded(object sender, RoutedEventArgs e)
+    private void SelectMoreFolders_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         SetAwesomeIcons(); // async Task nelze RunSynchronously (InvalidOperationException); ikony se nastavi pres Dispatcher.InvokeAsync
 
@@ -37,9 +37,9 @@ public partial class SelectMoreFolders : UserControl
 
     public void RemoveAllFolders()
     {
-        for (int i = spFolders.Children.Count - 1; i >= 0; i--)
+        for (int index = spFolders.Children.Count - 1; index >= 0; index--)
         {
-            Sf_FolderRemoved((SelectFolder)spFolders.Children[i]);
+            Sf_FolderRemoved((SelectFolder)spFolders.Children[index]);
         }
     }
 
@@ -51,13 +51,13 @@ public partial class SelectMoreFolders : UserControl
             //TextBox sf = new TextBox();
             //sf.Text = folder;
 
-            SelectFolder sf = new SelectFolder();
-            sf.SelectedFolder = folder;
-            sf.btnRemoveFolder.Visibility = Visibility.Visible;
-            sf.FolderRemoved += Sf_FolderRemoved;
-            sf.FolderChanged += Sf_FolderChanged;
+            SelectFolder selectFolder = new SelectFolder();
+            selectFolder.SelectedFolder = folder;
+            selectFolder.btnRemoveFolder.Visibility = Visibility.Visible;
+            selectFolder.FolderRemoved += Sf_FolderRemoved;
+            selectFolder.FolderChanged += Sf_FolderChanged;
 
-            spFolders.Children.Add(sf);
+            spFolders.Children.Add(selectFolder);
             if (FolderAdded != null)
             {
                 FolderAdded(this, SelectedFolders());
@@ -67,7 +67,7 @@ public partial class SelectMoreFolders : UserControl
         }
     }
 
-    private void Sf_FolderChanged(object o, string s)
+    private void Sf_FolderChanged(object sender, string folder)
     {
         if (FolderChanged != null)
         {
@@ -75,9 +75,9 @@ public partial class SelectMoreFolders : UserControl
         }
     }
 
-    public void Sf_FolderRemoved(SelectFolder t)
+    public void Sf_FolderRemoved(SelectFolder selectFolder)
     {
-        spFolders.Children.Remove(t);
+        spFolders.Children.Remove(selectFolder);
         if (FolderRemoved != null)
         {
             FolderRemoved(this, SelectedFolders());
@@ -91,7 +91,7 @@ public partial class SelectMoreFolders : UserControl
 
     }
 
-    private void BtnAddFolder_Click(object sender, RoutedEventArgs e)
+    private void BtnAddFolder_Click(object sender, RoutedEventArgs eventArgs)
     {
         AddFolder(string.Empty);
     }
@@ -114,7 +114,7 @@ public partial class SelectMoreFolders : UserControl
         return result;
     }
 
-    private void BtnAddAsTemplate_Click(object sender, RoutedEventArgs e)
+    private void BtnAddAsTemplate_Click(object sender, RoutedEventArgs eventArgs)
     {
         SaveSetAsTemplate();
     }
@@ -146,7 +146,7 @@ public partial class SelectMoreFolders : UserControl
         Validate(this);
     }
 
-    private void btnSaveChangesToTemplate_Click(object sender, RoutedEventArgs e)
+    private void btnSaveChangesToTemplate_Click(object sender, RoutedEventArgs eventArgs)
     {
 
     }

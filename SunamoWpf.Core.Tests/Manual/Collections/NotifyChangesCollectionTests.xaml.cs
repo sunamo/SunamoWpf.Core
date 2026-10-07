@@ -58,27 +58,27 @@ namespace Wpf.Tests.Collections
             Loaded += NotifyChangesCollection_Loaded;
         }
 
-        private void NotifyChangesCollection_Loaded(object sender, RoutedEventArgs e)
+        private void NotifyChangesCollection_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             //l = new NotifyChangesCollection<NotifyPropertyChangedWrapper<CheckBox>>(this, new ObservableCollection<NotifyPropertyChangedWrapper<CheckBox>>());
 
             chbl.Init();
-            var l = chbl.l;
+            var items = chbl.l;
 
-            for (int i = 0; i < 10; i++)
+            for (int index = 0; index < 10; index++)
             {
-                l.Add(c(i));
+                items.Add(c(index));
             }
 
-            chbl.lb.ItemsSource = l.l;
+            chbl.lb.ItemsSource = items.l;
         }
 
-        NotifyPropertyChangedWrapper<CheckBox> c(int i)
+        NotifyPropertyChangedWrapper<CheckBox> c(int index)
         {
-            var s = i.ToString();
-            var chb = CheckBoxHelper.Get(new ControlInitData { content = s, tag = s });
-            NotifyPropertyChangedWrapper<CheckBox> d = new NotifyPropertyChangedWrapper<CheckBox>(chb, CheckBox.IsCheckedProperty);
-            return d;
+            var text = index.ToString();
+            var chb = CheckBoxHelper.Get(new ControlInitData { content = text, tag = text });
+            NotifyPropertyChangedWrapper<CheckBox> wrapper = new NotifyPropertyChangedWrapper<CheckBox>(chb, CheckBox.IsCheckedProperty);
+            return wrapper;
         }
 
     }

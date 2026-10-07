@@ -6,9 +6,9 @@ internal static partial class AwesomeFontControls
     public const int low = 61440;
     public const int high = 62176;
 
-    public static bool IsFamilyFontFontAwesome(FontFamily f)
+    public static bool IsFamilyFontFontAwesome(FontFamily fontFamily)
     {
-        foreach (var item in f.FamilyNames)
+        foreach (var item in fontFamily.FamilyNames)
         {
             if (item.Value.Contains(FontAwesome))
             {
@@ -18,21 +18,21 @@ internal static partial class AwesomeFontControls
         return false;
     }
 
-    public static async Task SetAwesomeFontSymbol(Button txtSearchIcon, string v)
+    public static async Task SetAwesomeFontSymbol(Button txtSearchIcon, string symbol)
     {
         await System.Windows.Application.Current.Dispatcher.InvokeAsync(() =>
         {
             txtSearchIcon.FontFamily = new System.Windows.Media.FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#FontAwesome");
-            txtSearchIcon.Content = v;
+            txtSearchIcon.Content = symbol;
         });
     }
 
-    public static async Task SetAwesomeFontSymbol(TextBlock txtSearchIcon, string v)
+    public static async Task SetAwesomeFontSymbol(TextBlock txtSearchIcon, string symbol)
     {
         await System.Windows.Application.Current.Dispatcher.InvokeAsync(() =>
         {
             txtSearchIcon.FontFamily = new System.Windows.Media.FontFamily(new Uri("pack://application:,,,/"), "./Fonts/#FontAwesome");
-            txtSearchIcon.Text = v;
+            txtSearchIcon.Text = symbol;
         });
     }
 }

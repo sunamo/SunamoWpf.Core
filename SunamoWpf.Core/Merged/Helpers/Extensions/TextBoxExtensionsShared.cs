@@ -7,46 +7,46 @@ public static partial class TextBoxExtensions
     /// Before first calling I have to set validated = true
     /// </summary>
     /// <param name = "validated"></param>
-    /// <param name = "tb"></param>
+    /// <param name = "textBox"></param>
     /// <param name = "control"></param>
     /// <param name = "trim"></param>
-    public static void Validate(this TextBox control, object tb, ref ValidateDataWpf d)
+    public static void Validate(this TextBox control, object textBox, ref ValidateDataWpf validateData)
     {
         if (!validated)
         {
             return;
         }
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
         string text = control.Text;
-        if (d.trim)
+        if (validateData.trim)
         {
             text = text.Trim();
         }
-        var tbTos = TextBlockHelper.TextOrToString(tb);
-        if (d.validateMethod != null)
+        var tbTos = TextBlockHelper.TextOrToString(textBox);
+        if (validateData.validateMethod != null)
         {
             // ContainsInvalidFileNameChars return true if fails, therefore here cant be!
-            if (!d.validateMethod(text))
+            if (!validateData.validateMethod(text))
             {
-                if (d.messageWhenValidateMethodFails == null)
+                if (validateData.messageWhenValidateMethodFails == null)
                 {
-                    d.messageWhenValidateMethodFails = tbTos + " must be filled";
+                    validateData.messageWhenValidateMethodFails = tbTos + " must be filled";
                 }
-                d.messageToReallyShow = d.messageWhenValidateMethodFails;
+                validateData.messageToReallyShow = validateData.messageWhenValidateMethodFails;
                 validated = false;
                 return;
             }
         }
-        if (CAG.IsEqualToAnyElement<string>(text.Trim(), d.excludedStrings))
+        if (CAG.IsEqualToAnyElement<string>(text.Trim(), validateData.excludedStrings))
         {
             //InitApp.TemplateLogger.HaveUnallowedValue(tbTos);
             validated = false;
             return;
         }
-        if (text == string.Empty && !d.allowEmpty)
+        if (text == string.Empty && !validateData.allowEmpty)
         {
             //InitApp.TemplateLogger.MustHaveValue(tbTos);
             validated = false;

@@ -24,8 +24,8 @@ public class ApplicationDataContainerSearchTextBox : ApplicationDataContainer, I
             items.Add(ContentControlHelper.ExtractContent(item.o.Content)?.ToString() ?? string.Empty);
             items.Add(BTS.BoolToInt(item.o.IsChecked.Value).ToString());
         }
-        var sb = string.Join(innerDelimiter, items);
-        Set(sender, chbAdded, sb);
+        var joined = string.Join(innerDelimiter, items);
+        Set(sender, chbAdded, joined);
         SaveControl(chb);
     }
 
@@ -34,10 +34,10 @@ public class ApplicationDataContainerSearchTextBox : ApplicationDataContainer, I
     {
         var adcl = AddFrameworkElement(chbl as FrameworkElement);
         var list = adcl.GetListString(chbAdded, innerDelimiter);
-        for (int i = 0; i < list.Count; i++)
+        for (int index = 0; index < list.Count; index++)
         {
-            var chb = CheckBoxHelper.Get(new ControlInitData { text = list[i] });
-            var maybeInt = list[++i];
+            var chb = CheckBoxHelper.Get(new ControlInitData { text = list[index] });
+            var maybeInt = list[++index];
             if (!BTS.IsInt(maybeInt))
             {
             }

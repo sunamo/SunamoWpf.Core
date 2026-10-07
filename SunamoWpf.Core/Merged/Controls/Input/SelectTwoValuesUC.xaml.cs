@@ -51,17 +51,17 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
         Loaded += uc_Loaded;
     }
 
-    private void CbEntered1_KeyDown(object sender, KeyEventArgs e)
+    private void CbEntered1_KeyDown(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Enter)
+        if (eventArgs.Key == Key.Enter)
         {
 
         }
     }
 
-    private void CbEntered2_KeyDown(object sender, KeyEventArgs e)
+    private void CbEntered2_KeyDown(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Enter)
+        if (eventArgs.Key == Key.Enter)
         {
 
         }
@@ -85,12 +85,12 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
         return false;
     }
 
-    private void CbEntered1_Selected(object sender, RoutedEventArgs e)
+    private void CbEntered1_Selected(object sender, RoutedEventArgs eventArgs)
     {
         EnableBtn();
     }
 
-    private void CbEntered2_Selected(object sender, RoutedEventArgs e)
+    private void CbEntered2_Selected(object sender, RoutedEventArgs eventArgs)
     {
         EnableBtn();
     }
@@ -141,12 +141,12 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
 
     }
 
-    private void BtnEnter_Click(object sender, RoutedEventArgs e)
+    private void BtnEnter_Click(object sender, RoutedEventArgs eventArgs)
     {
         DialogResult = true;
     }
 
-    public void uc_Loaded(object sender, RoutedEventArgs e)
+    public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
 
     }

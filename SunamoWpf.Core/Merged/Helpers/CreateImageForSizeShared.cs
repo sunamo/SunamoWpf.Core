@@ -21,35 +21,35 @@ public class CreateImageForSizeShared
         gra.SmoothingMode = SmoothingMode.AntiAlias;
         gra.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-        using (var sf = new StringFormat()
+        using (var stringFormat = new StringFormat()
         {
             Alignment = StringAlignment.Center,
             LineAlignment = StringAlignment.Center,
         })
         {
             gra.FillRectangle(ColorH.RandomLightBrush(RandomHelper.RandomEnum<ColorComponent>()).ToSystemDrawing(), rect);
-            gra.DrawString(text, font, brush, new Rectangle(0, 0, bmp.Width, bmp.Height), sf);
+            gra.DrawString(text, font, brush, new Rectangle(0, 0, bmp.Width, bmp.Height), stringFormat);
         }
 
-        var fn = FS.ReplaceIncorrectCharactersFile(SH.ShortForLettersCount(text, 100));
-        var path = Path.Combine(saveToFolder, fn + ".jpg");
+        var fileName = FS.ReplaceIncorrectCharactersFile(SH.ShortForLettersCount(text, 100));
+        var path = Path.Combine(saveToFolder, fileName + ".jpg");
         FS.CreateUpfoldersPsysicallyUnlessThere(path);
 
 
         bmp.Save(path, ImageFormat.Jpeg);
     }
 
-    public static void CreateSingleColorImageWithColor(int w, int h, string fn, SunamoColor c, string saveToFolder)
+    public static void CreateSingleColorImageWithColor(int width, int height, string fileName, SunamoColor color, string saveToFolder)
     {
-        if (c != null && w != int.MinValue && h != int.MinValue)
+        if (color != null && width != int.MinValue && height != int.MinValue)
         {
-            Bitmap Bmp = new Bitmap(w, h);
+            Bitmap Bmp = new Bitmap(width, height);
             using (Graphics gfx = Graphics.FromImage(Bmp))
-            using (SolidBrush brush = new SolidBrush(c.ToSystemDrawing()))
+            using (SolidBrush brush = new SolidBrush(color.ToSystemDrawing()))
             {
-                gfx.FillRectangle(brush, 0, 0, w, h);
+                gfx.FillRectangle(brush, 0, 0, width, height);
             }
-            Bmp.Save(Path.Combine(saveToFolder, fn + ".png"), ImageFormat.Png);
+            Bmp.Save(Path.Combine(saveToFolder, fileName + ".png"), ImageFormat.Png);
         }
     }
 }

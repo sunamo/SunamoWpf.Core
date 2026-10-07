@@ -13,14 +13,14 @@ public class FoundedFileUC : FoundedResultUC
     ///
     /// </summary>
     /// <param name="sender"></param>
-    /// <param name="e"></param>
-    public static void Frd3Changed(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    /// <param name="eventArgs"></param>
+    public static void Frd3Changed(DependencyObject sender, DependencyPropertyChangedEventArgs eventArgs)
     {
-        var v = (FoundedFileUC)sender;
-        v.tbFileName.Text = e.NewValue.ToString();
+        var control = (FoundedFileUC)sender;
+        control.tbFileName.Text = eventArgs.NewValue.ToString();
     }
     public string FileFullPath { get; set; }
-    public FoundedFileUC(string filePath, TUListWpf<string, Brush> p, int serie) : base(filePath, p, serie)
+    public FoundedFileUC(string filePath, TUListWpf<string, Brush> colors, int serie) : base(filePath, colors, serie)
     {
     }
     public FoundedFileUC()

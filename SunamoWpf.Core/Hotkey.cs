@@ -8,10 +8,10 @@ public class HotKey : IDisposable
     private static Dictionary<int, HotKey> _dictHotKeyToCalBackProc;
 
     [DllImport("user32.dll")]
-    private static extern bool RegisterHotKey(nint hWnd, int id, uint fsModifiers, uint vlc);
+    private static extern bool RegisterHotKey(nint hWnd, int hotKeyId, uint fsModifiers, uint vlc);
 
     [DllImport("user32.dll")]
-    private static extern bool UnregisterHotKey(nint hWnd, int id);
+    private static extern bool UnregisterHotKey(nint hWnd, int hotKeyId);
 
     public const int WmHotKey = 0x0312;
 
@@ -30,9 +30,9 @@ public class HotKey : IDisposable
     //}
 
     // ******************************************************************
-    public HotKey(Key k, KeyModifier keyModifiers, Action<HotKey> action, bool register = true)
+    public HotKey(Key key, KeyModifier keyModifiers, Action<HotKey> action, bool register = true)
     {
-        Key = k;
+        Key = key;
         KeyModifiers = keyModifiers;
         Action = action;
         if (register)

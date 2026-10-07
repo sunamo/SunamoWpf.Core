@@ -4,16 +4,16 @@ namespace SunamoWpf.Helpers.BaseControls;
 public partial class FrameworkElementHelper
 {
     static Type type = typeof(FrameworkElementHelper);
-    public static object GetTagCheckBoxListUC(object o)
+    public static object GetTagCheckBoxListUC(object sender)
     {
-        var fw = (FrameworkElement)o;
-        var t = fw.Tag;
-        var s = (FrameworkElementTag)t;
-        return s.tagCheckBoxListUC;
+        var frameworkElement = (FrameworkElement)sender;
+        var tag = frameworkElement.Tag;
+        var elementTag = (FrameworkElementTag)tag;
+        return elementTag.tagCheckBoxListUC;
     }
     public static int CountOfAncestor(FrameworkElement item)
     {
-        var mi = item as MenuItem;
+        var menuItem = item as MenuItem;
         int result = 0;
         while (true)
         {
@@ -32,56 +32,56 @@ public partial class FrameworkElementHelper
     }
     private static string HeaderOrName(FrameworkElement item)
     {
-        var mi = item as MenuItem;
-        if (mi != null)
+        var menuItem = item as MenuItem;
+        if (menuItem != null)
         {
-            if (mi.Name != null)
+            if (menuItem.Name != null)
             {
-                return mi.Name;
+                return menuItem.Name;
             }
-            if (mi.Header != null)
+            if (menuItem.Header != null)
             {
-                return mi.Header.ToString();
+                return menuItem.Header.ToString();
             }
             return "(null)";
         }
         return "Not MI";
     }
-    public static T CastTo<T>(FrameworkElement o) where T : class
+    public static T CastTo<T>(FrameworkElement element) where T : class
     {
         T casted = default(T);
         //var casted2 = o as T;
         while (EqualityComparer<T>.Default.Equals(casted, default(T)))
         {
-            if (o.Parent == null)
+            if (element.Parent == null)
             {
                 break;
             }
-            o = (FrameworkElement)o.Parent;
-            casted = o as T;
+            element = (FrameworkElement)element.Parent;
+            casted = element as T;
         }
         return casted;
     }
-    public static Size GetMaxContentSize(FrameworkElement fe)
+    public static Size GetMaxContentSize(FrameworkElement frameworkElement)
     {
-        return new Size(fe.ActualWidth, fe.ActualHeight);
+        return new Size(frameworkElement.ActualWidth, frameworkElement.ActualHeight);
     }
-    public static Size GetContentSize(FrameworkElement fe)
+    public static Size GetContentSize(FrameworkElement frameworkElement)
     {
-        return new Size(fe.Width, fe.Height);
+        return new Size(frameworkElement.Width, frameworkElement.Height);
     }
-    public static void SetMaxContentSize(FrameworkElement fe, Size s)
+    public static void SetMaxContentSize(FrameworkElement frameworkElement, Size size)
     {
-        fe.MaxWidth = s.Width;
-        fe.MaxHeight = s.Height;
-        fe.Width = s.Width;
-        fe.Height = s.Height;
+        frameworkElement.MaxWidth = size.Width;
+        frameworkElement.MaxHeight = size.Height;
+        frameworkElement.Width = size.Width;
+        frameworkElement.Height = size.Height;
     }
-    public static void SetWidthAndHeight(FrameworkElement fe, Size s)
+    public static void SetWidthAndHeight(FrameworkElement frameworkElement, Size size)
     {
-        fe.Width = s.Width;
-        fe.Height = s.Height;
-        fe.UpdateLayout();
+        frameworkElement.Width = size.Width;
+        frameworkElement.Height = size.Height;
+        frameworkElement.UpdateLayout();
     }
     public static T FindName<T>(FrameworkElement element, string controlNamePrefix, int serie)
     {
@@ -103,29 +103,29 @@ public partial class FrameworkElementHelper
     {
         return RH.IsOrIsDeriveFromBaseClass(customControl.GetType(), typeof(Panel));
     }
-    public static T FindByTag<T>(object customControl, object v)
+    public static T FindByTag<T>(object customControl, object tag)
         where T : FrameworkElement
     {
         if (IsContentControl(customControl))
         {
-            ContentControl c = (ContentControl)customControl;
-            return FindByTag<T>(c.Content, v);
+            ContentControl contentControl = (ContentControl)customControl;
+            return FindByTag<T>(contentControl.Content, tag);
         }
         else if (IsPanel(customControl))
         {
-            Panel c = (Panel)customControl;
-            foreach (var item in c.Children)
+            Panel panel = (Panel)customControl;
+            foreach (var item in panel.Children)
             {
                 if (IsPanel(item) || IsContentControl(item))
                 {
-                    return FindByTag<T>(item, v);
+                    return FindByTag<T>(item, tag);
                 }
                 if (RH.IsOrIsDeriveFromBaseClass(item.GetType(), typeof(FrameworkElement)))
                 {
-                    FrameworkElement fw = (FrameworkElement)item;
-                    if (BTS.CompareAsObjectAndString(fw.Tag, v))
+                    FrameworkElement frameworkElement = (FrameworkElement)item;
+                    if (BTS.CompareAsObjectAndString(frameworkElement.Tag, tag))
                     {
-                        return (T)fw;
+                        return (T)frameworkElement;
                     }
                 }
             }
@@ -140,38 +140,38 @@ public partial class FrameworkElementHelper
     /// Dont use Aligment for stretch / fill all available size.
     /// Width / Height = double.NaN work like a charm!
     /// </summary>
-    /// <param name="g"></param>
-    public static void AligmentStretch(Grid g)
+    /// <param name="grid"></param>
+    public static void AligmentStretch(Grid grid)
     {
-        g.HorizontalAlignment = HorizontalAlignment.Stretch;
-        g.VerticalAlignment = VerticalAlignment.Stretch;
+        grid.HorizontalAlignment = HorizontalAlignment.Stretch;
+        grid.VerticalAlignment = VerticalAlignment.Stretch;
     }
     /// <summary>
     /// Dont use Aligment for stretch / fill all available size.
     /// Width / Height = double.NaN work like a charm!
     /// </summary>
-    /// <param name="fw"></param>
-    public static void HorizontalAligmentStretch(FrameworkElement fw)
+    /// <param name="frameworkElement"></param>
+    public static void HorizontalAligmentStretch(FrameworkElement frameworkElement)
     {
-        fw.HorizontalAlignment = HorizontalAlignment.Stretch;
-        if (fw is Control)
+        frameworkElement.HorizontalAlignment = HorizontalAlignment.Stretch;
+        if (frameworkElement is Control)
         {
-            var c = (Control)fw;
-            c.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            var control = (Control)frameworkElement;
+            control.HorizontalContentAlignment = HorizontalAlignment.Stretch;
         }
     }
     /// <summary>
     /// Dont use Aligment for stretch / fill all available size.
     /// Width / Height = double.NaN work like a charm!
     /// </summary>
-    /// <param name="fw"></param>
-    public static void VerticalAligmentStretch(FrameworkElement fw)
+    /// <param name="frameworkElement"></param>
+    public static void VerticalAligmentStretch(FrameworkElement frameworkElement)
     {
-        fw.VerticalAlignment = VerticalAlignment.Stretch;
-        if (fw is Control)
+        frameworkElement.VerticalAlignment = VerticalAlignment.Stretch;
+        if (frameworkElement is Control)
         {
-            var c = (Control)fw;
-            c.VerticalContentAlignment = VerticalAlignment.Stretch;
+            var control = (Control)frameworkElement;
+            control.VerticalContentAlignment = VerticalAlignment.Stretch;
         }
     }
     public static T FindName<T>(FrameworkElement element, string controlName)

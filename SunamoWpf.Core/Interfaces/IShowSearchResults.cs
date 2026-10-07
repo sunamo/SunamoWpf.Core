@@ -6,5 +6,5 @@ namespace SunamoWpf.Interfaces;
 public interface IShowSearchResults
 {
     void SetTbSearchedResult(int actual, int count);
-    void SetTextBoxState(string s = null);
+    void SetTextBoxState(string text = null);
 }

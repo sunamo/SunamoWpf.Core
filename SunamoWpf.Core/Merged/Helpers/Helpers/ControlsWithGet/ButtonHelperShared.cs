@@ -10,18 +10,18 @@ public static partial class ButtonHelper{
     /// </summary>
     /// <param name="tooltip"></param>
     /// <param name="imagePath"></param>
-    public static Button Get(ControlInitData d)
+    public static Button Get(ControlInitData controlInitData)
     {
-        Button vr = new Button();
-        ControlHelper.SetForeground(vr, d.foreground);
-        vr.Content = ContentControlHelper.GetContent(d);
-        if (d.OnClick != null)
+        Button button = new Button();
+        ControlHelper.SetForeground(button, controlInitData.foreground);
+        button.Content = ContentControlHelper.GetContent(controlInitData);
+        if (controlInitData.OnClick != null)
         {
-            vr.Click += d.OnClick;
+            button.Click += controlInitData.OnClick;
         }
-        vr.Tag = d.tag;
-        vr.ToolTip = d.tooltip;
-        return vr;
+        button.Tag = controlInitData.tag;
+        button.ToolTip = controlInitData.tooltip;
+        return button;
     }
 
     public static void PerformClick(Button btnEnter)

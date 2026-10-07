@@ -1,27 +1,27 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers;
 
-public delegate void updateContentOfLabel(Label lbl, object c);
-public delegate void updateBorderBrushOfBorder(Border b, Brush br);
-public delegate Brush getBorderBrushOfBorder(Border b);
-public delegate void updateProgressBarWpf(ProgressBar pb, double value);
+public delegate void updateContentOfLabel(Label lbl, object content);
+public delegate void updateBorderBrushOfBorder(Border border, Brush brush);
+public delegate Brush getBorderBrushOfBorder(Border border);
+public delegate void updateProgressBarWpf(ProgressBar progressBar, double value);
 public delegate void updateTextBlockText(TextBlock lbl, string text);
 public delegate void appendToTextBlock(TextBlock lbl, string text);
-public delegate void changeVisibilityUIElementWpf(UIElement uie, Visibility v);
-public delegate void updateContentOfStatusBarItem(StatusBarItem sbi, object o);
+public delegate void changeVisibilityUIElementWpf(UIElement uie, Visibility visibility);
+public delegate void updateContentOfStatusBarItem(StatusBarItem sbi, object content);
 public delegate void appendToTextBox(TextBox lbl, string text);
-public delegate void insertToListBoxWpf(ListBox lb, int index, object o);
-public delegate void setDataContext(FrameworkElement fe, object o);
-public delegate object getDataContext(FrameworkElement fe);
-public delegate void setEnabled(UIElement uie, bool ed);
-public delegate object getSelectedItemSelector(Selector cb);
-public delegate void setItemsSourceOfItemsControl(ItemsControl ic, IList o);
+public delegate void insertToListBoxWpf(ListBox listBox, int index, object item);
+public delegate void setDataContext(FrameworkElement frameworkElement, object dataContext);
+public delegate object getDataContext(FrameworkElement frameworkElement);
+public delegate void setEnabled(UIElement uie, bool enabled);
+public delegate object getSelectedItemSelector(Selector selector);
+public delegate void setItemsSourceOfItemsControl(ItemsControl itemsControl, IList items);
 public delegate void setCaretIndexOfTextBox(TextBox txt, int caretIndex);
 public delegate void focusTextBox(TextBox txt);
 public delegate string getTextOfTextBox(TextBox txt);
 public delegate void scrollToEndTextBox(TextBox txt);
-public delegate object getItemAtIndexInSelector(Selector s, int dex);
-public delegate void setSelectedItemSelector(Selector s, object item);
+public delegate object getItemAtIndexInSelector(Selector selector, int dex);
+public delegate void setSelectedItemSelector(Selector selector, object item);
 public delegate void updateLayoutOfUIElement(UIElement uie);
 //public delegate ListBoxItem getListBoxItemFromObject(ListBox lb, object )
 
@@ -85,22 +85,22 @@ public partial class IH
     {
         return tb.Text;
     }
-    static void setTextTextBlockW(TextBlock tb, string t)
+    static void setTextTextBlockW(TextBlock textBlock, string text)
     {
-        tb.Text = t;
+        textBlock.Text = text;
     }
 
     public static void updateLayoutOfUIElement(UIElement uie)
     {
         uie.UpdateLayout();
     }
-    public static void setSelectedItemSelector(Selector s, object item)
+    public static void setSelectedItemSelector(Selector selector, object item)
     {
-        s.SelectedItem = item;
+        selector.SelectedItem = item;
     }
-    public static object getItemAtIndexInSelector(Selector s, int dex)
+    public static object getItemAtIndexInSelector(Selector selector, int dex)
     {
-        return s.Items[dex];
+        return selector.Items[dex];
     }
     public static void scrollToEndTextBox(TextBox txt)
     {
@@ -114,43 +114,43 @@ public partial class IH
     {
         txt.Focus();
     }
-    public static void updateContentOfLabelValue(Label l, object content)
+    public static void updateContentOfLabelValue(Label label, object content)
     {
-        l.Content = content;
+        label.Content = content;
     }
     public static void setCaretIndexOfTextBox(TextBox txt, int caretIndex)
     {
         txt.CaretIndex = caretIndex;
     }
-    public static void updateBorderBrushOfBorderValue(Border b, Brush br)
+    public static void updateBorderBrushOfBorderValue(Border border, Brush brush)
     {
-        b.BorderBrush = br;
+        border.BorderBrush = brush;
     }
-    public static Brush getBorderBrushOfBorderValue(Border b)
+    public static Brush getBorderBrushOfBorderValue(Border border)
     {
-        return b.BorderBrush;
+        return border.BorderBrush;
     }
-    public static void updateContentOfStatusBarItemValue(StatusBarItem sbi, object o)
+    public static void updateContentOfStatusBarItemValue(StatusBarItem sbi, object content)
     {
-        sbi.Content = o;
+        sbi.Content = content;
     }
-    static void setItemsSourceOfItemsControlM(ItemsControl ic, IList o)
+    static void setItemsSourceOfItemsControlM(ItemsControl itemsControl, IList items)
     {
-        ic.ItemsSource = o;
+        itemsControl.ItemsSource = items;
     }
     /// <summary>
     /// Tato metoda je pro WPF, updateProgressBarValue pak na WF
     /// </summary>
-    /// <param name="pb"></param>
+    /// <param name="progressBar"></param>
     /// <param name="value"></param>
-    public static void updateProgressBarWpfValue(ProgressBar pb, double value)
+    public static void updateProgressBarWpfValue(ProgressBar progressBar, double value)
     {
         if (value > 100)
         {
             //ThrowEx.Custom("Hodnota pro ProgressBar nemůže být vyšší než 100.");
             value = 100;
         }
-        pb.Value = value;
+        progressBar.Value = value;
     }
     public static void updateTextBlockText(TextBlock lbl, string text)
     {
@@ -162,35 +162,35 @@ public partial class IH
         lbl.Text = lbl.Text + " " + text;
         lbl.ToolTip = lbl.Text;
     }
-    public static void appendToTextBoxText(TextBox tb, string text)
+    public static void appendToTextBoxText(TextBox textBox, string text)
     {
-        tb.Text = tb.Text + " " + text;
-        tb.ToolTip = tb.Text;
+        textBox.Text = textBox.Text + " " + text;
+        textBox.ToolTip = textBox.Text;
     }
     //
-    public static void updateVisibility(UIElement ui, Visibility vis)
+    public static void updateVisibility(UIElement uiElement, Visibility vis)
     {
-        ui.Visibility = vis;
+        uiElement.Visibility = vis;
     }
 
-    public static void insertToListBoxWpfValue(ListBox lb, int index, object o)
+    public static void insertToListBoxWpfValue(ListBox listBox, int index, object item)
     {
-        lb.Items.Insert(index, o);
+        listBox.Items.Insert(index, item);
     }
-    public static void setDataContextObject(FrameworkElement fw, object dc)
+    public static void setDataContextObject(FrameworkElement frameworkElement, object dataContext)
     {
-        fw.DataContext = dc;
+        frameworkElement.DataContext = dataContext;
     }
-    public static object getDataContextObject(FrameworkElement fw)
+    public static object getDataContextObject(FrameworkElement frameworkElement)
     {
-        return fw.DataContext;
+        return frameworkElement.DataContext;
     }
-    public static void setEnabledBool(UIElement ui, bool b)
+    public static void setEnabledBool(UIElement uiElement, bool enabled)
     {
-        ui.IsEnabled = b;
+        uiElement.IsEnabled = enabled;
     }
-    public static object getSelectedItemSelector(Selector s)
+    public static object getSelectedItemSelector(Selector selector)
     {
-        return s.SelectedItem;
+        return selector.SelectedItem;
     }
 }

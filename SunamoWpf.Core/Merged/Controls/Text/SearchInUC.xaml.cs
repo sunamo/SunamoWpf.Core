@@ -19,7 +19,7 @@ public partial class SearchInUC : UserControl
         Loaded += SearchInUC_Loaded;
     }
 
-    private void SearchInUC_Loaded(object sender, RoutedEventArgs e)
+    private void SearchInUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         cbSearchInContentUC.Name = Name + "Cb";
         chbSearchInContent.Name = Name + "Chb";
@@ -27,7 +27,7 @@ public partial class SearchInUC : UserControl
         chbSearchInContent.Checked += ChbSearchInContent_Checked;
     }
 
-    private void ChbSearchInContent_Checked(object sender, RoutedEventArgs e)
+    private void ChbSearchInContent_Checked(object sender, RoutedEventArgs eventArgs)
     {
 
     }

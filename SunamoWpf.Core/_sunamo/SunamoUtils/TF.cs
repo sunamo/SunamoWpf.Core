@@ -9,27 +9,27 @@ internal class TF
 #else
 void
 #endif
-        AppendAllText(string content, string sf)
+        AppendAllText(string content, string path)
     {
 #if ASYNC
         await
 #endif
-            File.AppendAllTextAsync(sf, content).ConfigureAwait(false);
+            File.AppendAllTextAsync(path, content).ConfigureAwait(false);
     }
 
-    public static async Task<string?> ReadAllText(string f)
+    public static async Task<string?> ReadAllText(string path)
     {
-        return await File.ReadAllTextAsync(f).ConfigureAwait(false);
+        return await File.ReadAllTextAsync(path).ConfigureAwait(false);
     }
 
-    public static async Task WriteAllLines(string item2, List<string> l)
+    public static async Task WriteAllLines(string item2, List<string> lines)
     {
-        await File.WriteAllLinesAsync(item2, l).ConfigureAwait(false);
+        await File.WriteAllLinesAsync(item2, lines).ConfigureAwait(false);
     }
 
-    public static async Task WriteAllText(string csProj, string c)
+    public static async Task WriteAllText(string csProj, string content)
     {
-        await File.WriteAllTextAsync(csProj, c).ConfigureAwait(false);
+        await File.WriteAllTextAsync(csProj, content).ConfigureAwait(false);
     }
 
     /// <summary>

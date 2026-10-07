@@ -19,20 +19,20 @@ public class ItemsControlHelper
             var coa = FrameworkElementHelper.CountOfAncestor(item);
             DictionaryHelper.AddOrCreate<int, ItemsControl>(mi2, coa, item);
         }
-        var sorted = mi2.OrderByDescending(d2 => d2.Key);
+        var sorted = mi2.OrderByDescending(entry => entry.Key);
         foreach (var item in sorted)
         {
-            for (int i = item.Value.Count - 1; i >= 0; i--)
+            for (int index = item.Value.Count - 1; index >= 0; index--)
             {
-                var item2 = item.Value[i];
-                var ic = item2 as SuMenuItem;
+                var item2 = item.Value[index];
+                var itemsControl = item2 as SuMenuItem;
                 string header = "(null)";
-                if (ic != null)
+                if (itemsControl != null)
                 {
 #if DEBUG
-                    if (ic.Header != null)
+                    if (itemsControl.Header != null)
                     {
-                        header = ic.Header.ToString();
+                        header = itemsControl.Header.ToString();
                         if (header == "Xlf")
                         {
                         }
@@ -40,9 +40,9 @@ public class ItemsControlHelper
                         {
                         }
                     }
-                    if (ic.Name != null)
+                    if (itemsControl.Name != null)
                     {
-                        if (ic.Name == "miAddSelectedSunamoProjectsToProjects")
+                        if (itemsControl.Name == "miAddSelectedSunamoProjectsToProjects")
                         {
                         }
                     }
@@ -56,12 +56,12 @@ public class ItemsControlHelper
                 {
                     continue;
                 }
-                if (!ic.onClick)
+                if (!itemsControl.onClick)
                 {
-                    var mip = ic.Parent as MenuItem;
+                    var mip = itemsControl.Parent as MenuItem;
                     if (mip != null)
                     {
-                        mip.Items.Remove(ic);
+                        mip.Items.Remove(itemsControl);
                         continue;
                     }
                 }
@@ -71,8 +71,8 @@ public class ItemsControlHelper
                 }
                 if (item2.Items.Count == 0)
                 {
-                    var mi = item2 as SuMenuItem;
-                    if (mi.onClick)
+                    var menuItem = item2 as SuMenuItem;
+                    if (menuItem.onClick)
                     {
                         continue;
                     }
@@ -82,7 +82,7 @@ public class ItemsControlHelper
                         // ic is Grid etc.
                         continue;
                     }
-                    if (ic.onClick)
+                    if (itemsControl.onClick)
                     {
                         //DebugLogger.instance.WriteLine(header);
                     }
@@ -98,10 +98,10 @@ public class ItemsControlHelper
             return;
         }
         list.Add(item);
-        foreach (var i2 in item.Items)
+        foreach (var subItem in item.Items)
         {
-            var mi = i2 as ItemsControl;
-            AddSubitems(list, mi);
+            var subItemsControl = subItem as ItemsControl;
+            AddSubitems(list, subItemsControl);
         }
     }
     public static List<ItemsControl> RecursivelyAllSubItems<T>(ItemCollection items) where T : ItemsControl
@@ -118,12 +118,12 @@ public class ItemsControlHelper
 #endif
         return result;
     }
-    public static void RecursivelyAllSubItems<T>(List<ItemsControl> ic, ItemCollection items) where T : ItemsControl
+    public static void RecursivelyAllSubItems<T>(List<ItemsControl> result, ItemCollection items) where T : ItemsControl
     {
         foreach (T item in items)
         {
-            ic.Add(item);
-            RecursivelyAllSubItems<T>(ic, item.Items);
+            result.Add(item);
+            RecursivelyAllSubItems<T>(result, item.Items);
         }
     }
 }

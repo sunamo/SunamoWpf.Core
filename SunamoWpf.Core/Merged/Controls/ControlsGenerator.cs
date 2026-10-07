@@ -6,16 +6,16 @@ public class ControlsGenerator
     public static RadioButton RadioButtonWithDescription(TWithSizeInString<string> data, bool addDescription, bool tick)
     {
         RadioButton chb = new RadioButton();
-        StackPanel sp = new StackPanel();
-        sp.Orientation = Orientation.Vertical;
-        sp.Children.Add(TextBlockHelper.Get(new ControlInitData { text = data.t }));
+        StackPanel stackPanel = new StackPanel();
+        stackPanel.Orientation = Orientation.Vertical;
+        stackPanel.Children.Add(TextBlockHelper.Get(new ControlInitData { text = data.t }));
         if (addDescription)
         {
-            sp.Children.Add(TextBlockHelper.Get(new ControlInitData { text = data.sizeS }));
+            stackPanel.Children.Add(TextBlockHelper.Get(new ControlInitData { text = data.sizeS }));
         }
         chb.IsThreeState = false;
         chb.IsChecked = tick;
-        chb.Content = sp;
+        chb.Content = stackPanel;
         return chb;
     }
 
@@ -27,19 +27,19 @@ public class ControlsGenerator
     /// <param name="tick"></param>
     public static CheckBox CheckBoxWithDescription(TWithSizeInString<string> data, bool addDescription, bool tick)
     {
-        var s = TextBlockHelper.Get(new ControlInitData { text = data.sizeS });
+        var textBlock = TextBlockHelper.Get(new ControlInitData { text = data.sizeS });
 
         CheckBox chb = new CheckBox();
-        StackPanel sp = new StackPanel();
-        sp.Orientation = Orientation.Vertical;
-        sp.Children.Add(TextBlockHelper.Get(new ControlInitData { text = data.t }));
+        StackPanel stackPanel = new StackPanel();
+        stackPanel.Orientation = Orientation.Vertical;
+        stackPanel.Children.Add(TextBlockHelper.Get(new ControlInitData { text = data.t }));
         if (addDescription)
         {
-            sp.Children.Add(s);
+            stackPanel.Children.Add(textBlock);
         }
         chb.IsThreeState = false;
         chb.IsChecked = tick;
-        chb.Content = sp;
+        chb.Content = stackPanel;
         return chb;
     }
 

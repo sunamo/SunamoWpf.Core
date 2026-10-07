@@ -9,8 +9,8 @@ internal partial class ThrowEx
     public static bool BadMappedXaml(string nameControl, string additionalInfo)
     { return ThrowIsNotNull(Exceptions.BadMappedXaml(FullNameOfExecutedCode(), nameControl, additionalInfo)); }
 
-    public static bool Custom(Exception ex, bool reallyThrow = true)
-    { return Custom(Exceptions.TextOfExceptions(ex), reallyThrow); }
+    public static bool Custom(Exception exception, bool reallyThrow = true)
+    { return Custom(Exceptions.TextOfExceptions(exception), reallyThrow); }
 
     public static bool Custom(string message, bool reallyThrow = true, string secondMessage = "")
     {
@@ -25,8 +25,8 @@ internal partial class ThrowEx
     public static bool DoesntHaveRequiredType(string variableName)
     { return ThrowIsNotNull(Exceptions.DoesntHaveRequiredType(FullNameOfExecutedCode(), variableName)); }
 
-    public static bool ExcAsArg(Exception ex, string message = "")
-    { return ThrowIsNotNull(Exceptions.ExcAsArg, ex, message); }
+    public static bool ExcAsArg(Exception exception, string message = "")
+    { return ThrowIsNotNull(Exceptions.ExcAsArg, exception, message); }
     public static bool FileHasExtensionNotParseAbleToImageFormat(string fnOri)
     { return ThrowIsNotNull(Exceptions.FileHasExtensionNotParseAbleToImageFormat(FullNameOfExecutedCode(), fnOri)); }
 
@@ -52,8 +52,8 @@ internal partial class ThrowEx
     public static string FullNameOfExecutedCode()
     {
         Tuple<string, string, string> placeOfExc = Exceptions.PlaceOfException();
-        string f = FullNameOfExecutedCode(placeOfExc.Item1, placeOfExc.Item2, true);
-        return f;
+        string fullName = FullNameOfExecutedCode(placeOfExc.Item1, placeOfExc.Item2, true);
+        return fullName;
     }
 
     static string FullNameOfExecutedCode(object type, string methodName, bool fromThrowEx = false)
@@ -84,8 +84,8 @@ internal partial class ThrowEx
         }
         else
         {
-            Type t = type.GetType();
-            typeFullName = t.FullName ?? "Type cannot be get via type.GetType()";
+            Type objectType = type.GetType();
+            typeFullName = objectType.FullName ?? "Type cannot be get via type.GetType()";
         }
         return string.Concat(typeFullName, ".", methodName);
     }
@@ -114,21 +114,21 @@ internal partial class ThrowEx
         return true;
     }
 
-    public static bool ThrowIsNotNull<A, B>(Func<string, A, B, string?> f, A ex, B message)
+    public static bool ThrowIsNotNull<A, B>(Func<string, A, B, string?> messageFactory, A exception, B message)
     {
-        string? exc = f(FullNameOfExecutedCode(), ex, message);
+        string? exc = messageFactory(FullNameOfExecutedCode(), exception, message);
         return ThrowIsNotNull(exc);
     }
 
-    public static bool ThrowIsNotNull<A>(Func<string, A, string?> f, A ex)
+    public static bool ThrowIsNotNull<A>(Func<string, A, string?> messageFactory, A exception)
     {
-        string? exc = f(FullNameOfExecutedCode(), ex);
+        string? exc = messageFactory(FullNameOfExecutedCode(), exception);
         return ThrowIsNotNull(exc);
     }
 
-    public static bool ThrowIsNotNull(Func<string, string?> f)
+    public static bool ThrowIsNotNull(Func<string, string?> messageFactory)
     {
-        string? exc = f(FullNameOfExecutedCode());
+        string? exc = messageFactory(FullNameOfExecutedCode());
         return ThrowIsNotNull(exc);
     }
 
@@ -140,9 +140,9 @@ internal partial class ThrowEx
     }
 
     /// <summary>Vyhodi vyjimku, pokud v1 obsahuje podretezec v2.</summary>
-    public static void StringContainsUnallowedSubstrings(string v1, string v2)
+    public static void StringContainsUnallowedSubstrings(string text, string unallowed)
     {
-        StringContainsUnAllowedSubstrings(v1, v2);
+        StringContainsUnAllowedSubstrings(text, unallowed);
     }
 
     /// <summary>Vyhodi vyjimku, ze soubor fnOri ma priponu, kterou nelze zparsovat jako obrazek.</summary>

@@ -23,8 +23,8 @@ public partial class PH
         {
             using (var results = searcher.Get())
             {
-                var mo = results.Cast<ManagementObject>().FirstOrDefault();
-                if (mo != null) return (string)mo["ExecutablePath"];
+                var managementObject = results.Cast<ManagementObject>().FirstOrDefault();
+                if (managementObject != null) return (string)managementObject["ExecutablePath"];
             }
         }
         return null;

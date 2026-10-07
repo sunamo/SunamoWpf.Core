@@ -3,29 +3,29 @@ namespace SunamoWpf.Helpers.BaseControls;
 
 public partial class ContentControlHelper
 {
-    public static object Content(CheckBox v)
+    public static object Content(CheckBox checkBox)
     {
-        var r = WpfApp.cd.Invoke(() => v.Content);
-        return r;
+        var content = WpfApp.cd.Invoke(() => checkBox.Content);
+        return content;
     }
-    public static string ExtractContent(object sp)
+    public static string ExtractContent(object value)
     {
-        var sp2 = (StackPanel)sp;
+        var sp2 = (StackPanel)value;
         var result = ExtractContent(sp2);
         return result;
     }
 
-    public static string ExtractContent(StackPanel sp)
+    public static string ExtractContent(StackPanel stackPanel)
     {
         /*
 Je zde ta věc že 
          */
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
 
         WpfApp.cd.Invoke(() =>
         {
-            foreach (var item in sp.Children)
+            foreach (var item in stackPanel.Children)
             {
                 //if (item is StackPanel)
                 //{
@@ -36,47 +36,47 @@ Je zde ta věc že
                     {
                         continue;
                     }
-                    sb.Append(sp2.Text);
+                    stringBuilder.Append(sp2.Text);
                 }
 
                 //}
             }
         }, System.Windows.Threading.DispatcherPriority.ContextIdle);
-        return sb.ToString();
+        return stringBuilder.ToString();
     }
 
-    public static async Task<StackPanel> GetContent(ControlInitData d)
+    public static async Task<StackPanel> GetContent(ControlInitData controlInitData)
     {
-        var img = d.imagePath;
-        var text = d.text;
+        var img = controlInitData.imagePath;
+        var text = controlInitData.text;
         bool isImg = img != null;
         bool isText = text != null;
 
         if (!isText)
         {
-            isText = d.xlfKey != null;
-            text = Translate.FromKey(d.xlfKey);
+            isText = controlInitData.xlfKey != null;
+            text = Translate.FromKey(controlInitData.xlfKey);
         }
 
-        StackPanel sp = new StackPanel();
-        sp.Orientation = Orientation.Horizontal;
+        StackPanel stackPanel = new StackPanel();
+        stackPanel.Orientation = Orientation.Horizontal;
         //10*2 padding
-        sp.Height = d.imageHeight + d.addPadding;
+        stackPanel.Height = controlInitData.imageHeight + controlInitData.addPadding;
         if (isImg && isText)
         {
-            var tbHeight = await AddImg(img, sp, d.imageWidth, d.imageHeight);
-            AddTextBlock(text, sp, tbHeight);
+            var tbHeight = await AddImg(img, stackPanel, controlInitData.imageWidth, controlInitData.imageHeight);
+            AddTextBlock(text, stackPanel, tbHeight);
         }
         else if (isImg)
         {
-            AddImg(img, sp, d.imageWidth, d.imageHeight).RunSynchronously();
+            AddImg(img, stackPanel, controlInitData.imageWidth, controlInitData.imageHeight).RunSynchronously();
         }
         else if (isText)
         {
-            AddTextBlock(text, sp);
+            AddTextBlock(text, stackPanel);
         }
 
-        return sp;
+        return stackPanel;
     }
 
 
@@ -85,11 +85,11 @@ Je zde ta věc že
     /// Return height which 
     /// </summary>
     /// <param name="img"></param>
-    /// <param name="sp"></param>
-    /// <param name="w"></param>
-    /// <param name="h"></param>
+    /// <param name="stackPanel"></param>
+    /// <param name="width"></param>
+    /// <param name="height"></param>
     /// <returns></returns>
-    private static async Task<double> AddImg(object img, StackPanel sp, double w, double h)
+    private static async Task<double> AddImg(object img, StackPanel stackPanel, double width, double height)
     {
         bool isAwesome = false;
         var imgS = img.ToString();
@@ -98,8 +98,8 @@ Je zde ta věc že
         {
             if (imgS.Length == 1)
             {
-                var ch = imgS[0];
-                if (ch >= AwesomeFontControls.low && ch <= AwesomeFontControls.high)
+                var first = imgS[0];
+                if (first >= AwesomeFontControls.low && first <= AwesomeFontControls.high)
                 {
                     isAwesome = true;
                 }
@@ -108,40 +108,40 @@ Je zde ta věc že
 
         if (isAwesome)
         {
-            TextBlock tb = new TextBlock();
+            TextBlock textBlock = new TextBlock();
 
-            tb.FontSize = h;
-            tb.Padding = new System.Windows.Thickness(10);
+            textBlock.FontSize = height;
+            textBlock.Padding = new System.Windows.Thickness(10);
 
-            sp.Height = h + tb.Padding.Top + tb.Padding.Bottom;
-            sp.Width = w;
+            stackPanel.Height = height + textBlock.Padding.Top + textBlock.Padding.Bottom;
+            stackPanel.Width = width;
 
-            await AwesomeFontControls.SetAwesomeFontSymbol(tb, imgS);
-            sp.Children.Add(tb);
+            await AwesomeFontControls.SetAwesomeFontSymbol(textBlock, imgS);
+            stackPanel.Children.Add(textBlock);
         }
         else
         {
             var img2 = ImageHelperDesktop.Get(img);
             img2.Margin = new System.Windows.Thickness(10);
 
-            sp.Children.Add(img2);
+            stackPanel.Children.Add(img2);
         }
 
-        var r = AwesomeFontControls.ReturnFontSizeForTextNextToAwesomeIconWithSize(sp.Height);
-        return r;
+        var size = AwesomeFontControls.ReturnFontSizeForTextNextToAwesomeIconWithSize(stackPanel.Height);
+        return size;
     }
 
-    private static void AddTextBlock(string text, StackPanel sp, double tbHeight = double.NaN)
+    private static void AddTextBlock(string text, StackPanel stackPanel, double tbHeight = double.NaN)
     {
-        var tb = TextBlockHelper.Get(new ControlInitData { text = text });
+        var textBlock = TextBlockHelper.Get(new ControlInitData { text = text });
         if (!double.IsNaN(tbHeight))
         {
-            tb.FontSize = tbHeight;
+            textBlock.FontSize = tbHeight;
         }
 
         // Must be vertical alignment
-        tb.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+        textBlock.VerticalAlignment = System.Windows.VerticalAlignment.Center;
 
-        sp.Children.Add(tb);
+        stackPanel.Children.Add(textBlock);
     }
 }

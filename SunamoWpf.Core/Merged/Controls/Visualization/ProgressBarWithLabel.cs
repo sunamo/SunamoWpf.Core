@@ -29,23 +29,23 @@ public class ProgressBarWithLabel : UserControl
 
     public ProgressBarWithLabel()
     {
-        StackPanel sp = new StackPanel();
-        sp.Orientation = Orientation.Horizontal;
+        StackPanel stackPanel = new StackPanel();
+        stackPanel.Orientation = Orientation.Horizontal;
 
         pb = new System.Windows.Controls.ProgressBar();
         pb.Width = 300;
         //pb.Value = 100;
 
-        sp.Children.Add(pb);
+        stackPanel.Children.Add(pb);
 
         
 
         tb = new TextBlock();
         tb.VerticalAlignment = System.Windows.VerticalAlignment.Center;
         tb.Width = 300;
-        sp.Children.Add(tb);
+        stackPanel.Children.Add(tb);
 
-        Content = sp;
+        Content = stackPanel;
     }
 
 

@@ -3,19 +3,19 @@ namespace SunamoWpf.Helpers.BaseControls;
 
 public partial class ControlHelper{
     public static readonly Size SizePositiveInfinity = new Size(double.PositiveInfinity, double.PositiveInfinity);
-    public static void SetForeground(Control c, Brush fg)
+    public static void SetForeground(Control control, Brush foreground)
     {
-        if (fg != null)
+        if (foreground != null)
         {
-            c.Foreground = fg;
+            control.Foreground = foreground;
         }
     }
-public static Size ActualInnerSize(ContentControl w)
+public static Size ActualInnerSize(ContentControl control)
     {
         
 
-        var fw = w.Content as FrameworkElement;
-        return new Size(fw.ActualWidth, fw.ActualHeight);
+        var frameworkElement = control.Content as FrameworkElement;
+        return new Size(frameworkElement.ActualWidth, frameworkElement.ActualHeight);
     }
     
 

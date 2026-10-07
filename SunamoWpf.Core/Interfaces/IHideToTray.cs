@@ -6,5 +6,5 @@ public interface IHideToTray
     bool CancelClosing { get; set; }
 
     bool GetCancelClosing();
-    void SetCancelClosing(bool b);
+    void SetCancelClosing(bool cancelClosing);
 }

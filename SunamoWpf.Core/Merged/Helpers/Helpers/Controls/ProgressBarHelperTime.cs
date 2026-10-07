@@ -7,9 +7,9 @@ public class ProgressBarHelperTime
     public double ai = 0;
     double allSecondsMinusOne = 0;
     System.Timers.Timer t2 = null;
-    public ProgressBarHelperTime(System.Windows.Controls.ProgressBar pb, double allSeconds, UIElement ui)
+    public ProgressBarHelperTime(System.Windows.Controls.ProgressBar progressBar, double allSeconds, UIElement uiElement)
     {
-        pbh = new ProgressBarHelper(pb, allSeconds, ui);
+        pbh = new ProgressBarHelper(progressBar, allSeconds, uiElement);
         allSecondsMinusOne = allSeconds - 1;
         t2 = new System.Timers.Timer();
         t2.AutoReset = true;
@@ -17,7 +17,7 @@ public class ProgressBarHelperTime
         t2.Elapsed += T2_Elapsed;
         t2.Start();
     }
-    private void T2_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    private void T2_Elapsed(object sender, System.Timers.ElapsedEventArgs eventArgs)
     {
         pbh.DonePartially();
         ai++;

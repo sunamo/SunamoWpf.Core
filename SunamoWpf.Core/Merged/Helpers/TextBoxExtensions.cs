@@ -41,21 +41,21 @@ public static partial class TextBoxExtensions
         txt.LostFocus += Txt_LostFocus;
     }
 
-    private static void Txt_LostFocus(object sender, System.Windows.RoutedEventArgs e)
+    private static void Txt_LostFocus(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         keyPress = false;
     }
 
-    private static void Txt_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    private static void Txt_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs eventArgs)
     {
         Txt_GotFocus(sender, null);
     }
 
     static bool keyPress = false;
 
-    private static void Txt_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    private static void Txt_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs eventArgs)
     {
-        if (!KeyboardHelper.IsWhitespace(e))
+        if (!KeyboardHelper.IsWhitespace(eventArgs))
         {
             keyPress = true;
         }
@@ -67,7 +67,7 @@ public static partial class TextBoxExtensions
         Txt_GotFocus(sender, null);
     }
 
-    private static void Txt_TextChanged(object sender, TextChangedEventArgs e)
+    private static void Txt_TextChanged(object sender, TextChangedEventArgs eventArgs)
     {
         var txt = (TextBox)sender;
         var tag = (TextBoxTag)txt.Tag;
@@ -92,7 +92,7 @@ public static partial class TextBoxExtensions
 
     static bool unsetPlaceholder = false;
 
-    private static void Txt_GotFocus(object sender, System.Windows.RoutedEventArgs e)
+    private static void Txt_GotFocus(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         var txt = (TextBox)sender;
         var tag = (TextBoxTag)txt.Tag;

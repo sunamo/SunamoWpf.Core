@@ -62,26 +62,26 @@ namespace Wpf.Tests.Controls.Visualization
             Loaded += TwoWayTableTests_Loaded;
         }
 
-        private void TwoWayTableTests_Loaded(object sender, RoutedEventArgs e)
+        private void TwoWayTableTests_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             #region region for all code to easy transfer to another code
             var rowsCount = 100;
             twt.CreateGrid(rowsCount, 2);
 
-            List<CheckBoxData<UIElement>> d = new List<CheckBoxData<UIElement>>();
-            List<CheckBoxData<UIElement>> d2 = new List<CheckBoxData<UIElement>>();
+            List<CheckBoxData<UIElement>> items = new List<CheckBoxData<UIElement>>();
+            List<CheckBoxData<UIElement>> secondItems = new List<CheckBoxData<UIElement>>();
 
-            List<int> l = new List<int>(rowsCount);
-            for (int i = 0; i < rowsCount; i++)
+            List<int> result = new List<int>(rowsCount);
+            for (int index = 0; index < rowsCount; index++)
             {
-                l.Add(i);
-                d.Add(CheckBoxDataHelper.TextBlock(new ControlInitData { text = i.ToString() }));
-                d2.Add(CheckBoxDataHelper.TextBlock(new ControlInitData { text = (i + 100).ToString() }));
+                result.Add(index);
+                items.Add(CheckBoxDataHelper.TextBlock(new ControlInitData { text = index.ToString() }));
+                secondItems.Add(CheckBoxDataHelper.TextBlock(new ControlInitData { text = (index + 100).ToString() }));
             }
             
-            twt.AddColumn(0, d, l.Cast<object>().ToList());
+            twt.AddColumn(0, items, result.Cast<object>().ToList());
 
-            twt.AddColumn(1, d2, l.Cast<object>().ToList());
+            twt.AddColumn(1, secondItems, result.Cast<object>().ToList());
             #endregion
         }
 

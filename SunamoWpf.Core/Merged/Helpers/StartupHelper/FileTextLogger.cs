@@ -13,11 +13,11 @@ public class FileTextLogger
     /// <summary>
     /// Buffer 1MB
     /// </summary>
-    /// <param name="fn"></param>
-    public FileTextLogger(string fn)
+    /// <param name="fileName"></param>
+    public FileTextLogger(string fileName)
     {
-        this.fn = fn;
-        FS.CreateUpfoldersPsysicallyUnlessThere(fn);
+        this.fn = fileName;
+        FS.CreateUpfoldersPsysicallyUnlessThere(fileName);
         //FileStream fs = new FileStream(fn, FileMode.OpenOrCreate);
 
         // 1024 * 1024 *
@@ -30,11 +30,11 @@ public class FileTextLogger
         WriteNewLine(DateTime.Now.ToLongTimeString());
     }
 
-    public void WriteNewLine(string l)
+    public void WriteNewLine(string line)
     {
         // Is written StartupHelper.Dispose => just sb here
         //TF.AppendAllText(l + Environment.NewLine, fn);
-        sb.AppendLine(l);
+        sb.AppendLine(line);
 
         // Umí se to zapsat aji ve StartupHelper.Dispose ale budu to zapisovat aji zde průběřně protože StartupHelper.Dispose to nedosáhne
         File.WriteAllText(fn, sb.ToString());

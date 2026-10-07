@@ -18,7 +18,7 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
     public List<SunamoPasswordBox> spbc;
     public List<Grid> gridc;
     //public List<PasswordBox> pwbc;
-    private void LoginDialog_Loaded(object sender, RoutedEventArgs e)
+    private void LoginDialog_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         txtHeslo.Init(true);
         SizeChanged += LoginDialog_SizeChanged;
@@ -41,7 +41,7 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
         txtHeslo.spShowPassword.HorizontalAlignment = HorizontalAlignment.Stretch;
         //ResourceDictionaryStyles.Margin(10,pwbc);
     }
-    private void LoginDialog_SizeChanged(object sender, SizeChangedEventArgs e)
+    private void LoginDialog_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
     {
         // All in OnSizeChanged
     }
@@ -107,11 +107,11 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
         btnForgetLoginAndPassword.Content = Translate.FromKey(XlfKeys.ForgetLoginAndPassword);
         Loaded += LoginDialog_Loaded;
     }
-    void chbRememberLogin_Unchecked(object sender, RoutedEventArgs e)
+    void chbRememberLogin_Unchecked(object sender, RoutedEventArgs eventArgs)
     {
         chbAutoLogin.IsChecked = false;
     }
-    void chbAutoLogin_Checked(object sender, RoutedEventArgs e)
+    void chbAutoLogin_Checked(object sender, RoutedEventArgs eventArgs)
     {
         chbRememberLogin.IsChecked = true;
     }
@@ -124,12 +124,12 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
     /// </summary>
     /// <param name="salt"></param>
     /// <param name="storageApplicationData"></param>
-    public LoginDialog(string salt, StorageApplicationData storageApplicationData, CryptDelegatesWpf c)
+    public LoginDialog(string salt, StorageApplicationData storageApplicationData, CryptDelegatesWpf cryptDelegatesWpf)
         : this(salt)
     {
         this.salt = salt;
         this.storageApplicationData = storageApplicationData;
-        cryptDelegates = c;
+        cryptDelegates = cryptDelegatesWpf;
     }
     public
 #if ASYNC
@@ -216,7 +216,7 @@ TF.ReadAllText(pLogin);
     {
         ThrowEx.Custom(Translate.FromKey(XlfKeys.SavingSettingsToAppConfigOrWebConfigIsNotYetSupported));
     }
-    private void btnLogin_Click(object sender, RoutedEventArgs e)
+    private void btnLogin_Click(object sender, RoutedEventArgs eventArgs)
     {
         //btnLogin_ClickAsync(null, null);
     }
@@ -226,7 +226,7 @@ async Task
 #else
 void
 #endif
-btnLogin_ClickAsync(object sender, RoutedEventArgs e)
+btnLogin_ClickAsync(object sender, RoutedEventArgs eventArgs)
     {
         if (storageApplicationData == StorageApplicationData.Registry)
         {
@@ -296,7 +296,7 @@ TF.ReadAllText(pSalt), this.txtHeslo.Password));
         }
         DialogResult = true;
     }
-    private void btnForgetLoginAndPassword_Click(object sender, RoutedEventArgs e)
+    private void btnForgetLoginAndPassword_Click(object sender, RoutedEventArgs eventArgs)
     {
         //btnForgetLoginAndPassword_ClickAsync(null, null);
     }
@@ -306,7 +306,7 @@ async Task
 #else
 void
 #endif
-btnForgetLoginAndPassword_ClickAsync(object sender, RoutedEventArgs e)
+btnForgetLoginAndPassword_ClickAsync(object sender, RoutedEventArgs eventArgs)
     {
         txtLogin.Text = "";
         txtHeslo.Password = "";
@@ -339,7 +339,7 @@ btnForgetLoginAndPassword_ClickAsync(object sender, RoutedEventArgs e)
             ThrowEx.NotImplementedCase(storageApplicationData);
         }
     }
-    private void btnForgetPassword_Click(object sender, RoutedEventArgs e)
+    private void btnForgetPassword_Click(object sender, RoutedEventArgs eventArgs)
     {
         //btnForgetPassword_ClickAsync(null, null);
     }
@@ -349,7 +349,7 @@ async Task
 #else
 void
 #endif
-btnForgetPassword_ClickAsync(object sender, RoutedEventArgs e)
+btnForgetPassword_ClickAsync(object sender, RoutedEventArgs eventArgs)
     {
         txtHeslo.Password = "";
         if (storageApplicationData == StorageApplicationData.Config)
@@ -385,9 +385,9 @@ btnForgetPassword_ClickAsync(object sender, RoutedEventArgs e)
         // Nemůžu tu nastavovat, FocusOnMainElement se volá automaticky, tím pádem se nastaví žluté obtažení ale nefunguje kurzor. Když kliknu do txtPassword mají zvýraznění oba 2
         //txtLogin.Focus();
     }
-    public void OnSizeChanged(DesktopSize e)
+    public void OnSizeChanged(DesktopSize size)
     {
-        txtHeslo.OnSizeChanged(new DesktopSize(e.Width, e.Height));
+        txtHeslo.OnSizeChanged(new DesktopSize(size.Width, size.Height));
     }
     #endregion
 }

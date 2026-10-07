@@ -11,18 +11,18 @@ public class WRTBH : InlineBuilderBase
     bool nextIsFirts = true;
     double width = 0;
     public List<StackPanel> uis = new List<StackPanel>();
-    public WRTBH(double maxWidth, double paddingLeftFirst, FontArgs fa)
+    public WRTBH(double maxWidth, double paddingLeftFirst, FontArgs fontArgs)
     {
-        this.fa = fa;
+        this.fa = fontArgs;
         this.paddingLeftFirst = paddingLeftFirst;
         this.maxWidth = maxWidth;
         uis.Add(NewStackPanel());
     }
     private StackPanel NewStackPanel()
     {
-        StackPanel sp = new StackPanel();
-        sp.Orientation = Orientation.Horizontal;
-        return sp;
+        StackPanel stackPanel = new StackPanel();
+        stackPanel.Orientation = Orientation.Horizontal;
+        return stackPanel;
     }
     public void Run(string text)
     {
@@ -83,8 +83,8 @@ public class WRTBH : InlineBuilderBase
         {
             width = width3;
         }
-        var sp = uis[uis.Count - 1];
-        sp.Children.Add(textBlock);
+        var last = uis[uis.Count - 1];
+        last.Children.Add(textBlock);
     }
     public void LineBreak()
     {
@@ -92,9 +92,9 @@ public class WRTBH : InlineBuilderBase
         uis.Add(NewStackPanel());
         //Add(GetTextBlock(GetLineBreak()));
     }
-    public void Italic(string p)
+    public void Italic(string text)
     {
-        var slova = GetWords(p);
+        var slova = GetWords(text);
         foreach (var item in slova)
         {
             Add(GetTextBlock(GetItalic(item + "  ", fa)));

@@ -10,7 +10,7 @@ public class SuMenuItemWithSubitemsHelper<T> : SuMenuItemWithSubitemsHelper
     public SuMenuItemWithSubitemsHelper(SuMenuItem tsddb)
         : base(tsddb, true)
     { }
-    public SuMenuItemWithSubitemsHelper(SuMenuItem tsddb, Array bs, T defaultValue)
+    public SuMenuItemWithSubitemsHelper(SuMenuItem tsddb, Array values, T defaultValue)
         : base(tsddb, true)
     {
         if (tsddb.ToolTip == null)
@@ -21,7 +21,7 @@ public class SuMenuItemWithSubitemsHelper<T> : SuMenuItemWithSubitemsHelper
         {
             originalToolTipText = tsddb.ToolTip.ToString();
         }
-        AddValuesOfEnumAsItems(bs, false);
+        AddValuesOfEnumAsItems(values, false);
         SelectedO = defaultValue;
         prev = GetItemWithTag(defaultValue);
         tsddb.ToolTip = originalToolTipText + " " + defaultValue.ToString();
@@ -48,8 +48,8 @@ public class SuMenuItemWithSubitemsHelper<T> : SuMenuItemWithSubitemsHelper
             return default(T);
         }
     }
-    public void AddValuesOfEnumAsItems(T t)
+    public void AddValuesOfEnumAsItems(T value)
     {
-        base.AddValuesOfEnumAsItems<T>(t);
+        base.AddValuesOfEnumAsItems<T>(value);
     }
 }

@@ -3,7 +3,7 @@ namespace SunamoWpf.Core._sunamo;
 
 internal class SHSplit
 {
-    public static List<string> SplitByWhiteSpaces(string s, bool removeEmpty = false)
+    public static List<string> SplitByWhiteSpaces(string text, bool removeEmpty = false)
     {
         WhitespaceCharService whitespaceChar = new();
         whitespaceChar.ConvertWhiteSpaceCodesToChars();
@@ -13,28 +13,28 @@ internal class SHSplit
             ThrowEx.Custom($"whitespaceChar.whiteSpaceChars is not initialized"); ;
         }
 
-        s = s.RemoveInvisibleChars();
-        List<string> r = null;
+        text = text.RemoveInvisibleChars();
+        List<string> result = null;
         if (removeEmpty)
         {
             //r = s.Split(AllChars.whiteSpaceChars.ToArray()).ToList();
-            r = SplitChar(s, whitespaceChar.whiteSpaceChars.ToArray()).ToList();
+            result = SplitChar(text, whitespaceChar.whiteSpaceChars.ToArray()).ToList();
         }
         else
             //r = s.Split(AllChars.whiteSpaceChars.ToArray(), StringSplitOptions.None).ToList();
-            r = SplitNone(s, whitespaceChar.whiteSpaceChars.ConvertAll(d => d.ToString()).ToArray()).ToList();
-        return r;
+            result = SplitNone(text, whitespaceChar.whiteSpaceChars.ConvertAll(item => item.ToString()).ToArray()).ToList();
+        return result;
     }
 
     public static List<string> SplitChar(string parametry, params char[] deli)
     {
         return Split(StringSplitOptions.RemoveEmptyEntries, parametry,
-            deli.ToList().ConvertAll(d => d.ToString()).ConvertAll(d => d.ToString()).ToArray());
+            deli.ToList().ConvertAll(item => item.ToString()).ConvertAll(itemText => itemText.ToString()).ToArray());
     }
 
-    public static List<string> Split(string p, params string[] newLine)
+    public static List<string> Split(string text, params string[] newLine)
     {
-        return p.Split(newLine, StringSplitOptions.RemoveEmptyEntries).ToList();
+        return text.Split(newLine, StringSplitOptions.RemoveEmptyEntries).ToList();
     }
 
     public static List<string> Split(StringSplitOptions stringSplitOptions, string text, params string[] deli)
@@ -45,13 +45,13 @@ internal class SHSplit
         var result = text.Split(deli, stringSplitOptions).ToList();
         CA.Trim(result);
         if (stringSplitOptions == StringSplitOptions.RemoveEmptyEntries)
-            result = result.Where(d => d.Trim() != string.Empty).ToList();
+            result = result.Where(line => line.Trim() != string.Empty).ToList();
 
         return result;
     }
 
-    public static List<string> SplitNone(string p, params string[] newLine)
+    public static List<string> SplitNone(string text, params string[] newLine)
     {
-        return p.Split(newLine, StringSplitOptions.None).ToList();
+        return text.Split(newLine, StringSplitOptions.None).ToList();
     }
 }

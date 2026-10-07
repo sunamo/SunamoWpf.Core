@@ -49,12 +49,12 @@ public partial class FolderContentsTreeView : UserControl
         }
         tv.SelectedItemChanged += Tv_SelectedItemChanged;
     }
-    private void Tv_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+    private void Tv_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> eventArgs)
     {
-        if (e.NewValue != null)
+        if (eventArgs.NewValue != null)
         {
-            var tv = (e.NewValue as TreeViewItem);
-            var fse = tv.Tag as FileSystemEntryWpf;
+            var treeViewItem = (eventArgs.NewValue as TreeViewItem);
+            var fse = treeViewItem.Tag as FileSystemEntryWpf;
             if (Selected != null)
             {
                 Selected(fse);
@@ -66,46 +66,46 @@ public partial class FolderContentsTreeView : UserControl
         var exp = tv.Items;
         Expand(exp);
     }
-    private void Expand(ItemCollection ic)
+    private void Expand(ItemCollection items)
     {
-        foreach (TreeViewItem item in ic)
+        foreach (TreeViewItem item in items)
         {
             item.ExpandSubtree();
             Expand(item.Items);
         }
     }
-    public void AddTviFolderTo(string s)
+    public void AddTviFolderTo(string folder)
     {
-        AddTviFolderTo(s, tv);
+        AddTviFolderTo(folder, tv);
     }
-    private void AddTviFolderTo(string s, ItemsControl to)
+    private void AddTviFolderTo(string folder, ItemsControl parent)
     {
         TreeViewItem subfolder = new TreeViewItem();
-        s = s.TrimEnd('\\');
-        subfolder.Header = s.Substring(s.LastIndexOf("\\") + 1);
-        subfolder.Tag = new FileSystemEntryWpf { file = false, path = s }; ;
+        folder = folder.TrimEnd('\\');
+        subfolder.Header = folder.Substring(folder.LastIndexOf("\\") + 1);
+        subfolder.Tag = new FileSystemEntryWpf { file = false, path = folder }; ;
         subfolder.FontWeight = System.Windows.FontWeights.Normal;
         subfolder.Items.Add(dummyNode);
         subfolder.Expanded += new RoutedEventHandler(folder_Expanded);
         if (useDictionary)
         {
-            folders.Add(s, subfolder);
+            folders.Add(folder, subfolder);
         }
-        to.Items.Add(subfolder);
+        parent.Items.Add(subfolder);
     }
-    private void AddTviFileTo(string s, ItemsControl to)
+    private void AddTviFileTo(string filePath, ItemsControl parent)
     {
         TreeViewItem subfiles = new TreeViewItem();
-        subfiles.Header = s.Substring(s.LastIndexOf("\\") + 1);
-        subfiles.Tag = new FileSystemEntryWpf { file = true, path = s };
+        subfiles.Header = filePath.Substring(filePath.LastIndexOf("\\") + 1);
+        subfiles.Tag = new FileSystemEntryWpf { file = true, path = filePath };
         subfiles.FontWeight = System.Windows.FontWeights.Normal;
         if (useDictionary)
         {
-            files.Add(s, subfiles);
+            files.Add(filePath, subfiles);
         }
-        to.Items.Add(subfiles);
+        parent.Items.Add(subfiles);
     }
-    void folder_Expanded(object sender, RoutedEventArgs e)
+    void folder_Expanded(object sender, RoutedEventArgs eventArgs)
     {
         TreeViewItem item = (TreeViewItem)sender;
         if (item.Items.Count == 1 && item.Items[0] == dummyNode)
@@ -114,16 +114,16 @@ public partial class FolderContentsTreeView : UserControl
             try
             {
                 string folder = ((FileSystemEntryWpf)item.Tag).path.ToString();
-                foreach (string s in FSGetFolders.GetFoldersEveryFolder(logger, folder))
+                foreach (string subfolder in FSGetFolders.GetFoldersEveryFolder(logger, folder))
                 {
-                    AddTviFolderTo(s, item);
+                    AddTviFolderTo(subfolder, item);
                 }
                 if (args.addFiles)
                 {
-                    List<string> d = FSGetFiles.GetFilesEveryFolder(logger, folder);
-                    foreach (string s in d)
+                    List<string> files = FSGetFiles.GetFilesEveryFolder(logger, folder);
+                    foreach (string file in files)
                     {
-                        AddTviFileTo(s, item);
+                        AddTviFileTo(file, item);
                     }
                 }
             }

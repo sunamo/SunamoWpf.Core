@@ -16,15 +16,15 @@ public static class ListBoxExtensions
     /// <param name="tb"></param>
     /// <param name="control"></param>
     /// <param name="trim"></param>
-    public static void Validate(this ListBox control, ref ValidateDataWpf d)
+    public static void Validate(this ListBox control, ref ValidateDataWpf validateData)
     {
         if (!validated)
         {
             return;
         }
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
         var count = control.SelectedItems.Count;
 

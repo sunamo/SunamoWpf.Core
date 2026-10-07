@@ -2,23 +2,23 @@ namespace SunamoWpf.SunamoDebugging;
 
 public class FrameworkElementDebug
 {
-    public static void ActualSize(FrameworkElement fe)
+    public static void ActualSize(FrameworkElement frameworkElement)
     {
-        if (fe == null)
+        if (frameworkElement == null)
         {
             return;
         }
 
-        Debug.WriteLine($"{fe.Name} ActualHeight: {fe.ActualHeight}");
-        Debug.WriteLine($"{fe.Name} ActualWidth: {fe.ActualWidth}");
-        Debug.WriteLine($"{fe.Name} DesiredSize: {fe.DesiredSize}");
-        Debug.WriteLine($"{fe.Name} RenderSize: {fe.RenderSize}");
-        Debug.WriteLine($"{fe.Name} Height: {fe.Height}");
-        Debug.WriteLine($"{fe.Name} Width: {fe.Width}");
-        Debug.WriteLine($"{fe.Name} MaxHeight: {fe.MaxHeight}");
-        Debug.WriteLine($"{fe.Name} MaxWidth: {fe.MaxWidth}");
-        Debug.WriteLine($"{fe.Name} MinHeight: {fe.MinHeight}");
-        Debug.WriteLine($"{fe.Name} MinWidth: {fe.MinWidth}");
+        Debug.WriteLine($"{frameworkElement.Name} ActualHeight: {frameworkElement.ActualHeight}");
+        Debug.WriteLine($"{frameworkElement.Name} ActualWidth: {frameworkElement.ActualWidth}");
+        Debug.WriteLine($"{frameworkElement.Name} DesiredSize: {frameworkElement.DesiredSize}");
+        Debug.WriteLine($"{frameworkElement.Name} RenderSize: {frameworkElement.RenderSize}");
+        Debug.WriteLine($"{frameworkElement.Name} Height: {frameworkElement.Height}");
+        Debug.WriteLine($"{frameworkElement.Name} Width: {frameworkElement.Width}");
+        Debug.WriteLine($"{frameworkElement.Name} MaxHeight: {frameworkElement.MaxHeight}");
+        Debug.WriteLine($"{frameworkElement.Name} MaxWidth: {frameworkElement.MaxWidth}");
+        Debug.WriteLine($"{frameworkElement.Name} MinHeight: {frameworkElement.MinHeight}");
+        Debug.WriteLine($"{frameworkElement.Name} MinWidth: {frameworkElement.MinWidth}");
 
     }
 }

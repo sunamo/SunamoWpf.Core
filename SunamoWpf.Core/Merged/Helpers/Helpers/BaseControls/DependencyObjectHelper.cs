@@ -11,11 +11,11 @@ public static class DependencyObjectHelper
         MarkupObject markupObject = System.Windows.Markup.Primitives.MarkupWriter.GetMarkupObjectFor(element);
         if (markupObject != null)
         {
-            foreach (MarkupProperty mp in markupObject.Properties)
+            foreach (MarkupProperty property in markupObject.Properties)
             {
-                if (mp.DependencyProperty != null)
+                if (property.DependencyProperty != null)
                 {
-                    properties.Add(mp.DependencyProperty);
+                    properties.Add(property.DependencyProperty);
                 }
             }
         }
@@ -35,11 +35,11 @@ public static class DependencyObjectHelper
         MarkupObject markupObject = System.Windows.Markup.Primitives.MarkupWriter.GetMarkupObjectFor(element);
         if (markupObject != null)
         {
-            foreach (MarkupProperty mp in markupObject.Properties)
+            foreach (MarkupProperty property in markupObject.Properties)
             {
-                if (mp.IsAttached)
+                if (property.IsAttached)
                 {
-                    attachedProperties.Add(mp.DependencyProperty);
+                    attachedProperties.Add(property.DependencyProperty);
                 }
             }
         }
@@ -47,37 +47,37 @@ public static class DependencyObjectHelper
         return attachedProperties;
     }
 
-    public static T CreatedWithCopiedValues<T>(T t, params DependencyProperty[] p) where T : DependencyObject
+    public static T CreatedWithCopiedValues<T>(T source, params DependencyProperty[] properties) where T : DependencyObject
     {
-        dynamic d = new System.Dynamic.ExpandoObject();
-        d.t = t;
-        d.p = p;
+        dynamic expando = new System.Dynamic.ExpandoObject();
+        expando.t = source;
+        expando.p = properties;
 
-        CreatedWithCopiedValuesWorker(d);
+        CreatedWithCopiedValuesWorker(expando);
 
         //Thread thread = new Thread(new ParameterizedThreadStart( ));
         //thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
         //thread.Start( d);
         //thread.Join(); //Wait for the thread to end <== here will be froze
 
-        return (T)d.r;
+        return (T)expando.r;
     }
 
-    static void CreatedWithCopiedValuesWorker(object o)
+    static void CreatedWithCopiedValuesWorker(object source)
     {
-        dynamic d = o;
+        dynamic data = source;
         object instance = null;
         WpfApp.cd.Invoke(() =>
         {
 
-            instance = Activator.CreateInstance(d.t.GetType());
-            foreach (var item in d.p)
+            instance = Activator.CreateInstance(data.t.GetType());
+            foreach (var item in data.p)
             {
                 object value = null;
-                value = d.t.GetValue(item); ;
+                value = data.t.GetValue(item); ;
                 (instance as DependencyObject).SetValue(item, value);
             }
         });
-        d.r = instance;
+        data.r = instance;
     }
 }

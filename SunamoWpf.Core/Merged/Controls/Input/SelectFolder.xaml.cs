@@ -27,14 +27,14 @@ public partial class SelectFolder : UserControl
         btnSelectFolder.Content = Translate.FromKey(XlfKeys.SelectTheFolder);
         Loaded += SelectFolder_Loaded;
     }
-    private void SelectFolder_Loaded(object sender, RoutedEventArgs e)
+    private void SelectFolder_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         AwesomeFontControls.SetAwesomeFontSymbol(btnRemoveFolder, "\uf00d"); // async Task nelze RunSynchronously (InvalidOperationException); symbol se nastavi pres Dispatcher.InvokeAsync
     }
-    private void CbDefaultFolders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void CbDefaultFolders_SelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
     {
-        ComboBox cb = sender as ComboBox;
-        SelectOfFolder(cb.SelectedItem.ToString());
+        ComboBox comboBox = sender as ComboBox;
+        SelectOfFolder(comboBox.SelectedItem.ToString());
     }
     /// <summary>
     /// Nastaví složku pouze když složka bude existovat na disku
@@ -66,11 +66,11 @@ public partial class SelectFolder : UserControl
             }
         }
     }
-    private void btnSelectFolder_Click(object sender, RoutedEventArgs e)
+    private void btnSelectFolder_Click(object sender, RoutedEventArgs eventArgs)
     {
         SelectOfFolder();
     }
-    private void txtFolder_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void txtFolder_MouseDoubleClick(object sender, MouseButtonEventArgs eventArgs)
     {
         SelectOfFolder();
     }
@@ -94,7 +94,7 @@ public partial class SelectFolder : UserControl
             FolderChanged(this, folder);
         }
     }
-    private void BtnRemoveFolder_Click(object sender, RoutedEventArgs e)
+    private void BtnRemoveFolder_Click(object sender, RoutedEventArgs eventArgs)
     {
         if (FolderRemoved != null)
         {

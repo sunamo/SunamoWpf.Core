@@ -7,11 +7,11 @@ public class DependencyReflection
     {
         List<DependencyProperty> result = new List<DependencyProperty>();
 
-        foreach (PropertyDescriptor pd in TypeDescriptor.GetProperties(obj,
+        foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(obj,
             new Attribute[] { new PropertyFilterAttribute(PropertyFilterOptions.All) }))
         {
             DependencyPropertyDescriptor dpd =
-                DependencyPropertyDescriptor.FromProperty(pd);
+                DependencyPropertyDescriptor.FromProperty(propertyDescriptor);
 
             if (dpd != null)
             {

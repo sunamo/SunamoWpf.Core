@@ -11,7 +11,7 @@ public class ConfigurableWindowWrapper
 {
     public Window w = null;
     SuMenuItem miAlwaysOnTop = null;
-    public void MiAlwaysOnTop_Click(object o, RoutedEventArgs e)
+    public void MiAlwaysOnTop_Click(object sender, RoutedEventArgs eventArgs)
     {
         w.Topmost = miAlwaysOnTop.IsChecked;
         CheckSuMenuItemTopMost();
@@ -25,7 +25,7 @@ public class ConfigurableWindowWrapper
     public IConfigurableWindowSettings _settings;
     #endregion // Data
     #region Constructor
-    public ConfigurableWindowWrapper(Window w2, SuMenuItem miAlwaysOnTop2)
+    public ConfigurableWindowWrapper(Window configurableWindow, SuMenuItem miAlwaysOnTop2)
     {
         miAlwaysOnTop = miAlwaysOnTop2;
         var aotText = ContentControlHelper.GetContent(new ControlInitData { text = Translate.FromKey(XlfKeys.AlwaysOnTop) });
@@ -37,11 +37,11 @@ public class ConfigurableWindowWrapper
         miAlwaysOnTop.Click += MiAlwaysOnTop_Click;
         miAlwaysOnTop.IsCheckable = true;
         miAlwaysOnTop.Header = aotText;
-        w = w2;
+        w = configurableWindow;
         w.LocationChanged += W_LocationChanged;
         w.StateChanged += W_StateChanged;
-        var ww = (IConfigurableWindow)w;
-        _settings = ww.CreateSettings();
+        var windowSettingsSource = (IConfigurableWindow)w;
+        _settings = windowSettingsSource.CreateSettings();
         if (_settings == null)
             ThrowEx.Custom(Translate.FromKey(XlfKeys.CannotReturnNull)+".");
         // Direct set _isLoaded to true, because I call this from _Loaded
@@ -51,7 +51,7 @@ public class ConfigurableWindowWrapper
     }
     static Type type = typeof(ConfigurableWindowWrapper);
     //
-    private void W_StateChanged(object sender, EventArgs e)
+    private void W_StateChanged(object sender, EventArgs eventArgs)
     {
         if (_isLoaded)
         {
@@ -67,7 +67,7 @@ public class ConfigurableWindowWrapper
     #region CreateSettings
     #endregion // CreateSettings
     #region Base Class Overrides
-    private void W_LocationChanged(object sender, EventArgs e)
+    private void W_LocationChanged(object sender, EventArgs eventArgs)
     {
         // We need to delay this call because we are 
         // notified of a location change before a 
@@ -90,16 +90,16 @@ public class ConfigurableWindowWrapper
     #region Private Helpers
     void ApplySettings()
     {
-        Size sz = _settings.WindowSize;
-        w.Width = sz.Width;
-        w.Height = sz.Height;
+        Size size = _settings.WindowSize;
+        w.Width = size.Width;
+        w.Height = size.Height;
         Point loc = _settings.WindowLocation;
         // If the user's machine had two monitors but now only
         // has one, and the Window was previously on the other
         // monitor, we need to move the Window into view.
         bool outOfBounds =
-            loc.X <= -sz.Width ||
-            loc.Y <= -sz.Height ||
+            loc.X <= -size.Width ||
+            loc.Y <= -size.Height ||
             SystemParameters.VirtualScreenWidth <= loc.X ||
             SystemParameters.VirtualScreenHeight <= loc.Y;
         if (_settings.IsFirstRun || outOfBounds)

@@ -21,8 +21,8 @@ internal class SelectFromManyHelper<T>
         filesWithSize.Clear();
         SetBasicVariable(sufficientFileName, defaultFileForLeave);
 
-        var fn = Path.GetFileName(defaultFileForLeave);
-        var files = Directory.GetFiles(folderForSearch, fn, SearchOption.AllDirectories).ToList();
+        var fileName = Path.GetFileName(defaultFileForLeave);
+        var files = Directory.GetFiles(folderForSearch, fileName, SearchOption.AllDirectories).ToList();
 
         ProcessFilesWithoutSize(files);
         _selectFromManyControl.AddControls();

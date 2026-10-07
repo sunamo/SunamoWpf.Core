@@ -72,10 +72,10 @@ public class EnterOneValueUCTests
 
         // 1. create controls
         var txt = TextBoxHelper.Get(new ControlInitData { text = nameTxt });
-        var cb = ComboBoxHelper.Get(new ControlInitData { tag = nameCb, list = TestData.list12 });
+        var comboBox = ComboBoxHelper.Get(new ControlInitData { tag = nameCb, list = TestData.list12 });
 
         // 2. create list
-        elements = new List<FrameworkElement> { txt, cb };
+        elements = new List<FrameworkElement> { txt, comboBox };
 
         // 3. init with list
         selectTwoValues.Init(elements);
@@ -87,18 +87,18 @@ public class EnterOneValueUCTests
         w.ShowDialog();
     }
 
-    private void W_Loaded(object sender, RoutedEventArgs e)
+    private void W_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         selectTwoValues.EnterOneValueUC_Loaded(null, null);
     }
 
-    private  void SelectTwoValues_ChangeDialogResult(bool? b)
+    private  void SelectTwoValues_ChangeDialogResult(bool? result)
     {
         // 4. get elements with indexes from original array
         var txt = ((TextBox)elements[0]).Text;
-        var cb = ((ComboBox)elements[1]).SelectedItem;
+        var selectedItem = ((ComboBox)elements[1]).SelectedItem;
 
-        MessageBox.Show(txt + Environment.NewLine + cb);
+        MessageBox.Show(txt + Environment.NewLine + selectedItem);
 
         w.Close();
     }

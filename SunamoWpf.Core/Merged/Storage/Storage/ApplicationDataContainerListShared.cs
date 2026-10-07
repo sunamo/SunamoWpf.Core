@@ -34,14 +34,14 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
     /// <summary>
     /// path = AppData.ci.GetFile(AppFolders.Controls, fw.Name)
     /// </summary>
-    /// <param name="fw"></param>
+    /// <param name="frameworkElement"></param>
     /// <param name="path"></param>
-    private ApplicationDataContainerList(FrameworkElement fw)
+    private ApplicationDataContainerList(FrameworkElement frameworkElement)
     {
         // Window bez Name (typicky bez x:Name) se ukládá pod názvem typu, viz ApplicationDataContainer.Add(Window)
-        if (fw != null && fw is not Window)
+        if (frameworkElement != null && frameworkElement is not Window)
         {
-            ThrowEx.IsWhitespaceOrNull("fw.Name", fw.Name);
+            ThrowEx.IsWhitespaceOrNull("fw.Name", frameworkElement.Name);
         }
     }
 
@@ -70,10 +70,10 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
 #else
     void
 #endif
- Init(FrameworkElement fw, string path)
+ Init(FrameworkElement frameworkElement, string path)
     {
-        ApplicationDataContainerList o = new ApplicationDataContainerList(fw);
-        o.path = path;
+        ApplicationDataContainerList result = new ApplicationDataContainerList(frameworkElement);
+        result.path = path;
         string content =
 #if ASYNC
     await
@@ -83,13 +83,13 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         {
             content = content.Substring(0, content.Length - 1);
         }
-        var d = SHSplit.SplitNone(content, "|");
-        int to = (d.Count / 3) * 3;
-        for (int i = 0; i < to;)
+        var parts = SHSplit.SplitNone(content, "|");
+        int usableCount = (parts.Count / 3) * 3;
+        for (int index = 0; index < usableCount;)
         {
-            string key = d[i++];
-            string fullName = d[i++];
-            string third = d[i++];
+            string key = parts[index++];
+            string fullName = parts[index++];
+            string third = parts[index++];
             object value = null;
             switch (fullName)
             {
@@ -219,11 +219,11 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
             if (value != null)
             {
                 ABWpf get = ABWpf.Get(fullName, value);
-                o.data.Add(key, get);
+                result.data.Add(key, get);
             }
         }
 
-        return o;
+        return result;
     }
     public Dictionary<string, ABWpf> GetItems()
     {
@@ -299,22 +299,22 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
             }
             if (data.ContainsKey(key))
             {
-                ABWpf ab = data[key];
-                if (typeName == ab.A)
+                ABWpf item = data[key];
+                if (typeName == item.A)
                 {
-                    ab.B = value;
+                    item.B = value;
                     //TF.throwExcIfCantBeWrite = throwExcIfFalse;
                     SaveFile().GetAwaiter().GetResult();
                 }
                 else
                 {
-                    ThrowEx.Custom(SHFormat.Format2("Pravděpodobně chyba v aplikaci, pokoušíte se uložit do souboru v AppData položku typu {0} pod klíčem {1} která měla původně typ {{}", typeName, key, ab.A));
+                    ThrowEx.Custom(SHFormat.Format2("Pravděpodobně chyba v aplikaci, pokoušíte se uložit do souboru v AppData položku typu {0} pod klíčem {1} která měla původně typ {{}", typeName, key, item.A));
                 }
             }
             else
             {
-                ABWpf ab = ABWpf.Get(typeName, value);
-                data.Add(key, ab);
+                ABWpf abItem = ABWpf.Get(typeName, value);
+                data.Add(key, abItem);
                 string zapsatDoSouboru = SF.PrepareToSerialization2(CA.ToListString(key, typeName, SH.ListToString(value))) + "|";
                 if (!string.IsNullOrEmpty(path))
                 {
@@ -352,17 +352,17 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
 #endif
  SaveFile()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         foreach (var item in data)
         {
-            sb.Append(SF.PrepareToSerialization2(CA.ToListString(item.Key, item.Value.A, SH.ListToString(item.Value.B))) + "|");
+            stringBuilder.Append(SF.PrepareToSerialization2(CA.ToListString(item.Key, item.Value.A, SH.ListToString(item.Value.B))) + "|");
         }
         if (string.IsNullOrEmpty(path))
         {
             return;
         }
         EnsureParentDirectory(path);
-        await TF.WriteAllText(path, sb.ToString()).ConfigureAwait(false);
+        await TF.WriteAllText(path, stringBuilder.ToString()).ConfigureAwait(false);
     }
     public IEnumerator GetEnumerator()
     {

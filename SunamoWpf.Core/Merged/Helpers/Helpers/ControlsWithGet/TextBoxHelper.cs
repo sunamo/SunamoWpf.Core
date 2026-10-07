@@ -25,9 +25,9 @@ public class TextBoxHelper
     /// <returns></returns>
     public static int VisibleLineCount(TextBox txt)
     {
-        var f = txt.GetFirstVisibleLineIndex();
-        var l = txt.GetLastVisibleLineIndex();
-        return l - f;
+        var firstLine = txt.GetFirstVisibleLineIndex();
+        var lastLine = txt.GetLastVisibleLineIndex();
+        return lastLine - firstLine;
     }
     public static void RegisterHighlightAllTextBox()
     {
@@ -35,7 +35,7 @@ public class TextBoxHelper
      UIElement.GotFocusEvent,
      new RoutedEventHandler(TextBox_GotFocus));
     }
-    static void TextBox_GotFocus(object sender, RoutedEventArgs e)
+    static void TextBox_GotFocus(object sender, RoutedEventArgs eventArgs)
     {
         (sender as TextBox).SelectAll();
     }
@@ -44,31 +44,31 @@ public class TextBoxHelper
     /// Tag here is mainly for comment what data control hold
     /// </summary>
     /// <param name="tag"></param>
-    public static TextBox Get(ControlInitData d)
+    public static TextBox Get(ControlInitData controlInitData)
     {
         TextBox txt = new TextBox();
-        ControlHelper.SetForeground(txt, d.foreground);
-        if (d.imagePath != null)
+        ControlHelper.SetForeground(txt, controlInitData.foreground);
+        if (controlInitData.imagePath != null)
         {
-            ThrowEx.IsNotNull("d.imagePath", d.imagePath);
+            ThrowEx.IsNotNull("d.imagePath", controlInitData.imagePath);
         }
-        if (d.OnClick != null)
+        if (controlInitData.OnClick != null)
         {
-            ThrowEx.IsNotNull("d.OnClick", d.OnClick);
+            ThrowEx.IsNotNull("d.OnClick", controlInitData.OnClick);
         }
-        txt.Name = d.name;
+        txt.Name = controlInitData.name;
         // Set up NaN due to fill all available size
         txt.Width = double.NaN;
-        txt.Tag = d.tag;
-        txt.ToolTip = d.tooltip;
-        txt.Text = d.text;
-        if (d.OnTextChange != null)
+        txt.Tag = controlInitData.tag;
+        txt.ToolTip = controlInitData.tooltip;
+        txt.Text = controlInitData.text;
+        if (controlInitData.OnTextChange != null)
         {
-            txt.TextChanged += d.OnTextChange;
+            txt.TextChanged += controlInitData.OnTextChange;
         }
         return txt;
     }
-    private static void Txt_TextChanged(object sender, TextChangedEventArgs e)
+    private static void Txt_TextChanged(object sender, TextChangedEventArgs eventArgs)
     {
     }
     static TextBoxHelper()
@@ -122,13 +122,13 @@ public class TextBoxHelper
         {
             return;
         }
-        var s = 0;
-        var l = txtContent.Text.Split(new string[] { SH.DetectNewline(txtContent.Text) }, StringSplitOptions.RemoveEmptyEntries);
-        for (int i = 0; i < line; i++)
+        var count = 0;
+        var lines = txtContent.Text.Split(new string[] { SH.DetectNewline(txtContent.Text) }, StringSplitOptions.RemoveEmptyEntries);
+        for (int index = 0; index < line; index++)
         {
-            s += l[i].Length + 1;
+            count += lines[index].Length + 1;
         }
-        txtContent.CaretOffset = s;
+        txtContent.CaretOffset = count;
         txtContent.Focus();
     }
     //private static void MoveCaretToLine(TextBox txtBox, int lineNumber)
@@ -168,28 +168,28 @@ public class TextBoxHelper
     }
     public static void InicializeWidths()
     {
-        StackPanel p = new StackPanel();
+        StackPanel stackPanel = new StackPanel();
         TextBox txtTest = new TextBox();
         txtTest.MinWidth = 0;
         Dictionary<int, double> charWidth = new Dictionary<int, double>();
-        double? d = null;
-        for (char i = 'a'; i <= 'z'; i++)
+        double? value = null;
+        for (char letter = 'a'; letter <= 'z'; letter++)
         {
             txtTest = new TextBox();
-            txtTest.Text = i.ToString();
+            txtTest.Text = letter.ToString();
             txtTest.Measure(ControlHelper.SizePositiveInfinity);
             txtTest.Arrange(new Rect(0, 0, txtTest.DesiredSize.Width, txtTest.DesiredSize.Height));
             txtTest.UpdateLayout();
-            charWidth.Add(i, txtTest.ActualWidth);
-            if (d == null)
+            charWidth.Add(letter, txtTest.ActualWidth);
+            if (value == null)
             {
-                d = txtTest.ActualWidth;
+                value = txtTest.ActualWidth;
             }
             else
             {
-                if (txtTest.ActualWidth > d.Value)
+                if (txtTest.ActualWidth > value.Value)
                 {
-                    d = txtTest.ActualWidth;
+                    value = txtTest.ActualWidth;
                 }
             }
         }
@@ -205,31 +205,31 @@ public class TextBoxHelper
         ave /= 100;
         // Násobím 1-100(velikost písma) předchozím výsledkem - dostanu šířku textboxu při velikosti písma ai
         Dictionary<int, double> aweWidthFor = new Dictionary<int, double>();
-        for (int i = 1; i < 101; i++)
+        for (int index = 1; index < 101; index++)
         {
-            aweWidthFor.Add(i, i * ave);
+            aweWidthFor.Add(index, index * ave);
         }
-        for (int i = 1; i < 101; i++)
+        for (int widthIndex = 1; widthIndex < 101; widthIndex++)
         {
             txtTest = new TextBox();
-            p.Children.Add(txtTest);
+            stackPanel.Children.Add(txtTest);
             txtTest.Text = "1";
-            txtTest.FontSize = i;
+            txtTest.FontSize = widthIndex;
             txtTest.Measure(ControlHelper.SizePositiveInfinity);
-            averageNumberWidthOnFontSize.Add(i, txtTest.DesiredSize.Width);
-            p.Children.Remove(txtTest);
+            averageNumberWidthOnFontSize.Add(widthIndex, txtTest.DesiredSize.Width);
+            stackPanel.Children.Remove(txtTest);
         }
-        p.Visibility = Visibility.Collapsed;
+        stackPanel.Visibility = Visibility.Collapsed;
     }
     /// <summary>
     /// Instead of this use instance
     /// </summary>
-    /// <param name="tb"></param>
+    /// <param name="textBox"></param>
     /// <param name="control"></param>
     /// <param name="trim"></param>
-    public static void Validate(object tb, TextBox control, ref ValidateDataWpf d)
+    public static void Validate(object textBox, TextBox control, ref ValidateDataWpf validateData)
     {
-        control.Validate(tb, ref d);
+        control.Validate(textBox, ref validateData);
     }
     public static double GetOptimalWidthForCountOfChars(int count, bool alsoLetters, TextBox txt)
     {

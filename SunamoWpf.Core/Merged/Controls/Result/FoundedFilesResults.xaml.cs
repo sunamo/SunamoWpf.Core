@@ -4,13 +4,13 @@ namespace SunamoWpf.Controls.Result;
 public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<FoundedFileUC>, IFoundedResultsUC<FoundedFileUC>*/, ISelectedTWpf<string>
 {
     #region FoundedFilesUC
-    private void FoundedFilesUC_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
+    private void FoundedFilesUC_SizeChanged(object sender, System.Windows.SizeChangedEventArgs eventArgs)
     {
 #if DEBUG
         //FrameworkElementDebug.ActualSize(this);
 #endif
     }
-    private void FoundedFilesUC_Loaded(object sender, System.Windows.RoutedEventArgs e)
+    private void FoundedFilesUC_Loaded(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
     }
     public void AttachSelected(VoidString act)
@@ -22,14 +22,14 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
     /// Already inserted is not deleted
     /// </summary>
     /// <param name="foundedList"></param>
-    /// <param name="p"></param>
-    public void AddFoundedFiles(List<string> foundedList, TUListWpf<string, System.Windows.Media.Brush> p)
+    /// <param name="colors"></param>
+    public void AddFoundedFiles(List<string> foundedList, TUListWpf<string, System.Windows.Media.Brush> colors)
     {
         HideTbNoResultsFound();
-        int i = 0;
+        int index = 0;
         foreach (var item in foundedList)
         {
-            AddFoundedFile(item, p, ref i);
+            AddFoundedFile(item, colors, ref index);
         }
     }
     /// <summary>
@@ -37,21 +37,21 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
     /// Already inserted is not deleted
     /// </summary>
     /// <param name="foundedList"></param>
-    /// <param name="p"></param>
-    public void AddFoundedFile(string item, TUListWpf<string, System.Windows.Media.Brush> p, ref int i)
+    /// <param name="colors"></param>
+    public void AddFoundedFile(string item, TUListWpf<string, System.Windows.Media.Brush> colors, ref int index)
     {
         if (sp != null)
         {
             HideTbNoResultsFound();
-            FoundedFileUC foundedFile = new FoundedFileUC(item, p, i++);
+            FoundedFileUC foundedFile = new FoundedFileUC(item, colors, index++);
             foundedFile.Selected += FoundedFile_Selected;
             sp.Children.Add(foundedFile);
         }
     }
-    public void FoundedFile_Selected(string s)
+    public void FoundedFile_Selected(string path)
     {
-        selectedItem = s;
-        OnSelected(s);
+        selectedItem = path;
+        OnSelected(path);
     }
     public bool? Filter(string text)
     {
@@ -68,15 +68,15 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             else
             {
                 bool someVisible = false;
-                Regex r = null;
+                Regex regex = null;
                 if (WildcardHelper.IsWildcard(text))
                 {
                     text = Wildcard.WildcardToRegex(text);
-                    r = new Regex(text);
+                    regex = new Regex(text);
                 }
                 foreach (FoundedFileUC item in sp.Children)
                 {
-                    if (item.Contains(r, text))
+                    if (item.Contains(regex, text))
                     {
                         someVisible = true;
                         item.Visibility = System.Windows.Visibility.Visible;
@@ -122,7 +122,7 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
         Loaded += FoundedResultsUC_Loaded;
         SizeChanged += FoundedResultsUC_SizeChanged;
     }
-    private void FoundedResultsUC_SizeChanged(object sender, SizeChangedEventArgs e)
+    private void FoundedResultsUC_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
     {
 #if DEBUG
         //FrameworkElementDebug.ActualSize(this);
@@ -130,7 +130,7 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
         //FrameworkElementDebug.ActualSize(sp);
 #endif
     }
-    private void FoundedResultsUC_Loaded(object sender, RoutedEventArgs e)
+    private void FoundedResultsUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
     }
     //private void FoundedResultViewModel_Do(FoundedResultActions obj)
@@ -166,8 +166,8 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
         }
         basePaths = basePath.ToList();
-        SunamoComparerICompare.StringLength.Desc s = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
-        basePaths.Sort(s);
+        SunamoComparerICompare.StringLength.Desc comparer = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
+        basePaths.Sort(comparer);
         CA.WithEndSlash(basePaths);
     }
     public TUListWpf<string, Brush> DefaultBrushes(string green = "", string red = "")
@@ -185,11 +185,11 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             sv.Visibility = Visibility.Visible;
         }
     }
-    public void AddFoundedResults(bool clear, TUListWpf<string, Brush> p, List<TWithNameTWpf<string>> foundedResult)
+    public void AddFoundedResults(bool clear, TUListWpf<string, Brush> colors, List<TWithNameTWpf<string>> foundedResult)
     {
         if (sp != null && sv != null)
         {
-            int i = 1;
+            int index = 1;
             if (clear)
             {
                 ClearFoundedResult();
@@ -201,11 +201,11 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             }
             foreach (var item in foundedResult)
             {
-                FoundedResultUC fr = new FoundedResultUC(item.name, p, i++);
-                fr.Selected += OnSelected;
-                TextBlock tb = TextBlockHelper.Get(new ControlInitData { text = item.t });
-                fr.SecondRow = tb;
-                sp.Children.Add(fr);
+                FoundedResultUC resultControl = new FoundedResultUC(item.name, colors, index++);
+                resultControl.Selected += OnSelected;
+                TextBlock textBlock = TextBlockHelper.Get(new ControlInitData { text = item.t });
+                resultControl.SecondRow = textBlock;
+                sp.Children.Add(resultControl);
             }
         }
     }
@@ -254,9 +254,9 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             tbNoResultsFound.Visibility = Visibility.Visible;
         }
     }
-    public void OnSelected(string p)
+    public void OnSelected(string path)
     {
-        Selected(p);
+        Selected(path);
     }
     /// <summary>
     /// return null if there is no element

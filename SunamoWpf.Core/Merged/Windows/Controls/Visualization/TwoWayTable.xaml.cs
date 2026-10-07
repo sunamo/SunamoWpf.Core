@@ -45,7 +45,7 @@ public partial class TwoWayTable : UserControl
         //var path = AppData.ci.GetFile(AppFolders.Controls, string.Join("_", sender.Name, site, page));
         #region Get isChecked from row
         var ele = sender.GetCheckBoxesInRow(page);
-        var isChecked = ele.Select(d => d.IsChecked.Value);
+        var isChecked = ele.Select(checkBox => checkBox.IsChecked.Value);
         var ints = new List<int>(isChecked.Count());
         foreach (var item in isChecked)
         {
@@ -108,7 +108,7 @@ public partial class TwoWayTable : UserControl
         }
         Loaded += TwoWayTable_Loaded;
     }
-    private void TwoWayTable_Loaded(object sender, RoutedEventArgs e)
+    private void TwoWayTable_Loaded(object sender, RoutedEventArgs eventArgs)
     {
 #if DEBUG
         //if (grid.Children.Count > 0)
@@ -157,7 +157,7 @@ GetRowsIsChecked(TwoWayTable twt, string folder)
         var begin = twt.Name + "_";
         //var folder = AppData.ci.GetFolder(AppFolders.Controls);
         var files = FSGetFiles.GetFilesEveryFolder(logger, folder, begin + "*", System.IO.SearchOption.TopDirectoryOnly);
-        Dictionary<string, Dictionary<string, List<bool>>> s = new Dictionary<string, Dictionary<string, List<bool>>>();
+        Dictionary<string, Dictionary<string, List<bool>>> result = new Dictionary<string, Dictionary<string, List<bool>>>();
         // In web will be window always null
         // See comments in IWindowWithSettingsManager
         var window = (IWindowWithSettingsManager)WpfApp.mp;
@@ -165,10 +165,10 @@ GetRowsIsChecked(TwoWayTable twt, string folder)
         var data = Data.data;
         foreach (var item in files)
         {
-            string fn = FS.GetFileName(item);
-            fn = fn.Substring(begin.Length);
-            string key = begin + fn;
-            var webPage = SHSplit.Split(fn, "_");
+            string fileName = FS.GetFileName(item);
+            fileName = fileName.Substring(begin.Length);
+            string key = begin + fileName;
+            var webPage = SHSplit.Split(fileName, "_");
             var web = webPage[0];
             var page = webPage[1];
             var dKey = begin + web;
@@ -201,18 +201,18 @@ TF.ReadAllText(item);
             List<int> numbers = CAToNumber.ToNumber<int>(BTS.ParseInt, cells, int.MinValue);
             List<bool> bools = CA.ToBool(numbers);
             Dictionary<string, List<bool>> dict = null;
-            if (s.ContainsKey(dKey))
+            if (result.ContainsKey(dKey))
             {
-                dict = s[dKey];
+                dict = result[dKey];
             }
             else
             {
                 dict = new Dictionary<string, List<bool>>();
-                s.Add(dKey, dict);
+                result.Add(dKey, dict);
             }
             DictionaryHelper.AddOrSet<string, List<bool>>(dict, page, bools);
         }
-        return s;
+        return result;
     }
     public void ReRender()
     {
@@ -254,27 +254,27 @@ GetRowsIsChecked(this, folder);
         var key = this.Name + "_" + displayEntity;
         if (checkedCells.ContainsKey(key))
         {
-            Dictionary<string, List<bool>> s = checkedCells[key];
-            foreach (var item in s)
+            Dictionary<string, List<bool>> row = checkedCells[key];
+            foreach (var item in row)
             {
                 int dex = GetIndexOfRow(item.Key);
                 if (dex != -1)
                 {
                     var ele = GetCheckBoxesInRow(dex);
-                    for (int i = 0; i < item.Value.Count; i++)
+                    for (int index = 0; index < item.Value.Count; index++)
                     {
-                        var el = ele[i];
-                        var isChecked = item.Value[i];
+                        var element = ele[index];
+                        var isChecked = item.Value[index];
                         if (displayEntity == "Lyr")
                         {
                             if (isChecked)
                             {
                             }
-                            el.IsChecked = isChecked;
+                            element.IsChecked = isChecked;
                         }
                         else
                         {
-                            el.IsChecked = isChecked;
+                            element.IsChecked = isChecked;
                         }
                     }
                 }
@@ -306,47 +306,47 @@ GetRowsIsChecked(this, folder);
     /// </summary>
     /// <param name="dexCol"></param>
     /// <param name="uie"></param>
-    /// <param name="o"></param>
-    public void AddColumn(int dexCol, List<CheckBoxData<UIElement>> uie, List<object> o)
+    /// <param name="values"></param>
+    public void AddColumn(int dexCol, List<CheckBoxData<UIElement>> uie, List<object> values)
     {
         // 1,4,5,6,7,8,13
-        for (int i = 0; i < uie.Count; i++)
+        for (int index = 0; index < uie.Count; index++)
         {
             UIElement item = null;
-            if (uie[i] != null)
+            if (uie[index] != null)
             {
-                item = uie[i].t;
+                item = uie[index].t;
             }
             if (item != null)
             {
-                Border b = new Border();
-                b.Height = maxHeightRowBorder;
-                b.Padding = new Thickness(5);
-                b.Child = item;
-                b.BorderBrush = Brushes.Transparent;
-                b.BorderThickness = new Thickness(1);
-                item = b;
+                Border border = new Border();
+                border.Height = maxHeightRowBorder;
+                border.Padding = new Thickness(5);
+                border.Child = item;
+                border.BorderBrush = Brushes.Transparent;
+                border.BorderThickness = new Thickness(1);
+                item = border;
             }
-            controls[i, dexCol] = item;
+            controls[index, dexCol] = item;
             if (item != null)
             {
-                data[i, dexCol] = o[i];
+                data[index, dexCol] = values[index];
                 if (DataCellWrapper == AddBeforeControl.CheckBox)
                 {
                     CheckBox chb = new CheckBox();
                     chb.VerticalAlignment = VerticalAlignment.Center;
                     chb.VerticalContentAlignment = VerticalAlignment.Center;
                     chb.Content = item;
-                    chb.IsChecked = uie[i].tick;
+                    chb.IsChecked = uie[index].tick;
                     Grid.SetColumn(chb, dexCol + 1);
-                    Grid.SetRow(chb, i + 1);
+                    Grid.SetRow(chb, index + 1);
                     grid.Children.Add(chb);
-                    checkBoxes[i, dexCol] = chb;
+                    checkBoxes[index, dexCol] = chb;
                 }
                 else
                 {
                     Grid.SetColumn(item, dexCol + 1);
-                    Grid.SetRow(item, i + 1);
+                    Grid.SetRow(item, index + 1);
                     grid.Children.Add(item);
                 }
             }
@@ -357,39 +357,39 @@ GetRowsIsChecked(this, folder);
     /// </summary>
     /// <param name="dexRow"></param>
     /// <param name="uie"></param>
-    /// <param name="o"></param>
-    public void AddRow(int dexRow, CheckBoxData<UIElement>[] uie, object[] o)
+    /// <param name="values"></param>
+    public void AddRow(int dexRow, CheckBoxData<UIElement>[] uie, object[] values)
     {
         if (uie.Length + 1 != columns)
         {
             return;
         }
-        for (int i = 0; i < uie.Length; i++)
+        for (int index = 0; index < uie.Length; index++)
         {
             UIElement item = null;
-            if (uie[i] != null)
+            if (uie[index] != null)
             {
-                item = uie[i].t;
+                item = uie[index].t;
             }
-            controls[dexRow, i] = item;
+            controls[dexRow, index] = item;
             if (item != null)
             {
-                data[dexRow, i] = o[i];
+                data[dexRow, index] = values[index];
                 if (DataCellWrapper == AddBeforeControl.CheckBox)
                 {
                     CheckBox chb = new CheckBox();
                     chb.Content = item;
-                    chb.IsChecked = uie[i].tick;
+                    chb.IsChecked = uie[index].tick;
                     FrameworkElementHelper.SetMargin(chb, marginInCell);
-                    Grid.SetColumn(chb, i + 1);
+                    Grid.SetColumn(chb, index + 1);
                     Grid.SetRow(chb, dexRow + 1);
                     grid.Children.Add(chb);
-                    checkBoxes[dexRow, i] = chb;
+                    checkBoxes[dexRow, index] = chb;
                 }
                 else
                 {
                     FrameworkElementHelper.SetMargin(item, marginInCell);
-                    Grid.SetColumn(item, i + 1);
+                    Grid.SetColumn(item, index + 1);
                     Grid.SetRow(item, dexRow + 1);
                     grid.Children.Add(item);
                 }
@@ -402,35 +402,35 @@ GetRowsIsChecked(this, folder);
     }
     public void AddTop(IList<CheckBoxData<UIElement>> uie)
     {
-        int i = 0;
+        int index = 0;
         foreach (var item2 in uie)
         {
             UIElement item = item2.t;
             if (dataCellWrapper == AddBeforeControl.CheckBox)
             {
                 CheckBox top = new CheckBox();
-                top.Tag = i;
+                top.Tag = index;
                 top.Click += Top_Click;
                 top.Content = item;
                 item = top;
             }
-            Grid.SetColumn(item, i + 1);
+            Grid.SetColumn(item, index + 1);
             Grid.SetRow(item, 0);
             grid.Children.Add(item);
-            i++;
+            index++;
         }
     }
-    private void Top_Click(object sender, RoutedEventArgs e)
+    private void Top_Click(object sender, RoutedEventArgs eventArgs)
     {
         CheckBox chb = (CheckBox)sender;
         int tagOfCheckBox = (int)chb.Tag;
         bool isChecked = ((bool)chb.IsChecked);
-        for (int i = 0; i < checkBoxes.GetLength(0); i++)
+        for (int index = 0; index < checkBoxes.GetLength(0); index++)
         {
-            var dr = checkBoxes[i, tagOfCheckBox];
-            if (dr != null)
+            var checkBoxData = checkBoxes[index, tagOfCheckBox];
+            if (checkBoxData != null)
             {
-                dr.IsChecked = isChecked;
+                checkBoxData.IsChecked = isChecked;
             }
         }
     }
@@ -442,14 +442,14 @@ GetRowsIsChecked(this, folder);
     public void AddLeft(IList<CheckBoxData<UIElement>> uie)
     {
         leftChbs.Clear();
-        int i = 0;
+        int index = 0;
         foreach (var item2 in uie)
         {
             UIElement item = item2.t;
-            var s = item.GetContent();
-            if (s != null)
+            var content = item.GetContent();
+            if (content != null)
             {
-                leftChbs.Add(s.ToString());
+                leftChbs.Add(content.ToString());
             }
             else
             {
@@ -458,28 +458,28 @@ GetRowsIsChecked(this, folder);
             if (dataCellWrapper == AddBeforeControl.CheckBox)
             {
                 CheckBox left = new CheckBox();
-                left.Tag = i;
+                left.Tag = index;
                 left.Click += Left_Click;
                 left.Content = item;
                 item = left;
             }
             Grid.SetColumn(item, 0);
-            Grid.SetRow(item, i + 1);
+            Grid.SetRow(item, index + 1);
             grid.Children.Add(item);
-            i++;
+            index++;
         }
     }
-    private void Left_Click(object sender, RoutedEventArgs e)
+    private void Left_Click(object sender, RoutedEventArgs eventArgs)
     {
         CheckBox chb = (CheckBox)sender;
         int tagOfCheckBox = (int)chb.Tag;
         bool isChecked = ((bool)chb.IsChecked);
-        for (int i = 0; i < checkBoxes.GetLength(1); i++)
+        for (int index = 0; index < checkBoxes.GetLength(1); index++)
         {
-            var dr = checkBoxes[tagOfCheckBox, i];
-            if (dr != null)
+            var checkBoxData = checkBoxes[tagOfCheckBox, index];
+            if (checkBoxData != null)
             {
-                dr.IsChecked = isChecked;
+                checkBoxData.IsChecked = isChecked;
             }
         }
     }

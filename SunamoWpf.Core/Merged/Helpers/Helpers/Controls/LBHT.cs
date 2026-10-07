@@ -1,27 +1,27 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Controls;
 
-public delegate void VoidMouseButtonGeneric1<in T>(MouseButton mb, T t);
+public delegate void VoidMouseButtonGeneric1<in T>(MouseButton mouseButton, T value);
 public class LBHT<T> : LBH
 {
     /// <summary>
     /// Vychozy pro A2 bylo SelectionMode.Extended
     /// </summary>
-    /// <param name="lb"></param>
-    /// <param name="sm"></param>
-    public LBHT(ListBox lb, SelectionMode sm = SelectionMode.Single)
-        : base(lb, sm)
+    /// <param name="listBox"></param>
+    /// <param name="selectionMode"></param>
+    public LBHT(ListBox listBox, SelectionMode selectionMode = SelectionMode.Single)
+        : base(listBox, selectionMode)
     {
-        lb.SelectionChanged += Lb_SelectionChanged;
+        listBox.SelectionChanged += Lb_SelectionChanged;
         ItemRemoved += LBHT_ItemRemoved;
-        lb.PreviewMouseDoubleClick += Lb_MouseDoubleClick;
+        listBox.PreviewMouseDoubleClick += Lb_MouseDoubleClick;
     }
-    private void LBHT_ItemRemoved(object o)
+    private void LBHT_ItemRemoved(object item)
     {
-        ItemRemovedT((T)o);
+        ItemRemovedT((T)item);
     }
     public event VoidT<T> ItemRemovedT;
-    private void Lb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Lb_SelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
     {
         SaveSelectedItem();
     }
@@ -29,35 +29,35 @@ public class LBHT<T> : LBH
     {
         if (lb.SelectedItem is T)
         {
-            T t = (T)lb.SelectedItem;
-            SaveSelectedItem(t);
+            T item = (T)lb.SelectedItem;
+            SaveSelectedItem(item);
         }
         else if (lb.SelectedItem is FrameworkElement)
         {
             // Vlastnost Tag je ve tzd FrameworkElement
-            FrameworkElement fw = lb.SelectedItem as FrameworkElement;
-            if (fw.Tag is T)
+            FrameworkElement frameworkElement = lb.SelectedItem as FrameworkElement;
+            if (frameworkElement.Tag is T)
             {
-                T t = (T)fw.Tag;
-                SaveSelectedItem(t);
+                T selectedItem = (T)frameworkElement.Tag;
+                SaveSelectedItem(selectedItem);
             }
         }
     }
-    private void SaveSelectedItem(T t)
+    private void SaveSelectedItem(T item)
     {
-        Selected = t;
+        Selected = item;
         if (MouseDown != null)
         {
-            MouseDown(mb, t);
+            MouseDown(mb, item);
         }
     }
-    private void Lb_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    private void Lb_MouseDoubleClick(object sender, MouseButtonEventArgs eventArgs)
     {
-        mb = e.ChangedButton;
+        mb = eventArgs.ChangedButton;
         SaveSelectedItem();
         if (IsSelected)
         {
-            if (e.ChangedButton == MouseButton.Left)
+            if (eventArgs.ChangedButton == MouseButton.Left)
             {
                 if (runOne)
                 {
@@ -74,17 +74,17 @@ public class LBHT<T> : LBH
             return (T)SelectedO;
         }
     }
-    public static List<T> GetItemsListT(ItemCollection oc)
+    public static List<T> GetItemsListT(ItemCollection items)
     {
-        List<T> vr = new List<T>();
-        foreach (object var in oc)
+        List<T> result = new List<T>();
+        foreach (object var in items)
         {
             if (var is T)
             {
-                vr.Add((T)var);
+                result.Add((T)var);
             }
         }
-        return vr;
+        return result;
     }
 }
 /// <summary>
@@ -93,18 +93,18 @@ public class LBHT<T> : LBH
 public class LBH
 {
     protected object Selected = null;
-    public static void AddRange2List(ListBox lb, IList il)
+    public static void AddRange2List(ListBox listBox, IList items)
     {
-        foreach (var item in il)
+        foreach (var item in items)
         {
-            lb.Items.Add(item);
+            listBox.Items.Add(item);
         }
     }
-    public static void AddRange2(ListBox lb, params object[] list)
+    public static void AddRange2(ListBox listBox, params object[] list)
     {
         foreach (var item in list)
         {
-            lb.Items.Add(item);
+            listBox.Items.Add(item);
         }
     }
     public void AddRange(params object[] list)
@@ -120,21 +120,21 @@ public class LBH
     /// </summary>
     public void CopyToClipboard()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         foreach (IListBoxHelperItem var in lb.Items)
         {
-            sb.AppendLine(var.ToString());
+            stringBuilder.AppendLine(var.ToString());
         }
-        ClipboardService.SetText(sb.ToString());
+        ClipboardService.SetText(stringBuilder.ToString());
     }
     public void CopyToClipboardShort()
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         foreach (IListBoxHelperItem var in lb.Items)
         {
-            sb.AppendLine(var.ShortName);
+            stringBuilder.AppendLine(var.ShortName);
         }
-        ClipboardService.SetText(sb.ToString());
+        ClipboardService.SetText(stringBuilder.ToString());
     }
     #region DPP
     public event Action<object> ItemRemoved;
@@ -148,29 +148,29 @@ public class LBH
     protected ListBox lb;
     #endregion
     protected MouseButton mb = MouseButton.XButton1;
-    private void Lb_MouseDown(object sender, MouseButtonEventArgs e)
+    private void Lb_MouseDown(object sender, MouseButtonEventArgs eventArgs)
     {
-        mb = e.ChangedButton;
+        mb = eventArgs.ChangedButton;
     }
     #region base
     /// <summary>
     /// EK, OOP.
     /// Vychozy pro A2 bylo SelectionMode.Extended
     /// </summary>
-    /// <param name="lb"></param>
-    public LBH(ListBox lb, SelectionMode sm)
+    /// <param name="listBox"></param>
+    public LBH(ListBox listBox, SelectionMode selectionMode)
     {
-        this.lb = lb;
-        lb.SelectionMode = sm;
-        lb.KeyDown += new KeyEventHandler(lb_KeyDown);
-        lb.PreviewMouseDown += Lb_MouseDown;
-        lb.SelectionChanged += Lb_SelectionChanged;
+        this.lb = listBox;
+        listBox.SelectionMode = selectionMode;
+        listBox.KeyDown += new KeyEventHandler(lb_KeyDown);
+        listBox.PreviewMouseDown += Lb_MouseDown;
+        listBox.SelectionChanged += Lb_SelectionChanged;
     }
-    private void Lb_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Lb_SelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
     {
-        if (e.AddedItems.Count > 0)
+        if (eventArgs.AddedItems.Count > 0)
         {
-            Selected = e.AddedItems[0];
+            Selected = eventArgs.AddedItems[0];
             if (ItemSelected != null)
             {
                 ItemSelected();
@@ -190,13 +190,13 @@ public class LBH
     /// Enter - ulozit do schranky
     /// </summary>
     /// <param name="sender"></param>
-    /// <param name="e"></param>
-    void lb_KeyDown(object sender, KeyEventArgs e)
+    /// <param name="eventArgs"></param>
+    void lb_KeyDown(object sender, KeyEventArgs eventArgs)
     {
         if (IsSelected)
         {
             #region Enter - Spusti akt. polozku v LB. Nepridava k ni nic.
-            if (e.Key == Key.Enter)
+            if (eventArgs.Key == Key.Enter)
             {
                 if (runOne)
                 {
@@ -205,7 +205,7 @@ public class LBH
             }
             #endregion
             #region C - Ulozi do schr.
-            else if (e.Key == Key.C)
+            else if (eventArgs.Key == Key.C)
             {
                 if (saveToClipboard)
                 {
@@ -214,7 +214,7 @@ public class LBH
             }
             #endregion
             #region del - smaze tuto domenu
-            else if (e.Key == Key.Delete)
+            else if (eventArgs.Key == Key.Delete)
             {
                 if (removeOne)
                 {
@@ -263,8 +263,8 @@ public class LBH
     {
         get
         {
-            string s = SelectedS;
-            return !string.IsNullOrEmpty(s);
+            string selectedText = SelectedS;
+            return !string.IsNullOrEmpty(selectedText);
             //return lb;
         }
     }
@@ -277,12 +277,12 @@ public class LBH
         get
         {
             //object o = lb.SelectedItem;
-            object o = Selected;
-            if (o == null)
+            object selected = Selected;
+            if (selected == null)
             {
                 return null;
             }
-            return o.ToString();
+            return selected.ToString();
         }
         set
         {
@@ -294,54 +294,54 @@ public class LBH
     /// <summary>
     /// Prida do pp lb polozku. Nekontroluje, zda jiz existuje.
     /// </summary>
-    /// <param name="s"></param>
-    public void Add(object s)
+    /// <param name="item"></param>
+    public void Add(object item)
     {
-        lb.Items.Add(s);
+        lb.Items.Add(item);
     }
     /// <summary>
     /// Odebere do pp lb polozku. Nekontroluje, zda jiz neexistuje.
     /// </summary>
-    /// <param name="s"></param>
-    public void Remove(object s)
+    /// <param name="item"></param>
+    public void Remove(object item)
     {
-        lb.Items.Remove(s);
+        lb.Items.Remove(item);
     }
     #endregion
     public List<string> GetItemsListString()
     {
-        List<string> vr = new List<string>();
+        List<string> result = new List<string>();
         foreach (object item in lb.Items)
         {
-            vr.Add(item.ToString());
+            result.Add(item.ToString());
         }
-        return vr;
+        return result;
     }
     public static List<string> GetSelectedListString(IList selectedObjectCollection)
     {
-        List<string> vr = new List<string>();
+        List<string> result = new List<string>();
         foreach (object var in selectedObjectCollection)
         {
-            vr.Add(var.ToString());
+            result.Add(var.ToString());
         }
-        return vr;
+        return result;
     }
     public static List<T1> GetItemsListT<T1>(ItemCollection objectCollection)
     {
-        List<T1> t1 = new List<T1>();
+        List<T1> result = new List<T1>();
         foreach (T1 var in objectCollection)
         {
-            t1.Add(var);
+            result.Add(var);
         }
-        return t1;
+        return result;
     }
     public static List<string> GetItemsListString(ItemCollection objectCollection)
     {
-        List<string> t1 = new List<string>();
+        List<string> result = new List<string>();
         foreach (object var in objectCollection)
         {
-            t1.Add(var.ToString());
+            result.Add(var.ToString());
         }
-        return t1;
+        return result;
     }
 }

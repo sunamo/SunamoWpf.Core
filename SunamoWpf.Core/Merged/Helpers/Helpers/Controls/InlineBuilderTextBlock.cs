@@ -5,9 +5,9 @@ public class InlineBuilderTextBlock : InlineBuilder
 {
     public TextBlock tb = null;
 
-    public InlineBuilderTextBlock(TextBlock tb) : base(tb.Inlines)
+    public InlineBuilderTextBlock(TextBlock textBlock) : base(textBlock.Inlines)
     {
-        this.tb = tb;
+        this.tb = textBlock;
     }
 
     public InlineBuilderTextBlock()

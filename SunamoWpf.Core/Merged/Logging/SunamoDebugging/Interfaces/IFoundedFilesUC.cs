@@ -17,9 +17,9 @@ public interface IFoundedFilesUCXaml<SearchInUC> : IFoundedFilesUC<SearchInUC>
 public interface IFoundedFilesUC<SearchInUC> : IFoundedResultsUC<IFoundedFileUC>, ISelectedTWpf<string>
 {
     //event VoidString Selected;
-    void AddFoundedFile(string item, TUListWpf<string, Brush> p, ref int i);
-    void AddFoundedFiles(List<string> foundedList, TUListWpf<string, Brush> p);
+    void AddFoundedFile(string item, TUListWpf<string, Brush> colors, ref int index);
+    void AddFoundedFiles(List<string> foundedList, TUListWpf<string, Brush> colors);
     bool? Filter(string text);
-    void FoundedFile_Selected(string s);
+    void FoundedFile_Selected(string path);
     void AttachSelected(VoidString act);
 }

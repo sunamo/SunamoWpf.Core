@@ -160,11 +160,11 @@ public partial class CheckBoxListUC : UserControl
 
         public List<string> AllContentString()
         {
-            var ac = AllContent();
+            var allContent = AllContent();
             List<string> result = new List<string>();
             string text = null;
 
-            foreach (var item in ac)
+            foreach (var item in allContent)
             {
                 //null; //
                 //IList<TextBlock> textboxes = null;
@@ -185,21 +185,21 @@ public partial class CheckBoxListUC : UserControl
 
         public static string ContentOfTextBlock(StackPanel key)
         {
-            var d = WpfApp.cd;
+            var value = WpfApp.cd;
 
-            UIElementCollection children = PanelHelper.Children(key, d);
+            UIElementCollection children = PanelHelper.Children(key, value);
             object first = null;
             WpfApp.cd.Invoke(() =>
             {
                 first = children.Count > 0 ? children[0] : null;
             }, WpfApp.cdp);
-            var tb = first as TextBlock;
+            var textBlock = first as TextBlock;
 
-            IH.tb = tb;
-            return d.Invoke<string>(IH.getTextOfTextBlock);
+            IH.tb = textBlock;
+            return value.Invoke<string>(IH.getTextOfTextBlock);
         }
 
-        private void CheckBoxListUC_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void CheckBoxListUC_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
         {
             // Cant be, otherwise set wrong size into checkbox and button will be out of window
             //OnSizeChanged(new DesktopSize( e.NewSize.Width, e.NewSize.Height));
@@ -222,14 +222,14 @@ public partial class CheckBoxListUC : UserControl
         /// <summary>
         /// Args are: object sender, string operation, object data
         /// </summary>
-        /// <param name="o"></param>
+        /// <param name="sender"></param>
         /// <param name="operation"></param>
         /// <param name="data"></param>
-        private void L_CollectionChanged(object o, ListOperation operation, object data)
+        private void L_CollectionChanged(object sender, ListOperation operation, object data)
         {
             if (CollectionChanged != null)
             {
-                CollectionChanged(o, operation, data);
+                CollectionChanged(sender, operation, data);
             }
             DialogResult = CheckedIndexes().Count() > 0;
         }
@@ -244,11 +244,11 @@ public partial class CheckBoxListUC : UserControl
             SelectAll(true);
         }
 
-        void SelectAll(bool b)
+        void SelectAll(bool select)
         {
             foreach (var item in l.l)
             {
-                item.o.IsChecked = b;
+                item.o.IsChecked = select;
             }
         }
 
@@ -271,15 +271,15 @@ public partial class CheckBoxListUC : UserControl
 
             foreach (var item in lines)
             {
-                var contents = l.Select(r => r.o.Content);
+                var contents = l.Select(checkBoxItem => checkBoxItem.o.Content);
                 var contents2 = new List<string>(contents.Count());
 
-                StackPanel sp = null;
+                StackPanel stackPanel = null;
 
                 foreach (var item2 in contents)
                 {
-                    sp = (StackPanel)item2;
-                    contents2.Add(CheckBoxListUC.ContentOfTextBlock(sp));
+                    stackPanel = (StackPanel)item2;
+                    contents2.Add(CheckBoxListUC.ContentOfTextBlock(stackPanel));
                 }
 
                 if (contents2.Contains(item))
@@ -299,22 +299,22 @@ public partial class CheckBoxListUC : UserControl
         }
 
 
-        public void AddCheckbox(NotifyPropertyChangedWrapper<CheckBox> n)
+        public void AddCheckbox(NotifyPropertyChangedWrapper<CheckBox> wrapper)
         {
-            var chb = n.o;
+            var chb = wrapper.o;
 
             // Must handling Checked / Unchecked, otherwise won't working dialogbuttons and cant exit dialog
             chb.Checked += CheckBox_Checked;
             chb.Unchecked += CheckBox_Unchecked;
-            l.Add(n);
+            l.Add(wrapper);
         }
         #endregion
 
         int dexLastChecked = -1;
 
-        public void ColButtons_Added(string s)
+        public void ColButtons_Added(string text)
         {
-            AddCheckbox(s, true);
+            AddCheckbox(text, true);
         }
 
         public IList<int> CheckedIndexes()
@@ -403,7 +403,7 @@ public partial class CheckBoxListUC : UserControl
         //    }
         //}
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs eventArgs)
         {
             MultiCheck(sender);
             s(sender, true);
@@ -423,31 +423,31 @@ public partial class CheckBoxListUC : UserControl
             if (actChecked == -1)
             {
                 var sp2 = (StackPanel)UIElement.Content;
-                var t = ContentControlHelper.ExtractContent(sp2);
-                int i = 0;
+                var text = ContentControlHelper.ExtractContent(sp2);
+                int index = 0;
 
                 foreach (var item in lb2.Items)
                 {
                     var chb2 = (NotifyPropertyChangedWrapper<CheckBox>)item;
-                    var sp = (StackPanel)chb2.o.Content;
-                    var ts = ContentControlHelper.ExtractContent(sp);
+                    var stackPanel = (StackPanel)chb2.o.Content;
+                    var contentText = ContentControlHelper.ExtractContent(stackPanel);
 
-                    if (ts != string.Empty)
+                    if (contentText != string.Empty)
                     {
 
                     }
 
-                    if (t != string.Empty)
+                    if (text != string.Empty)
                     {
 
                     }
 
-                    if (ts == t)
+                    if (contentText == text)
                     {
-                        actChecked = i;
+                        actChecked = index;
                         break;
                     }
-                    i++;
+                    index++;
                 }
             }
 
@@ -457,17 +457,17 @@ public partial class CheckBoxListUC : UserControl
                 {
                     if (dexLastChecked != -1)
                     {
-                        var p = NH.Sort<int>(actChecked, dexLastChecked);
-                        p[1]++;
+                        var sorted = NH.Sort<int>(actChecked, dexLastChecked);
+                        sorted[1]++;
 
-                        for (int i = p[0]; i < p[1]; i++)
+                        for (int checkIndex = sorted[0]; checkIndex < sorted[1]; checkIndex++)
                         {
-                            var ich2 = l[i].o.GetValue(CheckBox.IsCheckedProperty);
+                            var ich2 = l[checkIndex].o.GetValue(CheckBox.IsCheckedProperty);
 
-                            l[i].o.IsChecked = UIElement.IsChecked;
+                            l[checkIndex].o.IsChecked = UIElement.IsChecked;
 
-                            var ich = l[i].o.GetValue(CheckBox.IsCheckedProperty);
-                            int s = 0;
+                            var ich = l[checkIndex].o.GetValue(CheckBox.IsCheckedProperty);
+                            int count = 0;
                         }
                     }
                 }
@@ -486,11 +486,11 @@ public partial class CheckBoxListUC : UserControl
         /// Save IsChecked to elements in chbAdded
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="b"></param>
-        private void s(object sender, bool b)
+        /// <param name="value"></param>
+        private void s(object sender, bool value)
         {
-            var s = ((FrameworkElement)sender);
-            var name = s.Tag;
+            var element = ((FrameworkElement)sender);
+            var name = element.Tag;
 
             if (Tag != null)
             {
@@ -501,10 +501,10 @@ public partial class CheckBoxListUC : UserControl
                 }
                 else
                 {
-                    FrameworkElementTag ft = new FrameworkElementTag();
-                    ft.tagCheckBoxListUC = sender;
-                    ft.Tag = Tag;
-                    Tag = ft;
+                    FrameworkElementTag tag = new FrameworkElementTag();
+                    tag.tagCheckBoxListUC = sender;
+                    tag.Tag = Tag;
+                    Tag = tag;
                 }
             }
             else
@@ -512,16 +512,16 @@ public partial class CheckBoxListUC : UserControl
                 Tag = sender;
             }
 
-            var where = l.Where(d => d.o.Tag == s.Tag);
+            var where = l.Where(checkBoxWrapper => checkBoxWrapper.o.Tag == element.Tag);
 
             foreach (var item in where)
             {
                 // Uložím do
-                item.o.IsChecked = b;
+                item.o.IsChecked = value;
             }
         }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs eventArgs)
         {
             MultiCheck(sender);
             s(sender, false);
@@ -534,17 +534,17 @@ public partial class CheckBoxListUC : UserControl
         /// <summary>
         /// new DesktopSize( columnGrowing.ActualWidth, rowGrowing.ActualHeight)
         /// </summary>
-        /// <param name="s"></param>
-        public void OnSizeChanged(DesktopSize s)
+        /// <param name="size"></param>
+        public void OnSizeChanged(DesktopSize size)
         {
             if (Visibility != Visibility.Collapsed)
             {
                 var firstButton = colButtons.HeightOfFirstVisibleButton();
-                var h = s.Height - firstButton;
-                if (h >= 0)
+                var height = size.Height - firstButton;
+                if (height >= 0)
                 {
                     //r0.Height = new GridLength(h);
-                    lb2.Height = lb2.MaxHeight = lb2.MinHeight = h;
+                    lb2.Height = lb2.MaxHeight = lb2.MinHeight = height;
                     //lb.InvalidateVisual();
                     //lb.Invali
 
@@ -552,7 +552,7 @@ public partial class CheckBoxListUC : UserControl
 
                     ////////////DebugLogger.Instance.WriteArgs("Height", h, "First button", firstButton, "sp", colButtons.sp.ActualHeight, "colButtons", colButtons.ActualHeight);
 
-                    Debug.WriteLine(string.Join(" , ", h, lb2.ActualHeight.ToString(), lb2.Height));
+                    Debug.WriteLine(string.Join(" , ", height, lb2.ActualHeight.ToString(), lb2.Height));
                 }
             }
         }
@@ -575,14 +575,14 @@ public partial class CheckBoxListUC : UserControl
             return RuntimeHelper.GetInvocationList(ChangeDialogResult).Count;
         }
 
-        public void AttachChangeDialogResult(VoidBoolNullable a, bool throwException = true)
+        public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
         {
-            RuntimeHelper.AttachChangeDialogResult(this, a, throwException);
+            RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
         }
 
         public ImageButtons colButtons = null;
 
-        public void uc_Loaded(object sender, RoutedEventArgs e)
+        public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             // Is also in ctor
             if (initAfterLoaded != null)
@@ -594,18 +594,18 @@ public partial class CheckBoxListUC : UserControl
         /// <summary>
         /// Filters the list by the text typed into the search box.
         /// </summary>
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs eventArgs)
         {
             DoSearch(searchTextBox.Text);
         }
 
-        private void DoSearch(string k)
+        private void DoSearch(string text)
         {
             /*
 Here its is not possible with set up visibility
              * */
 
-            if (k.Trim() == string.Empty)
+            if (text.Trim() == string.Empty)
             {
                 foreach (var item in l)
                 {
@@ -616,11 +616,11 @@ Here its is not possible with set up visibility
             {
                 foreach (var item in l)
                 {
-                    var o = item.o;
-                    var sp = (StackPanel)o.Content;
-                    var c = CheckBoxListUC.ContentOfTextBlock(sp);
+                    var wrapper = item.o;
+                    var stackPanel = (StackPanel)wrapper.Content;
+                    var contentText = CheckBoxListUC.ContentOfTextBlock(stackPanel);
 
-                    if (c.Contains(k))
+                    if (contentText.Contains(text))
                     {
                         item.IsActive = true;
                     }
@@ -636,15 +636,15 @@ Here its is not possible with set up visibility
             //lb.UpdateLayout();
         }
 
-        public bool HandleKey(KeyEventArgs e)
+        public bool HandleKey(KeyEventArgs eventArgs)
         {
             return false;
         }
 
         Action initAfterLoaded = null;
 
-        public void SetInitAfterLoaded(Action a)
+        public void SetInitAfterLoaded(Action action)
         {
-            initAfterLoaded = a;
+            initAfterLoaded = action;
         }
     }

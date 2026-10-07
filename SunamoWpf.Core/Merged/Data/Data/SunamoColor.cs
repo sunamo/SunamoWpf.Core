@@ -6,12 +6,12 @@ public class SunamoColor
     {
     }
 
-    public SunamoColor(byte a, byte r, byte g, byte b)
+    public SunamoColor(byte alpha, byte red, byte green, byte blue)
     {
-        A = a;
-        R = r;
-        G = g;
-        B = b;
+        A = alpha;
+        R = red;
+        G = green;
+        B = blue;
     }
 
 

@@ -28,12 +28,12 @@ public partial class SelectFile : UserControl
         Loaded += SelectFile_Loaded;
     }
 
-    private void SelectFile_Loaded(object sender, RoutedEventArgs e)
+    private void SelectFile_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         SetAwesomeIcons(); // async Task nelze RunSynchronously (InvalidOperationException); ikony se nastavi pres Dispatcher.InvokeAsync
     }
 
-    private void BtnRemoveFile_Click(object sender, RoutedEventArgs e)
+    private void BtnRemoveFile_Click(object sender, RoutedEventArgs eventArgs)
     {
         if (FileRemoved != null)
         {
@@ -56,17 +56,17 @@ public partial class SelectFile : UserControl
 
     string selectedFile;
 
-    private void SetSelectedFile(string v)
+    private void SetSelectedFile(string path)
     {
-        if (v == "")
+        if (path == "")
         {
-            v = Translate.FromKey(XlfKeys.None);
+            path = Translate.FromKey(XlfKeys.None);
         }
-        selectedFile = v;
-        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + v;
+        selectedFile = path;
+        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + path;
     }
 
-    private void btnSelectFile_Click(object sender, RoutedEventArgs e)
+    private void btnSelectFile_Click(object sender, RoutedEventArgs eventArgs)
     {
         string file = DW.SelectOfFile();
         if (file != null)
@@ -94,11 +94,11 @@ public partial class SelectFile : UserControl
 
 
     public static Type type = typeof(SelectFile);
-    public void Validate(/*object tbNewPath,*/ ref ValidateDataWpf d)
+    public void Validate(/*object tbNewPath,*/ ref ValidateDataWpf validateData)
     {
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
         string SelectedFile = RH.GetValueOfPropertyOrField(this, "SelectedFile").ToString();
         validated = FS.ExistsFile(SelectedFile);

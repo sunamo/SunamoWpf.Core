@@ -58,9 +58,9 @@ GetString(uri.ToString()) - the same string as passed in ctor Uri
     /// <param name="name"></param>
     internal string GetString(string name)
     {
-        var s = GetStream(name);
+        var stream = GetStream(name);
 
-        return Encoding.UTF8.GetString(FS.StreamToArrayBytes(s));
+        return Encoding.UTF8.GetString(FS.StreamToArrayBytes(stream));
     }
 
     /// <summary>
@@ -69,8 +69,8 @@ GetString(uri.ToString()) - the same string as passed in ctor Uri
     /// <param name="name"></param>
     internal Stream GetStream(string name)
     {
-        var s = GetResourceName(name);
-        var vr = entryAssembly.GetManifestResourceStream(s);
-        return vr;
+        var resourceName = GetResourceName(name);
+        var resourceStream = entryAssembly.GetManifestResourceStream(resourceName);
+        return resourceStream;
     }
 }

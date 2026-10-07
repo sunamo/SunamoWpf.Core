@@ -4,13 +4,13 @@ namespace SunamoWpf.Core._sunamo;
 public class RuntimeHelper
 {
     public static Type type = typeof(RuntimeHelper);
-    public static List<Delegate> GetInvocationList(Delegate e)
+    public static List<Delegate> GetInvocationList(Delegate handler)
     {
-        if (e == null)
+        if (handler == null)
         {
             return new List<Delegate>();
         }
-        return e.GetInvocationList().ToList();
+        return handler.GetInvocationList().ToList();
     }
     /// <summary>
     /// Not working for WPF
@@ -20,9 +20,9 @@ public class RuntimeHelper
     {
         return Environment.UserInteractive;
     }
-    public static bool HasEventHandler(Delegate e)
+    public static bool HasEventHandler(Delegate handler)
     {
-        return GetInvocationList(e).Count() > 0;
+        return GetInvocationList(handler).Count() > 0;
     }
     /// <summary>
     /// Nedokázal jsem zjistit zda SuMenuItem má registrovaný Click - reflexe u něj nenašla vlastnost Events
@@ -37,12 +37,12 @@ public class RuntimeHelper
     {
 #if DEBUG
 #endif
-        var pi = typeof(T).GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance);
-        if (pi == null)
+        var propertyInfo = typeof(T).GetProperty("Events", BindingFlags.NonPublic | BindingFlags.Instance);
+        if (propertyInfo == null)
         {
             return false;
         }
-        EventHandlerList events = (EventHandlerList)pi.GetValue(control, null);
+        EventHandlerList events = (EventHandlerList)propertyInfo.GetValue(control, null);
         object key = typeof(T)
             .GetField(eventName, BindingFlags.NonPublic | BindingFlags.Static)
             .GetValue(null);
@@ -70,9 +70,9 @@ public class RuntimeHelper
     /// Default is true for automatically avoiding errors
     /// </summary>
     /// <param name = "controlWithResult"></param>
-    /// <param name = "a"></param>
+    /// <param name = "handler"></param>
     /// <param name = "throwException"></param>
-    public static void AttachChangeDialogResult(IControlWithResultDebugWpf controlWithResult, VoidBoolNullable a, bool throwException = true)
+    public static void AttachChangeDialogResult(IControlWithResultDebugWpf controlWithResult, VoidBoolNullable handler, bool throwException = true)
     {
         var count = controlWithResult.CountOfHandlersChangeDialogResult();
         if (count > 0)
@@ -88,22 +88,22 @@ public class RuntimeHelper
         }
         else
         {
-            controlWithResult.ChangeDialogResult += a;
+            controlWithResult.ChangeDialogResult += handler;
         }
     }
-    public static T CastToGeneric<T>(object o)
+    public static T CastToGeneric<T>(object value)
     {
-        return (T)o;
+        return (T)value;
     }
     public static void EmptyDummyMethod()
     {
     }
 
 #pragma warning disable
-    public static void EmptyDummyMethod(string s, params string[] o)
+    public static void EmptyDummyMethod(string message, params string[] parameters)
     {
     }
-    public static void EmptyDummyMethodLogMessage(TypeOfMessageWpf t, string s, params string[] o)
+    public static void EmptyDummyMethodLogMessage(TypeOfMessageWpf typeOfMessage, string message, params string[] parameters)
     {
     }
 #pragma warning restore

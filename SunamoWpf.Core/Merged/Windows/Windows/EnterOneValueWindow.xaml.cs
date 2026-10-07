@@ -59,11 +59,11 @@ public partial class EnterOneValueWindow : Window
             }
         }
     }
-    private void EnterOneValueUC_ChangeDialogResult(bool? b)
+    private void EnterOneValueUC_ChangeDialogResult(bool? result)
     {
         // Close() + DialogResult = b - Dialog result can be only set when is show as the dialog
         // Only DialogResult = b - works rightly with attach ChangeDialogResult or ShowDialog()
-        DialogResult = b;
+        DialogResult = result;
     }
     #endregion
 }

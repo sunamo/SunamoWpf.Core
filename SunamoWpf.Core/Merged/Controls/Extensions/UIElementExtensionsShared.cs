@@ -11,27 +11,27 @@ public static partial class UIElementExtensions
     /// Must be be Validate2 due to different with Validate which is defi
     /// From A3 removed = null & add ref => Validate2() is only one place which ci ValidateData
     /// </summary>
-    /// <param name = "ui"></param>
+    /// <param name = "uiElement"></param>
     /// <param name = "name"></param>
-    public static bool? Validate2(this UIElement ui, string name, ref ValidateDataWpf d)
+    public static bool? Validate2(this UIElement uiElement, string name, ref ValidateDataWpf validateData)
     {
         if (Validate2FullDelegate != null)
         {
-            var result = Validate2FullDelegate.Invoke(ui, name, d);
+            var result = Validate2FullDelegate.Invoke(uiElement, name, validateData);
             if (validatedInFull)
             {
                 return result;
             }
         }
-        if (d == null)
+        if (validateData == null)
         {
-            d = new ValidateDataWpf();
+            validateData = new ValidateDataWpf();
         }
-        var t = ui.GetType();
-        if (t == TypesControls.tTextBox)
+        var elementType = uiElement.GetType();
+        if (elementType == TypesControls.tTextBox)
         {
-            var c = ui as TextBox;
-            c.Validate(name, ref d);
+            var textBox = uiElement as TextBox;
+            textBox.Validate(name, ref validateData);
             return TextBoxHelper.validated;
         }
         // ListBoxHelper
@@ -48,135 +48,135 @@ public static partial class UIElementExtensions
         //    c.Validate(/*name,*/ d);
         //    return ListViewHelper.validated;
         //}
-        else if (t == TypesControls.tComboBox)
+        else if (elementType == TypesControls.tComboBox)
         {
-            var c = ui as ComboBox;
-            c.Validate(/*name,*/ ref d);
+            var comboBox = uiElement as ComboBox;
+            comboBox.Validate(/*name,*/ ref validateData);
             return ComboBoxHelper.validated;
         }
-        else if (t == SelectFile.type)
+        else if (elementType == SelectFile.type)
         {
-            var c = ui as SelectFile;
-            c.Validate(/*name,*/ ref d);
+            var selectFile = uiElement as SelectFile;
+            selectFile.Validate(/*name,*/ ref validateData);
             return SelectFile.validated;
         }
-        else if (t == SelectManyFiles.type)
+        else if (elementType == SelectManyFiles.type)
         {
-            var c = ui as SelectManyFiles;
-            c.Validate(ref d);
+            var selectManyFiles = uiElement as SelectManyFiles;
+            selectManyFiles.Validate(ref validateData);
             return SelectManyFiles.validated;
         }
-        else if (t == TwoRadiosUC.type)
+        else if (elementType == TwoRadiosUC.type)
         {
-            var c = ui as TwoRadiosUC;
-            c.Validate(/*name,*/ ref d);
+            var twoRadios = uiElement as TwoRadiosUC;
+            twoRadios.Validate(/*name,*/ ref validateData);
             return TwoRadiosUC.validated;
         }
-        else if (t == TypesControlsSunamo.tPathEditor)
+        else if (elementType == TypesControlsSunamo.tPathEditor)
         {
-            IValidateControl td = (IValidateControl)ui;
-            return td.Validate(name, ref d);
+            IValidateControl validateControl = (IValidateControl)uiElement;
+            return validateControl.Validate(name, ref validateData);
         }
         else
         {
-            ThrowEx.NotImplementedCase(t);
+            ThrowEx.NotImplementedCase(elementType);
         }
         return null;
     }
-    public static void SetValidated(this UIElement ui, bool b)
+    public static void SetValidated(this UIElement uiElement, bool value)
     {
         if (SetValidatedFullDelegate != null)
         {
-            if (SetValidatedFullDelegate.Invoke(ui, b))
+            if (SetValidatedFullDelegate.Invoke(uiElement, value))
             {
                 return;
             }
         }
-        var t = ui.GetType();
-        if (t == TypesControls.tTextBox)
+        var elementType = uiElement.GetType();
+        if (elementType == TypesControls.tTextBox)
         {
-            TextBoxHelper.validated = b;
+            TextBoxHelper.validated = value;
         }
-        else if (t == TypesControls.tListBox)
+        else if (elementType == TypesControls.tListBox)
         {
-            ListBoxExtensions.validated = b;
+            ListBoxExtensions.validated = value;
         }
-        else if (t == TypesControls.tListView)
+        else if (elementType == TypesControls.tListView)
         {
-            ListViewExtensions.validated = b;
+            ListViewExtensions.validated = value;
         }
-        else if (t == TypesControls.tComboBox)
+        else if (elementType == TypesControls.tComboBox)
         {
-            ComboBoxExtensions.validated = b;
+            ComboBoxExtensions.validated = value;
         }
-        else if (t == SelectFile.type)
+        else if (elementType == SelectFile.type)
         {
-            SelectFile.validated = b;
+            SelectFile.validated = value;
         }
-        else if (t == SelectManyFiles.type)
+        else if (elementType == SelectManyFiles.type)
         {
-            SelectManyFiles.validated = b;
+            SelectManyFiles.validated = value;
         }
-        else if (t == TypesControlsSunamo.tPathEditor)
+        else if (elementType == TypesControlsSunamo.tPathEditor)
         {
-            var ivc = (IValidateControl)ui;
-            ivc.Validated = b;
+            var ivc = (IValidateControl)uiElement;
+            ivc.Validated = value;
         }
         else
         {
-            ThrowEx.NotImplementedCase(t.FullName);
+            ThrowEx.NotImplementedCase(elementType.FullName);
         }
     }
     /// <summary>
     /// There is no Enum with all controls
     /// </summary>
-    /// <param name="ui"></param>
-    public static object GetContent(this UIElement ui)
+    /// <param name="uiElement"></param>
+    public static object GetContent(this UIElement uiElement)
     {
-        var t = ui.GetType();
-        if (t == TypesControls.tListBox)
+        var elementType = uiElement.GetType();
+        if (elementType == TypesControls.tListBox)
         {
-            var selector = (ListBox)ui;
+            var selector = (ListBox)uiElement;
             return selector.SelectedItems;
         }
-        else if (t == TypesControls.tListView)
+        else if (elementType == TypesControls.tListView)
         {
-            var lv = (ListView)ui;
-            return lv.SelectedItems;
+            var listView = (ListView)uiElement;
+            return listView.SelectedItems;
         }
-        else if (t == TypesControls.tComboBox)
+        else if (elementType == TypesControls.tComboBox)
         {
-            var cb = ui as ComboBox;
-            return cb.Text;
+            var comboBox = uiElement as ComboBox;
+            return comboBox.Text;
         }
-        else if (t == TypesControls.tTextBox)
+        else if (elementType == TypesControls.tTextBox)
         {
-            var txt = (TextBox)ui;
+            var txt = (TextBox)uiElement;
             return txt.Text;
         }
-        else if (t == TypesControls.tCheckBox)
+        else if (elementType == TypesControls.tCheckBox)
         {
-            var txt = (CheckBox)ui;
+            var txt = (CheckBox)uiElement;
             return txt.Content;
         }
-        else if (t == TwoRadiosUC.type)
+        else if (elementType == TwoRadiosUC.type)
         {
-            var txt = (TwoRadiosUC)ui;
+            var txt = (TwoRadiosUC)uiElement;
             return txt.GetBool();
         }
-        else if (t == TypesControlsSunamo.tPathEditor)
+        else if (elementType == TypesControlsSunamo.tPathEditor)
         {
-            var txt = (IValidateControl)ui;
+            var txt = (IValidateControl)uiElement;
             return txt.GetContent();
         }
-        else if (t == TypesControls.tTextBlock)
+        else if (elementType == TypesControls.tTextBlock)
         {
-            var txt = (TextBlock)ui;
+            var txt = (TextBlock)uiElement;
             return txt.Text;
         }
         else
         {
-            ThrowEx.NotImplementedCase(t);
+            ThrowEx.NotImplementedCase(elementType);
         }
         return null;
     }

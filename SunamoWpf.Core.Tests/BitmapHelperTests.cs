@@ -5,16 +5,16 @@ namespace SunamoWpf.Core.Tests;
 
 public class BitmapHelperTests
 {
-    string GetFile(string n)
+    string GetFile(string fileName)
     {
-        return @"D:\_Test\sunamo\desktop\Helpers\Controls\BitmapHelperTests\" + n + ".png";
+        return @"D:\_Test\sunamo\desktop\Helpers\Controls\BitmapHelperTests\" + fileName + ".png";
     }
 
     [Fact]
     public void ChangeColor2Test()
     {
         Bitmap bmp = new Bitmap(GetFile("In"));
-        var nB = BitmapHelper.ChangeColor2(bmp, Color.Black, Color.Orange);
-        nB.Save(GetFile("Out"));
+        var changedBitmap = BitmapHelper.ChangeColor2(bmp, Color.Black, Color.Orange);
+        changedBitmap.Save(GetFile("Out"));
     }
 }

@@ -6,20 +6,20 @@ public class FS
 {
     protected static readonly List<char> invalidFileNameChars = Path.GetInvalidFileNameChars().ToList();
 
-    public static string ReplaceIncorrectCharactersFile(string p)
+    public static string ReplaceIncorrectCharactersFile(string fileName)
     {
-        var t = p;
+        var result = fileName;
         foreach (var item in invalidFileNameChars)
         {
-            var sb = new StringBuilder();
-            foreach (var item2 in t)
+            var stringBuilder = new StringBuilder();
+            foreach (var item2 in result)
                 if (item != item2)
-                    sb.Append(item2);
+                    stringBuilder.Append(item2);
                 else
-                    sb.Append("");
-            t = sb.ToString();
+                    stringBuilder.Append("");
+            result = stringBuilder.ToString();
         }
-        return t;
+        return result;
     }
 
     public static void CreateUpfoldersPsysicallyUnlessThere(string nad)
@@ -69,34 +69,34 @@ nad
     {
         return File.Exists(selectedFile);
     }
-    public static string GetFileName(string fn)
+    public static string GetFileName(string path)
     {
-        return PathMs.GetFileName(fn.TrimEnd(Path.DirectorySeparatorChar));
+        return PathMs.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
     }
 
-    public static string GetSizeInAutoString(long value, ComputerSizeUnitsWpf b)
+    public static string GetSizeInAutoString(long value, ComputerSizeUnitsWpf fromUnit)
     {
-        return GetSizeInAutoString((double)value, b);
+        return GetSizeInAutoString((double)value, fromUnit);
     }
-    private static double ConvertToSmallerComputerUnitSize(double value, ComputerSizeUnitsWpf b, ComputerSizeUnitsWpf to)
+    private static double ConvertToSmallerComputerUnitSize(double value, ComputerSizeUnitsWpf fromUnit, ComputerSizeUnitsWpf toUnit)
     {
-        if (to == ComputerSizeUnitsWpf.Auto)
+        if (toUnit == ComputerSizeUnitsWpf.Auto)
             throw new Exception(
                 "Byl specifikov\u00E1n v\u00FDstupn\u00ED ComputerSizeUnit, nem\u016F\u017Eu toto nastaven\u00ED zm\u011Bnit");
-        if (to == ComputerSizeUnitsWpf.KB && b != ComputerSizeUnitsWpf.KB)
+        if (toUnit == ComputerSizeUnitsWpf.KB && fromUnit != ComputerSizeUnitsWpf.KB)
             value *= 1024;
-        else if (to == ComputerSizeUnitsWpf.MB && b != ComputerSizeUnitsWpf.MB)
+        else if (toUnit == ComputerSizeUnitsWpf.MB && fromUnit != ComputerSizeUnitsWpf.MB)
             value *= 1024 * 1024;
-        else if (to == ComputerSizeUnitsWpf.GB && b != ComputerSizeUnitsWpf.GB)
+        else if (toUnit == ComputerSizeUnitsWpf.GB && fromUnit != ComputerSizeUnitsWpf.GB)
             value *= 1024 * 1024 * 1024;
-        else if (to == ComputerSizeUnitsWpf.TB && b != ComputerSizeUnitsWpf.TB) value *= 1024L * 1024L * 1024L * 1024L;
+        else if (toUnit == ComputerSizeUnitsWpf.TB && fromUnit != ComputerSizeUnitsWpf.TB) value *= 1024L * 1024L * 1024L * 1024L;
         return value;
     }
-    public static string GetSizeInAutoString(double value, ComputerSizeUnitsWpf b)
+    public static string GetSizeInAutoString(double value, ComputerSizeUnitsWpf fromUnit)
     {
-        if (b != ComputerSizeUnitsWpf.B)
+        if (fromUnit != ComputerSizeUnitsWpf.B)
             // Z�sk�m hodnotu v bytech
-            value = ConvertToSmallerComputerUnitSize(value, b, ComputerSizeUnitsWpf.B);
+            value = ConvertToSmallerComputerUnitSize(value, fromUnit, ComputerSizeUnitsWpf.B);
         if (value < 1024) return value + " B";
         var previous = value;
         value /= 1024;
@@ -217,15 +217,15 @@ nad
         return csprojFolderInput.TrimEnd('\\') + "\\";
     }
 
-    public static string WithEndSlash(ref string v)
+    public static string WithEndSlash(ref string path)
     {
-        if (v != string.Empty)
+        if (path != string.Empty)
         {
-            v = v.TrimEnd('\\') + '\\';
+            path = path.TrimEnd('\\') + '\\';
         }
 
-        FirstCharUpper(ref v);
-        return v;
+        FirstCharUpper(ref path);
+        return path;
     }
 
     public static string FirstCharUpper(ref string nazevPP)
@@ -241,7 +241,7 @@ nad
             return nazevPP.ToUpper();
         }
 
-        string sb = nazevPP.Substring(1);
-        return nazevPP[0].ToString().ToUpper() + sb;
+        string withoutFirstCharacter = nazevPP.Substring(1);
+        return nazevPP[0].ToString().ToUpper() + withoutFirstCharacter;
     }
 }

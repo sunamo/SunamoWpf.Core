@@ -82,8 +82,8 @@ public class ConfigurableWindowSettings
 
     protected T GetValue<T>(string propName)
     {
-        var c = data.Get<T>(WpfApp.window, propName);
-        return c;
+        var value = data.Get<T>(WpfApp.window, propName);
+        return value;
     }
 
     protected void SetValue(string propName, object value)

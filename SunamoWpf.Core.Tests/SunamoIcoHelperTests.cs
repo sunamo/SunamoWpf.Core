@@ -26,13 +26,13 @@ public class SunamoIcoHelperTests
 
     private void Save(string folder, Bitmap bmp, Func<Image, Icon> convertToIco, string name)
     {
-        var f = Path.Combine(folder, name + ".ico");
+        var filePath = Path.Combine(folder, name + ".ico");
 
         var icon = convertToIco.Invoke(bmp);
-        using (FileStream fs = new FileStream(f, FileMode.OpenOrCreate))
+        using (FileStream fileStream = new FileStream(filePath, FileMode.OpenOrCreate))
         {
-            icon.Save(fs);
+            icon.Save(fileStream);
         }
-        Assert.True(new FileInfo(f).Length > 0);
+        Assert.True(new FileInfo(filePath).Length > 0);
     }
 }

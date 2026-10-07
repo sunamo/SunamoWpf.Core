@@ -58,13 +58,13 @@ public partial class ColorPicker : UserControl
             BTextBlock.Text = Translate.FromKey(XlfKeys.BlueColorComponent) + ":";
         }
     }
-    private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+    private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> eventArgs)
     {
         if (rectColor != null)
         {
-            Slider s = (sender as Slider);
-            string name = s.Name;
-            byte value = (byte)s.Value;
+            Slider slider = (sender as Slider);
+            string name = slider.Name;
+            byte value = (byte)slider.Value;
             switch (name)
             {
                 case "RSlider":
@@ -89,11 +89,11 @@ public partial class ColorPicker : UserControl
         }
     }
     static Type type = typeof(ColorPicker);
-    private void htmlColor_KeyUp(object sender, KeyEventArgs e)
+    private void htmlColor_KeyUp(object sender, KeyEventArgs eventArgs)
     {
-        if (e.Key == Key.Enter)
+        if (eventArgs.Key == Key.Enter)
         {
-            e.Handled = true;
+            eventArgs.Handled = true;
             Result = StringHexWindowsMediaColorConverter.ConvertFrom(htmlColor.Text);
         }
     }

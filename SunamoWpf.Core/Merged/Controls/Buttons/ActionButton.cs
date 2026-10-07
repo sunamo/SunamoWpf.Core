@@ -12,7 +12,7 @@ public class ActionButton<T> : Button
         this.what = what;
         this.Click += ActionButton_Click;
     }
-    private void ActionButton_Click(object sender, System.Windows.RoutedEventArgs e)
+    private void ActionButton_Click(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
         switch (action)
         {

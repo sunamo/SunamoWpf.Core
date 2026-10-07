@@ -3,18 +3,18 @@ namespace SunamoWpf.Core._sunamo;
 
 internal static class ExceptionsExtensions
 {
-    internal static string GetAllMessages(this Exception ex)
+    internal static string GetAllMessages(this Exception exception)
     {
-        if (ex == null)
+        if (exception == null)
         {
             return "";
         }
 
-        string message = ex.Message;
+        string message = exception.Message;
 
-        if (ex.InnerException != null)
+        if (exception.InnerException != null)
         {
-            message += Environment.NewLine + "Inner Exception: " + ex.InnerException.GetAllMessages();
+            message += Environment.NewLine + "Inner Exception: " + exception.InnerException.GetAllMessages();
         }
 
         return message;

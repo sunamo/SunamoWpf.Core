@@ -8,8 +8,8 @@ public static partial class BitmapImageHelper
 {
     public static BitmapImage MsAppx(string relPath)
     {
-        BitmapImage bs = new BitmapImage(new Uri(ImageHelper.protocol + relPath, UriKind.Absolute));
-        return bs;
+        BitmapImage bitmapImage = new BitmapImage(new Uri(ImageHelper.protocol + relPath, UriKind.Absolute));
+        return bitmapImage;
     }
     /// <summary>
     /// Do A1 se vkládá člen výčtu AppPics2.TS()
@@ -19,8 +19,8 @@ public static partial class BitmapImageHelper
     /// <param name = "appPic2"></param>
     public static BitmapImage MsAppxI(string appPic2)
     {
-        BitmapImage bs = new BitmapImage(new Uri(ImageHelper.protocol + "i/" + appPic2 + ".png"));
-        return bs;
+        BitmapImage bitmapImage = new BitmapImage(new Uri(ImageHelper.protocol + "i/" + appPic2 + ".png"));
+        return bitmapImage;
     }
     public static BitmapImage MsAppx(bool disabled, AppPics appPic)
     {
@@ -46,19 +46,19 @@ public static partial class BitmapImageHelper
     }
     public static BitmapSource Uri(Uri uri)
     {
-        BitmapImage bi = null;
+        BitmapImage bitmapImage = null;
         try
         {
-            bi = new BitmapImage(uri);
+            bitmapImage = new BitmapImage(uri);
         }
         catch (Exception)
         {
             // Image was damaged
         }
-        return bi;
+        return bitmapImage;
     }
-    public static BitmapImage MsAppxRoot(string p)
+    public static BitmapImage MsAppxRoot(string path)
     {
-        return new BitmapImage(new Uri(ImageHelper.protocolRoot + p, UriKind.Absolute));
+        return new BitmapImage(new Uri(ImageHelper.protocolRoot + path, UriKind.Absolute));
     }
 }

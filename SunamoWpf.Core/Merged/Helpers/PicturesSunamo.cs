@@ -6,10 +6,10 @@ public partial class PicturesSunamo
     public static System.Drawing.Image ImageResize(System.Drawing.Image image, int width, int height)
     {
         var bmp = new System.Drawing.Bitmap(width, height);
-        using (var g = System.Drawing.Graphics.FromImage(bmp))
+        using (var graphics = System.Drawing.Graphics.FromImage(bmp))
         {
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            g.DrawImage(image, 0, 0, width, height);
+            graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            graphics.DrawImage(image, 0, 0, width, height);
         }
         return bmp;
     }

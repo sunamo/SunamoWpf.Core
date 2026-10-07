@@ -48,17 +48,17 @@ public class CheckBoxListUCTests :UserControl
 {
     public CheckBoxListUCTests()
     {
-        CheckBoxListUC c = new CheckBoxListUC();
+        CheckBoxListUC control = new CheckBoxListUC();
 
 
-        List<string> s = TestData.list100Items;
-        s = TestData.list10Items;
+        List<string> items = TestData.list100Items;
+        items = TestData.list10Items;
 
         //new ImageButtonsInit { }
-        c.Init(ImageButtonsInit.ShowAllButtons(c.ColButtons_Added), s);
+        control.Init(ImageButtonsInit.ShowAllButtons(control.ColButtons_Added), items);
         //c.l.eoa.onPropertyChanged = true;
-        c.EventOn(new EventOnArgs(true));
-        Content = c;
+        control.EventOn(new EventOnArgs(true));
+        Content = control;
 
         //WindowWithUserControl w = new WindowWithUserControl(c, System.Windows.ResizeMode.CanResize, false);
         //w.WindowState = System.Windows.WindowState.Maximized;

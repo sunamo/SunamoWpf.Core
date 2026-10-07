@@ -22,9 +22,9 @@ public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
         c = new List<T>(count);
     }
 
-    internal CollectionWithoutDuplicatesBase(IList<T> l)
+    internal CollectionWithoutDuplicatesBase(IList<T> items)
     {
-        c = new List<T>(l.ToList());
+        c = new List<T>(items.ToList());
     }
 
     /// <summary>
@@ -42,15 +42,15 @@ public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
         }
     }
 
-    internal bool Add(T t2)
+    internal bool Add(T item)
     {
         var result = false;
-        var con = Contains(t2);
+        var con = Contains(item);
         if (con.HasValue)
         {
             if (!con.Value)
             {
-                c.Add(t2);
+                c.Add(item);
                 result = true;
             }
         }
@@ -58,7 +58,7 @@ public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
         {
             if (!allowNull.HasValue)
             {
-                c.Add(t2);
+                c.Add(item);
                 result = true;
             }
         }
@@ -70,7 +70,7 @@ public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
     }
 
     protected abstract bool IsComparingByString();
-    internal abstract bool? Contains(T t2);
+    internal abstract bool? Contains(T item);
 
 
     /// <summary>

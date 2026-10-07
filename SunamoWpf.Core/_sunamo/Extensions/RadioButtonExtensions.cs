@@ -2,11 +2,11 @@ namespace SunamoWpf.Core._sunamo;
 
 internal static class RadioButtonExtensions
 {
-    public static bool IsCheckedSimple(this RadioButton tb)
+    public static bool IsCheckedSimple(this RadioButton radioButton)
     {
-        if (tb.IsChecked.HasValue)
+        if (radioButton.IsChecked.HasValue)
         {
-            return tb.IsChecked.Value;
+            return radioButton.IsChecked.Value;
         }
         return false;
 

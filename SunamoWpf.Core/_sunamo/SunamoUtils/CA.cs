@@ -5,36 +5,36 @@ internal class CA
 {
     public static void Replace(List<string> files_in, string what, string forWhat)
     {
-        for (var i = 0; i < files_in.Count; i++) files_in[i] = Replace(files_in[i], what, forWhat);
+        for (var index = 0; index < files_in.Count; index++) files_in[index] = Replace(files_in[index], what, forWhat);
         //CAChangeContent.ChangeContent2(null, files_in, Replace, what, forWhat);
     }
 
-    private static string Replace(string s, string from, string to)
+    private static string Replace(string value, string from, string replacement)
     {
-        return s.Replace(from, to);
+        return value.Replace(from, replacement);
     }
 
-    public static List<string> Trim(List<string> l)
+    public static List<string> Trim(List<string> items)
     {
-        for (var i = 0; i < l.Count; i++) l[i] = l[i].Trim();
-        return l;
+        for (var index = 0; index < items.Count; index++) items[index] = items[index].Trim();
+        return items;
     }
 
-    public static bool IsAllTheSame<T>(T ext, IList<T> p1)
+    public static bool IsAllTheSame<T>(T ext, IList<T> items)
     {
-        for (var i = 0; i < p1.Count; i++)
-            if (!EqualityComparer<T>.Default.Equals(p1[i], ext))
+        for (var index = 0; index < items.Count; index++)
+            if (!EqualityComparer<T>.Default.Equals(items[index], ext))
                 return false;
         return true;
     }
 
     public static List<string> RemoveStringsEmpty(List<string> mySites)
     {
-        for (int i = mySites.Count - 1; i >= 0; i--)
+        for (int index = mySites.Count - 1; index >= 0; index--)
         {
-            if (mySites[i] == string.Empty)
+            if (mySites[index] == string.Empty)
             {
-                mySites.RemoveAt(i);
+                mySites.RemoveAt(index);
             }
         }
         return mySites;
@@ -42,21 +42,21 @@ internal class CA
 
     public static List<bool> ToBool(List<int> numbers)
     {
-        var b = new List<bool>(numbers.Count);
-        foreach (var item in numbers) b.Add(item == 1 ? true : false);
-        return b;
+        var result = new List<bool>(numbers.Count);
+        foreach (var item in numbers) result.Add(item == 1 ? true : false);
+        return result;
     }
 
-    public static List<string> ToListString(params string[] v)
+    public static List<string> ToListString(params string[] values)
     {
-        return v.ToList();
+        return values.ToList();
     }
 
     public static List<string> WithEndSlash(List<string> folders)
     {
         var list = folders;
         if (list == null) list = folders.ToList();
-        for (var i = 0; i < list.Count; i++) list[i] = list[i].TrimEnd('\\') + "\\";
+        for (var index = 0; index < list.Count; index++) list[index] = list[index].TrimEnd('\\') + "\\";
         return folders;
     }
 }

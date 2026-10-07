@@ -11,20 +11,20 @@ public class XamlSerializer
     /// path: path = AppData.ci.GetFile(AppFolders.Controls, name);
     /// </summary>
     /// <param name="nameWindow"></param>
-    /// <param name="w"></param>
-    public XamlSerializer(Window w)
+    /// <param name="window"></param>
+    public XamlSerializer(Window window)
     {
-        var name = w.GetType().Name;
+        var name = window.GetType().Name;
         //ThrowEx.NameIsNotSetted(Exc.GetStackTrace(),type, "ctor", nameWindow, w.Name);
-        this.w = w;
-        w.Loaded += new RoutedEventHandler(MainWindow_Loaded);
-        w.Closing += new CancelEventHandler(MainWindow_Closing);
+        this.w = window;
+        window.Loaded += new RoutedEventHandler(MainWindow_Loaded);
+        window.Closing += new CancelEventHandler(MainWindow_Closing);
     }
-    void MainWindow_Loaded(object sender, RoutedEventArgs e)
+    void MainWindow_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         LoadExternalXaml();
     }
-    void MainWindow_Closing(object sender, CancelEventArgs e)
+    void MainWindow_Closing(object sender, CancelEventArgs eventArgs)
     {
         SaveExternalXaml();
     }

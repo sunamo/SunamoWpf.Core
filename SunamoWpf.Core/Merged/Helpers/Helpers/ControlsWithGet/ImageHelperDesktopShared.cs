@@ -7,37 +7,37 @@ public partial class ImageHelperDesktop : ImageHelperBase<ImageSource, Image>
 
 public static Image Get(object imagePathOrBitmapImage)
     {
-        var t = imagePathOrBitmapImage.GetType();
-        BitmapImage bi = null;
-        if (t == TypesDesktop.tBitmapImage)
+        var type = imagePathOrBitmapImage.GetType();
+        BitmapImage bitmapImage = null;
+        if (type == TypesDesktop.tBitmapImage)
         {
-            bi = (BitmapImage)imagePathOrBitmapImage;
+            bitmapImage = (BitmapImage)imagePathOrBitmapImage;
         }
-        else if (t == Types.tString)
+        else if (type == Types.tString)
         {
-            bi = BitmapImageHelper.PathToBitmapImage(imagePathOrBitmapImage.ToString());
+            bitmapImage = BitmapImageHelper.PathToBitmapImage(imagePathOrBitmapImage.ToString());
         }
         else
         {
-            ThrowEx.NotImplementedCase(t);
+            ThrowEx.NotImplementedCase(type);
         }
 
-        Image img = ImageHelper.ReturnImage(bi);
+        Image img = ImageHelper.ReturnImage(bitmapImage);
         return img;
     }
 
-public override Image ReturnImage(ImageSource bs)
+public override Image ReturnImage(ImageSource imageSource)
     {
         Image image = new Image();
         image.Stretch = Stretch.Uniform;
-        image.Source = bs;
+        image.Source = imageSource;
         return image;
     }
-public override Image ReturnImage(ImageSource bs, double width, double height)
+public override Image ReturnImage(ImageSource imageSource, double width, double height)
     {
         Image image = new Image();
         image.Stretch = Stretch.Uniform;
-        image.Source = bs;
+        image.Source = imageSource;
         image.Width = width;
         image.Height = height;
         return image;

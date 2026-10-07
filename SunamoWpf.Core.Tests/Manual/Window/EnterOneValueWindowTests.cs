@@ -65,8 +65,8 @@ public class EnterOneValueWindowTests
         w.ShowDialog();
     }
 
-    private static void EnterOneValueUC_ChangeDialogResult(bool? b)
+    private static void EnterOneValueUC_ChangeDialogResult(bool? result)
     {
-        MessageBox.Show((b?.ToString() ?? "null") + " " + w.enterOneValueUC.txtEnteredText.Text);
+        MessageBox.Show((result?.ToString() ?? "null") + " " + w.enterOneValueUC.txtEnteredText.Text);
     }
 }

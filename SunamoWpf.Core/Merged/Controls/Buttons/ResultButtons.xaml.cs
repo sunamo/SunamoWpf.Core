@@ -20,16 +20,16 @@ public partial class ResultButtons : UserControl
         }
         Loaded += ResultButtons_Loaded;
     }
-    private void ResultButtons_Loaded(object sender, RoutedEventArgs e)
+    private void ResultButtons_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         btnAllRight.Content = Translate.FromKey(XlfKeys.AllRight) + "!";
         btnCopyToClipboard.Content = Translate.FromKey(XlfKeys.CopyTextToClipboard);
     }
-    private void btnCopyToClipboard_Click(object sender, RoutedEventArgs e)
+    private void btnCopyToClipboard_Click(object sender, RoutedEventArgs eventArgs)
     {
         CopyToClipboard();
     }
-    private void btnAllRight_Click(object sender, RoutedEventArgs e)
+    private void btnAllRight_Click(object sender, RoutedEventArgs eventArgs)
     {
         AllRightClick();
     }

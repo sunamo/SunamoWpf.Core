@@ -6,18 +6,18 @@ public class ProgressBarHelper
     ProgressBar pb = null;
     PercentCalculator percentCalculator;
     UIElement ui = null;
-    public ProgressBarHelper CreateInstance(object pb, double overall)
+    public ProgressBarHelper CreateInstance(object progressBar, double overall)
     {
-        return new ProgressBarHelper(pb, overall, ui);
+        return new ProgressBarHelper(progressBar, overall, ui);
     }
-    public ProgressBarHelper(object pb, double overall, object ui)
+    public ProgressBarHelper(object progressBar, double overall, object element)
     {
-        var pb2 = (ProgressBar)pb;
-        var ui2 = (DispatcherObject)ui;
+        var pb2 = (ProgressBar)progressBar;
+        var ui2 = (DispatcherObject)element;
         this.pb = pb2;
         this.ui = pb2;
-        ui2.Dispatcher.Invoke(IH.delegateUpdateProgressBarWpf, pb, 0d);
-        ui2.Dispatcher.Invoke(IH.delegateChangeVisibilityUIElementWpf, pb, Visibility.Visible);
+        ui2.Dispatcher.Invoke(IH.delegateUpdateProgressBarWpf, progressBar, 0d);
+        ui2.Dispatcher.Invoke(IH.delegateChangeVisibilityUIElementWpf, progressBar, Visibility.Visible);
         percentCalculator = new PercentCalculator(overall);
     }
     public void Done()
