@@ -207,7 +207,6 @@ nad
         }
         catch
         {
-            //WpfLogger.Error(Translate.FromKey(XlfKeys.FileCanTBeDeleted) + ": " + item);
             return false;
         }
     }

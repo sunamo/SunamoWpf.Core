@@ -32,7 +32,7 @@ internal class HeaderToImageConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        ThrowEx.Custom(Translate.FromKey(XlfKeys.CannotConvertBack));
+        ThrowEx.Custom("CannotConvertBack");
         return null;
     }
 }

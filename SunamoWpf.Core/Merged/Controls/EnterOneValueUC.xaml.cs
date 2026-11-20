@@ -76,8 +76,8 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
     }
     public void Init(string whatEnter)
     {
-        tbWhatEnter.Text = Translate.FromKey(XlfKeys.ToEnter) + " " + whatEnter + " " + Translate.FromKey(XlfKeys.andPressEnter) + ".";
-        btnEnter.Content = Translate.FromKey(XlfKeys.Enter);
+        tbWhatEnter.Text = "ToEnter" + " " + whatEnter + " " + "andPressEnter" + ".";
+        btnEnter.Content = "Enter";
     }
     /// <summary>
     /// TextBlock.Text is take from Tag, which can be TWithNameT<object>
@@ -143,7 +143,7 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             }
         }
     }//
-    public string Title => Translate.FromKey(XlfKeys.EnteringData);
+    public string Title => "EnteringData";
     public object GetContentByTag(object tag)
     {
         return dynLayout.GetContentByTag(tag);
@@ -192,7 +192,7 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             else
             {
                 allOk = false;
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.NotImplementedValidateForControl) + " " + item.GetType().FullName);
+                ThrowEx.Custom("Not implemented validate for control" + " " + item.GetType().FullName);
             }
         }
         //txtEnteredText.Text = txtEnteredText.Text.Trim();

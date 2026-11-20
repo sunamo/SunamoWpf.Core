@@ -27,10 +27,10 @@ public partial class SelectImageFileAndMakeSingleColorTransparent : UserControl
     {
         if (path == "")
         {
-            path = Translate.FromKey(XlfKeys.None);
+            path = "None";
         }
         selectedFile = path;
-        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + path;
+        tbSelectedFile.Text = "SelectedFile" + ": " + path;
     }
 
     //public event VoidStringBitmapBitmapSource FileSelected;

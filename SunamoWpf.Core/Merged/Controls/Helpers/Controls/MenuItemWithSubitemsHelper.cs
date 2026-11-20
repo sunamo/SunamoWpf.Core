@@ -68,7 +68,7 @@ public class SuMenuItemWithSubitemsHelper
         {
             if (type.FullName != defVal.GetType().FullName)
             {
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.ParameterDefValInSuMenuItemWithSubitemsHelperAddValuesOfEnumAsItemsWasNotTypeOfEnum) + ".");
+                ThrowEx.Custom("Parameter def val in su menu item with subitems helper add values of enum as items was not type of enum" + ".");
             }
         }
         T _def = (T)defVal;
@@ -90,7 +90,7 @@ public class SuMenuItemWithSubitemsHelper
         {
             if (type.FullName != defVal.GetType().FullName)
             {
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.ParameterDefValInSuMenuItemWithSubitemsHelperAddValuesOfEnumAsItemsWasNotTypeOfEnum) + ".");
+                ThrowEx.Custom("Parameter def val in su menu item with subitems helper add values of enum as items was not type of enum" + ".");
             }
         }
         T _def = (T)defVal;

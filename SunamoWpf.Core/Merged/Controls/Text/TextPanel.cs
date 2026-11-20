@@ -3,7 +3,7 @@ namespace SunamoWpf.Controls.Text;
 
 public class TextPanel : StackPanel
 {
-    public FontFamily fontFamily = new FontFamily(Translate.FromKey(XlfKeys.SegoeUI));
+    public FontFamily fontFamily = new FontFamily("SegoeUI");
     public double fontSize = 12;
     public FontStyle fontStyle = FontStyles.Normal;
     /// <summary>

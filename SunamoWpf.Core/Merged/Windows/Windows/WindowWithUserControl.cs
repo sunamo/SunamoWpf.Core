@@ -88,7 +88,7 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
         menu = new Menu();
         DockPanel.SetDock(menu, Dock.Top);
         dock.Children.Add(menu);
-        var textBlock = TextBlockHelper.Get(new ControlInitData { text = Translate.FromKey(XlfKeys.EnterForFastClosing) });
+        var textBlock = TextBlockHelper.Get(new ControlInitData { text = "Enter for fast closing" });
         DockPanel.SetDock(textBlock, Dock.Top);
         dock.Children.Add(textBlock);
         if (uc is IUserControlWithSuMenuItemsList)

@@ -31,7 +31,6 @@ public partial class LoggerUC : UserControl, ISaveWithoutArgWpf
     {
         List<string> result = Lines();
         ClipboardHelper.SetLines(result);
-        //SunamoTemplateLogger.Instance.CopiedToClipboard(Translate.FromKey(XlfKeys.logs));
     }
     private List<string> Lines()
     {

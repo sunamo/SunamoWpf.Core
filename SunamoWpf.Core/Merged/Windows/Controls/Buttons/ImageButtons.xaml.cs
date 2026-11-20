@@ -112,11 +112,11 @@ public partial class ImageButtons : UserControl
     /// <param name="clear"></param>
     public void Init(ImageButtonsInit imageButtonsInit)
     {
-        SetToolTip(btnCopyToClipboard, XlfKeys.CopyTextToClipboard);
-        SetToolTip(btnClear, XlfKeys.Clear);
-        SetToolTip(btnAdd, XlfKeys.Add);
-        SetToolTip(btnSelectAll, XlfKeys.CheckAll);
-        SetToolTip(btnUnselectAll, XlfKeys.UncheckAll);
+        SetToolTip(btnCopyToClipboard, "Copy text to clipboard");
+        SetToolTip(btnClear, "Clear");
+        SetToolTip(btnAdd, "Add");
+        SetToolTip(btnSelectAll, "CheckAll");
+        SetToolTip(btnUnselectAll, "UncheckAll");
         SetVisibility(btnCopyToClipboard, imageButtonsInit.copyToClipboard);
         SetVisibility(btnClear, imageButtonsInit.clear);
         SetVisibility(btnAdd, imageButtonsInit.add);
@@ -183,7 +183,7 @@ public partial class ImageButtons : UserControl
     }
     void Handler(object sender, RoutedEventArgs eventArgs)
     {
-        string methodName = Translate.FromKey(XlfKeys.Handler);
+        string methodName = "Handler";
         Button btn = (Button)sender;
         var type = btn.Tag.GetType();
         if (type == TypesD.tVoidString)

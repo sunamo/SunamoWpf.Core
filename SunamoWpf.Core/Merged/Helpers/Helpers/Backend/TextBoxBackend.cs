@@ -75,13 +75,13 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
     public TextBoxStateWpf state = new TextBoxStateWpf();
     public void SetActualFile(string file)
     {
-        state.textActualFile = Translate.FromKey(XlfKeys.File) + ": " + file;
+        state.textActualFile = "File" + ": " + file;
         SetTextBoxState();
     }
     public void SetActualLine(int line)
     {
         _actualLine = line++;
-        state.textActualFile = Translate.FromKey(XlfKeys.Line) + ": " + _actualLine;
+        state.textActualFile = "Line" + ": " + _actualLine;
         SetTextBoxState();
     }
     public void SetTbSearchedResult(int actual, int count)
@@ -93,7 +93,7 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
     {
         if (text == null)
         {
-            text = (string.Join("  ", state.textActualFile, state.textSearchedResult) + " " + Translate.FromKey(XlfKeys.Line) + ": " + (actualLine + 1)).Trim();
+            text = (string.Join("  ", state.textActualFile, state.textSearchedResult) + " " + "Line" + ": " + (actualLine + 1)).Trim();
         }
         txtTextBoxState.Text = text;
     }
@@ -158,7 +158,7 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
         TextBoxHelper.ScrollToLine(txtContent, line);
         #endregion
         actualLine = line;
-        WpfLogger.Info(Translate.FromKey(XlfKeys.ScrolledToLine) + " " + line);
+        WpfLogger.Info("ScrolledToLine" + " " + line);
         SetTextBoxState();
     }
     public void ScrollAboutLines(int lines)

@@ -37,31 +37,30 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
         this.updateUri = updateUri;
         this.appUri = appUri;
         this.appName = appName;
-        tbTitle.Text = Translate.FromKey(XlfKeys.AboutApp) + " " + appName;
+        tbTitle.Text = "AboutApp" + " " + appName;
         System.Reflection.Assembly assembly = System.Reflection.Assembly.GetEntryAssembly();
         System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
         actualVersion = fvi.FileVersion;
-        tbAboutApp.Text = Translate.FromKey(XlfKeys.Version) + ": " + actualVersion;
+        tbAboutApp.Text = "Version" + ": " + actualVersion;
         //WRTBH tbh2 = new WRTBH(475, 10, FontArgs.DefaultRun());
         ParagraphBuilderTextBlock tbh2 = new ParagraphBuilderTextBlock();
         // padding / margin top / bottom not working, therefore create new line will
-        tbh2.Hyperlink(Translate.FromKey(XlfKeys.CzechBlog), "http://jepsano.net");
+        tbh2.Hyperlink("CzechBlog", "http://jepsano.net");
         tbh2.LineBreak();
         tbh2.LineBreak();
-        tbh2.Hyperlink(Translate.FromKey(XlfKeys.EnglishBlog), "http://blog.sunamo.cz");
+        tbh2.Hyperlink("EnglishBlog", "http://blog.sunamo.cz");
         tbh2.LineBreak();
         tbh2.LineBreak();
         tbh2.Hyperlink("Web", "http://www.sunamo.cz");
         tbh2.LineBreak();
         tbh2.LineBreak();
-        //tbh2.Hyperlink(sess.i18n(XlfKeys.Google), "https://plus.google.com/111524962367375368826");
         //tbh2.LineBreak();
         //tbh2.LineBreak();
         tbh2.Hyperlink("Mail: radek.jancik@sunamo.cz", "mailto:radek.jancik@sunamo.cz");
         tbh2.LineBreak();
         tbh2.LineBreak();
         // cant be named new instead of updated - translation toolkit check for new a, new b, atd...
-        btnCheckNewVersion.Content = Translate.FromKey(XlfKeys.CheckUpdatedVersion);
+        btnCheckNewVersion.Content = "CheckUpdatedVersion";
         tbh2.margin = new Thickness(25, 0, 0, 0);
         tbh2.padding = new Thickness(0, 0, 0, 0);
         var stackPanel = tbh2.Final();
@@ -88,7 +87,7 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
     }
     public Action<string, string, string> CheckNewVersion;
     public bool? DialogResult { set => RuntimeHelper.EmptyDummyMethod(); }
-    public string Title => Translate.FromKey(XlfKeys.AboutApp);
+    public string Title => "AboutApp";
     private void OnClickOK(object sender, RoutedEventArgs eventArgs)
     {
         ChangeDialogResult(true);

@@ -90,13 +90,13 @@ public class SearchingInLbWPF
                 }
             }
             lb.Items.Clear();
-            WpfLogger.Info( Translate.FromKey(XlfKeys.WasFounded) + " " + nechat.Count + " items. ");
+            WpfLogger.Info( "WasFounded" + " " + nechat.Count + " items. ");
             AddRangeToListBox(nechat.ToArray());
         }
         else
         {
             lb.Items.Clear();
-            WpfLogger.Info( Translate.FromKey(XlfKeys.SearchingWasStopped) + ".");
+            WpfLogger.Info( "SearchingWasStopped" + ".");
             AddRangeToListBox(oc);
         }
     }

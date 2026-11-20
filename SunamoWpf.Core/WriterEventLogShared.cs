@@ -4,7 +4,7 @@ namespace SunamoWpf;
 public static partial class WriterEventLog
 {
     static EventLog mainEventLogOfApplication = null;
-    public const string ApplicationLogName = XlfKeys.Application;
+    public const string ApplicationLogName = "Application";
     static EventLog eventLogWindowsApplication = null;
 
     public static void WriteException(string stacktrace, string exception)
@@ -33,7 +33,6 @@ public static partial class WriterEventLog
     //        return false;
     //    }
     //    bool b = CreateMainAppLog(scz);
-    //    WriteToMainAppLogScz(sess.i18n(XlfKeys.Template), EventLogEntryType.Information);
     //    return b;
     //} 
     #endregion

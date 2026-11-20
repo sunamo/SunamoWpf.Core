@@ -7,9 +7,9 @@ public class SelectMoreFoldersWithTemplateSets
     ComboBoxHelper<string> cbSetsFoldersHelper = null;
     public ComboBox cbSetsFolders = new ComboBox();
     TextBlock tbSetsFolders = new TextBlock();
-    public string tbSetsFoldersKey = XlfKeys.SavedFoldersSets;
+    public string tbSetsFoldersKey = "SavedFoldersSets";
     public TextBlock tbFolders = new TextBlock();
-    public string tbFoldersKey = XlfKeys.Folders;
+    public string tbFoldersKey = "Folders";
     public SelectMoreFolders txtFolders = new SelectMoreFolders();
     string pathFromCtor;
     /// <summary>
@@ -61,7 +61,7 @@ public class SelectMoreFoldersWithTemplateSets
             string text = enterNameOfSet.enterOneValueUC.txtEnteredText.Text;
             if (cbSetsFolders.Items.Contains(text))
             {
-                WpfLogger.Warning("Set " + Translate.FromKey(XlfKeys.withName) + " " + text + " " + Translate.FromKey(XlfKeys.alreadyExists));
+                WpfLogger.Warning("Set " + "withName" + " " + text + " " + "alreadyExists");
             }
             else
             {
@@ -94,7 +94,7 @@ public class SelectMoreFoldersWithTemplateSets
     }
     private void this_SaveSetAsTemplate()
     {
-        enterNameOfSet = new EnterOneValueWindow(Translate.FromKey(XlfKeys.nameOfSet));
+        enterNameOfSet = new EnterOneValueWindow("nameOfSet");
         // TODO Replaced during repair 0xc0000374
         //enterNameOfSet.enterOneValueUC.ChangeDialogResult += EnterOneValueUC_ChangeDialogResult;
         //enterNameOfSet.enterOneValueUC.Accept("Websites");

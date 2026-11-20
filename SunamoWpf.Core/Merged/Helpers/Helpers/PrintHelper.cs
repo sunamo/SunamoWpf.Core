@@ -54,7 +54,7 @@ public static class SizeOfPaper
         else
         {
         }
-        ThrowEx.Custom(Translate.FromKey(XlfKeys.NISizeOfPaperGetPaperSize) + "()");
+        ThrowEx.Custom("NI size of paper get paper size" + "()");
         return Size.Empty;
     }
 }

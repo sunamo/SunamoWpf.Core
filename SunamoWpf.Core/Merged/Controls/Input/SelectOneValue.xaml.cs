@@ -49,7 +49,7 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
             cbEnteredHelper.AddValuesOfArrayAsItems(toMakeNameInTWithName, null, items);
         }
         cbEntered.SelectionChanged += CbEntered_Selected;
-        tbWhatEnter.Text = Translate.FromKey(XlfKeys.EnterOrSelect) + " " + whatEnter;
+        tbWhatEnter.Text = "EnterOrSelect" + " " + whatEnter;
     }
     private void btnEnter_Click_1(object sender, RoutedEventArgs eventArgs)
     {
@@ -73,7 +73,7 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
     /// Right approach is call here Finished which has registered WindowWithUserControl, which will set DialogResult itself
     /// </summary>
     public object ParentWindow { set { } }
-    public string Title => Translate.FromKey(XlfKeys.SelectOneValue);
+    public string Title => "SelectOneValue";
     private bool AfterEnteredValue(ComboBox cbEntered)
     {
         cbEntered.Text = SelectedItem.Trim();

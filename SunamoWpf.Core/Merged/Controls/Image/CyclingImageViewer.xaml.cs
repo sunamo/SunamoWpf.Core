@@ -59,12 +59,12 @@ public partial class CyclingImageViewer : UserControl, IStatusBroadcasterAppendW
         if (eventArgs.Key == Key.Left)
         {
             Before();
-            OnNewStatus(Translate.FromKey(XlfKeys.MovedBackToPhoto) + " " + imagesPath.ToString());
+            OnNewStatus("Moved back to photo" + " " + imagesPath.ToString());
         }
         else if (eventArgs.Key == Key.Right)
         {
             Next();
-            OnNewStatus(Translate.FromKey(XlfKeys.MovedForwardToPhoto) + " " + imagesPath.ToString());
+            OnNewStatus("Moved forward to photo" + " " + imagesPath.ToString());
         }
         else if (eventArgs.Key == Key.Enter)
         {
@@ -84,7 +84,7 @@ public partial class CyclingImageViewer : UserControl, IStatusBroadcasterAppendW
     public void ClearCollection()
     {
         imagesPath.Clear();
-        OnNewStatus(Translate.FromKey(XlfKeys.ImageCollectionDeleted) + ".");
+        OnNewStatus("ImageCollectionDeleted" + ".");
     }
     public void AddImages(List<string> value)
     {
@@ -95,7 +95,7 @@ public partial class CyclingImageViewer : UserControl, IStatusBroadcasterAppendW
         }
         else
         {
-            OnNewStatusAppend(Translate.FromKey(XlfKeys.NoMoreImagesLoadedBecauseTheSpecifiedFolderDidNotContainAnyImages) + ".");
+            OnNewStatusAppend("No more images loaded because the specified folder did not contain any images" + ".");
         }
     }
     public void Next()

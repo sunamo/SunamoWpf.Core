@@ -17,7 +17,7 @@ public class GuesslangHelper
  DetectLanguage(string code)
     {
         var command = "echo \"" + code.Replace("\"", "'") + "\" | guesslang";
-        string SourceCode = Translate.FromKey(XlfKeys.TheSourceCodeIsWrittenIn);
+        string SourceCode = "The source code is written in";
         var result =
 #if ASYNC
     await

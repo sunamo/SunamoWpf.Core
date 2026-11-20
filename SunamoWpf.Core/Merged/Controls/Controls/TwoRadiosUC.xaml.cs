@@ -56,11 +56,11 @@ public partial class TwoRadiosUC
                 break;
             case TwoState.AddRemove:
                 rb1.Content = "Add";
-                rb2.Content = Translate.FromKey(XlfKeys.Remove);
+                rb2.Content = "Remove";
                 break;
             case TwoState.AcceptDecline:
-                rb1.Content = Translate.FromKey(XlfKeys.Accept);
-                rb2.Content = Translate.FromKey(XlfKeys.Decline);
+                rb1.Content = "Accept";
+                rb2.Content = "Decline";
                 break;
             default:
                 break;

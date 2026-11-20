@@ -79,7 +79,7 @@ public class RuntimeHelper
         {
             if (throwException)
             {
-                throw new Exception(Translate.FromKey(XlfKeys.ChangeDialogResultHasAlredyRegisteredHandler));
+                throw new Exception("Change dialog result has alredy registered handler");
             }
             else
             {

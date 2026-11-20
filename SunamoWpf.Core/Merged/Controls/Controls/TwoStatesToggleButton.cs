@@ -21,7 +21,7 @@ public static partial class TwoStatesToggleButton
         }
         else
         {
-            ThrowEx.Custom(Translate.FromKey(XlfKeys.YouCannotCallSetInitialCheckedTwiceForTheSameToggleButton));
+            ThrowEx.Custom("You cannot call set initial checked twice for the same toggle button");
         }
     }
 

@@ -13,6 +13,5 @@ public class ToolbarTemplates
     //    Image image = new Image();
     //    //image.Source =  BitmapSourceHelper.;
 
-    //    //miShowControls.Header = sess.i18n(XlfKeys.AvailableShortcuts) + "...";
     //}
 }

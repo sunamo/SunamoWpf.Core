@@ -43,7 +43,7 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
     {
         if (neededRows > rowsCount)
         {
-            ThrowEx.BadMappedXaml("InputTwoColumnsUC", Translate.FromKey(XlfKeys.ItNeedsMoreRowsThanItExists));
+            ThrowEx.BadMappedXaml("InputTwoColumnsUC", "It needs more rows than it exists");
         }
         else
         {
@@ -82,7 +82,7 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
         {
             if (string.IsNullOrEmpty(item.Text))
             {
-                WpfLogger.Error(Translate.FromKey(XlfKeys.AllOfTheInputsMustBeFilled));
+                WpfLogger.Error("All of the inputs must be filled");
                 ////////DebugLogger.Instance.ClipboardOrDebug(methodName + "Something was not filled in");
                 allOk = false;
             }
@@ -108,7 +108,7 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
             }
         }
     }
-    public string Title => Translate.FromKey(XlfKeys.InputTwoColumns);
+    public string Title => "InputTwoColumns";
     public event VoidBoolNullable ChangeDialogResult;
     /// <summary>
     /// A1 must be ABT<string, string>

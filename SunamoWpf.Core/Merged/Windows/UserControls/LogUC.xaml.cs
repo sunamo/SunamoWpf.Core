@@ -20,7 +20,7 @@ public partial class LogUC : UserControl, IUserControl, IWindowOpener, IUserCont
         uc_Loaded(null, null);
     }
 
-    public string Title => Translate.FromKey(XlfKeys.Logs);
+    public string Title => "Logs";
     bool initialized = false;
     public WindowWithUserControl windowWithUserControl { get => windowOpenerMain.windowWithUserControl; set => windowOpenerMain.windowWithUserControl = value; }
 

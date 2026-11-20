@@ -23,7 +23,7 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
         cbEntered1.Focus();
     }
 
-    public string Title => Translate.FromKey(XlfKeys.SelectTwoValues);
+    public string Title => "SelectTwoValues";
 
     public event VoidBoolNullable ChangeDialogResult;
 

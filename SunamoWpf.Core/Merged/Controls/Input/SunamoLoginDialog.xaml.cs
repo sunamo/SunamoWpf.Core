@@ -77,7 +77,7 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
     const string h = "h";
     const string l = "l";
     const string s = "s";
-    string iniCredSection = Translate.FromKey(XlfKeys.Cred);
+    string iniCredSection = "Cred";
     /// <summary>
     /// A1 = RandomHelper.RandomString(10)
     /// Set also CryptDelegates from shared.unsafe
@@ -98,13 +98,13 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
         }
         chbAutoLogin.Checked += chbAutoLogin_Checked;
         chbRememberLogin.Unchecked += chbRememberLogin_Unchecked;
-        tbLogin.Text = Translate.FromKey(XlfKeys.Login) + ": ";
-        tbPw.Text = Translate.FromKey(XlfKeys.Password) + ": ";
-        chbRememberLogin.Content = Translate.FromKey(XlfKeys.RememberLogin);
-        chbAutoLogin.Content = Translate.FromKey(XlfKeys.AutoLogin);
-        btnLogin.Content = Translate.FromKey(XlfKeys.Login);
-        btnForgetPassword.Content = Translate.FromKey(XlfKeys.ForgetPassword);
-        btnForgetLoginAndPassword.Content = Translate.FromKey(XlfKeys.ForgetLoginAndPassword);
+        tbLogin.Text = "Login" + ": ";
+        tbPw.Text = "Password" + ": ";
+        chbRememberLogin.Content = "RememberLogin";
+        chbAutoLogin.Content = "AutoLogin";
+        btnLogin.Content = "Login";
+        btnForgetPassword.Content = "ForgetPassword";
+        btnForgetLoginAndPassword.Content = "Forget login and password";
         Loaded += LoginDialog_Loaded;
     }
     void chbRememberLogin_Unchecked(object sender, RoutedEventArgs eventArgs)
@@ -142,7 +142,7 @@ void
         this.pLogin = pLogin;
         this.pPw = pPw;
         this.pSalt = pSalt;
-        title = Translate.FromKey(XlfKeys.EnterLoginCredentials);
+        title = "EnterLoginCredentials";
         if (storageApplicationData == StorageApplicationData.Registry)
         {
             string salt2 = RA.ReturnValueString(s);
@@ -214,7 +214,7 @@ TF.ReadAllText(pLogin);
     }
     private static void ThrowExceptionConfigNotSupported()
     {
-        ThrowEx.Custom(Translate.FromKey(XlfKeys.SavingSettingsToAppConfigOrWebConfigIsNotYetSupported));
+        ThrowEx.Custom("Saving settings to app config or web config is not yet supported");
     }
     private void btnLogin_Click(object sender, RoutedEventArgs eventArgs)
     {

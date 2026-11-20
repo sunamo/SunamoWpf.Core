@@ -10,7 +10,7 @@ public class SuMenuItemTemplates
         {
             WindowWithUserControl.AvailableShortcut(dictionary2);
         };
-        miShowControls.Header = Translate.FromKey(XlfKeys.AvailableShortcuts) + "...";
+        miShowControls.Header = "AvailableShortcuts" + "...";
         return miShowControls;
     }
 }

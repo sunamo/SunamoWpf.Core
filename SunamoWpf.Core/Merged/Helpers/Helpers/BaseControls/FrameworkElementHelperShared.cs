@@ -77,7 +77,7 @@ public partial class FrameworkElementHelper
         //fn = WpfApp.mp.actualR.GetType().Name;
         SaveScreenshot(target, fileName);
 
-        var modeType = target.GetType().Assembly.GetTypes().Where(type => type.Name == Translate.FromKey(XlfKeys.Mode)).Single();
+        var modeType = target.GetType().Assembly.GetTypes().Where(type => type.Name == "Mode").Single();
         var names = Enum.GetNames(modeType);
         List<string> names_ctor = []; //Enum.GetNames(typeof(MainWindow_Ctor.Mode));
 

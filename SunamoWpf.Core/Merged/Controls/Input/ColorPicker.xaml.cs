@@ -45,17 +45,17 @@ public partial class ColorPicker : UserControl
         }
         if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "cs")
         {
-            ATextBlock.Text = Translate.FromKey(XlfKeys.Transparency) + ":";
-            RTextBlock.Text = Translate.FromKey(XlfKeys.RedColoredFolder) + ":";
-            GTextBlock.Text = Translate.FromKey(XlfKeys.GreenColorFolder) + ":";
-            BTextBlock.Text = Translate.FromKey(XlfKeys.BlueColorFolder) + ":";
+            ATextBlock.Text = "Transparency" + ":";
+            RTextBlock.Text = "RedColoredFolder" + ":";
+            GTextBlock.Text = "GreenColorFolder" + ":";
+            BTextBlock.Text = "BlueColorFolder" + ":";
         }
         else
         {
-            ATextBlock.Text = Translate.FromKey(XlfKeys.Opacity) + ":";
-            RTextBlock.Text = Translate.FromKey(XlfKeys.RedColorComponent) + ":";
-            GTextBlock.Text = Translate.FromKey(XlfKeys.GreenColorComponent) + ":";
-            BTextBlock.Text = Translate.FromKey(XlfKeys.BlueColorComponent) + ":";
+            ATextBlock.Text = "Opacity" + ":";
+            RTextBlock.Text = "RedColorComponent" + ":";
+            GTextBlock.Text = "GreenColorComponent" + ":";
+            BTextBlock.Text = "BlueColorComponent" + ":";
         }
     }
     private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> eventArgs)

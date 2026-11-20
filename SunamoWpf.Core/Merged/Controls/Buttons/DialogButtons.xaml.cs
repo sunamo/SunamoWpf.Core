@@ -94,7 +94,7 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
 
     public void Accept(object input)
     {
-        ThrowEx.Custom(Translate.FromKey(XlfKeys.OnlyButtonsCanBeAcceptedBecauseItHasNoDataForAccept) + ".");
+        ThrowEx.Custom("Only buttons can be accepted because it has no data for accept" + ".");
     }
 
     static Type type = typeof(DialogButtons);

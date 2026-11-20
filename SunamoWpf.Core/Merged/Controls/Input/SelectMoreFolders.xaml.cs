@@ -86,8 +86,8 @@ public partial class SelectMoreFolders : UserControl
 
     async Task SetAwesomeIcons()
     {
-        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddFolder, "\uf07c " + Translate.FromKey(XlfKeys.New2));
-        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddAsTemplate, "\uf022 " + Translate.FromKey(XlfKeys.SaveSetAsTemplate));
+        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddFolder, "\uf07c " + "New2");
+        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddAsTemplate, "\uf022 " + "Save set as template");
 
     }
 

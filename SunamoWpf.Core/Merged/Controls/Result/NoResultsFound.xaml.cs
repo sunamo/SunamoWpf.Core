@@ -18,7 +18,7 @@ public partial class NoResultsFound : UserControl
 
         if (string.IsNullOrEmpty(tbNoResultsFound.Text))
         {
-            tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
+            tbNoResultsFound.Text = "NoResultsFound";
         }
     }
     public NoResultsFound(string what) : this()

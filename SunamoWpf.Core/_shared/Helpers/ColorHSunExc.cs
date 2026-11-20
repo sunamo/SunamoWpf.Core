@@ -61,7 +61,7 @@ public partial class ColorH
                 blue += 127;
                 break;
             default:
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.NotImplementedCaseInColorHelperAppsRandomBrush));
+                ThrowEx.Custom("Not implemented case in color helper apps random brush");
                 return Brushes.Black;
         }
         return new SolidColorBrush(GetOpaqueColor(red, green, blue));

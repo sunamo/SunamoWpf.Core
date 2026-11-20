@@ -132,7 +132,7 @@ public partial class FrameworkElementHelper
         }
         else
         {
-            ThrowEx.Custom(Translate.FromKey(XlfKeys.customControlIsNotContentControlOrPanel));
+            ThrowEx.Custom("Custom control is not content control or panel");
         }
         return default(T);
     }

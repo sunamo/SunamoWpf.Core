@@ -24,7 +24,7 @@ public partial class SelectFolder : UserControl
         cbDefaultFolders.ItemsSource = DefaultPaths.All;
         cbDefaultFolders.SelectionChanged += CbDefaultFolders_SelectionChanged;
 #endif
-        btnSelectFolder.Content = Translate.FromKey(XlfKeys.SelectTheFolder);
+        btnSelectFolder.Content = "SelectTheFolder";
         Loaded += SelectFolder_Loaded;
     }
     private void SelectFolder_Loaded(object sender, RoutedEventArgs eventArgs)

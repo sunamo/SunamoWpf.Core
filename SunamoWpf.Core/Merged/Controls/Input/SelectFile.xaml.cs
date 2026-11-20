@@ -23,7 +23,7 @@ public partial class SelectFile : UserControl
         }
         SelectedFile = "";
 
-        btnSelectFile.Content = Translate.FromKey(XlfKeys.SelectFile);
+        btnSelectFile.Content = "SelectFile";
 
         Loaded += SelectFile_Loaded;
     }
@@ -60,10 +60,10 @@ public partial class SelectFile : UserControl
     {
         if (path == "")
         {
-            path = Translate.FromKey(XlfKeys.None);
+            path = "None";
         }
         selectedFile = path;
-        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + path;
+        tbSelectedFile.Text = "SelectedFile" + ": " + path;
     }
 
     private void btnSelectFile_Click(object sender, RoutedEventArgs eventArgs)

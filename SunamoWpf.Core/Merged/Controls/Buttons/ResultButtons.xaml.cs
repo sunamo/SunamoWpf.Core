@@ -22,8 +22,8 @@ public partial class ResultButtons : UserControl
     }
     private void ResultButtons_Loaded(object sender, RoutedEventArgs eventArgs)
     {
-        btnAllRight.Content = Translate.FromKey(XlfKeys.AllRight) + "!";
-        btnCopyToClipboard.Content = Translate.FromKey(XlfKeys.CopyTextToClipboard);
+        btnAllRight.Content = "AllRight" + "!";
+        btnCopyToClipboard.Content = "Copy text to clipboard";
     }
     private void btnCopyToClipboard_Click(object sender, RoutedEventArgs eventArgs)
     {

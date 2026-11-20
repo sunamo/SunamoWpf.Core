@@ -43,7 +43,7 @@ public partial class ShowTextResult : UserControl, IUserControl, IControlWithRes
             }
         }
     }
-    public string Title => Translate.FromKey(XlfKeys.ShowResult);
+    public string Title => "ShowResult";
     public event VoidBoolNullable ChangeDialogResult;
     public void Accept(object input)
     {
@@ -63,7 +63,6 @@ public partial class ShowTextResult : UserControl, IUserControl, IControlWithRes
     private void resultButtons_CopyToClipboard()
     {
         ClipboardService.SetText(txtResult.Text);
-        //SunamoTemplateLogger.Instance.CopiedToClipboard(Translate.FromKey(XlfKeys.Result));
     }
     #endregion
 }

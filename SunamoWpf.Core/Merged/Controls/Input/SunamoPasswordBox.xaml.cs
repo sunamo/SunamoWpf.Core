@@ -31,7 +31,7 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
 
     public void Init(bool noMargin)
     {
-        btnShowPassword.Content = Translate.FromKey(XlfKeys.HidePassword);
+        btnShowPassword.Content = "HidePassword";
 
         this.noMargin = noMargin;
         if (noMargin)
@@ -114,11 +114,11 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         }
         if (visible)
         {
-            btnShowPassword.Content = Translate.FromKey(XlfKeys.HidePassword);
+            btnShowPassword.Content = "HidePassword";
         }
         else
         {
-            btnShowPassword.Content = Translate.FromKey(XlfKeys.ShowPassword);
+            btnShowPassword.Content = "ShowPassword";
         }
         txtShowPassword.Visibility = visibility;
     }

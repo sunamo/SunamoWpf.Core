@@ -42,9 +42,7 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         //if (txtFilter != null)
         //{
         //    txtFilter.BorderBrush = Brushes.Tomato;
-        //    txtFilter.tb.Text = sess.i18n(XlfKeys.Filter) + " (" + sess.i18n(XlfKeys.alsoWildcard) + "): ";
         //}
-        ////miCopyToClipboardFounded.Header = sess.i18n(XlfKeys.CopyToClipboardFounded);
         //FoundedResultViewModel.Do += FoundedResultViewModel_Do;
     }
     private void FoundedResultViewModel_Do(FoundedResultActions obj)
@@ -77,7 +75,7 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
     {
         if (tbNoResultsFound != null)
         {
-            tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
+            tbNoResultsFound.Text = "NoResultsFound";
         }
         basePaths = basePath.ToList();
         SunamoComparerICompare.StringLength.Desc comparer = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);

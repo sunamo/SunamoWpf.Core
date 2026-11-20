@@ -163,7 +163,7 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
     {
         if (tbNoResultsFound != null)
         {
-            tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
+            tbNoResultsFound.Text = "NoResultsFound";
         }
         basePaths = basePath.ToList();
         SunamoComparerICompare.StringLength.Desc comparer = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);

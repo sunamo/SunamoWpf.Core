@@ -94,7 +94,7 @@ public partial class SelectManyFiles : UserControl
 
     async Task SetAwesomeIcons()
     {
-        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddFile, "\uf07c " + Translate.FromKey(XlfKeys.New));
+        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddFile, "\uf07c " + "New");
         await AwesomeFontControls.SetAwesomeFontSymbol(btnAddAsTemplate, "\uf022 Save set as template");
     }
 

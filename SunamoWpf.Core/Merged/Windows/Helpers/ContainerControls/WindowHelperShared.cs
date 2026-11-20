@@ -73,7 +73,7 @@ public partial class WindowHelper
             ShowMb(windowOpenerIsNull);
 #endif
             sl(windowOpenerIsNull);
-            var message = Translate.FromKey(XlfKeys.MainWindowMustBeIWindowOpenerDueToShowExceptions) + $"Is Application.Current.MainWindow null: {mainWindow == null}";
+            var message = "Main window must be i window opener due to show exceptions" + $"Is Application.Current.MainWindow null: {mainWindow == null}";
             if (mainWindow != null)
             {
                 message += $"Type: {mainWindow.GetType()}";
