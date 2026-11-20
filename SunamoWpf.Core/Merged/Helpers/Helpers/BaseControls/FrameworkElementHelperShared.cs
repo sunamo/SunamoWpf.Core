@@ -5,7 +5,7 @@ public partial class FrameworkElementHelper
 {
     public static void SetToolTip(Button btnCopyToClipboard, string xlfKeys)
     {
-        btnCopyToClipboard.ToolTip = Translate.FromKey(xlfKeys);
+        btnCopyToClipboard.ToolTip = xlfKeys;
     }
 
     private static string SaveScreenshot(Visual target, string fileName, string appName = null, string projectName = null)

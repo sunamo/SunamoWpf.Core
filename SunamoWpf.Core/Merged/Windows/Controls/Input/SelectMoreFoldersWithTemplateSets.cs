@@ -29,7 +29,7 @@ public class SelectMoreFoldersWithTemplateSets
             Grid.SetRow(cbSetsFolders, rowCbSets);
             Grid.SetRow(tbSetsFolders, rowCbSets);
             Grid.SetColumn(cbSetsFolders, 1);
-            tbSetsFolders.Text = Translate.FromKey(tbSetsFoldersKey);
+            tbSetsFolders.Text = tbSetsFoldersKey;
             gridCbSets.Children.Add(tbSetsFolders);
             gridCbSets.Children.Add(cbSetsFolders);
         }
@@ -40,7 +40,7 @@ public class SelectMoreFoldersWithTemplateSets
             Grid.SetRow(txtFolders, rowSmf);
             Grid.SetRow(tbFolders, rowSmf);
             Grid.SetColumn(txtFolders, 1);
-            tbFolders.Text = Translate.FromKey(tbFoldersKey);
+            tbFolders.Text = tbFoldersKey;
             gridSmf.Children.Add(tbFolders);
             gridSmf.Children.Add(txtFolders);
         }

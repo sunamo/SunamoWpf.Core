@@ -108,7 +108,7 @@ public partial class TextBlockHelper
 
     public static void SetTextPostColonXlf(TextBlock lblStatusDownload, string xlf)
     {
-        SetTextPostColonXlf(lblStatusDownload, Translate.FromKey(xlf));
+        SetTextPostColonXlf(lblStatusDownload, xlf);
     }
 
     public static void SetTextPostColon(TextBlock lblStatusDownload, string status)

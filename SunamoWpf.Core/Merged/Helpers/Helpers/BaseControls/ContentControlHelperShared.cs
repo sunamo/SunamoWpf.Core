@@ -55,7 +55,7 @@ Je zde ta věc že
         if (!isText)
         {
             isText = controlInitData.xlfKey != null;
-            text = Translate.FromKey(controlInitData.xlfKey);
+            text = controlInitData.xlfKey;
         }
 
         StackPanel stackPanel = new StackPanel();
