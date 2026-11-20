@@ -10,6 +10,9 @@ public partial class EnterOneValueWindow : Window
     //public EnterOneValueUC enterOneValueUC = null;
 
     #region MyRegion
+    /// <summary>
+    /// The validator before adding.
+    /// </summary>
     public Func<string, bool> ValidatorBeforeAdding
     {
         set
@@ -18,6 +21,9 @@ public partial class EnterOneValueWindow : Window
         }
     }
 
+    /// <summary>
+    /// The validator before adding message.
+    /// </summary>
     public string ValidatorBeforeAddingMessage
     {
         set
@@ -49,6 +55,9 @@ public partial class EnterOneValueWindow : Window
         //enterOneValueUC.ChangeDialogResult += EnterOneValueUC_ChangeDialogResult;
     }
 
+    /// <summary>
+    /// The is multiline.
+    /// </summary>
     public bool IsMultiline
     {
         set

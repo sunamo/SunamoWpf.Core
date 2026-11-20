@@ -1,9 +1,18 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ControlsWithGet;
 
+/// <summary>
+/// Represents the button helper type.
+/// </summary>
 public static partial class ButtonHelper
 {
 
+    /// <summary>
+    /// Save transparent image as content.
+    /// </summary>
+    /// <param name="button">The button.</param>
+    /// <param name="color">The color.</param>
+    /// <param name="imageRelPath">The image rel path.</param>
     public static void SaveTransparentImageAsContent(ContentControl button, System.Windows.Media.Color color, string imageRelPath)
     {
         BitmapSource bitmapSource = BitmapImageHelper.MsAppx(imageRelPath);

@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Controls;
 
+/// <summary>
+/// Represents the searching in lb WPF type.
+/// </summary>
 public class SearchingInLbWPF
 {
     /// <summary>
@@ -107,6 +110,9 @@ public class SearchingInLbWPF
             lb.Items.Add(item);
         }
     }
+    /// <summary>
+    /// Click stop.
+    /// </summary>
     public void ClickStop()
     {
         tstb.Text = "";

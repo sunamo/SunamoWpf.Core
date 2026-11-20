@@ -1,13 +1,25 @@
 ﻿#define ASYNC
 namespace SunamoWpf.StartupHelper;
 
+/// <summary>
+/// Represents the startup helper type.
+/// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public class StartupHelper
 {
     static StopwatchHelper swOverall = new StopwatchHelper();
+    /// <summary>
+    /// The ftl.
+    /// </summary>
     public static FileTextLogger ftl = null;
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(StartupHelper);
 
+    /// <summary>
+    /// The args.
+    /// </summary>
     public static String[] args = null;
 
     const string bp = @"C:\_._\";

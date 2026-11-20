@@ -25,6 +25,11 @@ public class SettingsManager : ISettingsManagerWpf<FrameworkElement, DependencyP
         this.def = def;
         this.providers = providers;
     }
+    /// <summary>
+    /// Load settings.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="savedElements">The saved elements.</param>
     public void LoadSettings(FrameworkElement sender, TUListWpf<FrameworkElement, DependencyProperty> savedElements)
     {
         ////////DebugLogger.Instance.WriteList(savedElements.Select(d => d.Key.GetType().FullName).ToList());
@@ -83,6 +88,11 @@ public class SettingsManager : ISettingsManagerWpf<FrameworkElement, DependencyP
         var result = stringBuilder.ToString();
         return result;
     }
+    /// <summary>
+    /// Save settings.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="savedElements">The saved elements.</param>
     public void SaveSettings(FrameworkElement sender, TUListWpf<FrameworkElement, DependencyProperty> savedElements)
     {
         EnsureProperties(savedElements);

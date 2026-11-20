@@ -7,10 +7,16 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
     bool publicSaveLogic = false;
     const string h = "h";
     const string l = "l";
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         btnLetsLogin.Focus();
     }
+    /// <summary>
+    /// Initializes a new instance of the login uc class.
+    /// </summary>
     public LoginUc()
     {
         try
@@ -67,6 +73,10 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
     {
         ChangeDialogResult(false);
     }
+    /// <summary>
+    /// Have logined data.
+    /// </summary>
+    /// <returns>The have logined data result.</returns>
     public bool HaveLoginedData()
     {
         string firstValue = RA.ReturnValueString(h);
@@ -85,11 +95,22 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
         // Cant be, window must be already showned as dialog
         //DialogResult = true;
     }
+    /// <summary>
+    /// Handle key.
+    /// </summary>
+    /// <param name="e*/">The e.</param>
+    /// <returns>The handle key result.</returns>
     public bool HandleKey(/*KeyEventArgs e*/)
     {
         return false;
     }
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -97,10 +118,16 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
             ChangeDialogResult(value);
         }
     }
+    /// <summary>
+    /// The uc size.
+    /// </summary>
     public Size UcSize
     {
         get { return this.DesiredSize; }
     }
+    /// <summary>
+    /// The login.
+    /// </summary>
     public String Login
     {
         get
@@ -108,6 +135,9 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
             return txtLogin.Text;
         }
     }
+    /// <summary>
+    /// The heslo.
+    /// </summary>
     public string Heslo
     {
         get
@@ -115,6 +145,9 @@ public partial class LoginUc : UserControl//, IControlWithResult, IKeysHandler
             return txtHeslo.Text;
         }
     }
+    /// <summary>
+    /// Gets the accept button.
+    /// </summary>
     public ButtonBase AcceptButton => btnLetsLogin;
     #endregion
 }

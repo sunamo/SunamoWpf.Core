@@ -1,10 +1,18 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ControlsWithGet;
 
+/// <summary>
+/// Represents the label helper type.
+/// </summary>
 public class LabelHelper
 {
     static Type type = typeof(LabelHelper);
 
+    /// <summary>
+    /// Get.
+    /// </summary>
+    /// <param name="controlInitData">The control init data.</param>
+    /// <returns>The get result.</returns>
     public static Label Get(ControlInitData controlInitData)
     {
         Label label = new Label();

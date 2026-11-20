@@ -1,15 +1,24 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Collections;
 
+/// <summary>
+/// Represents the sunamo combo box type.
+/// </summary>
 public class SunamoComboBox : ComboBox
 {
     static Type type = typeof(SunamoComboBox);
 
+    /// <summary>
+    /// Initializes a new instance of the sunamo combo box class.
+    /// </summary>
     public SunamoComboBox()
     {
         this.KeyUp += SunamoComboBox_KeyUp;
     }
 
+    /// <summary>
+    /// The cb.
+    /// </summary>
     public ComboBox cb
     {
         get
@@ -20,11 +29,18 @@ public class SunamoComboBox : ComboBox
 
     TextBox editableTextBox;
 
+    /// <summary>
+    /// On apply template.
+    /// </summary>
     public override void OnApplyTemplate()
     {
         SetEditableTextbox();
     }
 
+    /// <summary>
+    /// Set caret.
+    /// </summary>
+    /// <param name="position">The position.</param>
     public void SetCaret(int position)
     {
         this.editableTextBox.SelectionStart = position;

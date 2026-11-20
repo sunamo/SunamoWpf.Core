@@ -1,5 +1,8 @@
 namespace SunamoWpf.Data;
 
+/// <summary>
+/// Represents the check box data t type.
+/// </summary>
 public class CheckBoxData<T>
 {
     /// <summary>

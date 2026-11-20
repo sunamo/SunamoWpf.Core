@@ -3,7 +3,13 @@ namespace SunamoWpf;
 
 public sealed partial class UpDownNumeric : UserControl
 {
+    /// <summary>
+    /// The value changed.
+    /// </summary>
     public event ValueChangedRoutedHandler<uint> ValueChanged;
+    /// <summary>
+    /// Initializes a new instance of the up down numeric class.
+    /// </summary>
     public UpDownNumeric()
     {
         try
@@ -19,6 +25,9 @@ public sealed partial class UpDownNumeric : UserControl
     }
     string latest = "";
     int max = int.MaxValue;
+    /// <summary>
+    /// The max.
+    /// </summary>
     public int Max
     {
         get
@@ -31,6 +40,9 @@ public sealed partial class UpDownNumeric : UserControl
             FrameworkElementHelper.SetAll3Widths(txtValue, TextBoxHelper.GetOptimalWidthForCountOfChars(value.ToString().Length, false, txtValue));
         }
     }
+    /// <summary>
+    /// The value.
+    /// </summary>
     public int Value
     {
         get
@@ -72,7 +84,13 @@ public sealed partial class UpDownNumeric : UserControl
             Value--;
         }
     }
+    /// <summary>
+    /// The property changed.
+    /// </summary>
     public event PropertyChangedEventHandler PropertyChanged;
+    /// <summary>
+    /// The capture changes.
+    /// </summary>
     public static bool captureChanges = true;
     private void txtValue_TextChanged_1(object sender, TextChangedEventArgs eventArgs)
     {

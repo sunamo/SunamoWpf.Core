@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Content.Resources;
 
+/// <summary>
+/// Represents the image helper type.
+/// </summary>
 public partial class ImageHelper
 {
     /// <summary>
@@ -11,6 +14,12 @@ public partial class ImageHelper
     {
         return imageHelperDesktop.MsAppx(relPath);
     }
+    /// <summary>
+    /// Ms appx.
+    /// </summary>
+    /// <param name="disabled">The disabled.</param>
+    /// <param name="appPic">The app pic.</param>
+    /// <returns>The ms appx result.</returns>
     public static Image MsAppx(bool disabled, AppPics appPic)
     {
         return imageHelperDesktop.MsAppx(disabled, appPic);

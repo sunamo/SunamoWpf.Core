@@ -1,8 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the data table helper type.
+/// </summary>
 public class DataTableHelper
 {
+    /// <summary>
+    /// New column.
+    /// </summary>
+    /// <param name="dataTable">The data table.</param>
+    /// <param name="name">The name.</param>
+    /// <param name="type">The type.</param>
     public static void NewColumn(DataTable dataTable, string name, object type)
     {
         if (!(type is Type))
@@ -15,11 +24,25 @@ public class DataTableHelper
         dataTable.Columns.Add(dataColumn);
     }
 
+    /// <summary>
+    /// New column.
+    /// </summary>
+    /// <param name="dataTable">The data table.</param>
+    /// <param name="columnIndex">The column index.</param>
+    /// <param name="columns">The columns.</param>
+    /// <param name="types">The types.</param>
     public static void NewColumn(DataTable dataTable, int columnIndex, IList<string> columns, IList types)
     {
         NewColumn(dataTable, columns[columnIndex], types[columnIndex]);
     }
 
+    /// <summary>
+    /// Create data table.
+    /// </summary>
+    /// <param name="defaultValue">The default value.</param>
+    /// <param name="rows">The rows.</param>
+    /// <param name="columns">The columns.</param>
+    /// <returns>The create data table result.</returns>
     public static DataTable CreateDataTable(List<object> defaultValue, List<IList> rows, params string[] columns)
     {
         DataTable dataTable = new DataTable();

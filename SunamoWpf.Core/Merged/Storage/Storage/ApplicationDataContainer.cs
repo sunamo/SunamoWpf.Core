@@ -4,6 +4,10 @@ namespace SunamoWpf.Storage;
 public partial class ApplicationDataContainer
 {
     #region SelectFolder
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="chb">The chb.</param>
     public void Add(SelectFolder chb)
     {
         ApplicationDataContainerList adcl = AddFrameworkElement(chb);
@@ -22,6 +26,10 @@ public partial class ApplicationDataContainer
     #endregion
 
     #region SelectMoreFolders
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="txtFolders">The txt folders.</param>
     public void Add(SelectMoreFolders txtFolders)
     {
         var adcl = AddFrameworkElement(txtFolders);

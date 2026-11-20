@@ -19,5 +19,10 @@ public interface IKeysHandler<KeyArg>
     }
     */
 
+    /// <summary>
+    /// Handle key.
+    /// </summary>
+    /// <param name="keyArg">The key arg.</param>
+    /// <returns>The handle key result.</returns>
     bool HandleKey(KeyArg keyArg);
 }

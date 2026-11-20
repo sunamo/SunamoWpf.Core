@@ -6,6 +6,11 @@ namespace SunamoWpf.Helpers.Content.Resources;
 /// </summary>
 public static partial class BitmapImageHelper
 {
+    /// <summary>
+    /// Ms appx.
+    /// </summary>
+    /// <param name="relPath">The rel path.</param>
+    /// <returns>The ms appx result.</returns>
     public static BitmapImage MsAppx(string relPath)
     {
         BitmapImage bitmapImage = new BitmapImage(new Uri(ImageHelper.protocol + relPath, UriKind.Absolute));
@@ -22,6 +27,12 @@ public static partial class BitmapImageHelper
         BitmapImage bitmapImage = new BitmapImage(new Uri(ImageHelper.protocol + "i/" + appPic2 + ".png"));
         return bitmapImage;
     }
+    /// <summary>
+    /// Ms appx.
+    /// </summary>
+    /// <param name="disabled">The disabled.</param>
+    /// <param name="appPic">The app pic.</param>
+    /// <returns>The ms appx result.</returns>
     public static BitmapImage MsAppx(bool disabled, AppPics appPic)
     {
         string cesta = "";
@@ -36,6 +47,11 @@ public static partial class BitmapImageHelper
         cesta += appPic.ToString() + ".png";
         return MsAppx(cesta);
     }
+    /// <summary>
+    /// Path.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The path result.</returns>
     public static BitmapSource Path(string path)
     {
         if (string.IsNullOrWhiteSpace(path))
@@ -44,6 +60,11 @@ public static partial class BitmapImageHelper
         }
         return Uri(new Uri(path, UriKind.Absolute));
     }
+    /// <summary>
+    /// Uri.
+    /// </summary>
+    /// <param name="uri">The uri.</param>
+    /// <returns>The uri result.</returns>
     public static BitmapSource Uri(Uri uri)
     {
         BitmapImage bitmapImage = null;
@@ -57,6 +78,11 @@ public static partial class BitmapImageHelper
         }
         return bitmapImage;
     }
+    /// <summary>
+    /// Ms appx root.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The ms appx root result.</returns>
     public static BitmapImage MsAppxRoot(string path)
     {
         return new BitmapImage(new Uri(ImageHelper.protocolRoot + path, UriKind.Absolute));

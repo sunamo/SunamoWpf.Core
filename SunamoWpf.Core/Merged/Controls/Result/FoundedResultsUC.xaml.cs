@@ -4,15 +4,33 @@ namespace SunamoWpf.Controls.Result;
 public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IFoundedResultsUC<FoundedFileUC>
 {
     #region Rewrite to pure cs. With xaml is often problems without building
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(FoundedResultsUC);
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public event VoidString Selected;
+    /// <summary>
+    /// The selected item.
+    /// </summary>
     protected string selectedItem = null;
+    /// <summary>
+    /// Gets the selected item.
+    /// </summary>
     public string SelectedItem => selectedItem;
+    /// <summary>
+    /// The base paths.
+    /// </summary>
     public static List<string> basePaths = [];
     //public SearchInUC txtFilter = null;
     //public StackPanel sp = null;
     //public ScrollViewer sv = null;
     //public TextBlock tbNoResultsFound = null;
+    /// <summary>
+    /// Initializes a new instance of the founded results UC class.
+    /// </summary>
     public FoundedResultsUC()
     {
         try
@@ -82,6 +100,12 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         basePaths.Sort(comparer);
         CA.WithEndSlash(basePaths);
     }
+    /// <summary>
+    /// Default brushes.
+    /// </summary>
+    /// <param name="green">The green.</param>
+    /// <param name="red">The red.</param>
+    /// <returns>The default brushes result.</returns>
     public TUListWpf<string, Brush> DefaultBrushes(string green = "", string red = "")
     {
         TUListWpf<string, Brush> result = new TUListWpf<string, Brush>();
@@ -89,6 +113,9 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         result.Add(TUWpf<string, Brush>.Get(red, Brushes.Red));
         return result;
     }
+    /// <summary>
+    /// Hide tb no results found.
+    /// </summary>
     protected void HideTbNoResultsFound()
     {
         if (sv != null && tbNoResultsFound != null)
@@ -97,6 +124,12 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             sv.Visibility = Visibility.Visible;
         }
     }
+    /// <summary>
+    /// Add founded results.
+    /// </summary>
+    /// <param name="clear">The clear.</param>
+    /// <param name="colors">The colors.</param>
+    /// <param name="foundedResult">The founded result.</param>
     public void AddFoundedResults(bool clear, TUListWpf<string, Brush> colors, List<TWithNameTWpf<string>> foundedResult)
     {
         if (sp != null && sv != null)
@@ -139,6 +172,11 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             return founded;
         }
     }
+    /// <summary>
+    /// Get founded file by path.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The get founded file by path result.</returns>
     public FoundedFileUC GetFoundedFileByPath(string path)
     {
         if (sp != null)
@@ -153,10 +191,17 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
         }
         return null;
     }
+    /// <summary>
+    /// Select file.
+    /// </summary>
+    /// <param name="file">The file.</param>
     public void SelectFile(string file)
     {
         Selected(file);
     }
+    /// <summary>
+    /// Clear founded result.
+    /// </summary>
     public void ClearFoundedResult()
     {
         if (sp != null && sv != null && tbNoResultsFound != null)
@@ -166,6 +211,10 @@ public partial class FoundedResultsUC : UserControl, ISelectedTWpf<string>//, IF
             tbNoResultsFound.Visibility = Visibility.Visible;
         }
     }
+    /// <summary>
+    /// On selected.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void OnSelected(string path)
     {
         Selected(path);

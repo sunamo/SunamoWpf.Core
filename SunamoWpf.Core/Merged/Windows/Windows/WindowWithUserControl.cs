@@ -18,6 +18,9 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     /// Na false se nastaví při zavírání. Pokud tedy bude false, znamená to že okno se zavřelo křížkem a má tato hodnota false přednost
     /// </summary>
     public bool? dialogResult = null;
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -32,6 +35,9 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     IUserControlWithSizeChange userControlWithSizeChange = null;
     static Type type = typeof(WindowWithUserControl);
     StatusBar statusBar = null;
+    /// <summary>
+    /// The dialog buttons.
+    /// </summary>
     public DialogButtons dialogButtons = null;
     Menu menu = null;
     private void WindowWithUserControl_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
@@ -141,6 +147,9 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
         SizeChanged += WindowWithUserControl_SizeChanged;
         PreviewKeyDown += WindowWithUserControl_PreviewKeyDown;
     }
+    /// <summary>
+    /// Initializes a new instance of the window with user control class.
+    /// </summary>
     public WindowWithUserControl()
     {
     }
@@ -187,6 +196,9 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
     {
         UserControlWithResult_ChangeDialogResult(result);
     }
+    /// <summary>
+    /// The enable btn ok.
+    /// </summary>
     public bool EnableBtnOk
     {
         set
@@ -356,18 +368,32 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
         // Díval jsem se do ReferenceSource, InvalidateVisual volá jen InvalidateArrange
         InvalidateVisual();
     }
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
+    /// <summary>
+    /// The change dialog result async.
+    /// </summary>
     public event TaskBoolNullable ChangeDialogResultAsync;
     private void WindowWithUserControl_Closed(object sender, System.EventArgs eventArgs)
     {
         WpfApp.SaveReferenceToTextBlockStatus(true, null, null);
     }
+    /// <summary>
+    /// Available shortcut.
+    /// </summary>
+    /// <param name="dictionary">The dictionary.</param>
     public static void AvailableShortcut(Dictionary<string, string> dictionary)
     {
         ShowTextResult result = new ShowTextResult(SHJoin.JoinDictionary(dictionary, " - "));
         WindowWithUserControl window = new WindowWithUserControl(result, ResizeMode.NoResize);
         window.ShowDialog();
     }
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
         if (userControlWithResult != null)
@@ -375,6 +401,10 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             userControlWithResult.Accept(input);
         }
     }
+    /// <summary>
+    /// On size changed.
+    /// </summary>
+    /// <param name="maxSize">The max size.</param>
     public void OnSizeChanged(DesktopSize maxSize)
     {
         if (userControlWithSizeChange != null)
@@ -382,9 +412,15 @@ public class WindowWithUserControl : Window//, IControlWithResult, IUserControlW
             userControlWithSizeChange.OnSizeChanged(maxSize);
         }
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
     }

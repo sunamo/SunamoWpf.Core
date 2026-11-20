@@ -4,6 +4,11 @@ namespace SunamoWpf._shared;
 
 public partial class StatusHelper
 {
+    /// <summary>
+    /// Get foreground brush of type of message.
+    /// </summary>
+    /// <param name="typeOfMessage">The type of message.</param>
+    /// <returns>The get foreground brush of type of message result.</returns>
     public static Color GetForegroundBrushOfTypeOfMessage(TypeOfMessageWpf typeOfMessage)
     {
         switch (typeOfMessage)

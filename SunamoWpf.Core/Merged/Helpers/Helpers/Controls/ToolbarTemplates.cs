@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Controls;
 
+/// <summary>
+/// Represents the toolbar templates type.
+/// </summary>
 public class ToolbarTemplates
 {
     //public static void AvailableShortcut(Dictionary<string, string> dictionary2, ToolBar tsAkce, ImageSource imageOnButton, int whImage, int whButton)

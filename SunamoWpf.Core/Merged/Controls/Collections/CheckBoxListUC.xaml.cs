@@ -5,8 +5,14 @@ public partial class CheckBoxListUC : UserControl
         , IControlWithResultDebugWpf, IUserControlWithSizeChange, IUserControl, IKeysHandler, ICheckBoxListUC
     {
 
+        /// <summary>
+        /// The type.
+        /// </summary>
         public static Type type = typeof(CheckBoxListUC);
         #region IControlWithResult implementation
+        /// <summary>
+        /// The dialog result.
+        /// </summary>
         public bool? DialogResult
         {
             set
@@ -19,8 +25,15 @@ public partial class CheckBoxListUC : UserControl
             }
         }
 
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
         public string Title => "Check box list";
 
+        /// <summary>
+        /// Accept.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void Accept(object input)
         {
 
@@ -32,8 +45,14 @@ public partial class CheckBoxListUC : UserControl
         public event VoidBoolNullable ChangeDialogResult;
         #endregion
 
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
         public int Count => lb2.Items.Count;
 
+        /// <summary>
+        /// Focus on main element.
+        /// </summary>
         public void FocusOnMainElement()
         {
 
@@ -43,6 +62,9 @@ public partial class CheckBoxListUC : UserControl
         /// Args are: object sender, string operation, object data
         /// </summary>
         public event Action<object, ListOperation, object> CollectionChanged;
+        /// <summary>
+        /// Gets or sets the l.
+        /// </summary>
         public NotifyChangesCollection<NotifyPropertyChangedWrapper<CheckBox>> l { get; set; } = null;
         /// <summary>
         /// Whether have raise CollectionChanged after check
@@ -79,6 +101,9 @@ public partial class CheckBoxListUC : UserControl
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the check box list UC class.
+        /// </summary>
         public CheckBoxListUC()
         {
             InitializeComponent();
@@ -86,6 +111,9 @@ public partial class CheckBoxListUC : UserControl
             Loaded += uc_Loaded;
         }
 
+        /// <summary>
+        /// Clear.
+        /// </summary>
         public void Clear()
         {
             l.l.Clear();
@@ -158,6 +186,10 @@ public partial class CheckBoxListUC : UserControl
             EventOn(eoa);
         }
 
+        /// <summary>
+        /// All content string.
+        /// </summary>
+        /// <returns>The all content string result.</returns>
         public List<string> AllContentString()
         {
             var allContent = AllContent();
@@ -183,6 +215,11 @@ public partial class CheckBoxListUC : UserControl
             return result;
         }
 
+        /// <summary>
+        /// Content of text block.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        /// <returns>The content of text block result.</returns>
         public static string ContentOfTextBlock(StackPanel key)
         {
             var value = WpfApp.cd;
@@ -214,6 +251,9 @@ public partial class CheckBoxListUC : UserControl
             colButtons.Init(new ImageButtonsInit(false, false, new VoidString(ColButtons_Added), true, true));
         }
 
+        /// <summary>
+        /// Hide all buttons.
+        /// </summary>
         public void HideAllButtons()
         {
             colButtons.Init(ImageButtonsInit.HideAllButtons);
@@ -299,6 +339,10 @@ public partial class CheckBoxListUC : UserControl
         }
 
 
+        /// <summary>
+        /// Add checkbox.
+        /// </summary>
+        /// <param name="wrapper">The wrapper.</param>
         public void AddCheckbox(NotifyPropertyChangedWrapper<CheckBox> wrapper)
         {
             var chb = wrapper.o;
@@ -312,11 +356,19 @@ public partial class CheckBoxListUC : UserControl
 
         int dexLastChecked = -1;
 
+        /// <summary>
+        /// Col buttons added.
+        /// </summary>
+        /// <param name="text">The text.</param>
         public void ColButtons_Added(string text)
         {
             AddCheckbox(text, true);
         }
 
+        /// <summary>
+        /// Checked indexes.
+        /// </summary>
+        /// <returns>The checked indexes result.</returns>
         public IList<int> CheckedIndexes()
         {
             var innerObjects = NotifyPropertyHelper.InnerObjectsOfNotifyPropertyChangedWrapper<CheckBox>(l.l);
@@ -332,12 +384,20 @@ public partial class CheckBoxListUC : UserControl
             return CheckBoxListHelper.CheckedContent(innerObjects);
         }
 
+        /// <summary>
+        /// Checked strings.
+        /// </summary>
+        /// <returns>The checked strings result.</returns>
         public List<string> CheckedStrings()
         {
             var innerObjects = NotifyPropertyHelper.InnerObjectsOfNotifyPropertyChangedWrapper<CheckBox>(l.l);
             return CheckBoxListHelper.CheckedStrings(innerObjects);
         }
 
+        /// <summary>
+        /// All content dict.
+        /// </summary>
+        /// <returns>The all content dict result.</returns>
         public Dictionary<StackPanel, bool> AllContentDict()
         {
             var innerObjects = NotifyPropertyHelper.InnerObjectsOfNotifyPropertyChangedWrapper<CheckBox>(l.l);
@@ -476,6 +536,10 @@ public partial class CheckBoxListUC : UserControl
             }
         }
 
+        /// <summary>
+        /// All content.
+        /// </summary>
+        /// <returns>The all content result.</returns>
         public List<StackPanel> AllContent()
         {
             var innerObjects = NotifyPropertyHelper.InnerObjectsOfNotifyPropertyChangedWrapper<CheckBox>(l.l);
@@ -557,8 +621,14 @@ public partial class CheckBoxListUC : UserControl
             }
         }
 
+        /// <summary>
+        /// Gets the tag.
+        /// </summary>
         public new object Tag { get => base.Tag; set => base.Tag = value; }
 
+        /// <summary>
+        /// Gets the lb.
+        /// </summary>
         public ListBox lb { get => lb2; }
 
         /// <summary>
@@ -570,18 +640,35 @@ public partial class CheckBoxListUC : UserControl
             Init(null, null, EventOnArgs.allFalseOnlyCheckOn, false);
         }
 
+        /// <summary>
+        /// Count of handlers change dialog result.
+        /// </summary>
+        /// <returns>The count of handlers change dialog result result.</returns>
         public int CountOfHandlersChangeDialogResult()
         {
             return RuntimeHelper.GetInvocationList(ChangeDialogResult).Count;
         }
 
+        /// <summary>
+        /// Attach change dialog result.
+        /// </summary>
+        /// <param name="handler">The handler.</param>
+        /// <param name="throwException">The throw exception.</param>
         public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
         {
             RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
         }
 
+        /// <summary>
+        /// The col buttons.
+        /// </summary>
         public ImageButtons colButtons = null;
 
+        /// <summary>
+        /// Uc loaded.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The event args.</param>
         public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
         {
             // Is also in ctor
@@ -636,6 +723,11 @@ Here its is not possible with set up visibility
             //lb.UpdateLayout();
         }
 
+        /// <summary>
+        /// Handle key.
+        /// </summary>
+        /// <param name="eventArgs">The event args.</param>
+        /// <returns>The handle key result.</returns>
         public bool HandleKey(KeyEventArgs eventArgs)
         {
             return false;
@@ -643,6 +735,10 @@ Here its is not possible with set up visibility
 
         Action initAfterLoaded = null;
 
+        /// <summary>
+        /// Set init after loaded.
+        /// </summary>
+        /// <param name="action">The action.</param>
         public void SetInitAfterLoaded(Action action)
         {
             initAfterLoaded = action;

@@ -3,12 +3,18 @@ namespace SunamoWpf.Essential;
 
 
 
+/// <summary>
+/// Represents the wpf app type.
+/// </summary>
 public partial class WpfApp
 {
     static WpfApp()
     {
         EnableDesktopLogging(true);
     }
+    /// <summary>
+    /// The write to startup log release.
+    /// </summary>
     public static Action<string> WriteToStartupLogRelease;
     /// <summary>
     /// Delegate set by Windows layer to show exception window. Avoids circular dependency.
@@ -18,6 +24,10 @@ public partial class WpfApp
     /// Delegate set by Windows layer to show exception window with args. Returns dump string.
     /// </summary>
     public static Func<object, string, bool, string> ShowExceptionWindowDelegate;
+    /// <summary>
+    /// Show mb.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public static void ShowMb(string text)
     {
         reallyThrow = ThrowEx.reallyThrow2;
@@ -28,11 +38,19 @@ public partial class WpfApp
         }
         ThrowEx.reallyThrow2 = reallyThrow;
     }
+    /// <summary>
+    /// Shutdown.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public static void Shutdown(object sender, EventArgs eventArgs)
     {
         WpfApp.htt.SetCancelClosing(false);
         WpfApp.window.Close();
     }
+    /// <summary>
+    /// Restart.
+    /// </summary>
     public static void Restart()
     {
         System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
@@ -45,11 +63,19 @@ public partial class WpfApp
     //    System.Windows.Application.Current.Shutdown();
     //}
     static DependencyProperty[] props = new DependencyProperty[] { TextBlock.ForegroundProperty, TextBlock.TextProperty };
+    /// <summary>
+    /// SQL express instance name.
+    /// </summary>
+    /// <returns>The SQL express instance name result.</returns>
     public static string SQLExpressInstanceName()
     {
         return Environment.MachineName;
     }
 #if DEBUG
+    /// <summary>
+    /// Write debug.
+    /// </summary>
+    /// <param name="v">The v.</param>
     public static void WriteDebug(string v)
     {
         Debug.WriteLine(v);
@@ -67,6 +93,12 @@ public partial class WpfApp
         ////InitApp.TemplateLogger = //SunamoTemplateLogger.Instance;
         ////InitApp.TypedLogger = TypedSunamoLogger.Instance;
     }
+    /// <summary>
+    /// Save reference to text block status.
+    /// </summary>
+    /// <param name="restore">The restore.</param>
+    /// <param name="tbTemporaryLastErrorOrWarning">The tb temporary last error or warning.</param>
+    /// <param name="tbTemporaryLastOtherMessage">The tb temporary last other message.</param>
     public static void SaveReferenceToTextBlockStatus(bool restore, TextBlock tbTemporaryLastErrorOrWarning, TextBlock tbTemporaryLastOtherMessage)
     {
         if (restore)
@@ -158,6 +190,10 @@ public partial class WpfApp
     /// </summary>
     public static event Action<TypeOfMessageWpf, string> StatusSetted;
 
+    /// <summary>
+    /// Enable desktop logging.
+    /// </summary>
+    /// <param name="value">The value.</param>
     public static void EnableDesktopLogging(bool value)
     {
         if (value)
@@ -178,6 +214,11 @@ public partial class WpfApp
         SetStatus(typeOfMessage, message);
     }
     // TODO: Rename to SetStatusAsync and merge with commented method SetStatus here
+    /// <summary>
+    /// Set status to text block.
+    /// </summary>
+    /// <param name="typeOfMessage">The type of message.</param>
+    /// <param name="status">The status.</param>
     public async static Task SetStatusToTextBlock(TypeOfMessageWpf typeOfMessage, string status)
     {
         Color foreground = Colors.Black;
@@ -192,6 +233,11 @@ public partial class WpfApp
             await SetTextAsync(tbLastOtherMessage, status);
         }
     }
+    /// <summary>
+    /// Set foreground async.
+    /// </summary>
+    /// <param name="tbLastOtherMessage">The tb last other message.</param>
+    /// <param name="color">The color.</param>
     public async static Task SetForegroundAsync(TextBlock tbLastOtherMessage, Color color)
     {
         await cd.InvokeAsync(() =>
@@ -200,6 +246,11 @@ public partial class WpfApp
         }
         , cdp);
     }
+    /// <summary>
+    /// Set text async.
+    /// </summary>
+    /// <param name="lblStatusDownload">The lbl status download.</param>
+    /// <param name="status">The status.</param>
     public async static Task SetTextAsync(TextBlock lblStatusDownload, string status)
     {
         await cd.InvokeAsync(() =>
@@ -209,8 +260,17 @@ public partial class WpfApp
         , cdp);
     }
     static IEssentialMainWindowBase _mp = null;
+    /// <summary>
+    /// The window.
+    /// </summary>
     public static Window window = null;
+    /// <summary>
+    /// The htt.
+    /// </summary>
     public static IHideToTray htt = null;
+    /// <summary>
+    /// The mp.
+    /// </summary>
     public static IEssentialMainWindowBase mp
     {
         get
@@ -225,15 +285,35 @@ public partial class WpfApp
             window.Closed += (sender, eventArgs) => window.Dispatcher.InvokeShutdown();
         }
     }
+    /// <summary>
+    /// The tb last error or warning.
+    /// </summary>
     public static TextBlock tbLastErrorOrWarning = null;
+    /// <summary>
+    /// The tb last other message.
+    /// </summary>
     public static TextBlock tbLastOtherMessage = null;
     static TextBlock tbLastErrorOrWarningSaved = null;
     static TextBlock tbLastOtherMessageSaved = null;
     static StackPanel lbLogsOthers = null;
     static StackPanel lbLogsErrors = null;
+    /// <summary>
+    /// The cd.
+    /// </summary>
     public static Dispatcher cd = null;
+    /// <summary>
+    /// The cdp.
+    /// </summary>
     public static DispatcherPriority cdp = DispatcherPriority.Normal;
+    /// <summary>
+    /// The remember statuses.
+    /// </summary>
     public static bool rememberStatuses;
+    /// <summary>
+    /// Save reference to logs stack panel.
+    /// </summary>
+    /// <param name="_lbLogsOthers">The lb logs others.</param>
+    /// <param name="_lbLogsErrors">The lb logs errors.</param>
     public static void SaveReferenceToLogsStackPanel(StackPanel _lbLogsOthers, StackPanel _lbLogsErrors)
     {
         lbLogsErrors = _lbLogsErrors;

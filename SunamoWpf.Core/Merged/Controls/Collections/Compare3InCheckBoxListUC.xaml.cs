@@ -2,8 +2,14 @@
 namespace SunamoWpf.Controls.Collections;
 public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, IControlWithResultWpf, IUserControlWithSuMenuItemsList, IUserControlWithSizeChange
     {
+        /// <summary>
+        /// The chbls.
+        /// </summary>
         public List<CheckBoxListUC> chbls = null;
 
+        /// <summary>
+        /// Initializes a new instance of the compare 3 in check box list UC class.
+        /// </summary>
         public Compare3InCheckBoxListUC()
         {
             InitializeComponent();
@@ -11,8 +17,14 @@ public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, ICont
             Loaded += uc_Loaded;
         }
 
+        /// <summary>
+        /// Remove which have no item.
+        /// </summary>
         public void RemoveWhichHaveNoItem() { }
 
+        /// <summary>
+        /// Focus on main element.
+        /// </summary>
         public void FocusOnMainElement()
         {
 
@@ -35,17 +47,35 @@ public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, ICont
             //r1.Height. = this.ActualHeight - r0.ActualHeight;
         }
 
+        /// <summary>
+        /// Gets the dialog result.
+        /// </summary>
         public bool? DialogResult { set => ChangeDialogResult(value); }
 
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
         public string Title => "Decide which to process";
 
+        /// <summary>
+        /// The change dialog result.
+        /// </summary>
         public event VoidBoolNullable ChangeDialogResult;
 
+        /// <summary>
+        /// Accept.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void Accept(object input)
         {
 
         }
 
+        /// <summary>
+        /// Init.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
         public void Init(List<string> left, List<string> right)
         {
             var both = left.Intersect(right).ToList();
@@ -54,6 +84,15 @@ public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, ICont
 
         //Compare3InheckBoxListUCInit compare3InCheckBoxListUCInit = null;
 
+        /// <summary>
+        /// Init.
+        /// </summary>
+        /// <param name="tbleft">The tbleft.</param>
+        /// <param name="tbRight">The tb right.</param>
+        /// <param name="tbBoth">The tb both.</param>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <param name="both">The both.</param>
         public void Init(string tbleft, string tbRight, string tbBoth, IList<string> left, IList<string> right, IList<string> both)
         {
             tblAutoYes.Text = tbleft;
@@ -224,6 +263,10 @@ public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, ICont
             Process.Start(new ProcessStartInfo(file) { UseShellExecute = true });
         }
 
+        /// <summary>
+        /// Su menu items.
+        /// </summary>
+        /// <returns>The su menu items result.</returns>
         public List<SuMenuItem> SuMenuItems()
         {
             SuMenuItem menuItem = SuMenuItemHelper.Get(new ControlInitData { content = "Save to drive", OnClickAsync = SaveToDrive });
@@ -234,6 +277,10 @@ public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, ICont
             return CAG.ToList<SuMenuItem>();
         }
 
+        /// <summary>
+        /// On size changed.
+        /// </summary>
+        /// <param name="maxSize">The max size.</param>
         public void OnSizeChanged(DesktopSize maxSize)
         {
             chblAutoYes.OnSizeChanged(maxSize);
@@ -242,6 +289,11 @@ public partial class Compare3InCheckBoxListUC : UserControl, IUserControl, ICont
 
         }
 
+        /// <summary>
+        /// Uc loaded.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The event args.</param>
         public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
         {
 

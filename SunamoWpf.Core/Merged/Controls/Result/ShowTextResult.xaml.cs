@@ -23,14 +23,24 @@ public partial class ShowTextResult : UserControl, IUserControl, IControlWithRes
         Width = 1024;
         Height = 768;
     }
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         txtResult.Focus();
     }
+    /// <summary>
+    /// Initializes a new instance of the show text result class.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public ShowTextResult(string text) : this()
     {
         txtResult.Text = text;
     }
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -43,15 +53,32 @@ public partial class ShowTextResult : UserControl, IUserControl, IControlWithRes
             }
         }
     }
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     public string Title => "ShowResult";
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
         DialogResult = true;
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }
+    /// <summary>
+    /// On size changed.
+    /// </summary>
+    /// <param name="maxSize">The max size.</param>
     public void OnSizeChanged(DesktopSize maxSize)
     {
         txtResult.Height = rowGrowing.ActualHeight;

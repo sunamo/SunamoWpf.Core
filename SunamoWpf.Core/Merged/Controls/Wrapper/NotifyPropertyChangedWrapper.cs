@@ -1,18 +1,48 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Wrapper;
 
+/// <summary>
+/// Represents the notify property changed wrapper t type.
+/// </summary>
 public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : DependencyObject
 {
+	/// <summary>
+	/// The dp is checked.
+	/// </summary>
 	public DependencyProperty dpIsChecked;
+	/// <summary>
+	/// The o.
+	/// </summary>
 	public T o = default(T);
+	/// <summary>
+	/// The dp content.
+	/// </summary>
 	public DependencyProperty dpContent;
+	/// <summary>
+	/// The dp tag.
+	/// </summary>
 	public DependencyProperty dpTag;
+	/// <summary>
+	/// The dp visibility.
+	/// </summary>
 	public DependencyProperty dpVisibility;
+	/// <summary>
+	/// The dp height.
+	/// </summary>
 	public DependencyProperty dpHeight;
+	/// <summary>
+	/// The dp width.
+	/// </summary>
 	public DependencyProperty dpWidth;
 	DependencyProperty capturedProperty;
+	/// <summary>
+	/// The original height.
+	/// </summary>
 	public double originalHeight = double.NaN;
 
+	/// <summary>
+	/// The content.
+	/// </summary>
 	public object Content
 	{
 		get
@@ -27,6 +57,9 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 
 	private bool isActive = true;
 
+	/// <summary>
+	/// The is active.
+	/// </summary>
 	public bool IsActive
 	{
 		get { return isActive; }
@@ -36,6 +69,9 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 	}
 
 
+	/// <summary>
+	/// The height.
+	/// </summary>
 	public double Height
 	{
 		get
@@ -48,6 +84,9 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 		}
 	}
 
+	/// <summary>
+	/// The visibility.
+	/// </summary>
 	public Visibility Visibility
 	{
 		get
@@ -76,6 +115,9 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 		}
 	}
 
+	/// <summary>
+	/// The tag.
+	/// </summary>
 	public object Tag
 	{
 		get
@@ -88,6 +130,9 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 		}
 	}
 
+	/// <summary>
+	/// The is checked.
+	/// </summary>
 	public bool? IsChecked
 	{
 		get
@@ -100,6 +145,9 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 		}
 	}
 
+	/// <summary>
+	/// The control.
+	/// </summary>
 	public DependencyObject Control
 	{
 		get
@@ -140,5 +188,8 @@ public class NotifyPropertyChangedWrapper<T> : INotifyPropertyChanged where T : 
 		PropertyChanged(this, new PropertyChangedEventArgs(propName));
 	}
 
+	/// <summary>
+	/// The property changed.
+	/// </summary>
 	public event PropertyChangedEventHandler PropertyChanged;
 }

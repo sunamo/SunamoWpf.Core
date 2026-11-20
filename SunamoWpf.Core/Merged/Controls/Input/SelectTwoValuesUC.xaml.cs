@@ -7,9 +7,18 @@ namespace SunamoWpf.Controls.Input;
 /// </summary>
 public partial class SelectTwoValues : UserControl, IUserControl, IControlWithResultWpf
 {
+    /// <summary>
+    /// The cb entered 1 helper.
+    /// </summary>
     public ComboBoxHelper<string> cbEntered1Helper = null;
+    /// <summary>
+    /// The cb entered 2 helper.
+    /// </summary>
     public ComboBoxHelper<string> cbEntered2Helper = null;
 
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -18,15 +27,27 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
         }
     }
 
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         cbEntered1.Focus();
     }
 
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     public string Title => "SelectTwoValues";
 
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
 
+    /// <summary>
+    /// Initializes a new instance of the select two values class.
+    /// </summary>
     public SelectTwoValues()
     {
         try
@@ -109,6 +130,10 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
         }
     }
 
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
 
@@ -146,6 +171,11 @@ public partial class SelectTwoValues : UserControl, IUserControl, IControlWithRe
         DialogResult = true;
     }
 
+    /// <summary>
+    /// Uc loaded.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
 

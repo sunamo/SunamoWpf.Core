@@ -1,5 +1,8 @@
 namespace SunamoWpf.Data.Tag;
 
+/// <summary>
+/// Represents the framework element tag type.
+/// </summary>
 public class FrameworkElementTag
 {
     /// <summary>
@@ -12,6 +15,10 @@ public class FrameworkElementTag
     /// </summary>
     public object Tag = null;
 
+    /// <summary>
+    /// To string.
+    /// </summary>
+    /// <returns>The to string result.</returns>
     public override string ToString()
     {
         return Tag.ToString();

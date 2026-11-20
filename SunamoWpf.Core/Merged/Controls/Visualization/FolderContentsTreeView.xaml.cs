@@ -5,11 +5,27 @@ public partial class FolderContentsTreeView : UserControl
 {
     #region Rewrite to pure cs. With xaml is often problems without building
     private object dummyNode = null;
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public event VoidT<FileSystemEntryWpf> Selected;
+    /// <summary>
+    /// The folders.
+    /// </summary>
     public Dictionary<string, TreeViewItem> folders = new Dictionary<string, TreeViewItem>();
+    /// <summary>
+    /// The files.
+    /// </summary>
     public Dictionary<string, TreeViewItem> files = new Dictionary<string, TreeViewItem>();
+    /// <summary>
+    /// The args.
+    /// </summary>
     public FolderContentsTreeViewArgs args = new FolderContentsTreeViewArgs();
     ILogger logger;
+    /// <summary>
+    /// Initializes a new instance of the folder contents tree view class.
+    /// </summary>
+    /// <param name="logger">The logger.</param>
     public FolderContentsTreeView(ILogger logger)
     {
         this.logger = logger;
@@ -25,6 +41,9 @@ public partial class FolderContentsTreeView : UserControl
         }
     }
     bool useDictionary = false;
+    /// <summary>
+    /// The use dictionary.
+    /// </summary>
     public bool UseDictionary
     {
         set
@@ -61,6 +80,9 @@ public partial class FolderContentsTreeView : UserControl
             }
         }
     }
+    /// <summary>
+    /// Expand all.
+    /// </summary>
     public void ExpandAll()
     {
         var exp = tv.Items;
@@ -74,6 +96,10 @@ public partial class FolderContentsTreeView : UserControl
             Expand(item.Items);
         }
     }
+    /// <summary>
+    /// Add tvi folder to.
+    /// </summary>
+    /// <param name="folder">The folder.</param>
     public void AddTviFolderTo(string folder)
     {
         AddTviFolderTo(folder, tv);

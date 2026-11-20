@@ -8,6 +8,9 @@ namespace SunamoWpf.Storage;
 /// </summary>
 public partial class ApplicationDataContainer : ApplicationDataConsts
 {
+    /// <summary>
+    /// The apc search text box.
+    /// </summary>
     public IApplicationDataContainerSearchTextBox apcSearchTextBox = null;
 
     static Type type = typeof(ApplicationDataContainer);
@@ -20,6 +23,9 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     public Dictionary<object, ApplicationDataContainerList> data = new Dictionary<object, ApplicationDataContainerList>();
 
     string file = "";
+    /// <summary>
+    /// The inner delimiter.
+    /// </summary>
     public string innerDelimiter = "*";
     /// <summary>
     /// ctor for old approach
@@ -46,11 +52,18 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
             return null;
         }
     }
+    /// <summary>
+    /// Initializes a new instance of the application data container class.
+    /// </summary>
     public ApplicationDataContainer()
     {
     }
 
 
+    /// <summary>
+    /// Save control.
+    /// </summary>
+    /// <param name="control">The control.</param>
     public void SaveControl(object control)
     {
         FrameworkElement frameworkElement = (FrameworkElement)control;
@@ -76,6 +89,10 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
 
 
     #region Add - list. Data do listů ukládám zásadně přes SF
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="chbl">The chbl.</param>
     public void Add(ICheckBoxListUC chbl)
     {
         apcSearchTextBox.Add(chbl);
@@ -87,6 +104,10 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     //    //twt.Save += Twt_Save;
     //}
 
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="comboBox">The combo box.</param>
     public void Add(ComboBox comboBox)
     {
         // Automatically load
@@ -115,6 +136,10 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     #region Add - single
 
 
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="window">The window.</param>
     public void Add(Window window)
     {
         // Automatically load
@@ -127,18 +152,30 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
         //cb.DataContextChanged += Cb_DataContextChanged;
     }
 
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="textBlock">The text block.</param>
     public void Add(TextBlock textBlock)
     {
         var tb2 = AddFrameworkElement(textBlock);
         //tb.TextChanged +=
     }
 
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="chb">The chb.</param>
     public void Add(CheckBox chb)
     {
         ApplicationDataContainerList adcl = AddFrameworkElement(chb);
         chb.Click += Chb_Click;
         chb.IsChecked = adcl.GetNullableBool(IsChecked);
     }
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="txt">The txt.</param>
     public void Add(TextBox txt)
     {
         var adcl = AddFrameworkElement(txt);
@@ -155,6 +192,13 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
         SaveControl(chb);
     }
 
+    /// <summary>
+    /// Get t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="sender">The sender.</param>
+    /// <param name="key">The key.</param>
+    /// <returns>The get t result.</returns>
     public T Get<T>(object sender, string key)
     {
 
@@ -166,10 +210,22 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
 
         return default(T);
     }
+    /// <summary>
+    /// Get.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="key">The key.</param>
+    /// <returns>The get result.</returns>
     public object Get(object sender, string key)
     {
         return data[sender][key];
     }
+    /// <summary>
+    /// Set.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="key">The key.</param>
+    /// <param name="value">The value.</param>
     public void Set(object sender, string key, object value)
     {
         // Here must be "|" because in file it is in format name|type|value
@@ -205,11 +261,22 @@ public partial class ApplicationDataContainer : ApplicationDataConsts
     {
         //SaveControl(sender);
     }
+    /// <summary>
+    /// Add framework element.
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <param name="list">The list.</param>
+    /// <returns>The add framework element result.</returns>
     public ApplicationDataContainerList AddFrameworkElement(object key, ApplicationDataContainerList list)
     {
         data.Add(key, list);
         return list;
     }
+    /// <summary>
+    /// Add framework element.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
+    /// <returns>The add framework element result.</returns>
     public ApplicationDataContainerList AddFrameworkElement(FrameworkElement frameworkElement)
     {
         return AddFrameworkElement(frameworkElement, ResolveControlFile(frameworkElement));

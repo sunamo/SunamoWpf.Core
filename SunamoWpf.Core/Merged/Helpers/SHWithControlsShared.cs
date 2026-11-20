@@ -5,6 +5,17 @@ public static partial class SHWithControls
 {
     static TextBlock tb = new TextBlock();
 
+    /// <summary>
+    /// Measure string.
+    /// </summary>
+    /// <param name="fontFamily">The font family.</param>
+    /// <param name="fontSize">The font size.</param>
+    /// <param name="fontStyle">The font style.</param>
+    /// <param name="fontStretch">The font stretch.</param>
+    /// <param name="fontWeight">The font weight.</param>
+    /// <param name="text">The text.</param>
+    /// <param name="maxSize">The max size.</param>
+    /// <returns>The measure string result.</returns>
     public static double MeasureString(FontFamily fontFamily, double fontSize, System.Windows.FontStyle fontStyle, FontStretch fontStretch, System.Windows.FontWeight fontWeight, string text, Size maxSize)
     {
         //tb.Height = Double.PositiveInfinity;
@@ -19,6 +30,11 @@ public static partial class SHWithControls
         return tb.DesiredSize.Width;
     }
 
+    /// <summary>
+    /// Measure string.
+    /// </summary>
+    /// <param name="formattedText">The formatted text.</param>
+    /// <returns>The measure string result.</returns>
     public static object MeasureString(FormattedText formattedText)
     {
         //tb.FontFamily = fontFamily;

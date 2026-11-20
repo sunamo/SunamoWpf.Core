@@ -4,10 +4,16 @@ namespace SunamoWpf.Controls;
 public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, IControlWithResultDebugWpf, IUserControl
 {
     static Type type = typeof(InputTwoColumnsUC);
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         txt1.Focus();
     }
+    /// <summary>
+    /// The txt first.
+    /// </summary>
     public TextBox txtFirst
     {
         get
@@ -15,6 +21,9 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
             return txt1;
         }
     }
+    /// <summary>
+    /// The txt second.
+    /// </summary>
     public TextBox txtSecond
     {
         get
@@ -24,6 +33,9 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
     }
     const int rowsCount = 2;
     List<TextBox> checkForContent = new List<TextBox>();
+    /// <summary>
+    /// Initializes a new instance of the input two columns UC class.
+    /// </summary>
     public InputTwoColumnsUC()
     {
         try
@@ -39,6 +51,10 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
         dialogButtons.ChangeDialogResult += DialogButtons_ChangeDialogResult;
         uc_Loaded(null, null);
     }
+    /// <summary>
+    /// Initializes a new instance of the input two columns UC class.
+    /// </summary>
+    /// <param name="neededRows">The needed rows.</param>
     public InputTwoColumnsUC(int neededRows) : this()
     {
         if (neededRows > rowsCount)
@@ -93,11 +109,19 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
             ////////DebugLogger.Instance.ClipboardOrDebug(methodName + "Dialog result set to " + true);
         }
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="textFirst">The text first.</param>
+    /// <param name="textSecond">The text second.</param>
     public void Init(string textFirst, string textSecond)
     {
         tb1.Text = textFirst;
         tb2.Text = textSecond;
     }
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -108,7 +132,13 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
             }
         }
     }
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     public string Title => "InputTwoColumns";
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
     /// <summary>
     /// A1 must be ABT<string, string>
@@ -123,17 +153,34 @@ public partial class InputTwoColumnsUC : UserControl, IControlWithResultWpf, ICo
         //DialogResult = true;
     }
     //
+    /// <summary>
+    /// Count of handlers change dialog result.
+    /// </summary>
+    /// <returns>The count of handlers change dialog result result.</returns>
     public int CountOfHandlersChangeDialogResult()
     {
         return RuntimeHelper.GetInvocationList(ChangeDialogResult).Count;
     }
+    /// <summary>
+    /// Attach change dialog result.
+    /// </summary>
+    /// <param name="handler">The handler.</param>
+    /// <param name="throwException">The throw exception.</param>
     public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
     {
         RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }
+    /// <summary>
+    /// Uc loaded.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
     }

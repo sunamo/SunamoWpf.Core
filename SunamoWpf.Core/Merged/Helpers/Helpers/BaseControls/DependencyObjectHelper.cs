@@ -1,10 +1,21 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.BaseControls;
 
+/// <summary>
+/// Represents the dependency object helper type.
+/// </summary>
 public static class DependencyObjectHelper
 {
+    /// <summary>
+    /// Gets or sets the markup writer.
+    /// </summary>
     public static object MarkupWriter { get; private set; }
 
+    /// <summary>
+    /// Get dependency properties.
+    /// </summary>
+    /// <param name="element">The element.</param>
+    /// <returns>The get dependency properties result.</returns>
     public static List<DependencyProperty> GetDependencyProperties(object element)
     {
         List<DependencyProperty> properties = new List<DependencyProperty>();
@@ -47,6 +58,13 @@ public static class DependencyObjectHelper
         return attachedProperties;
     }
 
+    /// <summary>
+    /// Created with copied values t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="source">The source.</param>
+    /// <param name="properties">The properties.</param>
+    /// <returns>The created with copied values t result.</returns>
     public static T CreatedWithCopiedValues<T>(T source, params DependencyProperty[] properties) where T : DependencyObject
     {
         dynamic expando = new System.Dynamic.ExpandoObject();

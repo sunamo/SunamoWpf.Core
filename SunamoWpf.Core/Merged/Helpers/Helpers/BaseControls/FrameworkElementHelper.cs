@@ -1,9 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.BaseControls;
 
+/// <summary>
+/// Represents the framework element helper type.
+/// </summary>
 public partial class FrameworkElementHelper
 {
     static Type type = typeof(FrameworkElementHelper);
+    /// <summary>
+    /// Get tag check box list UC.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <returns>The get tag check box list UC result.</returns>
     public static object GetTagCheckBoxListUC(object sender)
     {
         var frameworkElement = (FrameworkElement)sender;
@@ -11,6 +19,11 @@ public partial class FrameworkElementHelper
         var elementTag = (FrameworkElementTag)tag;
         return elementTag.tagCheckBoxListUC;
     }
+    /// <summary>
+    /// Count of ancestor.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>The count of ancestor result.</returns>
     public static int CountOfAncestor(FrameworkElement item)
     {
         var menuItem = item as MenuItem;
@@ -47,6 +60,12 @@ public partial class FrameworkElementHelper
         }
         return "Not MI";
     }
+    /// <summary>
+    /// Cast to t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="element">The element.</param>
+    /// <returns>The cast to t result.</returns>
     public static T CastTo<T>(FrameworkElement element) where T : class
     {
         T casted = default(T);
@@ -62,14 +81,29 @@ public partial class FrameworkElementHelper
         }
         return casted;
     }
+    /// <summary>
+    /// Get max content size.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
+    /// <returns>The get max content size result.</returns>
     public static Size GetMaxContentSize(FrameworkElement frameworkElement)
     {
         return new Size(frameworkElement.ActualWidth, frameworkElement.ActualHeight);
     }
+    /// <summary>
+    /// Get content size.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
+    /// <returns>The get content size result.</returns>
     public static Size GetContentSize(FrameworkElement frameworkElement)
     {
         return new Size(frameworkElement.Width, frameworkElement.Height);
     }
+    /// <summary>
+    /// Set max content size.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
+    /// <param name="size">The size.</param>
     public static void SetMaxContentSize(FrameworkElement frameworkElement, Size size)
     {
         frameworkElement.MaxWidth = size.Width;
@@ -77,12 +111,25 @@ public partial class FrameworkElementHelper
         frameworkElement.Width = size.Width;
         frameworkElement.Height = size.Height;
     }
+    /// <summary>
+    /// Set width and height.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
+    /// <param name="size">The size.</param>
     public static void SetWidthAndHeight(FrameworkElement frameworkElement, Size size)
     {
         frameworkElement.Width = size.Width;
         frameworkElement.Height = size.Height;
         frameworkElement.UpdateLayout();
     }
+    /// <summary>
+    /// Find name t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="element">The element.</param>
+    /// <param name="controlNamePrefix">The control name prefix.</param>
+    /// <param name="serie">The serie.</param>
+    /// <returns>The find name t result.</returns>
     public static T FindName<T>(FrameworkElement element, string controlNamePrefix, int serie)
     {
         return FindName<T>(element, controlNamePrefix + serie);
@@ -103,6 +150,13 @@ public partial class FrameworkElementHelper
     {
         return RH.IsOrIsDeriveFromBaseClass(customControl.GetType(), typeof(Panel));
     }
+    /// <summary>
+    /// Find by tag t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="customControl">The custom control.</param>
+    /// <param name="tag">The tag.</param>
+    /// <returns>The find by tag t result.</returns>
     public static T FindByTag<T>(object customControl, object tag)
         where T : FrameworkElement
     {
@@ -174,6 +228,13 @@ public partial class FrameworkElementHelper
             control.VerticalContentAlignment = VerticalAlignment.Stretch;
         }
     }
+    /// <summary>
+    /// Find name t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="element">The element.</param>
+    /// <param name="controlName">The control name.</param>
+    /// <returns>The find name t result.</returns>
     public static T FindName<T>(FrameworkElement element, string controlName)
     {
         return (T)element.FindName(controlName);

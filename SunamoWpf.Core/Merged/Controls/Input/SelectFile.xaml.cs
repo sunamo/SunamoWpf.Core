@@ -7,8 +7,14 @@ public partial class SelectFile : UserControl
     /// In folder has hame Folder*Changed* but there already exists FileSelected
     /// </summary>
     public event VoidString FileSelected;
+    /// <summary>
+    /// The file removed.
+    /// </summary>
     public event VoidT<SelectFile> FileRemoved;
 
+    /// <summary>
+    /// Initializes a new instance of the select file class.
+    /// </summary>
     public SelectFile()
     {
         try
@@ -79,6 +85,9 @@ public partial class SelectFile : UserControl
         }
     }
 
+    /// <summary>
+    /// The selected file.
+    /// </summary>
     public string SelectedFile
     {
         get
@@ -93,7 +102,15 @@ public partial class SelectFile : UserControl
     }
 
 
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(SelectFile);
+    /// <summary>
+    /// Validate.
+    /// </summary>
+    /// <param name="tbNewPath">The tb new path.</param>
+    /// <param name="validateData">The validate data.</param>
     public void Validate(/*object tbNewPath,*/ ref ValidateDataWpf validateData)
     {
         if (validateData == null)
@@ -107,6 +124,9 @@ public partial class SelectFile : UserControl
             //InitApp.TemplateLogger.FileDontExists(SelectedFile);
         }
     }
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get => ValidationHelper.validated;

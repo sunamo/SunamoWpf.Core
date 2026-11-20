@@ -3,9 +3,18 @@ namespace SunamoWpf.Controls;
 
 public partial class ResultButtons : UserControl
 {
+    /// <summary>
+    /// The all right click.
+    /// </summary>
     public event Action AllRightClick;
     // as event - useful when output will be editable
+    /// <summary>
+    /// The copy to clipboard.
+    /// </summary>
     public event Action CopyToClipboard;
+    /// <summary>
+    /// Initializes a new instance of the result buttons class.
+    /// </summary>
     public ResultButtons()
     {
         try

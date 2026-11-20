@@ -3,10 +3,22 @@ namespace SunamoWpf.Controls.Result;
 
 public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<FoundedFileUC>, IFoundedResultsUC<IFoundedFileUC>, ISelectedT<string>
 {
+    /// <summary>
+    /// The base paths.
+    /// </summary>
     public static List<string> basePaths = CA.ToListString();
     List<FoundedResultDataWrapper> d = new List<FoundedResultDataWrapper>();
+    /// <summary>
+    /// Gets the selected item.
+    /// </summary>
     public string SelectedItem => selectedItem;
+    /// <summary>
+    /// The selected item.
+    /// </summary>
     protected string selectedItem = null;
+    /// <summary>
+    /// The items.
+    /// </summary>
     public List<IFoundedFileUC> Items
     {
         get
@@ -19,6 +31,9 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
             return founded;
         }
     }
+    /// <summary>
+    /// Initializes a new instance of the founded files results 2 class.
+    /// </summary>
     public FoundedFilesResults2()
     {
         try
@@ -33,7 +48,14 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
         }
         Loaded += FoundedFilesResults2_Loaded;
     }
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public event VoidString Selected;
+    /// <summary>
+    /// Add founded file.
+    /// </summary>
+    /// <param name="item">The item.</param>
     public void AddFoundedFile(string item)
     {
         HideTbNoResultsFound();
@@ -45,6 +67,10 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
     {
         tbNoResultsFound.Visibility = Visibility.Collapsed;
     }
+    /// <summary>
+    /// Add founded files.
+    /// </summary>
+    /// <param name="foundedList">The founded list.</param>
     public void AddFoundedFiles(List<string> foundedList)
     {
         HideTbNoResultsFound();
@@ -86,10 +112,19 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
     {
         Selected += act;
     }
+    /// <summary>
+    /// Clear founded result.
+    /// </summary>
     public void ClearFoundedResult()
     {
         d.Clear();
     }
+    /// <summary>
+    /// Default brushes.
+    /// </summary>
+    /// <param name="green">The green.</param>
+    /// <param name="red">The red.</param>
+    /// <returns>The default brushes result.</returns>
     public TUListWpf<string, Brush> DefaultBrushes(string green = "", string red = "")
     {
         TUListWpf<string, Brush> result = new TUListWpf<string, Brush>();
@@ -97,16 +132,30 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
         result.Add(TUWpf<string, Brush>.Get(red, Brushes.Red));
         return result;
     }
+    /// <summary>
+    /// Filter.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The filter result.</returns>
     public bool? Filter(string text)
     {
         bool cancel = string.IsNullOrWhiteSpace(text);
         return cancel;
     }
+    /// <summary>
+    /// Founded file selected.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void FoundedFile_Selected(string path)
     {
         selectedItem = path;
         OnSelected(path);
     }
+    /// <summary>
+    /// Get founded file by path.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The get founded file by path result.</returns>
     public IFoundedFileUC GetFoundedFileByPath(string path)
     {
         foreach (var item in d)
@@ -118,6 +167,10 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
         }
         return null;
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="basePath">The base path.</param>
     public void Init(params string[] basePath)
     {
         if (tbNoResultsFound != null)
@@ -129,6 +182,10 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
         basePaths.Sort(comparer);
         CA.WithEndSlash(basePaths);
     }
+    /// <summary>
+    /// On selected.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void OnSelected(string path)
     {
         Selected(path);
@@ -142,6 +199,10 @@ public partial class FoundedFilesResults2 : UserControl//, IFoundedFilesUC<Found
     {
         throw new NotImplementedException();
     }
+    /// <summary>
+    /// Select file.
+    /// </summary>
+    /// <param name="file">The file.</param>
     public void SelectFile(string file)
     {
         Selected(file);

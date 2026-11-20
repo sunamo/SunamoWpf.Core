@@ -1,8 +1,16 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Helpers.BaseControls;
 
+/// <summary>
+/// Represents the items control helper type.
+/// </summary>
 public class ItemsControlHelper
 {
+    /// <summary>
+    /// Remove which have no item.
+    /// </summary>
+    /// <param name="neverDelete">The never delete.</param>
+    /// <param name="rootMis">The root mis.</param>
     public static void RemoveWhichHaveNoItem(ItemsControl neverDelete, List<ItemsControl> rootMis)
     {
         // 1) Rekurzivně zjistím vš. položky
@@ -104,6 +112,12 @@ public class ItemsControlHelper
             AddSubitems(list, subItemsControl);
         }
     }
+    /// <summary>
+    /// Recursively all sub items t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="items">The items.</param>
+    /// <returns>The recursively all sub items t result.</returns>
     public static List<ItemsControl> RecursivelyAllSubItems<T>(ItemCollection items) where T : ItemsControl
     {
         List<ItemsControl> result = new List<ItemsControl>();
@@ -118,6 +132,12 @@ public class ItemsControlHelper
 #endif
         return result;
     }
+    /// <summary>
+    /// Recursively all sub items t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="result">The result.</param>
+    /// <param name="items">The items.</param>
     public static void RecursivelyAllSubItems<T>(List<ItemsControl> result, ItemCollection items) where T : ItemsControl
     {
         foreach (T item in items)

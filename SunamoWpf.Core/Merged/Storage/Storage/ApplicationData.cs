@@ -13,6 +13,12 @@ public class ApplicationData
     //    LocalSettings = new ApplicationDataContainer(AppData.ci.GetFile(AppFolders.Local, "data.dat"));
     //}
 
+    /// <summary>
+    /// The roaming settings.
+    /// </summary>
     public static ApplicationDataContainer RoamingSettings = null;
+    /// <summary>
+    /// The local settings.
+    /// </summary>
     public static ApplicationDataContainer LocalSettings = null;
 }

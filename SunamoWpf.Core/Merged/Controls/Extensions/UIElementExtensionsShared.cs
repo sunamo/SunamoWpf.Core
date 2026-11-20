@@ -1,11 +1,23 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Extensions;
 
+/// <summary>
+/// Represents the UI element extensions type.
+/// </summary>
 public static partial class UIElementExtensions
 {
     static Type type = typeof(UIElementExtensions);
+    /// <summary>
+    /// The validate 2 full delegate.
+    /// </summary>
     public static Func<UIElement, string, ValidateDataWpf, bool?> Validate2FullDelegate = null;
+    /// <summary>
+    /// The set validated full delegate.
+    /// </summary>
     public static Func<UIElement, bool, bool> SetValidatedFullDelegate = null;
+    /// <summary>
+    /// The validated in full.
+    /// </summary>
     public static bool validatedInFull = false;
     /// <summary>
     /// Must be be Validate2 due to different with Validate which is defi
@@ -83,6 +95,11 @@ public static partial class UIElementExtensions
         }
         return null;
     }
+    /// <summary>
+    /// Set validated.
+    /// </summary>
+    /// <param name="uiElement">The ui element.</param>
+    /// <param name="value">The value.</param>
     public static void SetValidated(this UIElement uiElement, bool value)
     {
         if (SetValidatedFullDelegate != null)

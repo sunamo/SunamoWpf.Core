@@ -7,9 +7,19 @@ namespace SunamoWpf.Controls.Helpers.Controls;
 /// <typeparam name="T"></typeparam>
 public class SuMenuItemWithSubitemsHelper<T> : SuMenuItemWithSubitemsHelper
 {
+    /// <summary>
+    /// Initializes a new instance of the su menu item with subitems helper class.
+    /// </summary>
+    /// <param name="tsddb">The tsddb.</param>
     public SuMenuItemWithSubitemsHelper(SuMenuItem tsddb)
         : base(tsddb, true)
     { }
+    /// <summary>
+    /// Initializes a new instance of the su menu item with subitems helper class.
+    /// </summary>
+    /// <param name="tsddb">The tsddb.</param>
+    /// <param name="values">The values.</param>
+    /// <param name="defaultValue">The default value.</param>
     public SuMenuItemWithSubitemsHelper(SuMenuItem tsddb, Array values, T defaultValue)
         : base(tsddb, true)
     {
@@ -37,6 +47,9 @@ public class SuMenuItemWithSubitemsHelper<T> : SuMenuItemWithSubitemsHelper
         }
         return null;
     }
+    /// <summary>
+    /// The selected enum value.
+    /// </summary>
     public T SelectedEnumValue
     {
         get
@@ -48,6 +61,10 @@ public class SuMenuItemWithSubitemsHelper<T> : SuMenuItemWithSubitemsHelper
             return default(T);
         }
     }
+    /// <summary>
+    /// Add values of enum as items.
+    /// </summary>
+    /// <param name="value">The value.</param>
     public void AddValuesOfEnumAsItems(T value)
     {
         base.AddValuesOfEnumAsItems<T>(value);

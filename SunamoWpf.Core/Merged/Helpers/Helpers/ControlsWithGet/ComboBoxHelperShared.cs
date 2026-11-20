@@ -4,14 +4,26 @@ namespace SunamoWpf.Helpers.ControlsWithGet;
 public partial class ComboBoxHelper
 {
     static Type type = typeof(ComboBoxHelper);
+    /// <summary>
+    /// The cb.
+    /// </summary>
     protected ComboBox cb = null;
+    /// <summary>
+    /// The raise selection changed.
+    /// </summary>
     public bool raiseSelectionChanged = true;
+    /// <summary>
+    /// The selection changed.
+    /// </summary>
     public event SelectionChangedEventHandler SelectionChanged;
     /// <summary>
     /// Objekt, ve kterém je vždy aktuální zda v tsddb něco je
     /// Takže se nelekni že to je promměná
     /// </summary>
     public object SelectedO = null;
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public bool Selected
     {
         get
@@ -23,6 +35,9 @@ public partial class ComboBoxHelper
             return false;
         }
     }
+    /// <summary>
+    /// The selected s.
+    /// </summary>
     public string SelectedS
     {
         get
@@ -59,6 +74,9 @@ public partial class ComboBoxHelper
             }
         }
     }
+    /// <summary>
+    /// The original tool tip text.
+    /// </summary>
     protected string originalToolTipText = "";
     /// <summary>
     /// A2 zda se má do SelectedO uložit tsmi.Tag nebo jen tsmi
@@ -70,6 +88,9 @@ public partial class ComboBoxHelper
         this.cb = tsddb;
         tsddb.SelectionChanged += tsddb_SelectionChanged;
     }
+    /// <summary>
+    /// The cb.
+    /// </summary>
     public ComboBox Cb
     {
         get
@@ -110,6 +131,9 @@ public partial class ComboBoxHelper
     {
         control.Validate(ref validateData);
     }
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         set

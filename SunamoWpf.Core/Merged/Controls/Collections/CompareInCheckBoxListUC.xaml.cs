@@ -5,6 +5,9 @@ namespace SunamoWpf.Controls.Collections;
     {
         List<CheckBoxListUC> chbls = null;
 
+        /// <summary>
+        /// Initializes a new instance of the compare in check box list UC class.
+        /// </summary>
         public CompareInCheckBoxListUC()
         {
             InitializeComponent();
@@ -12,10 +15,16 @@ namespace SunamoWpf.Controls.Collections;
             Loaded += uc_Loaded;
         }
 
+        /// <summary>
+        /// Focus on main element.
+        /// </summary>
         public void FocusOnMainElement()
         {
 
         }
+        /// <summary>
+        /// Remove which have no item.
+        /// </summary>
         public void RemoveWhichHaveNoItem() { }
         private void CompareInCheckBoxListUC_SizeChanged(object sender, SizeChangedEventArgs eventArgs)
         {
@@ -34,12 +43,25 @@ namespace SunamoWpf.Controls.Collections;
             //r1.Height. = this.ActualHeight - r0.ActualHeight;
         }
 
+        /// <summary>
+        /// Gets the dialog result.
+        /// </summary>
         public bool? DialogResult { set => ChangeDialogResult(value); }
 
+        /// <summary>
+        /// Gets the title.
+        /// </summary>
         public string Title => "Decide which to process";
 
+        /// <summary>
+        /// The change dialog result.
+        /// </summary>
         public event VoidBoolNullable ChangeDialogResult;
 
+        /// <summary>
+        /// Accept.
+        /// </summary>
+        /// <param name="input">The input.</param>
         public void Accept(object input)
         {
 
@@ -138,12 +160,20 @@ namespace SunamoWpf.Controls.Collections;
         }
 
 
+        /// <summary>
+        /// Exclude to process.
+        /// </summary>
+        /// <returns>The exclude to process result.</returns>
         public List<string> ExcludeToProcess()
         {
             List<string> resultNo = new List<string>(chblManuallyNo.Count + chblManuallyYes.Count);
             return resultNo;
         }
 
+        /// <summary>
+        /// Include to process.
+        /// </summary>
+        /// <returns>The include to process result.</returns>
         public List<string> IncludeToProcess()
         {
             List<string> result = new List<string>(chblManuallyYes.Count + chblAutoYes.Count);
@@ -190,6 +220,11 @@ namespace SunamoWpf.Controls.Collections;
  TF.ReadAllLines(autoNo));
         }
 
+        /// <summary>
+        /// Init.
+        /// </summary>
+        /// <param name="autoYes">The auto yes.</param>
+        /// <param name="autoNo">The auto no.</param>
         public void Init(IList<string> autoYes, IList<string> autoNo)
         {
             Init(autoYes, null, null, autoNo);
@@ -247,6 +282,10 @@ namespace SunamoWpf.Controls.Collections;
 
         }
 
+        /// <summary>
+        /// Su menu items.
+        /// </summary>
+        /// <returns>The su menu items result.</returns>
         public List<SuMenuItem> SuMenuItems()
         {
             //SuMenuItem mi = SuMenuItemHelper.Get(Title);
@@ -257,6 +296,10 @@ namespace SunamoWpf.Controls.Collections;
             return CAG.ToList<SuMenuItem>(miSave);
         }
 
+        /// <summary>
+        /// On size changed.
+        /// </summary>
+        /// <param name="maxSize">The max size.</param>
         public void OnSizeChanged(DesktopSize maxSize)
         {
             chblAutoYes.OnSizeChanged(maxSize);
@@ -265,6 +308,11 @@ namespace SunamoWpf.Controls.Collections;
             chblAutoNo.OnSizeChanged(maxSize);
         }
 
+        /// <summary>
+        /// Uc loaded.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="eventArgs">The event args.</param>
         public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
         {
 

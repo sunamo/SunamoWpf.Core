@@ -6,7 +6,13 @@ namespace SunamoWpf.ConfigurableWindow;
 /// </summary>
 public class ConfigurableWindowInstance : Window, IConfigurableWindow
 {
+    /// <summary>
+    /// Gets or sets the data.
+    /// </summary>
     public ApplicationDataContainer data { get; set; }
+    /// <summary>
+    /// Gets or sets the configurable window wrapper.
+    /// </summary>
     public ConfigurableWindowWrapper configurableWindowWrapper { get; set; }
     /// <summary>
     /// Data cant be static
@@ -17,6 +23,10 @@ public class ConfigurableWindowInstance : Window, IConfigurableWindow
         //this.data = data;
         SourceInitialized += ConfigurableWindow_SourceInitialized;
     }
+    /// <summary>
+    /// Create settings.
+    /// </summary>
+    /// <returns>The create settings result.</returns>
     public IConfigurableWindowSettings CreateSettings()
     {
         return new WindowConfigSettings(this, data);

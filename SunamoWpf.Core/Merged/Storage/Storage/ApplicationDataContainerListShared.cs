@@ -225,10 +225,19 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
 
         return result;
     }
+    /// <summary>
+    /// Get items.
+    /// </summary>
+    /// <returns>The get items result.</returns>
     public Dictionary<string, ABWpf> GetItems()
     {
         return data;
     }
+    /// <summary>
+    /// Get nullable bool.
+    /// </summary>
+    /// <param name="isChecked">The is checked.</param>
+    /// <returns>The get nullable bool result.</returns>
     public bool? GetNullableBool(string isChecked)
     {
         if (data.ContainsKey(isChecked))
@@ -237,10 +246,22 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         }
         return false;
     }
+    /// <summary>
+    /// Get list string.
+    /// </summary>
+    /// <param name="dataContext">The data context.</param>
+    /// <param name="delimiter">The delimiter.</param>
+    /// <param name=""">The ".</param>
+    /// <returns>The get list string result.</returns>
     public List<string> GetListString(string dataContext, string delimiter = ",")
     {
         return DeserializeList(data.ContainsKey(dataContext) ? this[dataContext] : null, delimiter);
     }
+    /// <summary>
+    /// Get string.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The get string result.</returns>
     public string GetString(string text)
     {
         if (data.ContainsKey(text))
@@ -268,16 +289,26 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         CA.RemoveStringsEmpty(result);
         return result;
     }
+    /// <summary>
+    /// Nuke.
+    /// </summary>
     public async Task Nuke()
     {
         data.Clear();
         await SaveFile().ConfigureAwait(false);
     }
+    /// <summary>
+    /// Delete entry.
+    /// </summary>
+    /// <param name="key">The key.</param>
     public async Task DeleteEntry(string key)
     {
         data.Remove(key);
         await SaveFile().ConfigureAwait(false);
     }
+    /// <summary>
+    /// The this string.
+    /// </summary>
     public object this[string key]
     {
         get
@@ -340,10 +371,18 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
             Directory.CreateDirectory(directory);
         }
     }
+    /// <summary>
+    /// Contains.
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <returns>The contains result.</returns>
     public bool Contains(string key)
     {
         return data.ContainsKey(key);
     }
+ /// <summary>
+ /// Save file.
+ /// </summary>
     public
 #if ASYNC
     async Task
@@ -364,6 +403,10 @@ public partial class ApplicationDataContainerList : System.Collections.IEnumerab
         EnsureParentDirectory(path);
         await TF.WriteAllText(path, stringBuilder.ToString()).ConfigureAwait(false);
     }
+    /// <summary>
+    /// Get enumerator.
+    /// </summary>
+    /// <returns>The get enumerator result.</returns>
     public IEnumerator GetEnumerator()
     {
         return data.GetEnumerator();

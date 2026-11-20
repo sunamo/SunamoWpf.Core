@@ -4,6 +4,9 @@ namespace SunamoWpf.Controls.Collections;
 public partial class LoggerUC : UserControl, ISaveWithoutArgWpf
 {
     #region Rewrite to pure cs. With xaml is often problems without building
+    /// <summary>
+    /// Initializes a new instance of the logger UC class.
+    /// </summary>
     public LoggerUC()
     {
         try
@@ -41,7 +44,14 @@ public partial class LoggerUC : UserControl, ISaveWithoutArgWpf
         }
         return result;
     }
+    /// <summary>
+    /// The file to save.
+    /// </summary>
     public string fileToSave = null;
+    /// <summary>
+    /// Save.
+    /// </summary>
+    /// <param name="fileToSave">The file to save.</param>
     public void Save(string fileToSave)
     {
         //fileToSave = AppData.ci.GetFile(AppFolders.Logs, this.Name + AllExtensions.txt);

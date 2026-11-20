@@ -6,11 +6,17 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
     #region Rewrite to pure cs. With xaml is often problems without building
     //public event VoidT<object> ClickOK;
     //public event VoidT<object> ClickCancel;
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
     string updateUri = null;
     string actualVersion = null;
     string appUri = null;
     string appName = null;
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         //btnOk.Focus();
@@ -72,6 +78,9 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
         //var d = wg;
         this.CheckNewVersion = CheckNewVersion;
     }
+    /// <summary>
+    /// The max content size.
+    /// </summary>
     public Size MaxContentSize
     {
         get
@@ -85,19 +94,40 @@ public sealed partial class AboutApp : UserControl, IUserControl, IControlWithRe
             FrameworkElementHelper.SetMaxContentSize(this, value);
         }
     }
+    /// <summary>
+    /// The check new version.
+    /// </summary>
     public Action<string, string, string> CheckNewVersion;
+    /// <summary>
+    /// Gets the dialog result.
+    /// </summary>
     public bool? DialogResult { set => RuntimeHelper.EmptyDummyMethod(); }
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     public string Title => "AboutApp";
     private void OnClickOK(object sender, RoutedEventArgs eventArgs)
     {
         ChangeDialogResult(true);
     }
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }
+    /// <summary>
+    /// Handle key.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
+    /// <returns>The handle key result.</returns>
     public bool HandleKey(KeyEventArgs eventArgs)
     {
         return false;

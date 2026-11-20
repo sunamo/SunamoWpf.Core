@@ -29,6 +29,11 @@ public partial class TextBlockHelper{
         return textBlock;
     }
 
+    /// <summary>
+    /// Set text.
+    /// </summary>
+    /// <param name="lblStatusDownload">The lbl status download.</param>
+    /// <param name="status">The status.</param>
     public static void SetText(TextBlock lblStatusDownload, string status)
     {
         if (lblStatusDownload != null)
@@ -58,6 +63,11 @@ public partial class TextBlockHelper{
         return value.ToString();
     }
 
+    /// <summary>
+    /// Set foreground.
+    /// </summary>
+    /// <param name="textBlock">The text block.</param>
+    /// <param name="foreground">The foreground.</param>
     public static void SetForeground(TextBlock textBlock, Brush foreground)
     {
         if (foreground != null)

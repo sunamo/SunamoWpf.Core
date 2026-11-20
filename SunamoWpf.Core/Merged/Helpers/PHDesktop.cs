@@ -1,8 +1,16 @@
 ﻿#define ASYNC
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the PH desktop type.
+/// </summary>
 public class PHDesktop
 {
+    /// <summary>
+    /// Open file in tag.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public static void OpenFileInTag(object sender, RoutedEventArgs eventArgs)
     {
         var frameworkElement = (FrameworkElement)sender;

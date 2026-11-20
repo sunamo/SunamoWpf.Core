@@ -7,14 +7,28 @@ namespace SunamoWpf.Helpers.Controls;
 /// </summary>
 public class InlineBuilderBase : ITextBlockHelperBase<FontWeight, Italic, Inline, Bold, Run, Hyperlink, FontArgs>
 {
+    /// <summary>
+    /// The texts.
+    /// </summary>
     protected List<MeasureStringArgs> texts = new List<MeasureStringArgs>();
 
+    /// <summary>
+    /// Get font weight.
+    /// </summary>
+    /// <param name="fontWeight">The font weight.</param>
+    /// <returns>The get font weight result.</returns>
     public FontWeight GetFontWeight(Enums.FontWeights fontWeight)
     {
         FontWeight weight = FontWeight.FromOpenTypeWeight((int)fontWeight);
         return weight;
     }
 
+    /// <summary>
+    /// Get italic.
+    /// </summary>
+    /// <param name="run">The run.</param>
+    /// <param name="fontArgs">The font args.</param>
+    /// <returns>The get italic result.</returns>
     public Italic GetItalic(string run, FontArgs fontArgs)
     {
         Italic italic = new Italic();
@@ -25,11 +39,23 @@ public class InlineBuilderBase : ITextBlockHelperBase<FontWeight, Italic, Inline
         return italic;
     }
 
+    /// <summary>
+    /// Get bullet.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="fontArgs">The font args.</param>
+    /// <returns>The get bullet result.</returns>
     public Inline GetBullet(string text, FontArgs fontArgs)
     {
         return GetRun("• " + text, fontArgs);
     }
 
+    /// <summary>
+    /// Get error.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="fontArgs">The font args.</param>
+    /// <returns>The get error result.</returns>
     public Bold GetError(string text, FontArgs fontArgs)
     {
         Bold bold = GetBold(text, fontArgs);
@@ -38,6 +64,12 @@ public class InlineBuilderBase : ITextBlockHelperBase<FontWeight, Italic, Inline
         return bold;
     }
 
+    /// <summary>
+    /// Get bold.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="fontArgs">The font args.</param>
+    /// <returns>The get bold result.</returns>
     public Bold GetBold(string text, FontArgs fontArgs)
     {
         Bold bold = new Bold();
@@ -48,6 +80,12 @@ public class InlineBuilderBase : ITextBlockHelperBase<FontWeight, Italic, Inline
         return bold;
     }
 
+    /// <summary>
+    /// Get run.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="fontArgs">The font args.</param>
+    /// <returns>The get run result.</returns>
     public Run GetRun(string text, FontArgs fontArgs)
     {
         Run run = new Run();
@@ -62,6 +100,13 @@ public class InlineBuilderBase : ITextBlockHelperBase<FontWeight, Italic, Inline
         return run;
     }
 
+    /// <summary>
+    /// Get hyperlink.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="uri">The uri.</param>
+    /// <param name="fontArgs">The font args.</param>
+    /// <returns>The get hyperlink result.</returns>
     public Hyperlink GetHyperlink(string text, string uri, FontArgs fontArgs)
     {
         // In WPF is not needed put it in subs. control like Label

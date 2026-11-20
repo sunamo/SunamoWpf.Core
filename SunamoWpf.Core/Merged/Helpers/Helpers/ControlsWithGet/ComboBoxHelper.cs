@@ -6,6 +6,11 @@ namespace SunamoWpf.Helpers.ControlsWithGet;
 /// </summary>
 public partial class ComboBoxHelper
 {
+    /// <summary>
+    /// Add range 2 list.
+    /// </summary>
+    /// <param name="cbInterpret">The cb interpret.</param>
+    /// <param name="allInterprets">The all interprets.</param>
     public static void AddRange2List(ComboBox cbInterpret, IList allInterprets)
     {
         for (int index = 0; index < allInterprets.Count; index++)
@@ -22,6 +27,11 @@ public partial class ComboBoxHelper
         }
     }
 
+    /// <summary>
+    /// Value from t with name or object.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>The value from t with name or object result.</returns>
     public static object ValueFromTWithNameOrObject(object value)
     {
         if (value is TWithNameTWpf<object>)
@@ -31,6 +41,10 @@ public partial class ComboBoxHelper
         return value;
     }
 
+    /// <summary>
+    /// Set focus.
+    /// </summary>
+    /// <param name="comboBox1">The combo box 1.</param>
     public static void SetFocus(ComboBox comboBox1)
     {
         Keyboard.Focus(comboBox1);
@@ -38,12 +52,20 @@ public partial class ComboBoxHelper
 
 
 
+    /// <summary>
+    /// Add values of enum as items t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
     public void AddValuesOfEnumAsItems<T>() where T : struct
     {
         IList arr = EnumHelper.GetValues<T>(true, true);
         AddValuesOfEnumAsItems(arr);
     }
 
+    /// <summary>
+    /// Add values of enum as items.
+    /// </summary>
+    /// <param name="values">The values.</param>
     public void AddValuesOfEnumAsItems(IList values)
     {
         int index = 0;
@@ -61,11 +83,19 @@ public partial class ComboBoxHelper
     }
 
 
+    /// <summary>
+    /// Add values of enumerable as items.
+    /// </summary>
+    /// <param name="items">The items.</param>
     public void AddValuesOfEnumerableAsItems(IList items)
     {
         AddValuesOfArrayAsItems(null, null, items);
     }
 
+    /// <summary>
+    /// Add values of array as items.
+    /// </summary>
+    /// <param name="items">The items.</param>
     public void AddValuesOfArrayAsItems(params object[] items)
     {
         AddValuesOfArrayAsItems(null, items);

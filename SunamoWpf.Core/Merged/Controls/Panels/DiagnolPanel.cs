@@ -27,6 +27,11 @@ public class DiagnolPanel : Panel
 
 
 
+    /// <summary>
+    /// Arrange override.
+    /// </summary>
+    /// <param name="finalSize">The final size.</param>
+    /// <returns>The arrange override result.</returns>
     protected override Size ArrangeOverride(Size finalSize)
     {
         var location = new Point();

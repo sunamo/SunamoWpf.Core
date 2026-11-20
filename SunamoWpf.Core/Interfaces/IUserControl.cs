@@ -5,7 +5,13 @@ namespace SunamoWpf.Interfaces;
 /// </summary>
 public interface IUserControl  //: IPanel
 {
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     string Title { get; }
+    /// <summary>
+    /// Init.
+    /// </summary>
     void Init();
 
     //uc_Loaded is not required, anyway I have to make screenshot handly

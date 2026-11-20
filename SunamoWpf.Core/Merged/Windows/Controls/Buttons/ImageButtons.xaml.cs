@@ -5,11 +5,26 @@ public partial class ImageButtons : UserControl
 {
     static Type type = typeof(ImageButtons);
     List<Button> allButtons = null;
+    /// <summary>
+    /// The added.
+    /// </summary>
     public event VoidString Added;
     EnterOneValueWindow eov = null;
+    /// <summary>
+    /// The copy to clipboard.
+    /// </summary>
     public event Action CopyToClipboard;
+    /// <summary>
+    /// The clear all.
+    /// </summary>
     public event Action ClearAll;
+    /// <summary>
+    /// The select all.
+    /// </summary>
     public event Action SelectAll;
+    /// <summary>
+    /// The unselect all.
+    /// </summary>
     public event Action UnselectAll;
 
     async Task SetAwesomeIcons()
@@ -93,6 +108,10 @@ public partial class ImageButtons : UserControl
     private void ImageButtons_Loaded(object sender, RoutedEventArgs eventArgs)
     {
     }
+    /// <summary>
+    /// Height of first visible button.
+    /// </summary>
+    /// <returns>The height of first visible button result.</returns>
     public double HeightOfFirstVisibleButton()
     {
         foreach (var item in allButtons)
@@ -135,6 +154,10 @@ public partial class ImageButtons : UserControl
     {
         FrameworkElementHelper.SetToolTip(btnCopyToClipboard, copyTextToClipboard);
     }
+    /// <summary>
+    /// Is all collapsed.
+    /// </summary>
+    /// <returns>The is all collapsed result.</returns>
     public bool IsAllCollapsed()
     {
         foreach (var item in allButtons)
@@ -147,7 +170,13 @@ public partial class ImageButtons : UserControl
         return true;
     }
     object data;
+    /// <summary>
+    /// The validator before adding.
+    /// </summary>
     public Func<string, bool> ValidatorBeforeAdding = null;
+    /// <summary>
+    /// The validator before adding message.
+    /// </summary>
     public string ValidatorBeforeAddingMessage = null;
     private void SetVisibility(Button btn, object copyToClipboard)
     {

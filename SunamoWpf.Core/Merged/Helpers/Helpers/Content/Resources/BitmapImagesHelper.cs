@@ -8,6 +8,12 @@ namespace SunamoWpf.Helpers.Content.Resources;
 /// </summary>
 public static class BitmapImagesHelper
 {
+    /// <summary>
+    /// Ms appx.
+    /// </summary>
+    /// <param name="enabled">The enabled.</param>
+    /// <param name="appPic">The app pic.</param>
+    /// <returns>The ms appx result.</returns>
     public static BitmapImage MsAppx(bool enabled, AppPics appPic)
     {
         string cesta = "";

@@ -6,5 +6,8 @@ namespace SunamoWpf.Interfaces;
 /// </summary>
 public interface IOnClosingMainWindow
 {
+    /// <summary>
+    /// On closing.
+    /// </summary>
     void OnClosing();
 }

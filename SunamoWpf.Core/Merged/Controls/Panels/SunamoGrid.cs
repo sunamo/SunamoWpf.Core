@@ -1,14 +1,24 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Panels;
 
+/// <summary>
+/// Represents the sunamo grid type.
+/// </summary>
 public class SunamoGrid : Grid
 {
+    /// <summary>
+    /// The property name property.
+    /// </summary>
     public static readonly DependencyProperty PropertyNameProperty = DependencyProperty.Register(
         "DisplayEntity", typeof(string), typeof(SunamoGrid), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.AffectsRender));
 
     DrawingGroup backingStore = new DrawingGroup();
     DrawingContext dc = null;
 
+    /// <summary>
+    /// On render.
+    /// </summary>
+    /// <param name="drawingContext">The drawing context.</param>
     protected override void OnRender(DrawingContext drawingContext)
     {
         base.OnRender(drawingContext);
@@ -18,6 +28,9 @@ public class SunamoGrid : Grid
         drawingContext.DrawDrawing(backingStore);
     }
 
+    /// <summary>
+    /// Force render.
+    /// </summary>
     public void ForceRender()
     {
         // Problem there was in ReviewAspxPagesUC that sometimes OnRender in SunamoGrid is not called and painted lines keep on old coords

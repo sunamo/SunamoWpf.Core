@@ -1,10 +1,19 @@
 namespace SunamoWpf._.Animation;
 
+/// <summary>
+/// Represents the limited timer type.
+/// </summary>
 public class LimitedTimer : SunamoTimer
 {
     int pocet = 0;
     int odbylo = 0;
 
+    /// <summary>
+    /// Initializes a new instance of the limited timer class.
+    /// </summary>
+    /// <param name="milliseconds">The milliseconds.</param>
+    /// <param name="pocet">The pocet.</param>
+    /// <param name="action">The action.</param>
     public LimitedTimer(int milliseconds, int pocet, Action action) : base(milliseconds, action, false)
     {
         Tick += LimitedTimer_Tick;

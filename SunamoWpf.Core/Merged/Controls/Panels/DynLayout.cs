@@ -1,17 +1,32 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Panels;
 
+/// <summary>
+/// Represents the dyn layout type.
+/// </summary>
 public class DynLayout
 {
     Grid gridGrowable = null;
 
+    /// <summary>
+    /// Initializes a new instance of the dyn layout class.
+    /// </summary>
+    /// <param name="grid">The grid.</param>
     public DynLayout(Grid grid)
     {
         gridGrowable = grid;
     }
 
+    /// <summary>
+    /// The fw elements.
+    /// </summary>
     public List<FrameworkElement> fwElements = new List<FrameworkElement>();
 
+    /// <summary>
+    /// Get content by tag.
+    /// </summary>
+    /// <param name="tag">The tag.</param>
+    /// <returns>The get content by tag result.</returns>
     public object GetContentByTag(object tag)
     {
         foreach (var item in fwElements)
@@ -24,6 +39,9 @@ public class DynLayout
         return null;
     }
 
+    /// <summary>
+    /// The this int.
+    /// </summary>
     public object this[int index]
     {
         get
@@ -60,6 +78,11 @@ public class DynLayout
         fwElements.Add(control);
     }
 
+    /// <summary>
+    /// Add label.
+    /// </summary>
+    /// <param name="row">The row.</param>
+    /// <param name="name">The name.</param>
     public void AddLabel(int row, string name)
     {
         var textBlock = TextBlockHelper.Get(new ControlInitData { text = name });
@@ -67,6 +90,11 @@ public class DynLayout
         AddLabel(row, textBlock);
     }
 
+    /// <summary>
+    /// Add label.
+    /// </summary>
+    /// <param name="row">The row.</param>
+    /// <param name="label">The label.</param>
     public void AddLabel(int row, UIElement label)
     {
         if (label is TextBlock)

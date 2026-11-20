@@ -1,8 +1,18 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls;
 
+/// <summary>
+/// Represents the controls generator type.
+/// </summary>
 public class ControlsGenerator
 {
+    /// <summary>
+    /// Radio button with description.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="addDescription">The add description.</param>
+    /// <param name="tick">The tick.</param>
+    /// <returns>The radio button with description result.</returns>
     public static RadioButton RadioButtonWithDescription(TWithSizeInString<string> data, bool addDescription, bool tick)
     {
         RadioButton chb = new RadioButton();

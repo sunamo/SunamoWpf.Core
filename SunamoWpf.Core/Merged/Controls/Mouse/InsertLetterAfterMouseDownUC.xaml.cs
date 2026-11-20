@@ -3,10 +3,19 @@ namespace SunamoWpf.Controls.Mouse;
 
 public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithResultWpf, IShowSearchResults
 {
+    /// <summary>
+    /// The to insert.
+    /// </summary>
     public string ToInsert = "\\";
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
     }
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -18,7 +27,13 @@ public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithRes
             }
         }
     }
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
+    /// <summary>
+    /// Initializes a new instance of the insert letter after mouse down UC class.
+    /// </summary>
     public InsertLetterAfterMouseDownUC()
     {
         try
@@ -44,6 +59,10 @@ public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithRes
             return (InsertLetterAfterMouseDownData)Tag;
         }
     }
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
         txt.Text = input.ToString();
@@ -74,12 +93,24 @@ public partial class InsertLetterAfterMouseDownUC : UserControl, IControlWithRes
             }
         }
     }
+    /// <summary>
+    /// The state.
+    /// </summary>
     public TextBoxStateWpf state = new TextBoxStateWpf();
+    /// <summary>
+    /// Set tb searched result.
+    /// </summary>
+    /// <param name="actual">The actual.</param>
+    /// <param name="count">The count.</param>
     public void SetTbSearchedResult(int actual, int count)
     {
         state.textSearchedResult = $"{actual}/{count}";
         SetTextBoxState();
     }
+    /// <summary>
+    /// Set text box state.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public void SetTextBoxState(string text = null)
     {
         if (text == null)

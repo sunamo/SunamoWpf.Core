@@ -1,8 +1,14 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Panels;
 
+/// <summary>
+/// Represents the sunamo variable sized wrap grid type.
+/// </summary>
 public class SunamoVariableSizedWrapGrid : StackPanel
 {
+    /// <summary>
+    /// Initializes a new instance of the sunamo variable sized wrap grid class.
+    /// </summary>
     public SunamoVariableSizedWrapGrid()
     {
         Orientation = Orientation.Horizontal;

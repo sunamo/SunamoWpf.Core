@@ -5,6 +5,9 @@ public partial class ColorPicker : UserControl
 {
     #region #region Rewrite to pure cs. With xaml is often problems without building
     Color result = new Color();
+    /// <summary>
+    /// The result.
+    /// </summary>
     public Color Result
     {
         get
@@ -30,7 +33,13 @@ public partial class ColorPicker : UserControl
         RSlider.BorderBrush = GSlider.BorderBrush = BSlider.BorderBrush = ASlider.BorderBrush = scb;
         //return value;
     }
+    /// <summary>
+    /// The color changed.
+    /// </summary>
     public event VoidWpfColor ColorChanged;
+    /// <summary>
+    /// Initializes a new instance of the color picker class.
+    /// </summary>
     public ColorPicker()
     {
         try

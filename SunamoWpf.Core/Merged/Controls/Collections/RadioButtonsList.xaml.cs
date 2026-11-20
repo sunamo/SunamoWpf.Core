@@ -3,6 +3,9 @@ namespace SunamoWpf.Controls.Collections;
 
 public partial class RadioButtonsList : UserControl, IUserControl, IControlWithResultDebugWpf
 {
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -14,9 +17,18 @@ public partial class RadioButtonsList : UserControl, IUserControl, IControlWithR
         }
     }
 
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     public string Title => string.Empty;
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
 
+    /// <summary>
+    /// Initializes a new instance of the radio buttons list class.
+    /// </summary>
     public RadioButtonsList()
     {
         try
@@ -48,13 +60,25 @@ public partial class RadioButtonsList : UserControl, IUserControl, IControlWithR
         }
     }
 
+    /// <summary>
+    /// Add radio button.
+    /// </summary>
+    /// <param name="controlInitData">The control init data.</param>
     public void AddRadioButton(ControlInitData controlInitData)
     {
         spRbs.Children.Add(RadioButtonHelper.Get(controlInitData));
     }
 
+    /// <summary>
+    /// The clicked tag.
+    /// </summary>
     public object clickedTag = null;
 
+    /// <summary>
+    /// Rb clicked.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void RbClicked(object sender, RoutedEventArgs eventArgs)
     {
         var radioButton = (RadioButton)sender;
@@ -82,26 +106,45 @@ public partial class RadioButtonsList : UserControl, IUserControl, IControlWithR
         }
     }
 
+    /// <summary>
+    /// Count of handlers change dialog result.
+    /// </summary>
+    /// <returns>The count of handlers change dialog result result.</returns>
     public int CountOfHandlersChangeDialogResult()
     {
         return RuntimeHelper.GetInvocationList(ChangeDialogResult).Count;
     }
 
+    /// <summary>
+    /// Attach change dialog result.
+    /// </summary>
+    /// <param name="handler">The handler.</param>
+    /// <param name="throwException">The throw exception.</param>
     public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
     {
         RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
     }
 
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
 
     }
 
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
 
     }
 
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }

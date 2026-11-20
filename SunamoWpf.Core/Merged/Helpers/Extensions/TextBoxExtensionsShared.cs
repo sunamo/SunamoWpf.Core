@@ -1,6 +1,9 @@
 #define ASYNC
 namespace SunamoWpf.Extensions;
 
+/// <summary>
+/// Represents the text box extensions type.
+/// </summary>
 public static partial class TextBoxExtensions
 {
     /// <summary>
@@ -56,6 +59,9 @@ public static partial class TextBoxExtensions
             validated = true;
         }
     }
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get => ValidationHelper.validated;

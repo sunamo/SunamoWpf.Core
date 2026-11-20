@@ -5,9 +5,20 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
+/// <summary>
+/// Represents the create image for size shared type.
+/// </summary>
 public class CreateImageForSizeShared
 {
 
+    /// <summary>
+    /// Place to center.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="fontSize">The font size.</param>
+    /// <param name="saveToFolder">The save to folder.</param>
     public static void PlaceToCenter(string text, int width, int height, float fontSize, string saveToFolder)
     {
         Font font = new Font("Segoe UI", fontSize);
@@ -39,6 +50,14 @@ public class CreateImageForSizeShared
         bmp.Save(path, ImageFormat.Jpeg);
     }
 
+    /// <summary>
+    /// Create single color image with color.
+    /// </summary>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <param name="fileName">The file name.</param>
+    /// <param name="color">The color.</param>
+    /// <param name="saveToFolder">The save to folder.</param>
     public static void CreateSingleColorImageWithColor(int width, int height, string fileName, SunamoColor color, string saveToFolder)
     {
         if (color != null && width != int.MinValue && height != int.MinValue)

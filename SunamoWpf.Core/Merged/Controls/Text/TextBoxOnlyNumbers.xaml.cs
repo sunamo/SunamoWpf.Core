@@ -4,6 +4,9 @@ namespace SunamoWpf;
 public partial class TextBoxOnlyNumbers : UserControl
 {
     #region Rewrite to pure cs. With xaml is often problems without building
+    /// <summary>
+    /// The text.
+    /// </summary>
     public string Text
     {
         set
@@ -16,6 +19,9 @@ public partial class TextBoxOnlyNumbers : UserControl
         }
     }
 
+    /// <summary>
+    /// Initializes a new instance of the text box only numbers class.
+    /// </summary>
     public TextBoxOnlyNumbers()
     {
         try

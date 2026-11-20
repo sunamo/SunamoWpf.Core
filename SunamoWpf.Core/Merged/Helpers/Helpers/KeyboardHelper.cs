@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers;
 
+/// <summary>
+/// Represents the keyboard helper type.
+/// </summary>
 public class KeyboardHelper
 {
     ///// <summary>
@@ -223,6 +226,11 @@ DbeEnterDialogConversionMode
 OemClear
 DeadCharProcessed");
     #endregion
+    /// <summary>
+    /// Is whitespace.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
+    /// <returns>The is whitespace result.</returns>
     public static bool IsWhitespace(KeyEventArgs eventArgs)
     {
         var keyName = eventArgs.Key.ToString();
@@ -287,18 +295,36 @@ mam 3, d0, u1 - nechapu */
         bool result = keyPressed && modifierPresent;
         return result;
     }
+    /// <summary>
+    /// Is num lock.
+    /// </summary>
+    /// <returns>The is num lock result.</returns>
     public static bool IsNumLock()
     {
         return (W32.GetKeyState(0x90) & 0xffff) != 0;
     }
+    /// <summary>
+    /// Is caps lock.
+    /// </summary>
+    /// <returns>The is caps lock result.</returns>
     public static bool IsCapsLock()
     {
         return (W32.GetKeyState(0x14) & 0xffff) != 0;
     }
+    /// <summary>
+    /// Is scroll lock.
+    /// </summary>
+    /// <returns>The is scroll lock result.</returns>
     public static bool IsScrollLock()
     {
         return (W32.GetKeyState(0x91) & 0xffff) != 0;
     }
+    /// <summary>
+    /// Key with none modifier.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
+    /// <param name="key">The key.</param>
+    /// <returns>The key with none modifier result.</returns>
     public static bool KeyWithNoneModifier(KeyEventArgs eventArgs, Key key)
     {
         bool result = false;
@@ -308,6 +334,11 @@ mam 3, d0, u1 - nechapu */
         }
         return result;
     }
+    /// <summary>
+    /// Number.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
+    /// <returns>The number result.</returns>
     public static int Number(KeyEventArgs eventArgs)
     {
         switch (eventArgs.Key)
@@ -356,6 +387,11 @@ mam 3, d0, u1 - nechapu */
                 return -1;
         }
     }
+    /// <summary>
+    /// Down key.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
+    /// <returns>The down key result.</returns>
     public static string DownKey(KeyEventArgs eventArgs)
     {
         string text = Keyboard.Modifiers.ToString() + ", " + eventArgs.Key.ToString();
@@ -374,7 +410,15 @@ mam 3, d0, u1 - nechapu */
         }
         return byte.MaxValue;
     }
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(KeyboardHelper);
+    /// <summary>
+    /// Is modifier.
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <returns>The is modifier result.</returns>
     public static bool IsModifier(Key key)
     {
         if (key == Key.LeftShift || key == Key.RightShift)
@@ -407,6 +451,11 @@ mam 3, d0, u1 - nechapu */
         }
         return false;
     }
+    /// <summary>
+    /// Is modifier 2.
+    /// </summary>
+    /// <param name="control">The control.</param>
+    /// <returns>The is modifier 2 result.</returns>
     public static bool IsModifier2(ModifierKeys control)
     {
         switch (control)

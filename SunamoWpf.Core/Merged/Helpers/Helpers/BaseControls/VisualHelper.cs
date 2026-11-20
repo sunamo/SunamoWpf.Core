@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.BaseControls;
 
+/// <summary>
+/// Represents the visual helper type.
+/// </summary>
 public class VisualHelper
 {
     /// <summary>
@@ -91,6 +94,13 @@ public class VisualHelper
         return result;
     }
 
+    /// <summary>
+    /// Convert visual to bytes.
+    /// </summary>
+    /// <param name="maybePanel">The maybe panel.</param>
+    /// <param name="element">The element.</param>
+    /// <param name="forceSizeTo">The force size to.</param>
+    /// <returns>The convert visual to bytes result.</returns>
     public static byte[] ConvertVisualToBytes(FrameworkElement maybePanel, FrameworkElement element, Size forceSizeTo)
     {
         /// get bound of the visual

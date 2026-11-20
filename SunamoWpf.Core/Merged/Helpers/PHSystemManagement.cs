@@ -7,11 +7,18 @@ namespace SunamoWpf;
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public partial class PH
 {
+    /// <summary>
+    /// Is already running.
+    /// </summary>
+    /// <returns>The is already running result.</returns>
     public static bool IsAlreadyRunning()
     {
         return false;
     }
 
+    /// <summary>
+    /// Start.
+    /// </summary>
     public static void Start()
     {
     }

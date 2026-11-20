@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the xaml serializer type.
+/// </summary>
 public class XamlSerializer
 {
     static Type type = typeof(XamlSerializer);
@@ -28,6 +31,9 @@ public class XamlSerializer
     {
         SaveExternalXaml();
     }
+    /// <summary>
+    /// Load external xaml.
+    /// </summary>
     public void LoadExternalXaml()
     {
         if (FS.ExistsFile(path))
@@ -38,6 +44,9 @@ public class XamlSerializer
             }
         }
     }
+    /// <summary>
+    /// Save external xaml.
+    /// </summary>
     public void SaveExternalXaml()
     {
         using (FileStream stream = new FileStream(path, FileMode.Create))

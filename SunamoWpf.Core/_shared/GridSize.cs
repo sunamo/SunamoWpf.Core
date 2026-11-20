@@ -1,5 +1,8 @@
 namespace SunamoWpf._shared;
 
+/// <summary>
+/// Represents the grid size type.
+/// </summary>
 public enum GridSize
 {
     /// <summary>
@@ -10,5 +13,8 @@ public enum GridSize
     /// Is apply also to row
     /// </summary>
     GetAutoSize,
+    /// <summary>
+    /// The mine value.
+    /// </summary>
     Mine
 }

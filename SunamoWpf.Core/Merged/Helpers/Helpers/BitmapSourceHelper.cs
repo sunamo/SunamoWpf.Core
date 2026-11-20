@@ -17,6 +17,13 @@ public static class BitmapSourceHelper
         stride);
   }
 #else
+    /// <summary>
+    /// Copy pixels.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="pixels">The pixels.</param>
+    /// <param name="stride">The stride.</param>
+    /// <param name="offset">The offset.</param>
     public static void CopyPixels(this BitmapSource source, PixelColorWpf[,] pixels, int stride, int offset)
     {
         var height = source.PixelHeight;
@@ -36,6 +43,11 @@ public static class BitmapSourceHelper
                 };
     }
 #endif
+    /// <summary>
+    /// Get pixels.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <returns>The get pixels result.</returns>
     public static PixelColorWpf[,] GetPixels(BitmapSource source)
     {
         if (source.Format != PixelFormats.Bgra32)
@@ -55,6 +67,13 @@ public static class BitmapSourceHelper
         result = new PixelColorWpf[0, 0]; //CA.OneDimensionArrayToTwoDirection<PixelColor>(colorArray, source.PixelWidth);
         return result;
     }
+    /// <summary>
+    /// Put pixels.
+    /// </summary>
+    /// <param name="bitmap">The bitmap.</param>
+    /// <param name="pixels">The pixels.</param>
+    /// <param name="x">The x.</param>
+    /// <param name="y">The y.</param>
     public static void PutPixels(WriteableBitmap bitmap, PixelColorWpf[,] pixels, int x, int y)
     {
         int width = pixels.GetLength(1);

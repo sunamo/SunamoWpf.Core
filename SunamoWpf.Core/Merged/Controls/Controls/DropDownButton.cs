@@ -1,11 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Controls;
 
+/// <summary>
+/// Represents the drop down button type.
+/// </summary>
 public class DropDownButton : ToggleButton
 {
     // *** Dependency Properties *** 
 
     // *** Constructors *** 
+    /// <summary>
+    /// Initializes a new instance of the drop down button class.
+    /// </summary>
     public DropDownButton()
     {
         // Bind the ToogleButton.IsChecked property to the drop-down's IsOpen property 
@@ -20,11 +26,17 @@ public class DropDownButton : ToggleButton
     }
 
     // *** Properties *** 
+    /// <summary>
+    /// The menu.
+    /// </summary>
     public ContextMenu Menu
     {
         get { return (ContextMenu)GetValue(MenuProperty); }
         set { SetValue(MenuProperty, value); }
     }
+    /// <summary>
+    /// The menu property.
+    /// </summary>
     public static readonly DependencyProperty MenuProperty = DependencyProperty.Register("Menu", typeof(ContextMenu), typeof(DropDownButton), new UIPropertyMetadata(null, OnMenuChanged));
 
     private static void OnMenuChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs eventArgs)
@@ -36,6 +48,9 @@ public class DropDownButton : ToggleButton
 
 
     // *** Overridden Methods *** 
+    /// <summary>
+    /// On click.
+    /// </summary>
     protected override void OnClick()
     {
         if (Menu != null)

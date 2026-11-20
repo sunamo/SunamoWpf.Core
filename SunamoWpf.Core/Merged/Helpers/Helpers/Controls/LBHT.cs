@@ -1,7 +1,13 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Controls;
 
+/// <summary>
+/// Represents the void mouse button generic 1 t type.
+/// </summary>
 public delegate void VoidMouseButtonGeneric1<in T>(MouseButton mouseButton, T value);
+/// <summary>
+/// Represents the LBHT t type.
+/// </summary>
 public class LBHT<T> : LBH
 {
     /// <summary>
@@ -20,6 +26,9 @@ public class LBHT<T> : LBH
     {
         ItemRemovedT((T)item);
     }
+    /// <summary>
+    /// The item removed t.
+    /// </summary>
     public event VoidT<T> ItemRemovedT;
     private void Lb_SelectionChanged(object sender, SelectionChangedEventArgs eventArgs)
     {
@@ -66,7 +75,13 @@ public class LBHT<T> : LBH
             }
         }
     }
+    /// <summary>
+    /// The mouse down.
+    /// </summary>
     public event VoidMouseButtonGeneric1<T> MouseDown;
+    /// <summary>
+    /// The selected t.
+    /// </summary>
     public T SelectedT
     {
         get
@@ -74,6 +89,11 @@ public class LBHT<T> : LBH
             return (T)SelectedO;
         }
     }
+    /// <summary>
+    /// Get items list t.
+    /// </summary>
+    /// <param name="items">The items.</param>
+    /// <returns>The get items list t result.</returns>
     public static List<T> GetItemsListT(ItemCollection items)
     {
         List<T> result = new List<T>();
@@ -92,7 +112,15 @@ public class LBHT<T> : LBH
 /// </summary>
 public class LBH
 {
+    /// <summary>
+    /// The selected.
+    /// </summary>
     protected object Selected = null;
+    /// <summary>
+    /// Add range 2 list.
+    /// </summary>
+    /// <param name="listBox">The list box.</param>
+    /// <param name="items">The items.</param>
     public static void AddRange2List(ListBox listBox, IList items)
     {
         foreach (var item in items)
@@ -100,6 +128,11 @@ public class LBH
             listBox.Items.Add(item);
         }
     }
+    /// <summary>
+    /// Add range 2.
+    /// </summary>
+    /// <param name="listBox">The list box.</param>
+    /// <param name="list">The list.</param>
     public static void AddRange2(ListBox listBox, params object[] list)
     {
         foreach (var item in list)
@@ -107,6 +140,10 @@ public class LBH
             listBox.Items.Add(item);
         }
     }
+    /// <summary>
+    /// Add range.
+    /// </summary>
+    /// <param name="list">The list.</param>
     public void AddRange(params object[] list)
     {
         //var enu = CA.ToEnumerable(list);
@@ -127,6 +164,9 @@ public class LBH
         }
         ClipboardService.SetText(stringBuilder.ToString());
     }
+    /// <summary>
+    /// Copy to clipboard short.
+    /// </summary>
     public void CopyToClipboardShort()
     {
         StringBuilder stringBuilder = new StringBuilder();
@@ -137,6 +177,9 @@ public class LBH
         ClipboardService.SetText(stringBuilder.ToString());
     }
     #region DPP
+    /// <summary>
+    /// The item removed.
+    /// </summary>
     public event Action<object> ItemRemoved;
     /// <summary>
     /// Dont register 
@@ -147,6 +190,9 @@ public class LBH
     /// </summary>
     protected ListBox lb;
     #endregion
+    /// <summary>
+    /// The mb.
+    /// </summary>
     protected MouseButton mb = MouseButton.XButton1;
     private void Lb_MouseDown(object sender, MouseButtonEventArgs eventArgs)
     {
@@ -181,9 +227,21 @@ public class LBH
             Selected = null;
         }
     }
+    /// <summary>
+    /// The tag.
+    /// </summary>
     public bool Tag = false;
+    /// <summary>
+    /// The run one.
+    /// </summary>
     public bool runOne = false;
+    /// <summary>
+    /// The save to clipboard.
+    /// </summary>
     public bool saveToClipboard = false;
+    /// <summary>
+    /// The remove one.
+    /// </summary>
     public bool removeOne = false;
     /// <summary>
     /// Back - otevrit v browseru
@@ -231,6 +289,9 @@ public class LBH
             #endregion
         }
     }
+    /// <summary>
+    /// Run selected.
+    /// </summary>
     protected void RunSelected()
     {
         if (Selected is IListBoxHelperItem)
@@ -308,6 +369,10 @@ public class LBH
         lb.Items.Remove(item);
     }
     #endregion
+    /// <summary>
+    /// Get items list string.
+    /// </summary>
+    /// <returns>The get items list string result.</returns>
     public List<string> GetItemsListString()
     {
         List<string> result = new List<string>();
@@ -317,6 +382,11 @@ public class LBH
         }
         return result;
     }
+    /// <summary>
+    /// Get selected list string.
+    /// </summary>
+    /// <param name="selectedObjectCollection">The selected object collection.</param>
+    /// <returns>The get selected list string result.</returns>
     public static List<string> GetSelectedListString(IList selectedObjectCollection)
     {
         List<string> result = new List<string>();
@@ -326,6 +396,12 @@ public class LBH
         }
         return result;
     }
+    /// <summary>
+    /// Get items list t t 1.
+    /// </summary>
+    /// <typeparam name="T1">The type T1.</typeparam>
+    /// <param name="objectCollection">The object collection.</param>
+    /// <returns>The get items list t t 1 result.</returns>
     public static List<T1> GetItemsListT<T1>(ItemCollection objectCollection)
     {
         List<T1> result = new List<T1>();
@@ -335,6 +411,11 @@ public class LBH
         }
         return result;
     }
+    /// <summary>
+    /// Get items list string.
+    /// </summary>
+    /// <param name="objectCollection">The object collection.</param>
+    /// <returns>The get items list string result.</returns>
     public static List<string> GetItemsListString(ItemCollection objectCollection)
     {
         List<string> result = new List<string>();

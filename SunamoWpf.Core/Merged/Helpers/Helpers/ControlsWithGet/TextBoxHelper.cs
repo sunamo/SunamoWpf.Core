@@ -1,12 +1,18 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ControlsWithGet;
 
+/// <summary>
+/// Represents the text box helper type.
+/// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public class TextBoxHelper
 {
     static Type type = typeof(TextBoxHelper);
     static Dictionary<int, double> averageNumberWidthOnFontSize = new Dictionary<int, double>();
     static Dictionary<int, double> averageCharWidthOnFontSize = new Dictionary<int, double>();
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         set
@@ -29,6 +35,9 @@ public class TextBoxHelper
         var lastLine = txt.GetLastVisibleLineIndex();
         return lastLine - firstLine;
     }
+    /// <summary>
+    /// Register highlight all text box.
+    /// </summary>
     public static void RegisterHighlightAllTextBox()
     {
         EventManager.RegisterClassHandler(typeof(TextBox),
@@ -75,6 +84,12 @@ public class TextBoxHelper
     {
         InicializeWidths();
     }
+    /// <summary>
+    /// Get line length.
+    /// </summary>
+    /// <param name="txt">The txt.</param>
+    /// <param name="line">The line.</param>
+    /// <returns>The get line length result.</returns>
     public static int GetLineLength(TextBox txt, int line)
     {
         // Counting from 0
@@ -90,6 +105,12 @@ public class TextBoxHelper
         // Counting from 0
         return txt.GetCharacterIndexFromLineIndex(line);
     }
+    /// <summary>
+    /// Get line text.
+    /// </summary>
+    /// <param name="txt">The txt.</param>
+    /// <param name="line">The line.</param>
+    /// <returns>The get line text result.</returns>
     public static string GetLineText(TextBox txt, int line)
     {
         // Counting from 0
@@ -116,6 +137,11 @@ public class TextBoxHelper
         // I had combobox which was focused by ctrl+1. But then lost focus due to next line
         //txt.Focus();
     }
+    /// <summary>
+    /// Scroll to line.
+    /// </summary>
+    /// <param name="txtContent">The txt content.</param>
+    /// <param name="line">The line.</param>
     public static void ScrollToLine(TextEditor txtContent, int line)
     {
         if (txtContent == null)
@@ -166,6 +192,9 @@ public class TextBoxHelper
         Debug.WriteLine("ScrollToLine: " + line);
 #endif
     }
+    /// <summary>
+    /// Inicialize widths.
+    /// </summary>
     public static void InicializeWidths()
     {
         StackPanel stackPanel = new StackPanel();
@@ -231,6 +260,13 @@ public class TextBoxHelper
     {
         control.Validate(textBox, ref validateData);
     }
+    /// <summary>
+    /// Get optimal width for count of chars.
+    /// </summary>
+    /// <param name="count">The count.</param>
+    /// <param name="alsoLetters">The also letters.</param>
+    /// <param name="txt">The txt.</param>
+    /// <returns>The get optimal width for count of chars result.</returns>
     public static double GetOptimalWidthForCountOfChars(int count, bool alsoLetters, TextBox txt)
     {
         double countDouble = count;

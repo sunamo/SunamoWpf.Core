@@ -1,15 +1,33 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Input;
 
+/// <summary>
+/// Represents the select more folders with template sets type.
+/// </summary>
 public class SelectMoreFoldersWithTemplateSets
 {
     EnterOneValueWindow enterNameOfSet = null;
     ComboBoxHelper<string> cbSetsFoldersHelper = null;
+    /// <summary>
+    /// The cb sets folders.
+    /// </summary>
     public ComboBox cbSetsFolders = new ComboBox();
     TextBlock tbSetsFolders = new TextBlock();
+    /// <summary>
+    /// The tb sets folders key.
+    /// </summary>
     public string tbSetsFoldersKey = "SavedFoldersSets";
+    /// <summary>
+    /// The tb folders.
+    /// </summary>
     public TextBlock tbFolders = new TextBlock();
+    /// <summary>
+    /// The tb folders key.
+    /// </summary>
     public string tbFoldersKey = "Folders";
+    /// <summary>
+    /// The txt folders.
+    /// </summary>
     public SelectMoreFolders txtFolders = new SelectMoreFolders();
     string pathFromCtor;
     /// <summary>

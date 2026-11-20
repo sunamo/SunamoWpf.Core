@@ -1,5 +1,8 @@
 namespace SunamoWpf.Data.Delegates;
 
+/// <summary>
+/// Represents the void wpf color type.
+/// </summary>
 public delegate void VoidWpfColor(System.Windows.Media.Color color);
 
 #region Mono

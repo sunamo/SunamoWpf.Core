@@ -33,6 +33,9 @@ public interface IConfigurableWindowSettings
     /// </summary>
     WindowState WindowState { get; set; }
 
+    /// <summary>
+    /// Gets or sets the always on top.
+    /// </summary>
     bool AlwaysOnTop { get; set; }
 }
 
@@ -59,6 +62,15 @@ public class ConfigurableWindowSettings
 
     #region Constructor
 
+    /// <summary>
+    /// Initializes a new instance of the configurable window settings class.
+    /// </summary>
+    /// <param name="settings2">The settings 2.</param>
+    /// <param name="isFirstRunProp">The is first run prop.</param>
+    /// <param name="windowLocationProp">The window location prop.</param>
+    /// <param name="windowSizeProp">The window size prop.</param>
+    /// <param name="windowStateProp">The window state prop.</param>
+    /// <param name="alwaysOnTopProp">The always on top prop.</param>
     public ConfigurableWindowSettings(
         ApplicationDataContainer settings2,
         string isFirstRunProp,
@@ -80,12 +92,23 @@ public class ConfigurableWindowSettings
 
     #region GetValue / SetValue
 
+    /// <summary>
+    /// Get value t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="propName">The prop name.</param>
+    /// <returns>The get value t result.</returns>
     protected T GetValue<T>(string propName)
     {
         var value = data.Get<T>(WpfApp.window, propName);
         return value;
     }
 
+    /// <summary>
+    /// Set value.
+    /// </summary>
+    /// <param name="propName">The prop name.</param>
+    /// <param name="value">The value.</param>
     protected void SetValue(string propName, object value)
     {
 
@@ -99,30 +122,45 @@ public class ConfigurableWindowSettings
 
     #region IConfigurableWindowSettings Members
 
+    /// <summary>
+    /// The is first run.
+    /// </summary>
     public bool IsFirstRun
     {
         get { return GetValue<bool>(_isFirstRunProp); }
         protected set { SetValue(_isFirstRunProp, value); }
     }
 
+    /// <summary>
+    /// The window location.
+    /// </summary>
     public Point WindowLocation
     {
         get { return GetValue<Point>(_windowLocationProp); }
         set { SetValue(_windowLocationProp, value); }
     }
 
+    /// <summary>
+    /// The window size.
+    /// </summary>
     public Size WindowSize
     {
         get { return GetValue<Size>(_windowSizeProp); }
         set { SetValue(_windowSizeProp, value); }
     }
 
+    /// <summary>
+    /// The window state.
+    /// </summary>
     public WindowState WindowState
     {
         get { return GetValue<WindowState>(_windowStateProp); }
         set { SetValue(_windowStateProp, value); }
     }
 
+    /// <summary>
+    /// The always on top.
+    /// </summary>
     public bool AlwaysOnTop
     {
         get { return GetValue<bool>(_alwaysOnTopProp); }

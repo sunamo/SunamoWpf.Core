@@ -2,6 +2,9 @@
 #region Mono
 
 
+/// <summary>
+/// Represents the drawing image helper type.
+/// </summary>
 public class DrawingImageHelper
 {
 

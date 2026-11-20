@@ -24,6 +24,10 @@ public static partial class ButtonHelper{
         return button;
     }
 
+    /// <summary>
+    /// Perform click.
+    /// </summary>
+    /// <param name="btnEnter">The btn enter.</param>
     public static void PerformClick(Button btnEnter)
     {
         btnEnter.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));

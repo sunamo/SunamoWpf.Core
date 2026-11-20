@@ -1,5 +1,8 @@
 namespace SunamoWpf.Data;
 
+    /// <summary>
+    /// Represents the insert letter after mouse down data type.
+    /// </summary>
     public class InsertLetterAfterMouseDownData
     {
     /// <summary>

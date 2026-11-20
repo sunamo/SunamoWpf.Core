@@ -3,6 +3,12 @@ namespace SunamoWpf.Helpers.ContainerControls;
 
 public partial class GridHelper
 {
+    /// <summary>
+    /// Get auto size.
+    /// </summary>
+    /// <param name="columns">The columns.</param>
+    /// <param name="rows">The rows.</param>
+    /// <returns>The get auto size result.</returns>
     public static Grid GetAutoSize(int columns, int rows)
     {
         Grid grid = new Grid();
@@ -28,6 +34,11 @@ public partial class GridHelper
         }
     }
 
+    /// <summary>
+    /// Get column definition.
+    /// </summary>
+    /// <param name="oneC">The one c.</param>
+    /// <returns>The get column definition result.</returns>
     public static ColumnDefinition GetColumnDefinition(GridLength oneC)
     {
         ColumnDefinition columnDefinition = new ColumnDefinition();
@@ -35,6 +46,11 @@ public partial class GridHelper
         return columnDefinition;
     }
 
+    /// <summary>
+    /// Get column definition direct.
+    /// </summary>
+    /// <param name="pixels">The pixels.</param>
+    /// <returns>The get column definition direct result.</returns>
     public static ColumnDefinition GetColumnDefinitionDirect(double pixels)
     {
         ColumnDefinition columnDefinition = new ColumnDefinition();
@@ -42,6 +58,12 @@ public partial class GridHelper
         return columnDefinition;
     }
 
+    /// <summary>
+    /// Get column definition direct.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="type">The type.</param>
+    /// <returns>The get column definition direct result.</returns>
     public static ColumnDefinition GetColumnDefinitionDirect(double value, GridUnitType type)
     {
         ColumnDefinition columnDefinition = new ColumnDefinition();
@@ -60,6 +82,11 @@ public partial class GridHelper
         return rowDefinition;
     }
 
+    /// <summary>
+    /// Get row definition direct.
+    /// </summary>
+    /// <param name="pixels">The pixels.</param>
+    /// <returns>The get row definition direct result.</returns>
     public static RowDefinition GetRowDefinitionDirect(double pixels)
     {
         RowDefinition rowDefinition = new RowDefinition();
@@ -67,6 +94,12 @@ public partial class GridHelper
         return rowDefinition;
     }
 
+    /// <summary>
+    /// Get row definition direct.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="type">The type.</param>
+    /// <returns>The get row definition direct result.</returns>
     public static RowDefinition GetRowDefinitionDirect(double value, GridUnitType type)
     {
         RowDefinition rowDefinition = new RowDefinition();

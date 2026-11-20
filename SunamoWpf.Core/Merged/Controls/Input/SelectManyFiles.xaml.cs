@@ -4,8 +4,15 @@ namespace SunamoWpf.Controls.Input;
 
 public partial class SelectManyFiles : UserControl
 {
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(SelectManyFiles);
 
+    /// <summary>
+    /// Validate.
+    /// </summary>
+    /// <param name="validateData">The validate data.</param>
     public void Validate(ref ValidateDataWpf validateData)
     {
         if (validateData == null)
@@ -18,12 +25,18 @@ public partial class SelectManyFiles : UserControl
         }
     }
 
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get => ValidationHelper.validated;
         set => ValidationHelper.validated = value;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the select many files class.
+    /// </summary>
     public SelectManyFiles()
     {
         try
@@ -40,12 +53,21 @@ public partial class SelectManyFiles : UserControl
         Loaded += SelectMoreFiles_Loaded;
     }
 
+    /// <summary>
+    /// The save set as template.
+    /// </summary>
     public event Action SaveSetAsTemplate;
     /// <summary>
     /// Only adding File with empty path
     /// </summary>
     public event Action<object, List<string>> FileAdded;
+    /// <summary>
+    /// The file changed.
+    /// </summary>
     public event Action<object, List<string>> FileChanged;
+    /// <summary>
+    /// The file removed.
+    /// </summary>
     public event Action<object, List<string>> FileRemoved;
 
     private void SelectMoreFiles_Loaded(object sender, RoutedEventArgs eventArgs)
@@ -55,6 +77,10 @@ public partial class SelectManyFiles : UserControl
         AddFile(string.Empty);
     }
 
+    /// <summary>
+    /// Add file.
+    /// </summary>
+    /// <param name="File">The file.</param>
     public void AddFile(string File)
     {
         //TextBox sf = new TextBox();
@@ -83,6 +109,10 @@ public partial class SelectManyFiles : UserControl
         }
     }
 
+    /// <summary>
+    /// Sf file removed.
+    /// </summary>
+    /// <param name="selectFile">The select file.</param>
     public void Sf_FileRemoved(SelectFile selectFile)
     {
         spFiles.Children.Remove(selectFile);
@@ -107,6 +137,9 @@ public partial class SelectManyFiles : UserControl
 
 
 
+    /// <summary>
+    /// Remove all files.
+    /// </summary>
     public void RemoveAllFiles()
     {
         for (int index = spFiles.Children.Count - 1; index >= 0; index--)

@@ -4,8 +4,17 @@ namespace SunamoWpf.Controls.Input;
 public partial class SelectFolder : UserControl
 {
     //public event VoidString FolderSelected;
+    /// <summary>
+    /// The folder changed.
+    /// </summary>
     public event Action<object, string> FolderChanged;
+    /// <summary>
+    /// The folder removed.
+    /// </summary>
     public event VoidT<SelectFolder> FolderRemoved;
+    /// <summary>
+    /// Initializes a new instance of the select folder class.
+    /// </summary>
     public SelectFolder()
     {
         try

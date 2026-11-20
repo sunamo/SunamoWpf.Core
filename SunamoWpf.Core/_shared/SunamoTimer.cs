@@ -2,9 +2,15 @@ namespace SunamoWpf._shared;
 
 using Timer = System.Timers.Timer;
 
+/// <summary>
+/// Represents the sunamo timer type.
+/// </summary>
 public class SunamoTimer
 {
     private readonly Action a;
+    /// <summary>
+    /// The t.
+    /// </summary>
     protected Timer t;
     internal SunamoTimer(int milliseconds, Action action, bool runImmediately)
     {
