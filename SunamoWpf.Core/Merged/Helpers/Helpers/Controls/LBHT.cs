@@ -297,11 +297,11 @@ public class LBH
         if (Selected is IListBoxHelperItem)
         {
             IListBoxHelperItem lbi = Selected as IListBoxHelperItem;
-            PH.Start();
+            PHWpf.Start();
         }
         else
         {
-            PH.Start();
+            PHWpf.Start();
         }
     }
     #endregion

@@ -5,7 +5,7 @@ namespace SunamoWpf;
 ///     Not include in standard
 /// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
-public partial class PH
+public partial class PHWpf
 {
     /// <summary>
     /// Is already running.

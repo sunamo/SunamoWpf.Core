@@ -14,7 +14,7 @@ public class PHDesktop
     public static void OpenFileInTag(object sender, RoutedEventArgs eventArgs)
     {
         var frameworkElement = (FrameworkElement)sender;
-        PH.Start();
+        PHWpf.Start();
     }
     private static void KillProcessAndChildren(int pid)
     {
