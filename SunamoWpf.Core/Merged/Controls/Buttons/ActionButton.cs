@@ -36,7 +36,6 @@ public class ActionButton<T> : Button
                 ClipboardService.SetText(what.ToString());
                 break;
             case ButtonAction.Run:
-                PHWpf.Start();
                 break;
             default:
                 break;
