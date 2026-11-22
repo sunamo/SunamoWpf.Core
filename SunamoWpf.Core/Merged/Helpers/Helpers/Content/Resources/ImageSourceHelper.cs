@@ -59,6 +59,13 @@ public static class ImageSourceHelper
     //} 
     #endregion
 
+    /// <summary>
+    /// Crop image.
+    /// </summary>
+    /// <param name="point">The point.</param>
+    /// <param name="size">The size.</param>
+    /// <param name="bitmapImage">The bitmap image.</param>
+    /// <returns>The crop image result.</returns>
     public static BitmapFrame CropImage(System.Windows.Point point, System.Windows.Size size, BitmapImage bitmapImage)
     {
         // bi je BitmapImage obrázek ke výřezu, point je bod od kterého se vyřezává, size je velikost která se vyřezává

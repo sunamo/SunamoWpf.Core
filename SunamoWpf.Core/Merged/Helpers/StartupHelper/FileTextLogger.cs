@@ -1,13 +1,22 @@
 ﻿#define ASYNC
 namespace SunamoWpf.StartupHelper;
 
+/// <summary>
+/// Represents the file text logger type.
+/// </summary>
 public class FileTextLogger
 {
     /// <summary>
     /// It was be totally nonsense, just do it in memory. Even if I call sw.Close and sw.Dispose app still hold the file
     /// </summary>
     public StreamWriter sw = null;
+    /// <summary>
+    /// The fn.
+    /// </summary>
     public string fn = null;
+    /// <summary>
+    /// The sb.
+    /// </summary>
     public StringBuilder sb = new StringBuilder();
 
     /// <summary>
@@ -30,6 +39,10 @@ public class FileTextLogger
         WriteNewLine(DateTime.Now.ToLongTimeString());
     }
 
+    /// <summary>
+    /// Write new line.
+    /// </summary>
+    /// <param name="line">The line.</param>
     public void WriteNewLine(string line)
     {
         // Is written StartupHelper.Dispose => just sb here

@@ -1,8 +1,14 @@
 #define ASYNC
 namespace SunamoWpf.Extensions;
 
+/// <summary>
+/// Represents the list box extensions type.
+/// </summary>
 public static class ListBoxExtensions
 {
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get => ValidationHelper.validated;

@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the text box extensions type.
+/// </summary>
 public static partial class TextBoxExtensions
 {
     /// <summary>
@@ -13,6 +16,10 @@ public static partial class TextBoxExtensions
         set => ValidationHelper.validated = value;
     }
 
+    /// <summary>
+    /// Create tag if not exists.
+    /// </summary>
+    /// <param name="txt">The txt.</param>
     public static void CreateTagIfNotExists(this TextBox txt)
     {
         if (txt.Tag == null )
@@ -21,11 +28,21 @@ public static partial class TextBoxExtensions
         }
     }
 
+    /// <summary>
+    /// Get tag.
+    /// </summary>
+    /// <param name="txt">The txt.</param>
+    /// <returns>The get tag result.</returns>
     public static TextBoxTag GetTag(this TextBox txt)
     {
         return txt.Tag as TextBoxTag;
     }
 
+    /// <summary>
+    /// Add placeholder.
+    /// </summary>
+    /// <param name="txt">The txt.</param>
+    /// <param name="placeholder">The placeholder.</param>
     public static void AddPlaceholder(this TextBox txt, string placeholder)
     {
         txt.CreateTagIfNotExists();

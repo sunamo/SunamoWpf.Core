@@ -1,13 +1,28 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Visualization;
 
+/// <summary>
+/// Represents the progress bar with label type.
+/// </summary>
 public class ProgressBarWithLabel : UserControl
 {
+    /// <summary>
+    /// The pb.
+    /// </summary>
     public System.Windows.Controls.ProgressBar pb = null;
     
+    /// <summary>
+    /// The tb.
+    /// </summary>
     public TextBlock tb = null;
+    /// <summary>
+    /// The prefix with constant.
+    /// </summary>
     public const string prefixWith = "   ";
 
+    /// <summary>
+    /// The tb text.
+    /// </summary>
     public string TbText
     {
         get
@@ -27,6 +42,9 @@ public class ProgressBarWithLabel : UserControl
         }
     }
 
+    /// <summary>
+    /// Initializes a new instance of the progress bar with label class.
+    /// </summary>
     public ProgressBarWithLabel()
     {
         StackPanel stackPanel = new StackPanel();

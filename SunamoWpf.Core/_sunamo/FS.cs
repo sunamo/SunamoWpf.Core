@@ -2,10 +2,21 @@ namespace SunamoWpf.Core._sunamo;
 
 using PathMs = System.IO.Path;
 
+/// <summary>
+/// Represents the FS type.
+/// </summary>
 public class FS
 {
+    /// <summary>
+    /// The invalid file name chars.
+    /// </summary>
     protected static readonly List<char> invalidFileNameChars = Path.GetInvalidFileNameChars().ToList();
 
+    /// <summary>
+    /// Replace incorrect characters file.
+    /// </summary>
+    /// <param name="fileName">The file name.</param>
+    /// <returns>The replace incorrect characters file result.</returns>
     public static string ReplaceIncorrectCharactersFile(string fileName)
     {
         var result = fileName;
@@ -22,10 +33,18 @@ public class FS
         return result;
     }
 
+    /// <summary>
+    /// Create upfolders psysically unless there.
+    /// </summary>
+    /// <param name="nad">The nad.</param>
     public static void CreateUpfoldersPsysicallyUnlessThere(string nad)
     {
         CreateFoldersPsysicallyUnlessThere(Path.GetDirectoryName(nad));
     }
+    /// <summary>
+    /// Create folders psysically unless there.
+    /// </summary>
+    /// <param name="nad">The nad.</param>
     public static void CreateFoldersPsysicallyUnlessThere(string nad)
     {
         ThrowEx.IsNullOrEmpty("nad", nad);
@@ -61,19 +80,40 @@ nad
     }
 
 
+    /// <summary>
+    /// Exists directory.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>The exists directory result.</returns>
     public static bool ExistsDirectory(string value)
     {
         return Directory.Exists(value);
     }
+    /// <summary>
+    /// Exists file.
+    /// </summary>
+    /// <param name="selectedFile">The selected file.</param>
+    /// <returns>The exists file result.</returns>
     public static bool ExistsFile(string selectedFile)
     {
         return File.Exists(selectedFile);
     }
+    /// <summary>
+    /// Get file name.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The get file name result.</returns>
     public static string GetFileName(string path)
     {
         return PathMs.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
     }
 
+    /// <summary>
+    /// Get size in auto string.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="fromUnit">The from unit.</param>
+    /// <returns>The get size in auto string result.</returns>
     public static string GetSizeInAutoString(long value, ComputerSizeUnitsWpf fromUnit)
     {
         return GetSizeInAutoString((double)value, fromUnit);
@@ -92,6 +132,12 @@ nad
         else if (toUnit == ComputerSizeUnitsWpf.TB && fromUnit != ComputerSizeUnitsWpf.TB) value *= 1024L * 1024L * 1024L * 1024L;
         return value;
     }
+    /// <summary>
+    /// Get size in auto string.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <param name="fromUnit">The from unit.</param>
+    /// <returns>The get size in auto string result.</returns>
     public static string GetSizeInAutoString(double value, ComputerSizeUnitsWpf fromUnit)
     {
         if (fromUnit != ComputerSizeUnitsWpf.B)
@@ -113,6 +159,11 @@ nad
         return value + " TB";
     }
 
+    /// <summary>
+    /// Get size in auto string.
+    /// </summary>
+    /// <param name="size">The size.</param>
+    /// <returns>The get size in auto string result.</returns>
     public static string GetSizeInAutoString(double size)
     {
         var unit = ComputerSizeUnitsWpf.B;
@@ -139,6 +190,11 @@ nad
         return size + " " + unit;
     }
 
+    /// <summary>
+    /// Stream to array bytes.
+    /// </summary>
+    /// <param name="stream">The stream.</param>
+    /// <returns>The stream to array bytes result.</returns>
     public static byte[] StreamToArrayBytes(System.IO.Stream stream)
     {
         if (stream == null)
@@ -196,6 +252,11 @@ nad
         }
     }
 
+    /// <summary>
+    /// Try delete file.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>The try delete file result.</returns>
     public static bool TryDeleteFile(string item)
     {
         // TODO: To all code message logging as here
@@ -207,16 +268,25 @@ nad
         }
         catch
         {
-            //WpfLogger.Error(Translate.FromKey(XlfKeys.FileCanTBeDeleted) + ": " + item);
             return false;
         }
     }
 
+    /// <summary>
+    /// With end slash.
+    /// </summary>
+    /// <param name="csprojFolderInput">The csproj folder input.</param>
+    /// <returns>The with end slash result.</returns>
     public static string WithEndSlash(string csprojFolderInput)
     {
         return csprojFolderInput.TrimEnd('\\') + "\\";
     }
 
+    /// <summary>
+    /// With end slash.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The with end slash result.</returns>
     public static string WithEndSlash(ref string path)
     {
         if (path != string.Empty)
@@ -228,12 +298,22 @@ nad
         return path;
     }
 
+    /// <summary>
+    /// First char upper.
+    /// </summary>
+    /// <param name="nazevPP">The nazev PP.</param>
+    /// <returns>The first char upper result.</returns>
     public static string FirstCharUpper(ref string nazevPP)
     {
         nazevPP = FirstCharUpper(nazevPP);
         return nazevPP;
     }
 
+    /// <summary>
+    /// First char upper.
+    /// </summary>
+    /// <param name="nazevPP">The nazev PP.</param>
+    /// <returns>The first char upper result.</returns>
     public static string FirstCharUpper(string nazevPP)
     {
         if (nazevPP.Length == 1)

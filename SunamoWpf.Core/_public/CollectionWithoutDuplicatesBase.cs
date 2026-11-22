@@ -1,5 +1,8 @@
 namespace SunamoWpf._public;
 
+/// <summary>
+/// Represents the collection without duplicates base t type.
+/// </summary>
 public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
 {
     internal static bool br = false;
@@ -8,6 +11,9 @@ public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
     private bool? _allowNull = false;
     internal List<T> c;
     internal List<string> sr;
+    /// <summary>
+    /// The ts.
+    /// </summary>
     protected string ts = null;
 
     internal CollectionWithoutDuplicatesBase()
@@ -69,6 +75,10 @@ public abstract class CollectionWithoutDuplicatesBase<T> //: IDumpAsString
         return result;
     }
 
+    /// <summary>
+    /// Is comparing by string.
+    /// </summary>
+    /// <returns>The is comparing by string result.</returns>
     protected abstract bool IsComparingByString();
     internal abstract bool? Contains(T item);
 

@@ -1,5 +1,8 @@
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the writer event log type.
+/// </summary>
 public static partial class WriterEventLog
 {
     /// <summary>

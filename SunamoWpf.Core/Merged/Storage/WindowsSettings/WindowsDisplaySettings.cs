@@ -1,11 +1,23 @@
 ﻿#define ASYNC
 namespace SunamoWpf.WindowsSettings;
 
+/// <summary>
+/// Represents the windows display settings type.
+/// </summary>
 public class WindowsDisplaySettings
 {
+    /// <summary>
+    /// Represents the device cap type.
+    /// </summary>
     public enum DeviceCap
     {
+        /// <summary>
+        /// The VERTRES value.
+        /// </summary>
         VERTRES = 10,
+        /// <summary>
+        /// The DESKTOPVERTRES value.
+        /// </summary>
         DESKTOPVERTRES = 117,
     }
 
@@ -22,5 +34,8 @@ public class WindowsDisplaySettings
     //    return ScreenScalingFactor; // 1.25 = 125%
     //}
 
+    /// <summary>
+    /// The windows display resolution.
+    /// </summary>
     public static readonly List<string> windowsDisplayResolution = CA.ToListString("2560x1440", "2048x1152", "1920x1440", "1920x1200", "1920x1080", "1856x1392", "1792x1344", "1680x1050", "1600x1200", "1600x900", "1440x1050", "1366x768", "1360x768", "1280x1024", "1280x960", "1280x800", "1280x768", "1280x720", "1280x600", "1200x690", "1152x684", "1024x768", "800x600");
 }

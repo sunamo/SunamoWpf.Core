@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the visual tree helpers type.
+/// </summary>
 public class VisualTreeHelpers
 {
     /// <summary>

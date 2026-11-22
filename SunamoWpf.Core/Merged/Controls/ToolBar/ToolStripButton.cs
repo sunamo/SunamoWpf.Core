@@ -1,20 +1,47 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.ToolBar;
 
+/// <summary>
+/// Represents the text image relation type.
+/// </summary>
 public enum TextImageRelation
 {
+    /// <summary>
+    /// The image above text value.
+    /// </summary>
     ImageAboveText,
+    /// <summary>
+    /// The image before text value.
+    /// </summary>
     ImageBeforeText
 }
 
+/// <summary>
+/// Represents the tool strip button type.
+/// </summary>
 public class ToolStripButton : ToggleButton
 {
-    public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(Translate.FromKey(XlfKeys.Image), typeof(ImageSource), typeof(ToolStripButton));
+    /// <summary>
+    /// The image property.
+    /// </summary>
+    public static readonly DependencyProperty ImageProperty = DependencyProperty.Register("Image", typeof(ImageSource), typeof(ToolStripButton));
+    /// <summary>
+    /// The text property.
+    /// </summary>
     public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text", typeof(string), typeof(ToolStripButton));
     //public static readonly DependencyProperty CheckedProperty = DependencyProperty.Register("Checked", typeof(bool), typeof(ToolStripButton));
+    /// <summary>
+    /// The check on click property.
+    /// </summary>
     public static readonly DependencyProperty CheckOnClickProperty = DependencyProperty.Register("CheckOnClick", typeof(bool), typeof(ToolStripButton));
     //public static readonly DependencyProperty EnabledProperty = DependencyProperty.Register("Enabled", typeof(bool), typeof(ToolStripButton));
+    /// <summary>
+    /// The text image relation property.
+    /// </summary>
     public static readonly DependencyProperty TextImageRelationProperty = DependencyProperty.Register("TextImageRelation", typeof(TextImageRelation), typeof(ToolStripButton), new PropertyMetadata(TextImageRelation.ImageAboveText));
+    /// <summary>
+    /// The fixed image size property.
+    /// </summary>
     public static readonly DependencyProperty FixedImageSizeProperty = DependencyProperty.Register("FixedImageSize", typeof(Size), typeof(ToolStripButton), new PropertyMetadata(null));
     StackPanel sp = new StackPanel();
     Image image = null;
@@ -25,6 +52,9 @@ public class ToolStripButton : ToggleButton
 
     }
 
+    /// <summary>
+    /// On click.
+    /// </summary>
     protected override void OnClick()
     {
         base.OnClick();
@@ -32,6 +62,10 @@ public class ToolStripButton : ToggleButton
 
     }
 
+    /// <summary>
+    /// On checked.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
     protected override void OnChecked(RoutedEventArgs eventArgs)
     {
         base.OnChecked(eventArgs);
@@ -46,22 +80,38 @@ public class ToolStripButton : ToggleButton
     #region MyRegion
     #endregion
 
+    /// <summary>
+    /// Initializes a new instance of the tool strip button class.
+    /// </summary>
+    /// <param name="image">The image.</param>
+    /// <param name="text">The text.</param>
     public ToolStripButton(ImageSource image, string text)
     {
         Image = image;
         Text = text;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the tool strip button class.
+    /// </summary>
+    /// <param name="image">The image.</param>
     public ToolStripButton(ImageSource image)
     {
         Image = image;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the tool strip button class.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public ToolStripButton(string text)
     {
         Text = text;
     }
 
+    /// <summary>
+    /// The image.
+    /// </summary>
     public ImageSource Image
     {
         get
@@ -85,6 +135,9 @@ public class ToolStripButton : ToggleButton
         }
     }
 
+    /// <summary>
+    /// The text.
+    /// </summary>
     public string Text
     {
         get
@@ -108,6 +161,9 @@ public class ToolStripButton : ToggleButton
         }
     }
 
+    /// <summary>
+    /// The check on click.
+    /// </summary>
     public bool CheckOnClick
     {
         get
@@ -120,6 +176,9 @@ public class ToolStripButton : ToggleButton
         }
     }
 
+    /// <summary>
+    /// The text image relation.
+    /// </summary>
     public TextImageRelation TextImageRelation
     {
         get
@@ -170,6 +229,9 @@ public class ToolStripButton : ToggleButton
         //base.InvalidateVisual();
     }
 
+    /// <summary>
+    /// The fixed image size.
+    /// </summary>
     public Size FixedImageSize
     {
         get

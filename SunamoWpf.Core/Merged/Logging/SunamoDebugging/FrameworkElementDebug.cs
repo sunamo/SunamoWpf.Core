@@ -1,7 +1,14 @@
 namespace SunamoWpf.SunamoDebugging;
 
+/// <summary>
+/// Represents the framework element debug type.
+/// </summary>
 public class FrameworkElementDebug
 {
+    /// <summary>
+    /// Actual size.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
     public static void ActualSize(FrameworkElement frameworkElement)
     {
         if (frameworkElement == null)

@@ -16,10 +16,19 @@ GetString(uri.ToString()) - the same string as passed in ctor Uri
     /// </summary>
     internal static EmbeddedResourcesH ci = null;
 
+    /// <summary>
+    /// The default namespace.
+    /// </summary>
     protected string _defaultNamespace;
 
+    /// <summary>
+    /// The entry assembly.
+    /// </summary>
     protected Assembly _entryAssembly;
 
+    /// <summary>
+    /// Initializes a new instance of the embedded resources h class.
+    /// </summary>
     protected EmbeddedResourcesH()
     {
     }
@@ -35,6 +44,9 @@ GetString(uri.ToString()) - the same string as passed in ctor Uri
         _defaultNamespace = defaultNamespace;
     }
 
+    /// <summary>
+    /// The entry assembly.
+    /// </summary>
     protected Assembly entryAssembly
     {
         get

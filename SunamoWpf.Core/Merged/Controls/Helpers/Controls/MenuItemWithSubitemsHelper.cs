@@ -8,9 +8,21 @@ namespace SunamoWpf.Controls.Helpers.Controls;
 public class SuMenuItemWithSubitemsHelper
 {
     static Type type = typeof(SuMenuItemWithSubitemsHelper);
+    /// <summary>
+    /// The tsddb.
+    /// </summary>
     protected SuMenuItem tsddb = null;
+    /// <summary>
+    /// The prev.
+    /// </summary>
     protected SuMenuItem prev = new SuMenuItem();
+    /// <summary>
+    /// The original tool tip text.
+    /// </summary>
     protected string originalToolTipText = "";
+    /// <summary>
+    /// The su menu item checked.
+    /// </summary>
     public event EventHandler SuMenuItemChecked;
     object selectedO = null;
     bool mnoho = false;
@@ -49,6 +61,11 @@ public class SuMenuItemWithSubitemsHelper
             }
         }
     }
+    /// <summary>
+    /// Add values of enum as items t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="defVal">The def val.</param>
     public void AddValuesOfEnumAsItems<T>(object defVal)
     {
         Dictionary<T, string> result = new Dictionary<T, string>();
@@ -61,6 +78,13 @@ public class SuMenuItemWithSubitemsHelper
         }
         AddValuesOfEnumAsItems<T>(result, defVal);
     }
+    /// <summary>
+    /// Add values of enum as items t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="items">The items.</param>
+    /// <param name="defVal">The def val.</param>
+    /// <param name="defMi">The def mi.</param>
     public void AddValuesOfEnumAsItems<T>(Dictionary<SuMenuItem, T> items, object defVal, SuMenuItem defMi)
     {
         Type type = typeof(T);
@@ -68,7 +92,7 @@ public class SuMenuItemWithSubitemsHelper
         {
             if (type.FullName != defVal.GetType().FullName)
             {
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.ParameterDefValInSuMenuItemWithSubitemsHelperAddValuesOfEnumAsItemsWasNotTypeOfEnum) + ".");
+                ThrowEx.Custom("Parameter def val in su menu item with subitems helper add values of enum as items was not type of enum" + ".");
             }
         }
         T _def = (T)defVal;
@@ -83,6 +107,12 @@ public class SuMenuItemWithSubitemsHelper
         }
         prev = defMi;
     }
+    /// <summary>
+    /// Add values of enum as items t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="items">The items.</param>
+    /// <param name="defVal">The def val.</param>
     public void AddValuesOfEnumAsItems<T>(Dictionary<T, string> items, object defVal)
     {
         Type type = typeof(T);
@@ -90,7 +120,7 @@ public class SuMenuItemWithSubitemsHelper
         {
             if (type.FullName != defVal.GetType().FullName)
             {
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.ParameterDefValInSuMenuItemWithSubitemsHelperAddValuesOfEnumAsItemsWasNotTypeOfEnum) + ".");
+                ThrowEx.Custom("Parameter def val in su menu item with subitems helper add values of enum as items was not type of enum" + ".");
             }
         }
         T _def = (T)defVal;
@@ -127,7 +157,13 @@ public class SuMenuItemWithSubitemsHelper
         }
         return null;
     }
+    /// <summary>
+    /// The zaskrtavat.
+    /// </summary>
     public bool zaskrtavat = false;
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public bool Selected
     {
         get
@@ -140,6 +176,9 @@ public class SuMenuItemWithSubitemsHelper
             //return SelectedO != null;
         }
     }
+    /// <summary>
+    /// The selected s.
+    /// </summary>
     public string SelectedS
     {
         get
@@ -147,6 +186,11 @@ public class SuMenuItemWithSubitemsHelper
             return SelectedO.ToString();
         }
     }
+    /// <summary>
+    /// Add values of enum as items.
+    /// </summary>
+    /// <param name="values">The values.</param>
+    /// <param name="zaskPrvni">The zask prvni.</param>
     public void AddValuesOfEnumAsItems(Array values, bool zaskPrvni)
     {
         tsddb.Items.Clear();
@@ -165,6 +209,11 @@ public class SuMenuItemWithSubitemsHelper
             index++;
         }
     }
+    /// <summary>
+    /// Tsmi click.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void tsmi_Click(object sender, RoutedEventArgs eventArgs)
     {
         prev.IsChecked = false;
@@ -188,6 +237,11 @@ public class SuMenuItemWithSubitemsHelper
             SuMenuItemChecked(sender, eventArgs);
         }
     }
+    /// <summary>
+    /// Add values of array as items.
+    /// </summary>
+    /// <param name="eventHandler">The event handler.</param>
+    /// <param name="items">The items.</param>
     public void AddValuesOfArrayAsItems(RoutedEventHandler eventHandler, object[] items)
     {
         tsddb.Items.Clear();
@@ -199,6 +253,11 @@ public class SuMenuItemWithSubitemsHelper
             index++;
         }
     }
+    /// <summary>
+    /// Add values of array as items.
+    /// </summary>
+    /// <param name="command">The command.</param>
+    /// <param name="items">The items.</param>
     public void AddValuesOfArrayAsItems(ICommand command, object[] items)
     {
         tsddb.Items.Clear();
@@ -211,6 +270,17 @@ public class SuMenuItemWithSubitemsHelper
             index++;
         }
     }
+    /// <summary>
+    /// Add values of array as items.
+    /// </summary>
+    /// <param name="cmd0">The cmd 0.</param>
+    /// <param name="items">The items.</param>
+    /// <param name="cmd1">The cmd 1.</param>
+    /// <param name="stovky">The stovky.</param>
+    /// <param name="cmd2">The cmd 2.</param>
+    /// <param name="desitky">The desitky.</param>
+    /// <param name="/*">The /*.</param>
+    /// <param name="jednotky*/">The jednotky.</param>
     public void AddValuesOfArrayAsItems(RoutedCommand cmd0, object[] items, RoutedCommand cmd1, List<StringBuilder> stovky, RoutedCommand cmd2, /*List<StringBuilder> desitky,*/ RoutedCommand cmd3 /*, List<StringBuilder> jednotky*/)
     {
         mnoho = true;
@@ -321,6 +391,13 @@ public class SuMenuItemWithSubitemsHelper
             index++;
         }
     }
+    /// <summary>
+    /// Add values of int as items.
+    /// </summary>
+    /// <param name="eventHandler">The event handler.</param>
+    /// <param name="initialValue">The initial value.</param>
+    /// <param name="resizeOf">The resize of.</param>
+    /// <param name="degrees">The degrees.</param>
     public void AddValuesOfIntAsItems(RoutedEventHandler eventHandler, int initialValue, int resizeOf, int degrees)
     {
         tsddb.Items.Clear();
@@ -366,6 +443,10 @@ public class SuMenuItemWithSubitemsHelper
         this.tsddb = tsddb;
         this.tagy = tagy;
     }
+    /// <summary>
+    /// Initializes a new instance of the su menu item with subitems helper class.
+    /// </summary>
+    /// <param name="tsddb">The tsddb.</param>
     public SuMenuItemWithSubitemsHelper(SuMenuItem tsddb)
     {
         this.tsddb = tsddb;

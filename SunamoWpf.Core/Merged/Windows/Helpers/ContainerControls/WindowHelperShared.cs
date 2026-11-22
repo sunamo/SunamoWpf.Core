@@ -3,15 +3,31 @@ namespace SunamoWpf.Helpers.ContainerControls;
 
 public partial class WindowHelper
 {
+    /// <summary>
+    /// Size of window to title.
+    /// </summary>
+    /// <param name="window">The window.</param>
+    /// <param name="growingRow">The growing row.</param>
+    /// <param name="content">The content.</param>
     public static void SizeOfWindowToTitle(Window window, RowDefinition growingRow, FrameworkElement content)
     {
         SizeOfWindowToTitle(window, growingRow.ActualHeight, content);
     }
+    /// <summary>
+    /// Size of window to title.
+    /// </summary>
+    /// <param name="window">The window.</param>
+    /// <param name="growingRow">The growing row.</param>
+    /// <param name="content">The content.</param>
     public static void SizeOfWindowToTitle(Window window, double growingRow, FrameworkElement content)
     {
         window.Title = $"Window: {window.ActualWidth}x{window.ActualHeight} growingRow: {growingRow} Content: {content.ActualWidth}x{content.ActualHeight}";
     }
     static IWindowOpener windowOpener = null;
+    /// <summary>
+    /// Show exception window 2.
+    /// </summary>
+    /// <param name="exception">The exception.</param>
     public static void ShowExceptionWindow2(object exception)
     {
         ShowExceptionWindow(exception, Environment.NewLine);
@@ -73,7 +89,7 @@ public partial class WindowHelper
             ShowMb(windowOpenerIsNull);
 #endif
             sl(windowOpenerIsNull);
-            var message = Translate.FromKey(XlfKeys.MainWindowMustBeIWindowOpenerDueToShowExceptions) + $"Is Application.Current.MainWindow null: {mainWindow == null}";
+            var message = "Main window must be i window opener due to show exceptions" + $"Is Application.Current.MainWindow null: {mainWindow == null}";
             if (mainWindow != null)
             {
                 message += $"Type: {mainWindow.GetType()}";
@@ -92,6 +108,10 @@ public partial class WindowHelper
         }
         return dump;
     }
+    /// <summary>
+    /// Close.
+    /// </summary>
+    /// <param name="window">The window.</param>
     public static void Close(Window window)
     {
         try

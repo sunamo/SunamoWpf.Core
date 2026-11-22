@@ -3,9 +3,18 @@ namespace SunamoWpf.Controls;
 
 public partial class ResultButtons : UserControl
 {
+    /// <summary>
+    /// The all right click.
+    /// </summary>
     public event Action AllRightClick;
     // as event - useful when output will be editable
+    /// <summary>
+    /// The copy to clipboard.
+    /// </summary>
     public event Action CopyToClipboard;
+    /// <summary>
+    /// Initializes a new instance of the result buttons class.
+    /// </summary>
     public ResultButtons()
     {
         try
@@ -22,8 +31,8 @@ public partial class ResultButtons : UserControl
     }
     private void ResultButtons_Loaded(object sender, RoutedEventArgs eventArgs)
     {
-        btnAllRight.Content = Translate.FromKey(XlfKeys.AllRight) + "!";
-        btnCopyToClipboard.Content = Translate.FromKey(XlfKeys.CopyTextToClipboard);
+        btnAllRight.Content = "AllRight" + "!";
+        btnCopyToClipboard.Content = "Copy text to clipboard";
     }
     private void btnCopyToClipboard_Click(object sender, RoutedEventArgs eventArgs)
     {

@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ControlsWithGet;
 
+/// <summary>
+/// Represents the radio button helper type.
+/// </summary>
 public class RadioButtonHelper
 {
     /// <summary>

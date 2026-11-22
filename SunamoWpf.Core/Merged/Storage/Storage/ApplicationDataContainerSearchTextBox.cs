@@ -2,6 +2,9 @@
 
 namespace SunamoWpf.Storage;
 
+/// <summary>
+/// Represents the application data container search text box type.
+/// </summary>
 public class ApplicationDataContainerSearchTextBox : ApplicationDataContainer, IApplicationDataContainerSearchTextBox
 {
     // Nemůžu použít statický ctor protože mám ve třídách jen interface
@@ -10,6 +13,9 @@ public class ApplicationDataContainerSearchTextBox : ApplicationDataContainer, I
     //    ApplicationDataContainer.apcSearchTextBox = new ApplicationDataContainerSearchTextBox();
     //}
 
+    /// <summary>
+    /// Initializes a new instance of the application data container search text box class.
+    /// </summary>
     public ApplicationDataContainerSearchTextBox()
     {
 
@@ -30,6 +36,10 @@ public class ApplicationDataContainerSearchTextBox : ApplicationDataContainer, I
     }
 
 
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="chbl">The chbl.</param>
     public void Add(ICheckBoxListUC chbl)
     {
         var adcl = AddFrameworkElement(chbl as FrameworkElement);

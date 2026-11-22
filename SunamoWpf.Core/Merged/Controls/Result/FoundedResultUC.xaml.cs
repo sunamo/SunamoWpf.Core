@@ -3,6 +3,9 @@ namespace SunamoWpf.Controls.Result;
 
 public partial class FoundedResultUC : UserControl//, IFoundedResultUC
 {
+    /// <summary>
+    /// Gets or sets the frd.
+    /// </summary>
     public FoundedResultData Frd { get; set; }
     #region Commented - dont know why
     //UIElement previousSecondRow = new UserControl();
@@ -38,20 +41,37 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
     //    }
     //}
     #endregion
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public event VoidString Selected;
     /// <summary>
     /// Is used for showing visually
     /// </summary>
     public string file = null;
+    /// <summary>
+    /// The file full path.
+    /// </summary>
     public string fileFullPath
     {
         get { return Frd.fileFullPath; }
         set { Frd.fileFullPath = value; }
     }
+    /// <summary>
+    /// Contains.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The contains result.</returns>
     public bool Contains(string text)
     {
         return Frd.fileFullPath.Contains(text);
     }
+    /// <summary>
+    /// Contains.
+    /// </summary>
+    /// <param name="regex">The regex.</param>
+    /// <param name="text">The text.</param>
+    /// <returns>The contains result.</returns>
     public bool Contains(Regex regex, string text)
     {
         if (regex != null)
@@ -60,6 +80,9 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
         }
         return Frd.fileFullPath.Contains(text);
     }
+    /// <summary>
+    /// Initializes a new instance of the founded result UC class.
+    /// </summary>
     public FoundedResultUC() : base()
     {
         try
@@ -123,12 +146,19 @@ public partial class FoundedResultUC : UserControl//, IFoundedResultUC
         }
         this.MouseLeftButtonDown += FoundedFileUC_MouseLeftButtonDown;
     }
+    /// <summary>
+    /// The second row.
+    /// </summary>
     public UIElement SecondRow
     {
         set
         {
         }
     }
+    /// <summary>
+    /// On got focus.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
     protected override void OnGotFocus(RoutedEventArgs eventArgs)
     {
         base.OnGotFocus(eventArgs);

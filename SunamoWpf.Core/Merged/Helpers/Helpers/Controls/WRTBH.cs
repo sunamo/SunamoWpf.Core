@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Controls;
 
+/// <summary>
+/// Represents the WRTBH type.
+/// </summary>
 public class WRTBH : InlineBuilderBase
 {
     FontArgs fa = null;
@@ -10,7 +13,16 @@ public class WRTBH : InlineBuilderBase
     double paddingLeftFirst = 0;
     bool nextIsFirts = true;
     double width = 0;
+    /// <summary>
+    /// The uis.
+    /// </summary>
     public List<StackPanel> uis = new List<StackPanel>();
+    /// <summary>
+    /// Initializes a new instance of the WRTBH class.
+    /// </summary>
+    /// <param name="maxWidth">The max width.</param>
+    /// <param name="paddingLeftFirst">The padding left first.</param>
+    /// <param name="fontArgs">The font args.</param>
     public WRTBH(double maxWidth, double paddingLeftFirst, FontArgs fontArgs)
     {
         this.fa = fontArgs;
@@ -24,6 +36,10 @@ public class WRTBH : InlineBuilderBase
         stackPanel.Orientation = Orientation.Horizontal;
         return stackPanel;
     }
+    /// <summary>
+    /// Run.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public void Run(string text)
     {
         var slova = GetWords(text);
@@ -47,6 +63,10 @@ public class WRTBH : InlineBuilderBase
         //Add(GetRichTextBlock( GetHyperlink(text, uri, margin, padding, fa)));
         Add(GetTextBlock(GetRun(" ", fa)));
     }
+    /// <summary>
+    /// Bold.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public void Bold(string text)
     {
         var slova = GetWords(text);
@@ -86,12 +106,19 @@ public class WRTBH : InlineBuilderBase
         var last = uis[uis.Count - 1];
         last.Children.Add(textBlock);
     }
+    /// <summary>
+    /// Line break.
+    /// </summary>
     public void LineBreak()
     {
         nextIsFirts = true;
         uis.Add(NewStackPanel());
         //Add(GetTextBlock(GetLineBreak()));
     }
+    /// <summary>
+    /// Italic.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public void Italic(string text)
     {
         var slova = GetWords(text);

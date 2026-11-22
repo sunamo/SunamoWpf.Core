@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Controls;
 
+/// <summary>
+/// Represents the searching in lb WPF type.
+/// </summary>
 public class SearchingInLbWPF
 {
     /// <summary>
@@ -90,13 +93,13 @@ public class SearchingInLbWPF
                 }
             }
             lb.Items.Clear();
-            WpfLogger.Info( Translate.FromKey(XlfKeys.WasFounded) + " " + nechat.Count + " items. ");
+            WpfLogger.Info( "WasFounded" + " " + nechat.Count + " items. ");
             AddRangeToListBox(nechat.ToArray());
         }
         else
         {
             lb.Items.Clear();
-            WpfLogger.Info( Translate.FromKey(XlfKeys.SearchingWasStopped) + ".");
+            WpfLogger.Info( "SearchingWasStopped" + ".");
             AddRangeToListBox(oc);
         }
     }
@@ -107,6 +110,9 @@ public class SearchingInLbWPF
             lb.Items.Add(item);
         }
     }
+    /// <summary>
+    /// Click stop.
+    /// </summary>
     public void ClickStop()
     {
         tstb.Text = "";

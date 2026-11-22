@@ -8,18 +8,34 @@ namespace SunamoWpf;
 /// <typeparam name="T"></typeparam>
 public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChanged
 {
+    /// <summary>
+    /// Gets the c.
+    /// </summary>
     public NotifyChangesCollection<T> c => this;
     /// <summary>
     /// Its collection due to use also ObservableCollection and so
     /// </summary>
     public Collection<T> l = null;
+    /// <summary>
+    /// The collection changed.
+    /// </summary>
     public event Action<object, ListOperation, object> CollectionChanged;
     /// <summary>
     /// sender is chbl but in Tag are last clicked chb
     /// </summary>
     private object _sender;
+    /// <summary>
+    /// The eoa.
+    /// </summary>
     public EventOnArgs eoa = null;
+    /// <summary>
+    /// The eoa was changed.
+    /// </summary>
     public EventOnArgs eoaWasChanged = new EventOnArgs(false);
+    /// <summary>
+    /// Event on.
+    /// </summary>
+    /// <param name="eventOnArgs">The event on args.</param>
     public void EventOn(EventOnArgs eventOnArgs)
     {
         this.eoa = eventOnArgs;
@@ -34,9 +50,22 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
         _sender = sender;
         l = collection;
     }
+    /// <summary>
+    /// Gets the this int.
+    /// </summary>
     public T this[int index] { get => l[index]; set => l[index] = value; }
+    /// <summary>
+    /// Gets the count.
+    /// </summary>
     public int Count => l.Count;
+    /// <summary>
+    /// Gets the is read only.
+    /// </summary>
     public bool IsReadOnly => false;
+    /// <summary>
+    /// Add.
+    /// </summary>
+    /// <param name="item">The item.</param>
     public void Add(T item)
     {
         item.PropertyChanged += Item_PropertyChanged;
@@ -74,6 +103,9 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
             }
         }
     }
+    /// <summary>
+    /// Clear.
+    /// </summary>
     public void Clear()
     {
         l.Clear();
@@ -82,22 +114,46 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
             OnCollectionChanged(ListOperation.Clear, null);
         }
     }
+    /// <summary>
+    /// Contains.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>The contains result.</returns>
     public bool Contains(T item)
     {
         return l.Contains(item);
     }
+    /// <summary>
+    /// Copy to.
+    /// </summary>
+    /// <param name="array">The array.</param>
+    /// <param name="arrayIndex">The array index.</param>
     public void CopyTo(T[] array, int arrayIndex)
     {
         l.CopyTo(array, arrayIndex);
     }
+    /// <summary>
+    /// Get enumerator.
+    /// </summary>
+    /// <returns>The get enumerator result.</returns>
     public IEnumerator<T> GetEnumerator()
     {
         return l.GetEnumerator();
     }
+    /// <summary>
+    /// Index of.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>The index of result.</returns>
     public int IndexOf(T item)
     {
         return l.IndexOf(item);
     }
+    /// <summary>
+    /// Insert.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <param name="item">The item.</param>
     public void Insert(int index, T item)
     {
         l.Insert(index, item);
@@ -106,6 +162,11 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
             OnCollectionChanged(ListOperation.Insert, item);
         }
     }
+    /// <summary>
+    /// Remove.
+    /// </summary>
+    /// <param name="item">The item.</param>
+    /// <returns>The remove result.</returns>
     public bool Remove(T item)
     {
         bool removed = l.Remove(item);
@@ -115,6 +176,10 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
         }
         return removed;
     }
+    /// <summary>
+    /// Remove at.
+    /// </summary>
+    /// <param name="index">The index.</param>
     public void RemoveAt(int index)
     {
         l.RemoveAt(index);
@@ -124,6 +189,11 @@ public class NotifyChangesCollection<T> : IList<T> where T : INotifyPropertyChan
     {
         return l.GetEnumerator();
     }
+    /// <summary>
+    /// On collection changed.
+    /// </summary>
+    /// <param name="operation">The operation.</param>
+    /// <param name="data">The data.</param>
     public void OnCollectionChanged(ListOperation operation, object data)
     {
         if (CollectionChanged != null)

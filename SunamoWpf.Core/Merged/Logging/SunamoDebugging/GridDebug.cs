@@ -1,7 +1,14 @@
 namespace SunamoWpf.SunamoDebugging;
 
+/// <summary>
+/// Represents the grid debug type.
+/// </summary>
 public class GridDebug
 {
+    /// <summary>
+    /// Print actual height of row definitions.
+    /// </summary>
+    /// <param name="grid">The grid.</param>
     public static void PrintActualHeightOfRowDefinitions(Grid grid)
     {
         foreach (var item in grid.RowDefinitions)
@@ -10,6 +17,10 @@ public class GridDebug
         }
     }
 
+    /// <summary>
+    /// Print actual width of column definitions.
+    /// </summary>
+    /// <param name="grid">The grid.</param>
     public static void PrintActualWidthOfColumnDefinitions(Grid grid)
     {
         foreach (var item in grid.ColumnDefinitions)
@@ -18,6 +29,10 @@ public class GridDebug
         }
     }
 
+    /// <summary>
+    /// Print rows and columns of all childrens.
+    /// </summary>
+    /// <param name="grid">The grid.</param>
     public static void PrintRowsAndColumnsOfAllChildrens(Grid grid)
     {
         foreach (FrameworkElement item in grid.Children)

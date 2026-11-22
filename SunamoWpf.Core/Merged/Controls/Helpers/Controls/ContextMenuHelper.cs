@@ -1,8 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Helpers.Controls;
 
+/// <summary>
+/// Represents the context menu helper type.
+/// </summary>
 public class ContextMenuHelper
 {
+    /// <summary>
+    /// Get su menu item with name.
+    /// </summary>
+    /// <param name="contextMenu">The context menu.</param>
+    /// <param name="name">The name.</param>
+    /// <returns>The get su menu item with name result.</returns>
     public static SuMenuItem GetSuMenuItemWithName(ContextMenu contextMenu, string name)
     {
         int index = 0;
@@ -25,6 +34,12 @@ public class ContextMenuHelper
         }
         return null;
     }
+    /// <summary>
+    /// Find context menu.
+    /// </summary>
+    /// <param name="depObj">The dep obj.</param>
+    /// <param name="ContextMenuProperty">The context menu property.</param>
+    /// <returns>The find context menu result.</returns>
     public static ContextMenu FindContextMenu(DependencyObject depObj, DependencyProperty ContextMenuProperty)
     {
         ContextMenu contextMenu = depObj.GetValue(ContextMenuProperty) as ContextMenu;

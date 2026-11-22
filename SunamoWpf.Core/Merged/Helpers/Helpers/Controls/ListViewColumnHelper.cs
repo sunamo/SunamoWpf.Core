@@ -7,14 +7,30 @@ namespace SunamoWpf.Helpers.Controls;
 /// <typeparam name="T"></typeparam>
 public class ListViewColumnHelper<T> where T : IIdentificatorDesktop<int>
 {
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(ListViewColumnHelper<T>);
+    /// <summary>
+    /// The last id.
+    /// </summary>
     public int lastId = int.MinValue;
     private ListView lstViewXamlColumns;
+    /// <summary>
+    /// Initializes a new instance of the list view column helper class.
+    /// </summary>
+    /// <param name="lstViewXamlColumns">The lst view xaml columns.</param>
     public ListViewColumnHelper(ListView lstViewXamlColumns)
     {
         this.lstViewXamlColumns = lstViewXamlColumns;
     }
     //public event Action<int, int> MultiCheck;
+    /// <summary>
+    /// Check box click.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="e">The e.</param>
+    /// <param name="chb2">The chb 2.</param>
     public void CheckBox_Click(object sender, /*RoutedEventArgs e, */Checkboxes chb2)
     {
         if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
@@ -29,6 +45,12 @@ public class ListViewColumnHelper<T> where T : IIdentificatorDesktop<int>
             lastId = BTS.ParseInt(chb.Tag.ToString());
         }
     }
+    /// <summary>
+    /// Grid view 2 multi check.
+    /// </summary>
+    /// <param name="arg1">The arg 1.</param>
+    /// <param name="arg2">The arg 2.</param>
+    /// <param name="chb2">The chb 2.</param>
     public void GridView2_MultiCheck(int arg1, int arg2, Checkboxes chb2)
     {
         List<int> sorted = NH.Sort<int>(arg1, arg2);

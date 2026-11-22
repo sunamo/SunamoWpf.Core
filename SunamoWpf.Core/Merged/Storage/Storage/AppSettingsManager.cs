@@ -1,5 +1,8 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Storage;
+/// <summary>
+/// Represents the app settings manager type.
+/// </summary>
 public class AppSettingsManager
 {
     /// <summary>
@@ -7,6 +10,10 @@ public class AppSettingsManager
     /// </summary>
     public static ISettingsManagerWpf<FrameworkElement, DependencyProperty> SettingsManager = null;
     static Dictionary<FrameworkElement, TUListWpf<FrameworkElement, DependencyProperty>> savedElement = new Dictionary<FrameworkElement, TUListWpf<FrameworkElement, DependencyProperty>>();
+    /// <summary>
+    /// Add children from.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
     public static void AddChildrenFrom(FrameworkElement frameworkElement)
     {
         if (frameworkElement is Panel)
@@ -48,6 +55,9 @@ public class AppSettingsManager
         }
         savedElement.Add(frameworkElement, list);
     }
+    /// <summary>
+    /// Load settings.
+    /// </summary>
     public static void LoadSettings()
     {
         foreach (var item in savedElement)
@@ -56,6 +66,9 @@ public class AppSettingsManager
             SettingsManager.LoadSettings(item.Key, item.Value);
         }
     }
+    /// <summary>
+    /// Save settings.
+    /// </summary>
     public static void SaveSettings()
     {
         foreach (var item in savedElement)

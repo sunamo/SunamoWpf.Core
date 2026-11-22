@@ -5,6 +5,11 @@ public partial class ImageHelperDesktop : ImageHelperBase<ImageSource, Image>
 {
     static Type type = typeof(ImageHelperDesktop);
 
+/// <summary>
+/// Get.
+/// </summary>
+/// <param name="imagePathOrBitmapImage">The image path or bitmap image.</param>
+/// <returns>The get result.</returns>
 public static Image Get(object imagePathOrBitmapImage)
     {
         var type = imagePathOrBitmapImage.GetType();
@@ -26,6 +31,11 @@ public static Image Get(object imagePathOrBitmapImage)
         return img;
     }
 
+/// <summary>
+/// Return image.
+/// </summary>
+/// <param name="imageSource">The image source.</param>
+/// <returns>The return image result.</returns>
 public override Image ReturnImage(ImageSource imageSource)
     {
         Image image = new Image();
@@ -33,6 +43,13 @@ public override Image ReturnImage(ImageSource imageSource)
         image.Source = imageSource;
         return image;
     }
+/// <summary>
+/// Return image.
+/// </summary>
+/// <param name="imageSource">The image source.</param>
+/// <param name="width">The width.</param>
+/// <param name="height">The height.</param>
+/// <returns>The return image result.</returns>
 public override Image ReturnImage(ImageSource imageSource, double width, double height)
     {
         Image image = new Image();

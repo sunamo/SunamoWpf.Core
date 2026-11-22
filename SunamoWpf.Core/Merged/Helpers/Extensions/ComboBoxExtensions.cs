@@ -1,8 +1,14 @@
 #define ASYNC
 namespace SunamoWpf.Extensions;
 
+/// <summary>
+/// Represents the combo box extensions type.
+/// </summary>
 public static class ComboBoxExtensions
 {
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get => ValidationHelper.validated;

@@ -1,9 +1,21 @@
 namespace SunamoWpf;
 
+/// <summary>
+/// Represents the search code elements UC data type.
+/// </summary>
 public class SearchCodeElementsUCData
 {
+    /// <summary>
+    /// The txt search in code element name.
+    /// </summary>
     public ComboBox txtSearchInCodeElementName;
+    /// <summary>
+    /// The txt search in content.
+    /// </summary>
     public ComboBox txtSearchInContent;
+    /// <summary>
+    /// The txt search in path.
+    /// </summary>
     public ComboBox txtSearchInPath;
     CheckBox chbSearchInContent;
     CheckBox chbSearchInPath;
@@ -14,6 +26,9 @@ public class SearchCodeElementsUCData
     /// 
     /// </summary>
     public Dictionary<string, List<FoundedCodeElementWpf>> _founded;
+    /// <summary>
+    /// The founded.
+    /// </summary>
     public Dictionary<string, List<FoundedCodeElementWpf>> founded
     {
         get
@@ -35,6 +50,9 @@ public class SearchCodeElementsUCData
         }
     }
     string _file = null;
+    /// <summary>
+    /// The file.
+    /// </summary>
     public string file
     {
         get
@@ -49,6 +67,9 @@ public class SearchCodeElementsUCData
 #endif
         }
     }
+    /// <summary>
+    /// The actual file search occurences.
+    /// </summary>
     public List<FoundedCodeElementWpf> actualFileSearchOccurences
     {
         get
@@ -60,6 +81,15 @@ public class SearchCodeElementsUCData
             return founded[file];
         }
     }
+    /// <summary>
+    /// Initializes a new instance of the search code elements UC data class.
+    /// </summary>
+    /// <param name="txtSearchInCodeElementName">The txt search in code element name.</param>
+    /// <param name="txtSearchInContent">The txt search in content.</param>
+    /// <param name="txtSearchInPath">The txt search in path.</param>
+    /// <param name="chbSearchInContent">The chb search in content.</param>
+    /// <param name="chbSearchInPath">The chb search in path.</param>
+    /// <param name="chbSearchInCodeElementName">The chb search in code element name.</param>
     public SearchCodeElementsUCData(ComboBox txtSearchInCodeElementName, ComboBox txtSearchInContent, ComboBox txtSearchInPath, CheckBox chbSearchInContent, CheckBox chbSearchInPath, CheckBox chbSearchInCodeElementName)
     {
         this.txtSearchInCodeElementName = txtSearchInCodeElementName;
@@ -69,9 +99,15 @@ public class SearchCodeElementsUCData
         this.chbSearchInPath = chbSearchInPath;
         this.chbSearchInCodeElementName = chbSearchInCodeElementName;
     }
+    /// <summary>
+    /// Initializes a new instance of the search code elements UC data class.
+    /// </summary>
     public SearchCodeElementsUCData()
     {
     }
+    /// <summary>
+    /// The is searching in element name.
+    /// </summary>
     public bool IsSearchingInElementName
     {
         get
@@ -79,6 +115,9 @@ public class SearchCodeElementsUCData
             return !string.IsNullOrWhiteSpace(txtSearchInCodeElementName.Text); // || ( string.IsNullOrWhiteSpace && 
         }
     }
+    /// <summary>
+    /// The is searching in content.
+    /// </summary>
     public bool IsSearchingInContent
     {
         get
@@ -87,6 +126,9 @@ public class SearchCodeElementsUCData
             //return chbSearchInContent.IsChecked.Value;
         }
     }
+    /// <summary>
+    /// The is searching in path.
+    /// </summary>
     public bool IsSearchingInPath
     {
         get

@@ -4,14 +4,26 @@ namespace SunamoWpf.Controls.Input;
 public partial class SelectMoreFolders : UserControl
 {
 
+    /// <summary>
+    /// The save set as template.
+    /// </summary>
     public event Action SaveSetAsTemplate;
     /// <summary>
     /// Only adding folder with empty path
     /// </summary>
     public event Action<object, List<string>> FolderAdded;
+    /// <summary>
+    /// The folder changed.
+    /// </summary>
     public event Action<object, List<string>> FolderChanged;
+    /// <summary>
+    /// The folder removed.
+    /// </summary>
     public event Action<object, List<string>> FolderRemoved;
 
+    /// <summary>
+    /// Initializes a new instance of the select more folders class.
+    /// </summary>
     public SelectMoreFolders()
     {
         try
@@ -35,6 +47,9 @@ public partial class SelectMoreFolders : UserControl
         AddFolder(string.Empty);
     }
 
+    /// <summary>
+    /// Remove all folders.
+    /// </summary>
     public void RemoveAllFolders()
     {
         for (int index = spFolders.Children.Count - 1; index >= 0; index--)
@@ -43,6 +58,10 @@ public partial class SelectMoreFolders : UserControl
         }
     }
 
+    /// <summary>
+    /// Add folder.
+    /// </summary>
+    /// <param name="folder">The folder.</param>
     public void AddFolder(string folder)
     {
         if (string.IsNullOrEmpty(folder) || (!string.IsNullOrEmpty(folder) && FS.ExistsDirectory(folder))
@@ -75,6 +94,10 @@ public partial class SelectMoreFolders : UserControl
         }
     }
 
+    /// <summary>
+    /// Sf folder removed.
+    /// </summary>
+    /// <param name="selectFolder">The select folder.</param>
     public void Sf_FolderRemoved(SelectFolder selectFolder)
     {
         spFolders.Children.Remove(selectFolder);
@@ -86,8 +109,8 @@ public partial class SelectMoreFolders : UserControl
 
     async Task SetAwesomeIcons()
     {
-        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddFolder, "\uf07c " + Translate.FromKey(XlfKeys.New2));
-        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddAsTemplate, "\uf022 " + Translate.FromKey(XlfKeys.SaveSetAsTemplate));
+        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddFolder, "\uf07c " + "New2");
+        await AwesomeFontControls.SetAwesomeFontSymbol(btnAddAsTemplate, "\uf022 " + "Save set as template");
 
     }
 
@@ -119,7 +142,13 @@ public partial class SelectMoreFolders : UserControl
         SaveSetAsTemplate();
     }
 
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(SelectMoreFolders);
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get
@@ -132,6 +161,10 @@ public partial class SelectMoreFolders : UserControl
         }
     }
 
+    /// <summary>
+    /// Validate.
+    /// </summary>
+    /// <param name="control">The control.</param>
     public static void Validate(SelectMoreFolders control)
     {
         var controls = ControlFinder.StackPanel(control, "spFolders").Children;
@@ -141,6 +174,9 @@ public partial class SelectMoreFolders : UserControl
         }
     }
 
+    /// <summary>
+    /// Validate.
+    /// </summary>
     public void Validate()
     {
         Validate(this);

@@ -10,6 +10,9 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
     List<Button> btnc;
     List<TextBlock> tbc;
 
+    /// <summary>
+    /// Initializes a new instance of the sunamo password box class.
+    /// </summary>
     public SunamoPasswordBox()
     {
         try
@@ -29,9 +32,13 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
 
     bool noMargin = false;
 
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="noMargin">The no margin.</param>
     public void Init(bool noMargin)
     {
-        btnShowPassword.Content = Translate.FromKey(XlfKeys.HidePassword);
+        btnShowPassword.Content = "HidePassword";
 
         this.noMargin = noMargin;
         if (noMargin)
@@ -47,6 +54,9 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         }
     }
 
+    /// <summary>
+    /// The password.
+    /// </summary>
     public string Password
     {
         get
@@ -64,11 +74,17 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
 
     }
 
+    /// <summary>
+    /// The brush of border.
+    /// </summary>
     public Brush BrushOfBorder
     {
         get; set;
     } = Brushes.Yellow;
 
+    /// <summary>
+    /// The show txt show password.
+    /// </summary>
     public bool ShowTxtShowPassword
     {
         set
@@ -80,6 +96,9 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         }
     }
 
+    /// <summary>
+    /// The overall width.
+    /// </summary>
     public double OverallWidth
     {
         set
@@ -114,15 +133,19 @@ public partial class SunamoPasswordBox : UserControl, IUserControlWithSizeChange
         }
         if (visible)
         {
-            btnShowPassword.Content = Translate.FromKey(XlfKeys.HidePassword);
+            btnShowPassword.Content = "HidePassword";
         }
         else
         {
-            btnShowPassword.Content = Translate.FromKey(XlfKeys.ShowPassword);
+            btnShowPassword.Content = "ShowPassword";
         }
         txtShowPassword.Visibility = visibility;
     }
 
+    /// <summary>
+    /// On size changed.
+    /// </summary>
+    /// <param name="size">The size.</param>
     public void OnSizeChanged(DesktopSize size)
     {
         if (noMargin)

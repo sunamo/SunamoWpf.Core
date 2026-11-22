@@ -8,6 +8,10 @@ namespace SunamoWpf;
 /// </summary>
 public class GuesslangHelper
 {
+ /// <summary>
+ /// Detect language.
+ /// </summary>
+ /// <param name="code">The code.</param>
     public static
 #if ASYNC
     async Task<string>
@@ -17,7 +21,7 @@ public class GuesslangHelper
  DetectLanguage(string code)
     {
         var command = "echo \"" + code.Replace("\"", "'") + "\" | guesslang";
-        string SourceCode = Translate.FromKey(XlfKeys.TheSourceCodeIsWrittenIn);
+        string SourceCode = "The source code is written in";
         var result =
 #if ASYNC
     await
@@ -33,6 +37,10 @@ public class GuesslangHelper
         }
         return null;
     }
+    /// <summary>
+    /// Generate dictionary for map to text box syntax.
+    /// </summary>
+    /// <param name="CSharpHelperGetDictionaryValuesFromDictionary">The c sharp helper get dictionary values from dictionary.</param>
     public static void GenerateDictionaryForMapToTextBoxSyntax(Func<Dictionary<string, string>, string> CSharpHelperGetDictionaryValuesFromDictionary)
     {
         string File = @"C:\Program Files\Python36\Lib\site-packages\guesslang\data\languages.json";

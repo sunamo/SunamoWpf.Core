@@ -4,7 +4,13 @@ namespace SunamoWpf;
 public sealed partial class ErrorListing : UserControl
 {
     #region Rewrite to pure cs. With xaml is often problems without building
+    /// <summary>
+    /// The click OK.
+    /// </summary>
     public event VoidT<object> ClickOK;
+    /// <summary>
+    /// The title.
+    /// </summary>
     public string Title
     {
         set
@@ -12,6 +18,9 @@ public sealed partial class ErrorListing : UserControl
             tbTitle.Text = value;
         }
     }
+    /// <summary>
+    /// The max content size.
+    /// </summary>
     public Size MaxContentSize
     {
         get
@@ -53,6 +62,9 @@ public sealed partial class ErrorListing : UserControl
             tbChybovaZprava.Text = value;
         }
     }
+    /// <summary>
+    /// Initializes a new instance of the error listing class.
+    /// </summary>
     public ErrorListing()
     {
         try
@@ -70,10 +82,16 @@ public sealed partial class ErrorListing : UserControl
     {
         ClickOK(null);
     }
+    /// <summary>
+    /// The popup border brush.
+    /// </summary>
     public Brush PopupBorderBrush
     {
         set { border.BorderBrush = value; }
     }
+    /// <summary>
+    /// The click cancel.
+    /// </summary>
     public event VoidT<object> ClickCancel;
 
     #endregion

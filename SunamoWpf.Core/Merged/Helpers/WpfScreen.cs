@@ -1,4 +1,7 @@
 ﻿#define ASYNC
+/// <summary>
+/// Represents the wpf screen type.
+/// </summary>
 public class WpfScreen
 {
     #region Nen� v net core

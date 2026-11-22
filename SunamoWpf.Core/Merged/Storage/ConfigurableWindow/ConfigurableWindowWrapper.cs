@@ -9,26 +9,48 @@ namespace SunamoWpf.ConfigurableWindow;
 /// </summary>
 public class ConfigurableWindowWrapper
 {
+    /// <summary>
+    /// The w.
+    /// </summary>
     public Window w = null;
     SuMenuItem miAlwaysOnTop = null;
+    /// <summary>
+    /// Mi always on top click.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void MiAlwaysOnTop_Click(object sender, RoutedEventArgs eventArgs)
     {
         w.Topmost = miAlwaysOnTop.IsChecked;
         CheckSuMenuItemTopMost();
     }
+    /// <summary>
+    /// Check su menu item top most.
+    /// </summary>
     public void CheckSuMenuItemTopMost()
     {
         miAlwaysOnTop.IsChecked = _settings.AlwaysOnTop = w.Topmost;
     }
     #region Data
+    /// <summary>
+    /// The is loaded.
+    /// </summary>
     public bool _isLoaded;
+    /// <summary>
+    /// The settings.
+    /// </summary>
     public IConfigurableWindowSettings _settings;
     #endregion // Data
     #region Constructor
+    /// <summary>
+    /// Initializes a new instance of the configurable window wrapper class.
+    /// </summary>
+    /// <param name="configurableWindow">The configurable window.</param>
+    /// <param name="miAlwaysOnTop2">The mi always on top 2.</param>
     public ConfigurableWindowWrapper(Window configurableWindow, SuMenuItem miAlwaysOnTop2)
     {
         miAlwaysOnTop = miAlwaysOnTop2;
-        var aotText = ContentControlHelper.GetContent(new ControlInitData { text = Translate.FromKey(XlfKeys.AlwaysOnTop) });
+        var aotText = ContentControlHelper.GetContent(new ControlInitData { text = "AlwaysOnTop" });
         if (miAlwaysOnTop == null)
         {
             // Only in non selling apps. in Selling must be padding!
@@ -43,7 +65,7 @@ public class ConfigurableWindowWrapper
         var windowSettingsSource = (IConfigurableWindow)w;
         _settings = windowSettingsSource.CreateSettings();
         if (_settings == null)
-            ThrowEx.Custom(Translate.FromKey(XlfKeys.CannotReturnNull)+".");
+            ThrowEx.Custom("CannotReturnNull"+".");
         // Direct set _isLoaded to true, because I call this from _Loaded
         _isLoaded = true;
         //w.Loaded += delegate { _isLoaded = true; };

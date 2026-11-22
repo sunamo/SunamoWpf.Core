@@ -15,12 +15,21 @@ public enum TypeOfMessageWpf
     ///     tbLastErrorOrWarning
     /// </summary>
     Warning,
+    /// <summary>
+    /// The information value.
+    /// </summary>
     Information,
 
     /// <summary>
     ///     Returned if from text cant determine value
     /// </summary>
     Ordinal,
+    /// <summary>
+    /// The appeal value.
+    /// </summary>
     Appeal,
+    /// <summary>
+    /// The success value.
+    /// </summary>
     Success
 }

@@ -3,9 +3,18 @@ namespace SunamoWpf.Controls.Input;
 
 public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUserControlWithSuMenuItemsList, IControlWithResultDebugWpf
 {
+    /// <summary>
+    /// The validator before adding.
+    /// </summary>
     public Func<string, bool> ValidatorBeforeAdding = null;
+    /// <summary>
+    /// The validator before adding message.
+    /// </summary>
     public string ValidatorBeforeAddingMessage = null;
     static Type type = typeof(EnterOneValueUC);
+    /// <summary>
+    /// The validate data.
+    /// </summary>
     public ValidateDataWpf validateData = null;
     #region ctor
     /// <summary>
@@ -27,6 +36,11 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         fwElemements = CAG.ToList<FrameworkElement>(txtEnteredText);
         Loaded += uc_Loaded;
     }
+    /// <summary>
+    /// Initializes a new instance of the enter one value UC class.
+    /// </summary>
+    /// <param name="whatEnter">The what enter.</param>
+    /// <param name="size">The size.</param>
     public EnterOneValueUC(string whatEnter, Size size) : this()
     {
         Init(whatEnter);
@@ -47,6 +61,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         Loaded += EnterOneValueUC_Loaded;
     }
     #endregion
+    /// <summary>
+    /// The is multiline.
+    /// </summary>
     public bool IsMultiline
     {
         set
@@ -63,6 +80,11 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             }
         }
     }
+    /// <summary>
+    /// Enter one value UC loaded.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void EnterOneValueUC_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         PrintColumnsRows(gridGrowable);
@@ -74,10 +96,14 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         //////////DebugLogger.Instance.WriteLine(grid2.ColumnDefinitions.Count + "x" + grid2.RowDefinitions.Count);
 #endif
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="whatEnter">The what enter.</param>
     public void Init(string whatEnter)
     {
-        tbWhatEnter.Text = Translate.FromKey(XlfKeys.ToEnter) + " " + whatEnter + " " + Translate.FromKey(XlfKeys.andPressEnter) + ".";
-        btnEnter.Content = Translate.FromKey(XlfKeys.Enter);
+        tbWhatEnter.Text = "ToEnter" + " " + whatEnter + " " + "andPressEnter" + ".";
+        btnEnter.Content = "Enter";
     }
     /// <summary>
     /// TextBlock.Text is take from Tag, which can be TWithNameT<object>
@@ -133,6 +159,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             DialogResult = true;
         }
     }
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -142,12 +171,27 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
                 ChangeDialogResult(value);
             }
         }
-    }//
-    public string Title => Translate.FromKey(XlfKeys.EnteringData);
+    }
+
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
+    public string Title => "EnteringData";
+    /// <summary>
+    /// Get content by tag.
+    /// </summary>
+    /// <param name="tag">The tag.</param>
+    /// <returns>The get content by tag result.</returns>
     public object GetContentByTag(object tag)
     {
         return dynLayout.GetContentByTag(tag);
     }
+    /// <summary>
+    /// Add control.
+    /// </summary>
+    /// <param name="row">The row.</param>
+    /// <param name="name">The name.</param>
+    /// <param name="control">The control.</param>
     public void AddControl(int row, string name, FrameworkElement control)
     {
         dynLayout.AddControl(row, name, control);
@@ -192,7 +236,7 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             else
             {
                 allOk = false;
-                ThrowEx.Custom(Translate.FromKey(XlfKeys.NotImplementedValidateForControl) + " " + item.GetType().FullName);
+                ThrowEx.Custom("Not implemented validate for control" + " " + item.GetType().FullName);
             }
         }
         //txtEnteredText.Text = txtEnteredText.Text.Trim();
@@ -206,6 +250,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         }
         return false;
     }
+    /// <summary>
+    /// The fw elemements.
+    /// </summary>
     public List<FrameworkElement> fwElemements
     {
         get
@@ -217,6 +264,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             dynLayout.fwElements = value;
         }
     }
+    /// <summary>
+    /// The this int.
+    /// </summary>
     public object this[int index]
     {
         get
@@ -224,6 +274,9 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             return fwElemements[index].GetContent();
         }
     }
+    /// <summary>
+    /// The dyn layout.
+    /// </summary>
     public DynLayout dynLayout = null;
     private void txtEnteredText_KeyDown_1(object sender, KeyEventArgs eventArgs)
     {
@@ -235,6 +288,10 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
             }
         }
     }
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
         txtEnteredText.Text = input.ToString();
@@ -242,35 +299,68 @@ public partial class EnterOneValueUC : UserControl, IControlWithResultWpf, IUser
         // Cant be, window must be already showned as dialog
         //DialogResult = true;
     }
+    /// <summary>
+    /// The su su menu items.
+    /// </summary>
     public List<SuMenuItem> suSuMenuItems = new List<SuMenuItem>();
     //public TextBox txtEnteredText => new TextBox();
+    /// <summary>
+    /// Su menu items.
+    /// </summary>
+    /// <returns>The su menu items result.</returns>
     public List<SuMenuItem> SuMenuItems()
     {
         return suSuMenuItems;
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }
+    /// <summary>
+    /// Count of handlers change dialog result.
+    /// </summary>
+    /// <returns>The count of handlers change dialog result result.</returns>
     public int CountOfHandlersChangeDialogResult()
     {
         var invocationList = RuntimeHelper.GetInvocationList(ChangeDialogResult);
         return invocationList.Count;
     }
+    /// <summary>
+    /// Attach change dialog result.
+    /// </summary>
+    /// <param name="handler">The handler.</param>
+    /// <param name="throwException">The throw exception.</param>
     public void AttachChangeDialogResult(VoidBoolNullable handler, bool throwException = true)
     {
         RuntimeHelper.AttachChangeDialogResult(this, handler, throwException);
     }
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         txtEnteredText.Focus();
     }
+    /// <summary>
+    /// Uc loaded.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public void uc_Loaded(object sender, RoutedEventArgs eventArgs)
     {
         //ThrowEx.NotImplementedMethod(Exc.GetStackTrace(),type, Exceptions.CallingMethod());
     }
+    /// <summary>
+    /// Remove which have no item.
+    /// </summary>
     public void RemoveWhichHaveNoItem()
     {
     }
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
 }
 //    public List<SuMenuItem> SuMenuItems = new List<SuMenuItem>();

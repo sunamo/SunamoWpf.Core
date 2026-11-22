@@ -1,9 +1,15 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Controls;
 
+/// <summary>
+/// Represents the two states toggle button type.
+/// </summary>
 public static partial class TwoStatesToggleButton
 {
     
+    /// <summary>
+    /// The count.
+    /// </summary>
     public static int Count
     {
         get
@@ -12,6 +18,11 @@ public static partial class TwoStatesToggleButton
         }
     }
 
+    /// <summary>
+    /// Set initial checked.
+    /// </summary>
+    /// <param name="toggleButton">The toggle button.</param>
+    /// <param name="check">The check.</param>
     public static void SetInitialChecked(ToggleButton toggleButton, bool check)
     {
         toggleButton.IsChecked = check;
@@ -21,7 +32,7 @@ public static partial class TwoStatesToggleButton
         }
         else
         {
-            ThrowEx.Custom(Translate.FromKey(XlfKeys.YouCannotCallSetInitialCheckedTwiceForTheSameToggleButton));
+            ThrowEx.Custom("You cannot call set initial checked twice for the same toggle button");
         }
     }
 

@@ -1,5 +1,8 @@
 namespace SunamoWpf.Interfaces;
 
+/// <summary>
+/// Represents the i compare in check box list UC type.
+/// </summary>
 public interface ICompareInCheckBoxListUC
 {
     /// <summary>

@@ -1,15 +1,33 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Input;
 
+/// <summary>
+/// Represents the select more folders with template sets type.
+/// </summary>
 public class SelectMoreFoldersWithTemplateSets
 {
     EnterOneValueWindow enterNameOfSet = null;
     ComboBoxHelper<string> cbSetsFoldersHelper = null;
+    /// <summary>
+    /// The cb sets folders.
+    /// </summary>
     public ComboBox cbSetsFolders = new ComboBox();
     TextBlock tbSetsFolders = new TextBlock();
-    public string tbSetsFoldersKey = XlfKeys.SavedFoldersSets;
+    /// <summary>
+    /// The tb sets folders key.
+    /// </summary>
+    public string tbSetsFoldersKey = "SavedFoldersSets";
+    /// <summary>
+    /// The tb folders.
+    /// </summary>
     public TextBlock tbFolders = new TextBlock();
-    public string tbFoldersKey = XlfKeys.Folders;
+    /// <summary>
+    /// The tb folders key.
+    /// </summary>
+    public string tbFoldersKey = "Folders";
+    /// <summary>
+    /// The txt folders.
+    /// </summary>
     public SelectMoreFolders txtFolders = new SelectMoreFolders();
     string pathFromCtor;
     /// <summary>
@@ -29,7 +47,7 @@ public class SelectMoreFoldersWithTemplateSets
             Grid.SetRow(cbSetsFolders, rowCbSets);
             Grid.SetRow(tbSetsFolders, rowCbSets);
             Grid.SetColumn(cbSetsFolders, 1);
-            tbSetsFolders.Text = Translate.FromKey(tbSetsFoldersKey);
+            tbSetsFolders.Text = tbSetsFoldersKey;
             gridCbSets.Children.Add(tbSetsFolders);
             gridCbSets.Children.Add(cbSetsFolders);
         }
@@ -40,7 +58,7 @@ public class SelectMoreFoldersWithTemplateSets
             Grid.SetRow(txtFolders, rowSmf);
             Grid.SetRow(tbFolders, rowSmf);
             Grid.SetColumn(txtFolders, 1);
-            tbFolders.Text = Translate.FromKey(tbFoldersKey);
+            tbFolders.Text = tbFoldersKey;
             gridSmf.Children.Add(tbFolders);
             gridSmf.Children.Add(txtFolders);
         }
@@ -61,7 +79,7 @@ public class SelectMoreFoldersWithTemplateSets
             string text = enterNameOfSet.enterOneValueUC.txtEnteredText.Text;
             if (cbSetsFolders.Items.Contains(text))
             {
-                WpfLogger.Warning("Set " + Translate.FromKey(XlfKeys.withName) + " " + text + " " + Translate.FromKey(XlfKeys.alreadyExists));
+                WpfLogger.Warning("Set " + "withName" + " " + text + " " + "alreadyExists");
             }
             else
             {
@@ -94,7 +112,7 @@ public class SelectMoreFoldersWithTemplateSets
     }
     private void this_SaveSetAsTemplate()
     {
-        enterNameOfSet = new EnterOneValueWindow(Translate.FromKey(XlfKeys.nameOfSet));
+        enterNameOfSet = new EnterOneValueWindow("nameOfSet");
         // TODO Replaced during repair 0xc0000374
         //enterNameOfSet.enterOneValueUC.ChangeDialogResult += EnterOneValueUC_ChangeDialogResult;
         //enterNameOfSet.enterOneValueUC.Accept("Websites");

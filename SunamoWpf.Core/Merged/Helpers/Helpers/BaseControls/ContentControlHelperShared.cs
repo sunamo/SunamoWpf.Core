@@ -3,11 +3,21 @@ namespace SunamoWpf.Helpers.BaseControls;
 
 public partial class ContentControlHelper
 {
+    /// <summary>
+    /// Content.
+    /// </summary>
+    /// <param name="checkBox">The check box.</param>
+    /// <returns>The content result.</returns>
     public static object Content(CheckBox checkBox)
     {
         var content = WpfApp.cd.Invoke(() => checkBox.Content);
         return content;
     }
+    /// <summary>
+    /// Extract content.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    /// <returns>The extract content result.</returns>
     public static string ExtractContent(object value)
     {
         var sp2 = (StackPanel)value;
@@ -15,6 +25,11 @@ public partial class ContentControlHelper
         return result;
     }
 
+    /// <summary>
+    /// Extract content.
+    /// </summary>
+    /// <param name="stackPanel">The stack panel.</param>
+    /// <returns>The extract content result.</returns>
     public static string ExtractContent(StackPanel stackPanel)
     {
         /*
@@ -45,6 +60,11 @@ Je zde ta věc že
         return stringBuilder.ToString();
     }
 
+    /// <summary>
+    /// Get content.
+    /// </summary>
+    /// <param name="controlInitData">The control init data.</param>
+    /// <returns>The get content result.</returns>
     public static async Task<StackPanel> GetContent(ControlInitData controlInitData)
     {
         var img = controlInitData.imagePath;
@@ -55,7 +75,7 @@ Je zde ta věc že
         if (!isText)
         {
             isText = controlInitData.xlfKey != null;
-            text = Translate.FromKey(controlInitData.xlfKey);
+            text = controlInitData.xlfKey;
         }
 
         StackPanel stackPanel = new StackPanel();

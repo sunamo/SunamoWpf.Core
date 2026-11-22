@@ -1,14 +1,23 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Panels;
 
+/// <summary>
+/// Represents the sunamo variable sized wrap grid 2 type.
+/// </summary>
 public class SunamoVariableSizedWrapGrid2 : Panel
 {
     private Dictionary<int, Dictionary<int, UIElement>> controls = new Dictionary<int, Dictionary<int, UIElement>>();
+    /// <summary>
+    /// Initializes a new instance of the sunamo variable sized wrap grid 2 class.
+    /// </summary>
     public SunamoVariableSizedWrapGrid2()
     {
 
     }
 
+    /// <summary>
+    /// The visual children count.
+    /// </summary>
     protected override int VisualChildrenCount
     {
         get
@@ -26,6 +35,11 @@ public class SunamoVariableSizedWrapGrid2 : Panel
 
     static Type type = typeof(SunamoVariableSizedWrapGrid2);
 
+    /// <summary>
+    /// Get visual child.
+    /// </summary>
+    /// <param name="index">The index.</param>
+    /// <returns>The get visual child result.</returns>
     protected override Visual GetVisualChild(int index)
     {
         if (index >= VisualChildrenCount)
@@ -49,6 +63,11 @@ public class SunamoVariableSizedWrapGrid2 : Panel
         return null;
     }
 
+    /// <summary>
+    /// Measure override.
+    /// </summary>
+    /// <param name="availableSize">The available size.</param>
+    /// <returns>The measure override result.</returns>
     protected override Size MeasureOverride(Size availableSize)
     {
         double width = 0;
@@ -121,6 +140,11 @@ public class SunamoVariableSizedWrapGrid2 : Panel
         return false;
     }
 
+    /// <summary>
+    /// Arrange override.
+    /// </summary>
+    /// <param name="finalSize">The final size.</param>
+    /// <returns>The arrange override result.</returns>
     protected override Size ArrangeOverride(Size finalSize)
     {
         double overallHeight = 0;

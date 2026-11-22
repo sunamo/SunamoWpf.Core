@@ -1,8 +1,14 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Result;
 
+/// <summary>
+/// Represents the founded files UC type.
+/// </summary>
 public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>, IFoundedResultsUC<IFoundedFileUC>
 {
+    /// <summary>
+    /// Initializes a new instance of the founded files UC class.
+    /// </summary>
     public FoundedFilesUC()
     {
         Loaded += FoundedFilesUC_Loaded;
@@ -17,6 +23,10 @@ public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>
     private void FoundedFilesUC_Loaded(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
     }
+    /// <summary>
+    /// Attach selected.
+    /// </summary>
+    /// <param name="act">The act.</param>
     public void AttachSelected(VoidString act)
     {
         Selected += act;
@@ -52,11 +62,20 @@ public class FoundedFilesUC : FoundedResultsUC//, IFoundedFilesUC<FoundedFileUC>
             sp.Children.Add(foundedFile);
         }
     }
+    /// <summary>
+    /// Founded file selected.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void FoundedFile_Selected(string path)
     {
         selectedItem = path;
         OnSelected(path);
     }
+    /// <summary>
+    /// Filter.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The filter result.</returns>
     public bool? Filter(string text)
     {
         bool cancel = string.IsNullOrWhiteSpace(text);

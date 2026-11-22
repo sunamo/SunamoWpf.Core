@@ -1,16 +1,34 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Backend;
 
+/// <summary>
+/// Represents the text box backend type.
+/// </summary>
 [System.Runtime.Versioning.SupportedOSPlatform("windows")]
 public class TextBoxBackend : IKeysHandler, IShowSearchResults
 {
     static Type type = typeof(TextBoxBackend);
     // Menu, ToolBar and tbLineBreak = 67 lines. Should be changed in every App
     //public int addLinesInEveryScroll = 67;
+    /// <summary>
+    /// The actual searched result.
+    /// </summary>
     public int actualSearchedResult = -1;
+    /// <summary>
+    /// The search code elements UC data.
+    /// </summary>
     public SearchCodeElementsUCData searchCodeElementsUCData = null;
+    /// <summary>
+    /// The scroll to line.
+    /// </summary>
     public event VoidInt ScrollToLine;
+    /// <summary>
+    /// The end of filtered lines.
+    /// </summary>
     public event Action EndOfFilteredLines;
+    /// <summary>
+    /// The actual file search occurences.
+    /// </summary>
     public List<FoundedCodeElementWpf> actualFileSearchOccurences
     {
         get
@@ -34,6 +52,9 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
     /// Line to which was last time scrolled
     /// </summary>
     int _actualLine = 0;
+    /// <summary>
+    /// The actual line.
+    /// </summary>
     public int actualLine
     {
         set
@@ -65,38 +86,70 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
     {
         //SetActualLine( txtContent.GetLineIndexFromCharacterIndex(txtContent.SelectionStart));
     }
+    /// <summary>
+    /// Handle key.
+    /// </summary>
+    /// <param name="eventArgs">The event args.</param>
+    /// <returns>The handle key result.</returns>
     public bool HandleKey(KeyEventArgs eventArgs)
     {
         return false;
     }
     TextBlock txtTextBoxState;
     //
+    /// <summary>
+    /// The txt content.
+    /// </summary>
     protected TextEditor txtContent;
+    /// <summary>
+    /// The state.
+    /// </summary>
     public TextBoxStateWpf state = new TextBoxStateWpf();
+    /// <summary>
+    /// Set actual file.
+    /// </summary>
+    /// <param name="file">The file.</param>
     public void SetActualFile(string file)
     {
-        state.textActualFile = Translate.FromKey(XlfKeys.File) + ": " + file;
+        state.textActualFile = "File" + ": " + file;
         SetTextBoxState();
     }
+    /// <summary>
+    /// Set actual line.
+    /// </summary>
+    /// <param name="line">The line.</param>
     public void SetActualLine(int line)
     {
         _actualLine = line++;
-        state.textActualFile = Translate.FromKey(XlfKeys.Line) + ": " + _actualLine;
+        state.textActualFile = "Line" + ": " + _actualLine;
         SetTextBoxState();
     }
+    /// <summary>
+    /// Set tb searched result.
+    /// </summary>
+    /// <param name="actual">The actual.</param>
+    /// <param name="count">The count.</param>
     public void SetTbSearchedResult(int actual, int count)
     {
         state.textSearchedResult = $"{actual}/{count}";
         SetTextBoxState();
     }
+    /// <summary>
+    /// Set text box state.
+    /// </summary>
+    /// <param name="text">The text.</param>
     public void SetTextBoxState(string text = null)
     {
         if (text == null)
         {
-            text = (string.Join("  ", state.textActualFile, state.textSearchedResult) + " " + Translate.FromKey(XlfKeys.Line) + ": " + (actualLine + 1)).Trim();
+            text = (string.Join("  ", state.textActualFile, state.textSearchedResult) + " " + "Line" + ": " + (actualLine + 1)).Trim();
         }
         txtTextBoxState.Text = text;
     }
+    /// <summary>
+    /// Jump to next searched result.
+    /// </summary>
+    /// <param name="addLines">The add lines.</param>
     public void JumpToNextSearchedResult(int addLines)
     {
         if (actualFileSearchOccurences == null)
@@ -158,9 +211,13 @@ do SearchCodeElementsUCData.founded vkládám ve value.Count 2, ale zde mi to ji
         TextBoxHelper.ScrollToLine(txtContent, line);
         #endregion
         actualLine = line;
-        WpfLogger.Info(Translate.FromKey(XlfKeys.ScrolledToLine) + " " + line);
+        WpfLogger.Info("ScrolledToLine" + " " + line);
         SetTextBoxState();
     }
+    /// <summary>
+    /// Scroll about lines.
+    /// </summary>
+    /// <param name="lines">The lines.</param>
     public void ScrollAboutLines(int lines)
     {
         //v -= 1;

@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Helpers.ControlsWithGet;
 
+/// <summary>
+/// Represents the action button helper type.
+/// </summary>
 public partial class ActionButtonHelper{ 
 /// <summary>
     /// tag is not needed, value is obtained through []

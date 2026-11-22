@@ -10,6 +10,9 @@ public partial class DeleteDuplicitiesFilesRadioButton : UserControl, ISelectFro
     #region Rewrite to pure cs. With xaml is often problems without building
     internal SelectFromManyHelper<TWithSizeInString<string>> sfmh = null;
 
+    /// <summary>
+    /// Initializes a new instance of the delete duplicities files radio button class.
+    /// </summary>
     public DeleteDuplicitiesFilesRadioButton()
     {
         try
@@ -26,11 +29,19 @@ public partial class DeleteDuplicitiesFilesRadioButton : UserControl, ISelectFro
         sfmh = new SelectFromManyHelper<TWithSizeInString<string>>(this);
     }
 
+    /// <summary>
+    /// Add control.
+    /// </summary>
+    /// <param name="data">The data.</param>
+    /// <param name="tick">The tick.</param>
     public void AddControl(TWithSizeInString<string> data, bool tick)
     {
         spFolders.Children.Add(ControlsGenerator.RadioButtonWithDescription(data, !sfmh.sufficientFileName, tick));
     }
 
+    /// <summary>
+    /// Add controls.
+    /// </summary>
     public void AddControls()
     {
         spFolders.Children.Clear();

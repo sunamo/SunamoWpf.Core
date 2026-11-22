@@ -3,6 +3,9 @@ namespace SunamoWpf.Controls.Text;
 
 public partial class SearchInUC : UserControl
 {
+    /// <summary>
+    /// Initializes a new instance of the search in UC class.
+    /// </summary>
     public SearchInUC()
     {
         try
@@ -32,6 +35,9 @@ public partial class SearchInUC : UserControl
 
     }
 
+    /// <summary>
+    /// The border brush.
+    /// </summary>
     public Brush BorderBrush
     {
         set

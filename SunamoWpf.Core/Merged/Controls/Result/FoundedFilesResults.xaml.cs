@@ -13,6 +13,10 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
     private void FoundedFilesUC_Loaded(object sender, System.Windows.RoutedEventArgs eventArgs)
     {
     }
+    /// <summary>
+    /// Attach selected.
+    /// </summary>
+    /// <param name="act">The act.</param>
     public void AttachSelected(VoidString act)
     {
         Selected += act;
@@ -48,11 +52,20 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             sp.Children.Add(foundedFile);
         }
     }
+    /// <summary>
+    /// Founded file selected.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void FoundedFile_Selected(string path)
     {
         selectedItem = path;
         OnSelected(path);
     }
+    /// <summary>
+    /// Filter.
+    /// </summary>
+    /// <param name="text">The text.</param>
+    /// <returns>The filter result.</returns>
     public bool? Filter(string text)
     {
         bool cancel = string.IsNullOrWhiteSpace(text);
@@ -96,15 +109,33 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
     }
     #endregion
     #region FoundedResultsUC
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(FoundedResultsUC);
+    /// <summary>
+    /// The selected.
+    /// </summary>
     public event VoidString Selected;
+    /// <summary>
+    /// The selected item.
+    /// </summary>
     protected string selectedItem = null;
+    /// <summary>
+    /// Gets the selected item.
+    /// </summary>
     public string SelectedItem => selectedItem;
+    /// <summary>
+    /// The base paths.
+    /// </summary>
     public static List<string> basePaths = CA.ToListString();
     //public SearchInUC txtFilter = null;
     //public StackPanel sp = null;
     //public ScrollViewer sv = null;
     //public TextBlock tbNoResultsFound = null;
+    /// <summary>
+    /// Initializes a new instance of the founded files results class.
+    /// </summary>
     public FoundedFilesResults()
     {
         try
@@ -163,13 +194,19 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
     {
         if (tbNoResultsFound != null)
         {
-            tbNoResultsFound.Text = Translate.FromKey(XlfKeys.NoResultsFound);
+            tbNoResultsFound.Text = "NoResultsFound";
         }
         basePaths = basePath.ToList();
         SunamoComparerICompare.StringLength.Desc comparer = new SunamoComparerICompare.StringLength.Desc(SunamoComparer.StringLength.Instance);
         basePaths.Sort(comparer);
         CA.WithEndSlash(basePaths);
     }
+    /// <summary>
+    /// Default brushes.
+    /// </summary>
+    /// <param name="green">The green.</param>
+    /// <param name="red">The red.</param>
+    /// <returns>The default brushes result.</returns>
     public TUListWpf<string, Brush> DefaultBrushes(string green = "", string red = "")
     {
         TUListWpf<string, Brush> result = new TUListWpf<string, Brush>();
@@ -177,6 +214,9 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
         result.Add(TUWpf<string, Brush>.Get(red, Brushes.Red));
         return result;
     }
+    /// <summary>
+    /// Hide tb no results found.
+    /// </summary>
     protected void HideTbNoResultsFound()
     {
         if (sv != null && tbNoResultsFound != null)
@@ -185,6 +225,12 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             sv.Visibility = Visibility.Visible;
         }
     }
+    /// <summary>
+    /// Add founded results.
+    /// </summary>
+    /// <param name="clear">The clear.</param>
+    /// <param name="colors">The colors.</param>
+    /// <param name="foundedResult">The founded result.</param>
     public void AddFoundedResults(bool clear, TUListWpf<string, Brush> colors, List<TWithNameTWpf<string>> foundedResult)
     {
         if (sp != null && sv != null)
@@ -227,6 +273,11 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             return founded;
         }
     }
+    /// <summary>
+    /// Get founded file by path.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The get founded file by path result.</returns>
     public FoundedFileUC GetFoundedFileByPath(string path)
     {
         if (sp != null)
@@ -241,10 +292,17 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
         }
         return null;
     }
+    /// <summary>
+    /// Select file.
+    /// </summary>
+    /// <param name="file">The file.</param>
     public void SelectFile(string file)
     {
         Selected(file);
     }
+    /// <summary>
+    /// Clear founded result.
+    /// </summary>
     public void ClearFoundedResult()
     {
         if (sp != null && sv != null && tbNoResultsFound != null)
@@ -254,6 +312,10 @@ public partial class FoundedFilesResults : UserControl /*, IFoundedFilesUC<Found
             tbNoResultsFound.Visibility = Visibility.Visible;
         }
     }
+    /// <summary>
+    /// On selected.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void OnSelected(string path)
     {
         Selected(path);

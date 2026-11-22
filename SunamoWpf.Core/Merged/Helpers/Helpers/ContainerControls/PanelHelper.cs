@@ -1,8 +1,16 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ContainerControls;
 
+/// <summary>
+/// Represents the panel helper type.
+/// </summary>
 public partial class PanelHelper
 {
+    /// <summary>
+    /// Get this and recursive all sub UI elements.
+    /// </summary>
+    /// <param name="element">The element.</param>
+    /// <returns>The get this and recursive all sub UI elements result.</returns>
     public static List<UIElement> GetThisAndRecursiveAllSubUIElements(UIElement element)
     {
         List<UIElement> result = new List<UIElement>();
@@ -78,6 +86,12 @@ public partial class PanelHelper
         }
     }
 
+    /// <summary>
+    /// Get recursive all sub UI elements of type t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="control">The control.</param>
+    /// <returns>The get recursive all sub UI elements of type t result.</returns>
     public static List<T> GetRecursiveAllSubUIElementsOfType<T>(UIElement control) where T : class
     {
         List<T> result = new List<T>();

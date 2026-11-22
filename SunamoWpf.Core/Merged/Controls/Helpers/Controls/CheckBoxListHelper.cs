@@ -1,5 +1,13 @@
+/// <summary>
+/// Represents the check box list helper type.
+/// </summary>
 public class CheckBoxListHelper
 {
+    /// <summary>
+    /// Checked indexes.
+    /// </summary>
+    /// <param name="chbs">The chbs.</param>
+    /// <returns>The checked indexes result.</returns>
     public static IList<int> CheckedIndexes(IList<CheckBox> chbs)
     {
         //chbs[0].IsChecked = true;
@@ -16,6 +24,11 @@ public class CheckBoxListHelper
     }
 
     //
+    /// <summary>
+    /// Checked content dict.
+    /// </summary>
+    /// <param name="chbs">The chbs.</param>
+    /// <returns>The checked content dict result.</returns>
     public static Dictionary<StackPanel, bool> CheckedContentDict(IList<CheckBox> chbs)
     {
         var unticked = UncheckedContent(chbs);

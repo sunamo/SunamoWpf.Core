@@ -1,11 +1,22 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Buttons;
 
+/// <summary>
+/// Represents the action button t type.
+/// </summary>
 public class ActionButton<T> : Button
 {
     ButtonAction action = ButtonAction.SaveToClipboard;
     T what;
+    /// <summary>
+    /// The remove.
+    /// </summary>
     public event VoidT<T> Remove;
+    /// <summary>
+    /// Initializes a new instance of the action button class.
+    /// </summary>
+    /// <param name="action">The action.</param>
+    /// <param name="what">The what.</param>
     public ActionButton(ButtonAction action, T what)
     {
         this.action = action;
@@ -25,7 +36,7 @@ public class ActionButton<T> : Button
                 ClipboardService.SetText(what.ToString());
                 break;
             case ButtonAction.Run:
-                PH.Start();
+                PHWpf.Start();
                 break;
             default:
                 break;

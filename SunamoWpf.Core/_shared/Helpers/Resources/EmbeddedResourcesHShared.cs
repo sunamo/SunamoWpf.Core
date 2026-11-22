@@ -1,5 +1,8 @@
 namespace SunamoWpf._shared.Helpers.Resources;
 
+/// <summary>
+/// Represents the embedded resources h shared type.
+/// </summary>
 public class EmbeddedResourcesHShared : EmbeddedResourcesH
 {
     private static EmbeddedResourcesHShared _ciShared = null;
@@ -85,11 +88,21 @@ public class EmbeddedResourcesHShared : EmbeddedResourcesH
         }
     }
 
+    /// <summary>
+    /// Initializes a new instance of the embedded resources h shared class.
+    /// </summary>
+    /// <param name="_entryAssembly">The entry assembly.</param>
+    /// <param name="defaultNamespace">The default namespace.</param>
     public EmbeddedResourcesHShared(Assembly _entryAssembly, string defaultNamespace) : base(_entryAssembly, defaultNamespace)
     {
 
     }
 
+    /// <summary>
+    /// Get bitmap image source.
+    /// </summary>
+    /// <param name="name">The name.</param>
+    /// <returns>The get bitmap image source result.</returns>
     public BitmapImage GetBitmapImageSource(string name)
     {
         var imageSource = new BitmapImage();

@@ -1,8 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers;
 
+/// <summary>
+/// Represents the control finder type.
+/// </summary>
 public class ControlFinder
 {
+    /// <summary>
+    /// Stack panel.
+    /// </summary>
+    /// <param name="parent">The parent.</param>
+    /// <param name="name">The name.</param>
+    /// <returns>The stack panel result.</returns>
     public static StackPanel StackPanel(FrameworkElement parent, string name)
     {
         return FindControl<StackPanel>(parent, name);

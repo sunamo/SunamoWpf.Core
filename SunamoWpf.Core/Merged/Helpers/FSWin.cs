@@ -1,7 +1,13 @@
 ﻿#define ASYNC
 namespace SunamoWpf;
+/// <summary>
+/// Represents the FS win type.
+/// </summary>
 public class FSWin //: IFSWin
 {
+    /// <summary>
+    /// The ci.
+    /// </summary>
     public static FSWin ci = new FSWin();
 
     private static void Terminate(List<Process> processes)
@@ -20,6 +26,10 @@ public class FSWin //: IFSWin
         item.WaitForExit();
     }
 
+    /// <summary>
+    /// Delete file maybe locked.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public static void DeleteFileMaybeLocked(string path)
     {
         var processes = FileUtil.WhoIsLocking(path);
@@ -27,6 +37,10 @@ public class FSWin //: IFSWin
         FS.TryDeleteFile(path);
     }
 
+    /// <summary>
+    /// Delete file or folder maybe locked.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public static void DeleteFileOrFolderMaybeLocked(string path)
     {
         Console.WriteLine("DeleteFileOrFolderMaybeLocked: " + path);
@@ -75,6 +89,9 @@ public class FSWin //: IFSWin
         }
     }
 
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(FSWin);
 
     /// <summary>

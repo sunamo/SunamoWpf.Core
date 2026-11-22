@@ -1,7 +1,15 @@
 namespace SunamoWpf._shared;
 
+/// <summary>
+/// Represents the status helper type.
+/// </summary>
 public partial class StatusHelper
 {
+    /// <summary>
+    /// Get background brush of type of message.
+    /// </summary>
+    /// <param name="typeOfMessage">The type of message.</param>
+    /// <returns>The get background brush of type of message result.</returns>
     public static Color GetBackgroundBrushOfTypeOfMessage(TypeOfMessageWpf typeOfMessage)
     {
         //return Colors.White;

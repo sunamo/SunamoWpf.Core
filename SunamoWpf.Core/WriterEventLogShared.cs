@@ -4,9 +4,17 @@ namespace SunamoWpf;
 public static partial class WriterEventLog
 {
     static EventLog mainEventLogOfApplication = null;
-    public const string ApplicationLogName = XlfKeys.Application;
+    /// <summary>
+    /// The application log name constant.
+    /// </summary>
+    public const string ApplicationLogName = "Application";
     static EventLog eventLogWindowsApplication = null;
 
+    /// <summary>
+    /// Write exception.
+    /// </summary>
+    /// <param name="stacktrace">The stacktrace.</param>
+    /// <param name="exception">The exception.</param>
     public static void WriteException(string stacktrace, string exception)
     {
         if (!IsAdmin())
@@ -33,7 +41,6 @@ public static partial class WriterEventLog
     //        return false;
     //    }
     //    bool b = CreateMainAppLog(scz);
-    //    WriteToMainAppLogScz(sess.i18n(XlfKeys.Template), EventLogEntryType.Information);
     //    return b;
     //} 
     #endregion
@@ -111,12 +118,21 @@ public static partial class WriterEventLog
         mainEventLogOfApplication.WriteEntry(text, type);
     }
 
+    /// <summary>
+    /// Is admin.
+    /// </summary>
+    /// <returns>The is admin result.</returns>
     public static bool IsAdmin()
     {
         return false;
         //return WindowsSecurityHelper.IsUserAdministrator();
     }
 
+    /// <summary>
+    /// Create main app log.
+    /// </summary>
+    /// <param name="notThisAppNameJustEventLogNames">The not this app name just event log names.</param>
+    /// <returns>The create main app log result.</returns>
     public static bool CreateMainAppLog(string notThisAppNameJustEventLogNames)
     {
         if (!IsAdmin())

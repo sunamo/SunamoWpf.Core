@@ -4,6 +4,9 @@ namespace SunamoWpf.Controls;
 
 public partial class MultiLineTextBlock : UserControl
 {
+    /// <summary>
+    /// Initializes a new instance of the multi line text block class.
+    /// </summary>
     public MultiLineTextBlock()
     {
         try
@@ -20,6 +23,12 @@ public partial class MultiLineTextBlock : UserControl
 
     }
 
+    /// <summary>
+    /// Add lines.
+    /// </summary>
+    /// <param name="background">The background.</param>
+    /// <param name="foreground">The foreground.</param>
+    /// <param name="lines">The lines.</param>
     public void AddLines(Brush background, Brush foreground, params string[] lines)
     {
         foreach (var item in lines)

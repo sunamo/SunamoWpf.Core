@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ContainerControls;
 
+/// <summary>
+/// Represents the window helper type.
+/// </summary>
 public partial class WindowHelper
 {
     /// <summary>
@@ -14,6 +17,13 @@ public partial class WindowHelper
         return Size.Empty;
         //return WpfApp.mp.actualR.RenderSize;
     }
+    /// <summary>
+    /// Set dialog result.
+    /// </summary>
+    /// <param name="window">The window.</param>
+    /// <param name="dialog">The dialog.</param>
+    /// <param name="dialogResult">The dialog result.</param>
+    /// <returns>The set dialog result result.</returns>
     public static bool? SetDialogResult(Window window, bool dialog, bool? dialogResult)
     {
         if (dialog)
@@ -35,6 +45,10 @@ public partial class WindowHelper
 
 
 
+    /// <summary>
+    /// Show dialog.
+    /// </summary>
+    /// <param name="windowWithUserControl">The window with user control.</param>
     public static void ShowDialog(WindowWithUserControl windowWithUserControl)
     {
         dynamic windowWithUserControl2 = windowWithUserControl;
@@ -49,6 +63,10 @@ public partial class WindowHelper
         }
     }
 
+    /// <summary>
+    /// Close.
+    /// </summary>
+    /// <param name="windowWithUserControl">The window with user control.</param>
     public static void Close(WindowWithUserControl windowWithUserControl)
     {
         try

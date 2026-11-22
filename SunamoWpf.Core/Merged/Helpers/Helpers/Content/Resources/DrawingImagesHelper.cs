@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 
 
+/// <summary>
+/// Represents the drawing images helper type.
+/// </summary>
 public static class DrawingImagesHelper
 {
     //public static System.Drawing.Image MsAppx(bool enabled, AppPics appPic)

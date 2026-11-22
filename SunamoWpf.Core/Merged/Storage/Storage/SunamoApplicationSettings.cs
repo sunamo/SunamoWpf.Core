@@ -1,9 +1,19 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Storage;
 
+/// <summary>
+/// Represents the sunamo application settings type.
+/// </summary>
 public class SunamoApplicationSettings
 {
+    /// <summary>
+    /// The saved element.
+    /// </summary>
     public static Dictionary<FrameworkElement, TUListWpf<FrameworkElement, DependencyProperty>> savedElement = new Dictionary<FrameworkElement, TUListWpf<FrameworkElement, DependencyProperty>>();
+    /// <summary>
+    /// Add children from.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
     public static void AddChildrenFrom(FrameworkElement frameworkElement)
     {
         if (frameworkElement is Panel)

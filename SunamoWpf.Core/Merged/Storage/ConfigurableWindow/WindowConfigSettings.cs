@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.ConfigurableWindow;
 
+/// <summary>
+/// Represents the window config settings type.
+/// </summary>
 public class WindowConfigSettings : ConfigurableWindowSettings
 {
     const string IS_FIRST_RUN = "IsFirstRun";

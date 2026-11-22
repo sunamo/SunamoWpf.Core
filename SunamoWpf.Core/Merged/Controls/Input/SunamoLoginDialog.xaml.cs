@@ -11,11 +11,29 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
 {
     #region Rewrite to pure cs. With xaml is often problems without building
     static Type type = typeof(Type);
+    /// <summary>
+    /// The tbc.
+    /// </summary>
     public List<TextBlock> tbc;
+    /// <summary>
+    /// The chbc.
+    /// </summary>
     public List<CheckBox> chbc;
+    /// <summary>
+    /// The txtc.
+    /// </summary>
     public List<TextBox> txtc;
+    /// <summary>
+    /// The btnc.
+    /// </summary>
     public List<Button> btnc;
+    /// <summary>
+    /// The spbc.
+    /// </summary>
     public List<SunamoPasswordBox> spbc;
+    /// <summary>
+    /// The gridc.
+    /// </summary>
     public List<Grid> gridc;
     //public List<PasswordBox> pwbc;
     private void LoginDialog_Loaded(object sender, RoutedEventArgs eventArgs)
@@ -45,6 +63,9 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
     {
         // All in OnSizeChanged
     }
+    /// <summary>
+    /// The login.
+    /// </summary>
     public string Login
     {
         get
@@ -52,6 +73,9 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
             return txtLogin.Text;
         }
     }
+    /// <summary>
+    /// The heslo.
+    /// </summary>
     public string Heslo
     {
         get
@@ -60,7 +84,13 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
         }
     }
     string title = null;
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
     public string Title => title;
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -71,13 +101,19 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
             }
         }
     }
+    /// <summary>
+    /// The login enigma.
+    /// </summary>
     public string LoginEnigma;
+    /// <summary>
+    /// The pw enigma.
+    /// </summary>
     public string PwEnigma;
     StorageApplicationData storageApplicationData = StorageApplicationData.NoWhere;
     const string h = "h";
     const string l = "l";
     const string s = "s";
-    string iniCredSection = Translate.FromKey(XlfKeys.Cred);
+    string iniCredSection = "Cred";
     /// <summary>
     /// A1 = RandomHelper.RandomString(10)
     /// Set also CryptDelegates from shared.unsafe
@@ -98,13 +134,13 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
         }
         chbAutoLogin.Checked += chbAutoLogin_Checked;
         chbRememberLogin.Unchecked += chbRememberLogin_Unchecked;
-        tbLogin.Text = Translate.FromKey(XlfKeys.Login) + ": ";
-        tbPw.Text = Translate.FromKey(XlfKeys.Password) + ": ";
-        chbRememberLogin.Content = Translate.FromKey(XlfKeys.RememberLogin);
-        chbAutoLogin.Content = Translate.FromKey(XlfKeys.AutoLogin);
-        btnLogin.Content = Translate.FromKey(XlfKeys.Login);
-        btnForgetPassword.Content = Translate.FromKey(XlfKeys.ForgetPassword);
-        btnForgetLoginAndPassword.Content = Translate.FromKey(XlfKeys.ForgetLoginAndPassword);
+        tbLogin.Text = "Login" + ": ";
+        tbPw.Text = "Password" + ": ";
+        chbRememberLogin.Content = "RememberLogin";
+        chbAutoLogin.Content = "AutoLogin";
+        btnLogin.Content = "Login";
+        btnForgetPassword.Content = "ForgetPassword";
+        btnForgetLoginAndPassword.Content = "Forget login and password";
         Loaded += LoginDialog_Loaded;
     }
     void chbRememberLogin_Unchecked(object sender, RoutedEventArgs eventArgs)
@@ -115,7 +151,13 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
     {
         chbRememberLogin.IsChecked = true;
     }
+    /// <summary>
+    /// The crypt delegates.
+    /// </summary>
     public CryptDelegatesWpf cryptDelegates = null;
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
     string salt = null;
     string pPw; string pSalt; string pLogin;
@@ -131,6 +173,12 @@ public partial class LoginDialog : UserControl, IUserControlWithSizeChange
         this.storageApplicationData = storageApplicationData;
         cryptDelegates = cryptDelegatesWpf;
     }
+        /// <summary>
+        /// Init.
+        /// </summary>
+        /// <param name="pPw">The p pw.</param>
+        /// <param name="pSalt">The p salt.</param>
+        /// <param name="pLogin">The p login.</param>
     public
 #if ASYNC
 async Task
@@ -142,7 +190,7 @@ void
         this.pLogin = pLogin;
         this.pPw = pPw;
         this.pSalt = pSalt;
-        title = Translate.FromKey(XlfKeys.EnterLoginCredentials);
+        title = "EnterLoginCredentials";
         if (storageApplicationData == StorageApplicationData.Registry)
         {
             string salt2 = RA.ReturnValueString(s);
@@ -214,7 +262,7 @@ TF.ReadAllText(pLogin);
     }
     private static void ThrowExceptionConfigNotSupported()
     {
-        ThrowEx.Custom(Translate.FromKey(XlfKeys.SavingSettingsToAppConfigOrWebConfigIsNotYetSupported));
+        ThrowEx.Custom("Saving settings to app config or web config is not yet supported");
     }
     private void btnLogin_Click(object sender, RoutedEventArgs eventArgs)
     {
@@ -380,11 +428,18 @@ btnForgetPassword_ClickAsync(object sender, RoutedEventArgs eventArgs)
     //{
     //    ThrowEx.NotImplementedMethod();
     //}
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         // Nemůžu tu nastavovat, FocusOnMainElement se volá automaticky, tím pádem se nastaví žluté obtažení ale nefunguje kurzor. Když kliknu do txtPassword mají zvýraznění oba 2
         //txtLogin.Focus();
     }
+    /// <summary>
+    /// On size changed.
+    /// </summary>
+    /// <param name="size">The size.</param>
     public void OnSizeChanged(DesktopSize size)
     {
         txtHeslo.OnSizeChanged(new DesktopSize(size.Width, size.Height));

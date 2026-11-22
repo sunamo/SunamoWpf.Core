@@ -1,8 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.Controls;
 
+/// <summary>
+/// Represents the data grid helper type.
+/// </summary>
 public static class DataGridHelper
 {
+    /// <summary>
+    /// New text column.
+    /// </summary>
+    /// <param name="header">The header.</param>
+    /// <param name="bindingPath">The binding path.</param>
+    /// <returns>The new text column result.</returns>
     public static DataGridColumn NewTextColumn(string header, string bindingPath)
     {
         DataGridTextColumn column = new DataGridTextColumn();
@@ -11,6 +20,12 @@ public static class DataGridHelper
         return column;
     }
 
+    /// <summary>
+    /// New check box column.
+    /// </summary>
+    /// <param name="header">The header.</param>
+    /// <param name="bindingPath">The binding path.</param>
+    /// <returns>The new check box column result.</returns>
     public static DataGridColumn NewCheckBoxColumn(string header, string bindingPath)
     {
         DataGridCheckBoxColumn column = new DataGridCheckBoxColumn();
@@ -20,6 +35,13 @@ public static class DataGridHelper
         return column;
     }
 
+    /// <summary>
+    /// Get cell.
+    /// </summary>
+    /// <param name="dataGrid1">The data grid 1.</param>
+    /// <param name="row">The row.</param>
+    /// <param name="column">The column.</param>
+    /// <returns>The get cell result.</returns>
     public static DataGridCell GetCell(DataGrid dataGrid1, int row, int column)
     {
         DataGridRow rowContainer = GetRow(dataGrid1, row);
@@ -39,6 +61,12 @@ public static class DataGridHelper
         return null;
     }
 
+    /// <summary>
+    /// Get row.
+    /// </summary>
+    /// <param name="dataGrid1">The data grid 1.</param>
+    /// <param name="index">The index.</param>
+    /// <returns>The get row result.</returns>
     public static DataGridRow GetRow(DataGrid dataGrid1, int index)
     {
         if (dataGrid1.ItemContainerGenerator.Status == GeneratorStatus.NotStarted)
@@ -56,6 +84,12 @@ public static class DataGridHelper
         return row;
     }
 
+    /// <summary>
+    /// Get visual child t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="parent">The parent.</param>
+    /// <returns>The get visual child t result.</returns>
     public static T GetVisualChild<T>(Visual parent) where T : Visual
     {
         T child = default;
@@ -120,6 +154,11 @@ public static class DataGridHelper
         return null;
     }
 
+    /// <summary>
+    /// Get cell value as string.
+    /// </summary>
+    /// <param name="dataGridCellInfo">The data grid cell info.</param>
+    /// <returns>The get cell value as string result.</returns>
     public static string GetCellValueAsString(DataGridCellInfo dataGridCellInfo)
     {
         object value = GetCellValue(dataGridCellInfo);
@@ -130,6 +169,11 @@ public static class DataGridHelper
         return value.ToString();
     }
 
+    /// <summary>
+    /// Get data grid rows.
+    /// </summary>
+    /// <param name="dataGrid">The data grid.</param>
+    /// <returns>The get data grid rows result.</returns>
     public static List<DataGridRow> GetDataGridRows(DataGrid dataGrid)
     {
         if (dataGrid.ItemContainerGenerator.Status == GeneratorStatus.NotStarted)
@@ -158,6 +202,13 @@ public static class DataGridHelper
         return result;
     }
 
+    /// <summary>
+    /// Add rows.
+    /// </summary>
+    /// <param name="dtGrid">The dt grid.</param>
+    /// <param name="list">The list.</param>
+    /// <param name="rows">The rows.</param>
+    /// <param name="columns">The columns.</param>
     public static void AddRows(DataGrid dtGrid, /*List<object> list,*/ List<IList> rows, params string[] columns)
     {
         foreach (var item in columns)
@@ -168,6 +219,11 @@ public static class DataGridHelper
         dtGrid.ItemsSource = rows;
     }
 
+    /// <summary>
+    /// Enable sorting.
+    /// </summary>
+    /// <param name="dtGrid">The dt grid.</param>
+    /// <param name="enabled">The enabled.</param>
     public static void EnableSorting(DataGrid dtGrid, bool enabled)
     {
         dtGrid.CanUserSortColumns = enabled;
@@ -177,6 +233,12 @@ public static class DataGridHelper
         }
     }
 
+    /// <summary>
+    /// Sort data grid.
+    /// </summary>
+    /// <param name="dataGrid">The data grid.</param>
+    /// <param name="column">The column.</param>
+    /// <param name="sortDirection">The sort direction.</param>
     public static void SortDataGrid(DataGrid dataGrid, DataGridColumn column, ListSortDirection? sortDirection)
     {
         // Clear current sort descriptions

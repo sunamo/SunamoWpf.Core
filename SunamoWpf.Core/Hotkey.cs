@@ -13,15 +13,33 @@ public class HotKey : IDisposable
     [DllImport("user32.dll")]
     private static extern bool UnregisterHotKey(nint hWnd, int hotKeyId);
 
+    /// <summary>
+    /// The wm hot key constant.
+    /// </summary>
     public const int WmHotKey = 0x0312;
 
     private bool _disposed = false;
 
+    /// <summary>
+    /// Gets or sets the key.
+    /// </summary>
     public Key Key { get; private set; }
+    /// <summary>
+    /// Gets or sets the key modifiers.
+    /// </summary>
     public KeyModifier KeyModifiers { get; private set; }
+    /// <summary>
+    /// Gets or sets the action.
+    /// </summary>
     public Action<HotKey> Action { get; private set; }
+    /// <summary>
+    /// Gets or sets the id.
+    /// </summary>
     public int Id { get; set; }
 
+    /// <summary>
+    /// The tag.
+    /// </summary>
     public object Tag = null;
 
     //public static void DummyMethod(HotKey h)
@@ -30,6 +48,13 @@ public class HotKey : IDisposable
     //}
 
     // ******************************************************************
+    /// <summary>
+    /// Initializes a new instance of the hot key class.
+    /// </summary>
+    /// <param name="key">The key.</param>
+    /// <param name="keyModifiers">The key modifiers.</param>
+    /// <param name="action">The action.</param>
+    /// <param name="register">The register.</param>
     public HotKey(Key key, KeyModifier keyModifiers, Action<HotKey> action, bool register = true)
     {
         Key = key;
@@ -42,6 +67,10 @@ public class HotKey : IDisposable
     }
 
     // ******************************************************************
+    /// <summary>
+    /// Register.
+    /// </summary>
+    /// <returns>The register result.</returns>
     public bool Register()
     {
         int virtualKeyCode = KeyInterop.VirtualKeyFromKey(Key);
@@ -60,6 +89,9 @@ public class HotKey : IDisposable
     }
 
     // ******************************************************************
+    /// <summary>
+    /// Unregister.
+    /// </summary>
     public void Unregister()
     {
         HotKey hotKey;
@@ -94,6 +126,9 @@ public class HotKey : IDisposable
     // Implement IDisposable.
     // Do not make this method virtual.
     // A derived public class should not be able to override this method.
+    /// <summary>
+    /// Dispose.
+    /// </summary>
     public void Dispose()
     {
         Dispose(true);
@@ -113,6 +148,10 @@ public class HotKey : IDisposable
     // If disposing equals false, the method has been called by the
     // runtime from inside the finalizer and you should not reference
     // other objects. Only unmanaged resources can be _disposed.
+    /// <summary>
+    /// Dispose.
+    /// </summary>
+    /// <param name="disposing">The disposing.</param>
     protected virtual void Dispose(bool disposing)
     {
         // Check to see if Dispose has already been called.
@@ -133,14 +172,35 @@ public class HotKey : IDisposable
 }
 
 // ******************************************************************
+/// <summary>
+/// Represents the key modifier type.
+/// </summary>
 [Flags]
 public enum KeyModifier
 {
+    /// <summary>
+    /// The none value.
+    /// </summary>
     None = 0x0000,
+    /// <summary>
+    /// The alt value.
+    /// </summary>
     Alt = 0x0001,
+    /// <summary>
+    /// The ctrl value.
+    /// </summary>
     Ctrl = 0x0002,
+    /// <summary>
+    /// The no repeat value.
+    /// </summary>
     NoRepeat = 0x4000,
+    /// <summary>
+    /// The shift value.
+    /// </summary>
     Shift = 0x0004,
+    /// <summary>
+    /// The win value.
+    /// </summary>
     Win = 0x0008
 }
 

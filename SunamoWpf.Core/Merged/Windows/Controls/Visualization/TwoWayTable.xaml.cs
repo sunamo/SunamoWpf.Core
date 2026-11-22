@@ -23,6 +23,10 @@ public partial class TwoWayTable : UserControl
     /// Is initialized only when dataCellWrapper == AddBeforeControl.CheckBox
     /// </summary>
     CheckBox[,] checkBoxes = null;
+    /// <summary>
+    /// Do save.
+    /// </summary>
+    /// <param name="path">The path.</param>
     public void DoSave(string path)
     {
         foreach (var item in leftChbs)
@@ -70,6 +74,9 @@ public partial class TwoWayTable : UserControl
     /// Every cell data has own data
     /// </summary>
     object[,] data = null;
+    /// <summary>
+    /// The rows.
+    /// </summary>
     public int Rows
     {
         get
@@ -77,6 +84,9 @@ public partial class TwoWayTable : UserControl
             return rows;
         }
     }
+    /// <summary>
+    /// The columns.
+    /// </summary>
     public int Columns
     {
         get
@@ -84,15 +94,32 @@ public partial class TwoWayTable : UserControl
             return columns;
         }
     }
+    /// <summary>
+    /// Get data at t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="row">The row.</param>
+    /// <param name="column">The column.</param>
+    /// <returns>The get data at t result.</returns>
     public T GetDataAt<T>(int row, int column)
     {
         return (T)data[row, column];
     }
+    /// <summary>
+    /// Is checked at.
+    /// </summary>
+    /// <param name="row">The row.</param>
+    /// <param name="column">The column.</param>
+    /// <returns>The is checked at result.</returns>
     public bool? IsCheckedAt(int row, int column)
     {
         return checkBoxes[row, column].IsChecked;
     }
     ILogger logger;
+    /// <summary>
+    /// Initializes a new instance of the two way table class.
+    /// </summary>
+    /// <param name="logger">The logger.</param>
     public TwoWayTable(ILogger logger)
     {
         this.logger = logger;
@@ -119,6 +146,11 @@ public partial class TwoWayTable : UserControl
         //}
 #endif
     }
+    /// <summary>
+    /// Create grid.
+    /// </summary>
+    /// <param name="row">The row.</param>
+    /// <param name="column">The column.</param>
     public void CreateGrid(int row, int column)
     {
         row++;
@@ -136,6 +168,9 @@ public partial class TwoWayTable : UserControl
         ClearGridChildren();
         GridHelper.GetAutoSize(grid, column, row);
     }
+    /// <summary>
+    /// Clear grid children.
+    /// </summary>
     public void ClearGridChildren()
     {
         grid.Children.Clear();
@@ -214,14 +249,27 @@ TF.ReadAllText(item);
         }
         return result;
     }
+    /// <summary>
+    /// Re render.
+    /// </summary>
     public void ReRender()
     {
         base.OnRenderSizeChanged(new SizeChangedInfo(this, this.RenderSize, true, true));
     }
+    /// <summary>
+    /// Get check boxes in row.
+    /// </summary>
+    /// <param name="dex">The dex.</param>
+    /// <returns>The get check boxes in row result.</returns>
     public List<CheckBox> GetCheckBoxesInRow(string dex)
     {
         return GetCheckBoxesInRow(leftChbs.IndexOf(dex));
     }
+    /// <summary>
+    /// Get check boxes in row.
+    /// </summary>
+    /// <param name="dex">The dex.</param>
+    /// <returns>The get check boxes in row result.</returns>
     public List<CheckBox> GetCheckBoxesInRow(int dex)
     {
         var ele = GridHelper.GetControlsFrom<CheckBox>(grid, true, dex).ToList();
@@ -231,6 +279,9 @@ TF.ReadAllText(item);
     AddBeforeControl dataCellWrapper = AddBeforeControl.None;
     string displayEntity = string.Empty;
     //public event Action<TwoWayTable, string, string> Save;
+    /// <summary>
+    /// Get display entity.
+    /// </summary>
     public void GetDisplayEntity()
     {
     }
@@ -286,6 +337,9 @@ GetRowsIsChecked(this, folder);
         var result = leftChbs.IndexOf(key);
         return result;
     }
+    /// <summary>
+    /// The data cell wrapper.
+    /// </summary>
     public AddBeforeControl DataCellWrapper
     {
         get
@@ -297,6 +351,9 @@ GetRowsIsChecked(this, folder);
             dataCellWrapper = value;
         }
     }
+    /// <summary>
+    /// The max height row border.
+    /// </summary>
     public double maxHeightRowBorder = 30;
     /// <summary>
     /// Can be use AddColumn or AddRow in dependent how I have structured data
@@ -396,10 +453,18 @@ GetRowsIsChecked(this, folder);
             }
         }
     }
+    /// <summary>
+    /// Add top.
+    /// </summary>
+    /// <param name="uie">The uie.</param>
     public void AddTop(params CheckBoxData<UIElement>[] uie)
     {
         AddTop(uie.ToList());
     }
+    /// <summary>
+    /// Add top.
+    /// </summary>
+    /// <param name="uie">The uie.</param>
     public void AddTop(IList<CheckBoxData<UIElement>> uie)
     {
         int index = 0;
@@ -434,11 +499,19 @@ GetRowsIsChecked(this, folder);
             }
         }
     }
+    /// <summary>
+    /// Add left.
+    /// </summary>
+    /// <param name="uie">The uie.</param>
     public void AddLeft(params CheckBoxData<UIElement>[] uie)
     {
         AddLeft(uie.ToList());
     }
     List<string> leftChbs = new List<string>();
+    /// <summary>
+    /// Add left.
+    /// </summary>
+    /// <param name="uie">The uie.</param>
     public void AddLeft(IList<CheckBoxData<UIElement>> uie)
     {
         leftChbs.Clear();

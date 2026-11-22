@@ -3,12 +3,21 @@ namespace SunamoWpf.Controls.Input;
 
 partial class SelectFolder
 {
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(SelectFolder);
+    /// <summary>
+    /// The validated.
+    /// </summary>
     public static bool validated
     {
         get => ValidationHelper.validated;
         set => ValidationHelper.validated = value;
     }
+    /// <summary>
+    /// Validate.
+    /// </summary>
     public void Validate()
     {
         SelectFolder.Validate(this);

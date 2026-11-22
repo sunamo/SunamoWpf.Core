@@ -1,6 +1,9 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers;
 
+/// <summary>
+/// Represents the pictures desktop type.
+/// </summary>
 public partial class PicturesDesktop
 {
     static Type type = typeof(PicturesDesktop);
@@ -185,6 +188,19 @@ public partial class PicturesDesktop
         return null;
     }
 
+    /// <summary>
+    /// Place to center fixed percent size.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <param name="imagePath">The image path.</param>
+    /// <param name="targetWidth">The target width.</param>
+    /// <param name="targetHeight">The target height.</param>
+    /// <param name="percentWidthIconOfImage">The percent width icon of image.</param>
+    /// <param name="percentHeightIconOfImage">The percent height icon of image.</param>
+    /// <param name="bgPixelColor">The bg pixel color.</param>
+    /// <param name="fgPixelColor/*">The fg pixel color.</param>
+    /// <param name="definitelyFgPixelColor*/">The definitely fg pixel color.</param>
+    /// <returns>The place to center fixed percent size result.</returns>
     public static BitmapSource PlaceToCenterFixedPercentSize(string path, string imagePath, double targetWidth, double targetHeight, double percentWidthIconOfImage, double percentHeightIconOfImage, PixelColorWpf bgPixelColor, PixelColorWpf fgPixelColor/*, PixelColorWpf definitelyFgPixelColor*/)
     {
         var bitmap = imagePath;

@@ -3,9 +3,14 @@ namespace SunamoWpf.Helpers.BaseControls;
 
 public partial class FrameworkElementHelper
 {
+    /// <summary>
+    /// Set tool tip.
+    /// </summary>
+    /// <param name="btnCopyToClipboard">The btn copy to clipboard.</param>
+    /// <param name="xlfKeys">The xlf keys.</param>
     public static void SetToolTip(Button btnCopyToClipboard, string xlfKeys)
     {
-        btnCopyToClipboard.ToolTip = Translate.FromKey(xlfKeys);
+        btnCopyToClipboard.ToolTip = xlfKeys;
     }
 
     private static string SaveScreenshot(Visual target, string fileName, string appName = null, string projectName = null)
@@ -48,6 +53,11 @@ public partial class FrameworkElementHelper
         }
     }
 
+    /// <summary>
+    /// Set margin 3.
+    /// </summary>
+    /// <param name="element">The element.</param>
+    /// <param name="allSides">The all sides.</param>
     public static void SetMargin3(object element, double allSides)
     {
         var frameworkElement = (FrameworkElement)element;
@@ -57,11 +67,21 @@ public partial class FrameworkElementHelper
         }
     }
 
+    /// <summary>
+    /// Set all 3 widths.
+    /// </summary>
+    /// <param name="frameworkElement">The framework element.</param>
+    /// <param name="width">The width.</param>
     public static void SetAll3Widths(FrameworkElement frameworkElement, double width)
     {
         frameworkElement.Width = frameworkElement.MaxWidth = frameworkElement.MinWidth = width;
     }
 
+    /// <summary>
+    /// Create bitmap from visual.
+    /// </summary>
+    /// <param name="sender">The sender.</param>
+    /// <param name="eventArgs">The event args.</param>
     public static void CreateBitmapFromVisual(object sender, RoutedEventArgs eventArgs)
     {
         Visual target = null;
@@ -77,7 +97,7 @@ public partial class FrameworkElementHelper
         //fn = WpfApp.mp.actualR.GetType().Name;
         SaveScreenshot(target, fileName);
 
-        var modeType = target.GetType().Assembly.GetTypes().Where(type => type.Name == Translate.FromKey(XlfKeys.Mode)).Single();
+        var modeType = target.GetType().Assembly.GetTypes().Where(type => type.Name == "Mode").Single();
         var names = Enum.GetNames(modeType);
         List<string> names_ctor = []; //Enum.GetNames(typeof(MainWindow_Ctor.Mode));
 
@@ -129,6 +149,13 @@ public partial class FrameworkElementHelper
         }
     }
 
+    /// <summary>
+    /// Path to screenshot.
+    /// </summary>
+    /// <param name="fileName">The file name.</param>
+    /// <param name="appName">The app name.</param>
+    /// <param name="projectName">The project name.</param>
+    /// <returns>The path to screenshot result.</returns>
     public static string PathToScreenshot(string fileName, string appName, string projectName)
     {
         fileName = Path.Combine(@"E:\vs\" + appName, projectName, FolderConsts.screenshots, fileName + ".png");

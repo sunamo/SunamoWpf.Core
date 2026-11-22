@@ -3,11 +3,21 @@ namespace SunamoWpf.Helpers.Content.Resources;
 
 public static partial class BitmapImageHelper
 {
+    /// <summary>
+    /// Path to bitmap image.
+    /// </summary>
+    /// <param name="path">The path.</param>
+    /// <returns>The path to bitmap image result.</returns>
     public static BitmapImage PathToBitmapImage(string path)
     {
         ; return UriToBitmapImage(new Uri(path, UriKind.Absolute));
     }
 
+    /// <summary>
+    /// Uri to bitmap image.
+    /// </summary>
+    /// <param name="uri">The uri.</param>
+    /// <returns>The uri to bitmap image result.</returns>
     public static BitmapImage UriToBitmapImage(Uri uri)
     {
         BitmapImage bitmapImage = new BitmapImage(uri);
@@ -34,6 +44,13 @@ public static partial class BitmapImageHelper
         }
     }
 
+    /// <summary>
+    /// Resize.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="width">The width.</param>
+    /// <param name="height">The height.</param>
+    /// <returns>The resize result.</returns>
     public static BitmapImage Resize(BitmapImage source, int width, int height)
     {
         source.BeginInit();
@@ -43,6 +60,13 @@ public static partial class BitmapImageHelper
         return source;
     }
 
+    /// <summary>
+    /// Resize.
+    /// </summary>
+    /// <param name="source">The source.</param>
+    /// <param name="rate">The rate.</param>
+    /// <param name="init">The init.</param>
+    /// <returns>The resize result.</returns>
     public static BitmapImage Resize(BitmapImage source, int rate, bool init)
     {
         if (init)
@@ -60,6 +84,11 @@ public static partial class BitmapImageHelper
         return source;
     }
 
+    /// <summary>
+    /// Save.
+    /// </summary>
+    /// <param name="renderTarget">The render target.</param>
+    /// <param name="path">The path.</param>
     public static void Save(BitmapSource renderTarget, string path)
     {
         PngBitmapEncoder bitmapEncoder = new PngBitmapEncoder();

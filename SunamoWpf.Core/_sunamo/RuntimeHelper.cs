@@ -1,9 +1,20 @@
 namespace SunamoWpf.Core._sunamo;
 
 
+/// <summary>
+/// Represents the runtime helper type.
+/// </summary>
 public class RuntimeHelper
 {
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(RuntimeHelper);
+    /// <summary>
+    /// Get invocation list.
+    /// </summary>
+    /// <param name="handler">The handler.</param>
+    /// <returns>The get invocation list result.</returns>
     public static List<Delegate> GetInvocationList(Delegate handler)
     {
         if (handler == null)
@@ -20,6 +31,11 @@ public class RuntimeHelper
     {
         return Environment.UserInteractive;
     }
+    /// <summary>
+    /// Has event handler.
+    /// </summary>
+    /// <param name="handler">The handler.</param>
+    /// <returns>The has event handler result.</returns>
     public static bool HasEventHandler(Delegate handler)
     {
         return GetInvocationList(handler).Count() > 0;
@@ -79,7 +95,7 @@ public class RuntimeHelper
         {
             if (throwException)
             {
-                throw new Exception(Translate.FromKey(XlfKeys.ChangeDialogResultHasAlredyRegisteredHandler));
+                throw new Exception("Change dialog result has alredy registered handler");
             }
             else
             {
@@ -91,10 +107,19 @@ public class RuntimeHelper
             controlWithResult.ChangeDialogResult += handler;
         }
     }
+    /// <summary>
+    /// Cast to generic t.
+    /// </summary>
+    /// <typeparam name="T">The type T.</typeparam>
+    /// <param name="value">The value.</param>
+    /// <returns>The cast to generic t result.</returns>
     public static T CastToGeneric<T>(object value)
     {
         return (T)value;
     }
+    /// <summary>
+    /// Empty dummy method.
+    /// </summary>
     public static void EmptyDummyMethod()
     {
     }
@@ -108,6 +133,10 @@ public class RuntimeHelper
     }
 #pragma warning restore
 
+    /// <summary>
+    /// Is admin user.
+    /// </summary>
+    /// <returns>The is admin user result.</returns>
     public static bool IsAdminUser()
     {
         return false;

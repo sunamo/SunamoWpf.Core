@@ -3,6 +3,9 @@ namespace SunamoWpf.Controls;
 
 public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
 {
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -10,10 +13,16 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             ChangeDialogResult(value);
         }
     }
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         selectFolder.Focus();
     }
+    /// <summary>
+    /// Initializes a new instance of the select folder advanced class.
+    /// </summary>
     public SelectFolderAdvanced()
     {
         try
@@ -27,7 +36,13 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
 #endif
         }
     }
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
+    /// <summary>
+    /// The chb dont ask again.
+    /// </summary>
     public CheckBox chbDontAskAgain
     {
         get
@@ -35,6 +50,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             return FrameworkElementHelper.FindByTag<CheckBox>(cDialogButtons.CustomControl, "chbDontAskAgain");
         }
     }
+    /// <summary>
+    /// The txt masc.
+    /// </summary>
     public TextBox txtMasc
     {
         get
@@ -42,6 +60,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             return FrameworkElementHelper.FindByTag<TextBox>(cDialogButtons.CustomControl, "txtMasc");
         }
     }
+    /// <summary>
+    /// The chb files from subfolders.
+    /// </summary>
     public CheckBox chbFilesFromSubfolders
     {
         get
@@ -49,6 +70,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             return FrameworkElementHelper.FindByTag<CheckBox>(cDialogButtons.CustomControl, "chbFilesFromSubfolders");
         }
     }
+    /// <summary>
+    /// The selected folder.
+    /// </summary>
     public string SelectedFolder
     {
         get
@@ -65,6 +89,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
     {
         return ((CheckBox)cDialogButtons.CustomControl);
     }
+    /// <summary>
+    /// The dont ask again.
+    /// </summary>
     public bool DontAskAgain
     {
         get
@@ -72,6 +99,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             return GetChbDontAskAgain().IsChecked.Value;
         }
     }
+    /// <summary>
+    /// The visibility btn apply.
+    /// </summary>
     public Visibility VisibilityBtnApply
     {
         set
@@ -79,6 +109,9 @@ public partial class SelectFolderAdvanced : UserControl, IControlWithResultWpf
             cDialogButtons.btnApply.Visibility = value;
         }
     }
+    /// <summary>
+    /// The visibility chb dont ask again.
+    /// </summary>
     public Visibility VisibilityChbDontAskAgain
     {
         set

@@ -4,10 +4,22 @@ namespace SunamoWpf.Controls;
 public partial class SelectImageFileAndMakeSingleColorTransparent : UserControl
 {
     #region Rewrite to pure cs. With xaml is often problems without building
+    /// <summary>
+    /// Gets or sets the minimal image width.
+    /// </summary>
     public int MinimalImageWidth { get; set; }
+    /// <summary>
+    /// Gets or sets the minimal image height.
+    /// </summary>
     public int MinimalImageHeight { get; set; }
+    /// <summary>
+    /// Gets or sets the square.
+    /// </summary>
     public bool Square { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of the select image file and make single color transparent class.
+    /// </summary>
     public SelectImageFileAndMakeSingleColorTransparent()
     {
         try
@@ -27,10 +39,10 @@ public partial class SelectImageFileAndMakeSingleColorTransparent : UserControl
     {
         if (path == "")
         {
-            path = Translate.FromKey(XlfKeys.None);
+            path = "None";
         }
         selectedFile = path;
-        tbSelectedFile.Text = Translate.FromKey(XlfKeys.SelectedFile) + ": " + path;
+        tbSelectedFile.Text = "SelectedFile" + ": " + path;
     }
 
     //public event VoidStringBitmapBitmapSource FileSelected;
@@ -69,6 +81,9 @@ public partial class SelectImageFileAndMakeSingleColorTransparent : UserControl
 
     string selectedFile = "";
 
+    /// <summary>
+    /// The selected file.
+    /// </summary>
     public string SelectedFile
     {
         get

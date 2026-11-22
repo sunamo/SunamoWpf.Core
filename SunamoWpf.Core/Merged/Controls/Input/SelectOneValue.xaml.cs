@@ -3,7 +3,13 @@ namespace SunamoWpf.Controls.Input;
 
 public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserControl
 {
+    /// <summary>
+    /// The cb entered helper.
+    /// </summary>
     public ComboBoxHelper<string> cbEnteredHelper = null;
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         cbEntered.Focus();
@@ -29,6 +35,9 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
         }
         Init(whatEnter);
     }
+    /// <summary>
+    /// The selected item.
+    /// </summary>
     public string SelectedItem
     {
         get
@@ -36,10 +45,21 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
             return cbEntered.Text;
         }
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="whatEnter">The what enter.</param>
     public void Init(string whatEnter)
     {
         Init(false, whatEnter, null, null);
     }
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="allowCustomEntry">The allow custom entry.</param>
+    /// <param name="whatEnter">The what enter.</param>
+    /// <param name="toMakeNameInTWithName">The to make name in t with name.</param>
+    /// <param name="items">The items.</param>
     public void Init(bool allowCustomEntry, string whatEnter, Func<object, string> toMakeNameInTWithName, params object[] items)
     {
         cbEnteredHelper = new ComboBoxHelper<string>(cbEntered);
@@ -49,7 +69,7 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
             cbEnteredHelper.AddValuesOfArrayAsItems(toMakeNameInTWithName, null, items);
         }
         cbEntered.SelectionChanged += CbEntered_Selected;
-        tbWhatEnter.Text = Translate.FromKey(XlfKeys.EnterOrSelect) + " " + whatEnter;
+        tbWhatEnter.Text = "EnterOrSelect" + " " + whatEnter;
     }
     private void btnEnter_Click_1(object sender, RoutedEventArgs eventArgs)
     {
@@ -58,6 +78,9 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
             DialogResult = true;
         }
     }
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -73,7 +96,10 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
     /// Right approach is call here Finished which has registered WindowWithUserControl, which will set DialogResult itself
     /// </summary>
     public object ParentWindow { set { } }
-    public string Title => Translate.FromKey(XlfKeys.SelectOneValue);
+    /// <summary>
+    /// Gets the title.
+    /// </summary>
+    public string Title => "SelectOneValue";
     private bool AfterEnteredValue(ComboBox cbEntered)
     {
         cbEntered.Text = SelectedItem.Trim();
@@ -106,6 +132,10 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
             }
         }
     }
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
         cbEntered.Text = input.ToString();
@@ -113,12 +143,18 @@ public partial class SelectOneValue : UserControl, IControlWithResultWpf, IUserC
         // Cant be, window must be already showned as dialog
         //DialogResult = true;
     }
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
     private void CbEntered_Selected(object sender, RoutedEventArgs eventArgs)
     {
         EnableBtn();
     }
     static Type type = typeof(SelectOneValue);
+    /// <summary>
+    /// Init.
+    /// </summary>
     public void Init()
     {
     }

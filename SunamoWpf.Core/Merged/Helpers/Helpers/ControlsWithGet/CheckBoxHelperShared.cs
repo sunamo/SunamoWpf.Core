@@ -1,9 +1,17 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Helpers.ControlsWithGet;
 
+/// <summary>
+/// Represents the check box helper type.
+/// </summary>
 public partial class CheckBoxHelper
 {
 
+    /// <summary>
+    /// Is checked.
+    /// </summary>
+    /// <param name="checkBox">The check box.</param>
+    /// <returns>The is checked result.</returns>
     public static bool IsChecked(CheckBox checkBox)
     {
         var isChecked = WpfApp.cd.Invoke(() => checkBox.IsChecked);

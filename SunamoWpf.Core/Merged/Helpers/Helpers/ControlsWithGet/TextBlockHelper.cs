@@ -6,6 +6,9 @@ namespace SunamoWpf.Helpers.ControlsWithGet;
 /// </summary>
 public partial class TextBlockHelper 
 {
+    /// <summary>
+    /// Inicialize widths.
+    /// </summary>
     public static void InicializeWidths()
     {
         StackPanel stackPanel = new StackPanel();
@@ -66,6 +69,10 @@ public partial class TextBlockHelper
         stackPanel.Visibility = Visibility.Collapsed;
     }
 
+    /// <summary>
+    /// Add text post colon.
+    /// </summary>
+    /// <param name="tbSmtpServer">The tb smtp server.</param>
     public static void AddTextPostColon(TextBlock tbSmtpServer)
     {
         tbSmtpServer.Text += ": ";
@@ -78,6 +85,13 @@ public partial class TextBlockHelper
 
     static Dictionary<int, double> averageNumberWidthOnFontSize = new Dictionary<int, double>();
     static Dictionary<int, double> averageCharWidthOnFontSize = new Dictionary<int, double>();
+    /// <summary>
+    /// Get optimal width for count of chars.
+    /// </summary>
+    /// <param name="count">The count.</param>
+    /// <param name="alsoLetters">The also letters.</param>
+    /// <param name="txt">The txt.</param>
+    /// <returns>The get optimal width for count of chars result.</returns>
     public static double GetOptimalWidthForCountOfChars(int count, bool alsoLetters, TextBlock txt)
     {
         double countDouble = (double)count;
@@ -106,11 +120,21 @@ public partial class TextBlockHelper
         return dict[copyInt] * countDouble;
     }
 
+    /// <summary>
+    /// Set text post colon xlf.
+    /// </summary>
+    /// <param name="lblStatusDownload">The lbl status download.</param>
+    /// <param name="xlf">The xlf.</param>
     public static void SetTextPostColonXlf(TextBlock lblStatusDownload, string xlf)
     {
-        SetTextPostColonXlf(lblStatusDownload, Translate.FromKey(xlf));
+        SetTextPostColonXlf(lblStatusDownload, xlf);
     }
 
+    /// <summary>
+    /// Set text post colon.
+    /// </summary>
+    /// <param name="lblStatusDownload">The lbl status download.</param>
+    /// <param name="status">The status.</param>
     public static void SetTextPostColon(TextBlock lblStatusDownload, string status)
     {
         status = SH.PostfixIfNotEmpty(status, ":");

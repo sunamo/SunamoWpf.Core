@@ -12,6 +12,9 @@ public partial class WpfApp
     static bool initialized = false;
     static bool attached = false;
 
+    /// <summary>
+    /// The type.
+    /// </summary>
     public static Type type = typeof(WpfApp);
 
     /// <summary>
@@ -27,6 +30,10 @@ public partial class WpfApp
     }
 
 
+    /// <summary>
+    /// Init.
+    /// </summary>
+    /// <param name="dispatcher">The dispatcher.</param>
     public static void Init(Dispatcher dispatcher)
     {
         string initWpfApp = "Init WpfApp";

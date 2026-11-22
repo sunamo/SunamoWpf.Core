@@ -1,10 +1,19 @@
 ﻿#define ASYNC
 namespace SunamoWpf.Controls.Menu;
 
+/// <summary>
+/// Represents the su menu item type.
+/// </summary>
 public class SuMenuItem : MenuItem
 {
+    /// <summary>
+    /// The on click.
+    /// </summary>
     public bool onClick = false;
 
+    /// <summary>
+    /// The click.
+    /// </summary>
     public new event RoutedEventHandler Click
     {
         add
@@ -19,6 +28,9 @@ public class SuMenuItem : MenuItem
         }
     }
 
+    /// <summary>
+    /// The click async.
+    /// </summary>
     public event RoutedEventHandlerAsync ClickAsync
     {
         add
@@ -35,6 +47,10 @@ public class SuMenuItem : MenuItem
         }
     }
 
+    /// <summary>
+    /// Collapse maybe not referenced.
+    /// </summary>
+    /// <param name="mis">The mis.</param>
     public static void CollapseMaybeNotReferenced(params SuMenuItem[] mis)
     {
         foreach (var menuItem in mis)
@@ -43,6 +59,9 @@ public class SuMenuItem : MenuItem
         }
     }
 
+    /// <summary>
+    /// The visibility.
+    /// </summary>
     public new Visibility Visibility
     {
         get

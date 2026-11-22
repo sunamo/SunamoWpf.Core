@@ -5,5 +5,8 @@ namespace SunamoWpf.Interfaces;
 /// </summary>
 public interface IUserControlClosing
 {
+    /// <summary>
+    /// On closing.
+    /// </summary>
     void OnClosing();
 }

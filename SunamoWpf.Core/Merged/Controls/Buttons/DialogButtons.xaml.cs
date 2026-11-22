@@ -4,6 +4,9 @@ namespace SunamoWpf.Controls;
 public partial class DialogButtons : UserControl, IControlWithResultWpf
 {
     #region MyRegion
+    /// <summary>
+    /// Initializes a new instance of the dialog buttons class.
+    /// </summary>
     public DialogButtons()
     {
         try
@@ -18,11 +21,17 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         }
     }
 
+    /// <summary>
+    /// Focus on main element.
+    /// </summary>
     public void FocusOnMainElement()
     {
         btnOk.Focus();
     }
 
+    /// <summary>
+    /// The custom control.
+    /// </summary>
     public UIElement CustomControl
     {
         set
@@ -35,6 +44,9 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         }
     }
 
+    /// <summary>
+    /// The dialog result.
+    /// </summary>
     public bool? DialogResult
     {
         set
@@ -43,8 +55,14 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         }
     }
 
+    /// <summary>
+    /// The change dialog result.
+    /// </summary>
     public event VoidBoolNullable ChangeDialogResult;
 
+    /// <summary>
+    /// The is enabled btn ok.
+    /// </summary>
     public bool IsEnabledBtnOk
     {
         set
@@ -53,11 +71,23 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         }
     }
 
+    /// <summary>
+    /// The clicked ok.
+    /// </summary>
     public bool clickedOk = false;
+    /// <summary>
+    /// The clicked apply.
+    /// </summary>
     public bool clickedApply = false;
+    /// <summary>
+    /// The clicked cancel.
+    /// </summary>
     public bool clickedCancel = false;
 
 
+    /// <summary>
+    /// The is enabled btn apply.
+    /// </summary>
     public bool IsEnabledBtnApply
     {
         set
@@ -66,6 +96,9 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         }
     }
 
+    /// <summary>
+    /// The visibility btn apply.
+    /// </summary>
     public Visibility VisibilityBtnApply
     {
         set
@@ -92,9 +125,13 @@ public partial class DialogButtons : UserControl, IControlWithResultWpf
         DialogResult = null;
     }
 
+    /// <summary>
+    /// Accept.
+    /// </summary>
+    /// <param name="input">The input.</param>
     public void Accept(object input)
     {
-        ThrowEx.Custom(Translate.FromKey(XlfKeys.OnlyButtonsCanBeAcceptedBecauseItHasNoDataForAccept) + ".");
+        ThrowEx.Custom("Only buttons can be accepted because it has no data for accept" + ".");
     }
 
     static Type type = typeof(DialogButtons);

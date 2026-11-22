@@ -1,8 +1,34 @@
 namespace SunamoWpf.Data;
 
+/// <summary>
+/// Represents the image buttons init type.
+/// </summary>
 public class ImageButtonsInit
 {
-    public object copyToClipboard = null; public object clear = null; public object add = null; public object selectAll = null; public object deselectAll = null;
+    /// <summary>
+    /// Gets or sets the copy to clipboard.
+    /// </summary>
+    public object copyToClipboard = null;
+
+    /// <summary>
+    /// Gets or sets the clear.
+    /// </summary>
+    public object clear = null;
+
+    /// <summary>
+    /// Gets or sets the add.
+    /// </summary>
+    public object add = null;
+
+    /// <summary>
+    /// Gets or sets the select all.
+    /// </summary>
+    public object selectAll = null;
+
+    /// <summary>
+    /// Gets or sets the deselect all.
+    /// </summary>
+    public object deselectAll = null;
 
     /// <summary>
     /// If everything is null
@@ -34,6 +60,9 @@ public class ImageButtonsInit
     /// </summary>
     //public static ImageButtonsInit DefaultButtons = new ImageButtonsInit(false, false, new VoidString(ColButtons_Added), true, true);
     public static ImageButtonsInit HideAllButtons = new ImageButtonsInit(false, false, false, false, false);
+    /// <summary>
+    /// The only select.
+    /// </summary>
     public static ImageButtonsInit OnlySelect = new ImageButtonsInit(false, false, false, true, true);
 
     /// <summary>
