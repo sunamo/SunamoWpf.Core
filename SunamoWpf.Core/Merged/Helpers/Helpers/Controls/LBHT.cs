@@ -294,15 +294,6 @@ public class LBH
     /// </summary>
     protected void RunSelected()
     {
-        if (Selected is IListBoxHelperItem)
-        {
-            IListBoxHelperItem lbi = Selected as IListBoxHelperItem;
-            PHWpf.Start();
-        }
-        else
-        {
-            PHWpf.Start();
-        }
     }
     #endregion
     #region H
