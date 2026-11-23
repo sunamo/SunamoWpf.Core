@@ -6,7 +6,6 @@ global using SunamoWpf._shared.Helpers;
 global using SunamoWpf._shared.Helpers.Resources;
 global using SunamoWpf.Core._sunamo;
 global using SunamoWpf.Values;
-global using SunamoWpf._.Animation;
 global using SunamoWpf.Args;
 global using SunamoWpf.Collections;
 global using SunamoWpf.Commands;
