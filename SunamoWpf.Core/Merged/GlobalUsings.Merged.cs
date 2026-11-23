@@ -42,7 +42,6 @@ global using SunamoWpf.SunamoDebugging;
 global using SunamoWpf.SunamoDebugging.Interfaces;
 global using SunamoWpf.UserControls;
 global using SunamoWpf.Windows;
-global using SunamoWpf.WindowsSettings;
 global using System.Windows.Markup.Primitives;
 global using System.Windows.Media.Animation;
 global using TextCopy;
